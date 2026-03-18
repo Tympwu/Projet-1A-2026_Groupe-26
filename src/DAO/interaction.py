@@ -49,7 +49,7 @@ class DAO:
         self.__data = self.__data.reset_index(drop=True, inplace=True)
 
     def enlever_valeur_manquante(self, colonne: str | None = None) -> None:
-        if colonne:
+        if colonne is not None:
             self.__data = self.__data.dropna(subset=[colonne])
         else:
             self.__data = self.__data.dropna()
