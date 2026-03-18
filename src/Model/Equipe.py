@@ -16,7 +16,7 @@ class Equipe:
         statut_equipe: str ="Casual"
         ------------
 
-        """
+    """
     def __init__(
         self, nom_equipe: str, joueurs_equipe: list, nom_coach_equipe: str =None,
         region_equipe: str =None, pays_equipe: str =None, statut_equipe: str =None

@@ -1,23 +1,21 @@
-# from typing import Union
-# from src.Common.utils import parse_boolean
 
-# is_the_goat: Union[str, bool]
+from .Personne import Personne
 
 
-class Player:
-    def __init__(self, id: int, full_name: str, sport: str, nb_jours_blesse: int, age: int, palmares: int = 0):
+class Player(Personne):
+    def __init__(self, id: int, full_name: str, sport: str, age: int, blesse: int = 0, sexe: str = None, palmares: int = 0):
+        super().__init__(full_name, age, sexe)
+        if not isinstance(id, int):
+            raise TypeError("'id' doit être une instance de int")
+        if not isinstance(sport, str):
+            raise TypeError("'sport' doit être une instance de str")
+        if not isinstance(blesse, int) and blesse in (0, 1):
+            raise TypeError("'blesse' doit être une instance de int dans (0, 1)")
         self.id = id
-        self.full_name = full_name
-        # self.is_the_goat = parse_boolean(is_the_goat)
         self.palmares = palmares
-        self.nb_jours_blesse = nb_jours_blesse
-        self.age = age
-        
+        self.blesse = blesse
+      
     def __repr__(self):
-        # display_string = self.full_name
-        # if self.is_the_goat:
-        # display_string += " (GOAT)"
-        # return display_string
         return f"Nom:{self.full_name}, Id:{self.id}, Sport:{self.sport}"
 
     def __str__(self):
@@ -25,3 +23,11 @@ class Player:
 
     def victoire_finale(self):
         self.palmares += 1
+
+    def blessure(self):
+        if self.blesse == 0:
+            self.blesse = 1
+
+    def retabli(self):
+        if self.blesse == 1:
+            self.blesse = 0
