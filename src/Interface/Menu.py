@@ -53,3 +53,4 @@ class Menu:
         """
         print("-------------------------------------------")
         print("Bonjour, \n Que voulez-vous faire ?")
+        print("")

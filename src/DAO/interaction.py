@@ -20,5 +20,5 @@ class DAO:
             df = self.__data.drop(columns=self.__col_prive)
         df.to_csv(nom, index=False)
 
-    def choix(self, col_name):
+    def choix_col(self, col_name):
         return self.__data[col_name]
