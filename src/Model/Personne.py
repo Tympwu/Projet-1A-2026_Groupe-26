@@ -3,7 +3,7 @@ from typing import Any
 
 class Personne:
 
-    def __init__(self, full_name: str,  age: int, sexe: str = None):
+    def __init__(self, full_name: str,  age: int, sexe: str = None) -> None:
         if not isinstance(full_name, str):
             raise TypeError("'full_name' doit être une instance de str")
         if not isinstance(sexe, str) and sexe in ("femme", "homme", None):
