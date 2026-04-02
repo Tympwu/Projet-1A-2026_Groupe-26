@@ -19,8 +19,8 @@ class Equipe:
     def __init__(
         self,
         nom_equipe: str,
-        joueurs_equipe: list,
-        nom_coach_equipe: str = None,
+        joueurs_equipe: set[*Player],
+        coach_equipe: set[*Coach],
         region_equipe: str = None,
         pays_equipe: str = None,
         statut_equipe: str = None
@@ -30,9 +30,9 @@ class Equipe:
         if not isinstance(nom_equipe, str):
             raise TypeError("L'attribut nom_equipe doit être de type str")
         if not all(isinstance(p, Player) for p in joueurs_equipe):
-            raise TypeError("L'attribut joueurs_equipe doit être de type list de joueurs")
-        if not isinstance(nom_coach_equipe, Player):
-            raise TypeError("L'attribut nom_coach_equipe doit être de type Player")
+            raise TypeError("L'attribut joueurs_equipe doit être de type list[Player]")
+        if not all(isinstance(c, Coach) for c in coach_equipe):
+            raise TypeError("L'attribut nom_coach_equipe doit être de type list[Coach]")
         if not isinstance(pays_equipe, str):
             raise TypeError("L'attribut pays_equipe doit être de type str")
         if not pays_equipe in liste_pays:

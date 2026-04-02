@@ -1,5 +1,6 @@
 from ..Query.recherche import Recherche
 
+
 class Menu:
     """ """
 
@@ -25,9 +26,9 @@ class Menu:
         connexion_reussie = False
         mdp = ""
         while not connexion_reussie:
-            mdp = input("Mot de passe (-1 pour annuler) :\n")
-            if mdp == "-1":
-                break
+            mdp = input("Mot de passe (0 pour annuler) :\n")
+            if mdp == "0":
+                return
             elif mdp == self.__password_admin:
                 self.__admin = True
                 print("Connexion réussie !\n \n")
@@ -53,72 +54,73 @@ class Menu:
                 elif confirmation.lower() == "oui":
                     self.__admin = False
                 else:
-                    break
+                    return
 
     def help(self):
         """Fonction d'aide indiquant différentes informations sur l'application
         """
 
-        print("""-------------------------------------------\n
+        print("""-------------------------------------------
         Application permettant de traiter et d'analyser des données sur des bases de données
-        de différents sports / e-sports.\n
-        Pour l'instant les sports / e-sports supportés sont : \n
-        Basketball\n
-        Football européen\n
-        Tennis\n
-        Volleyball\n
-        League-of-Legends\n\n
+        de différents sports / e-sports.
+        Pour l'instant les sports / e-sports supportés sont :
+        Basketball
+        Football européen
+        Tennis
+        Volleyball
+        League-of-Legends
 
-        A tout moment, si vous répondez -1 à une question cela permettra de revenir en arrière\n\n
+
+        A tout moment, si vous répondez 0 à une question cela permettra de revenir en arrière
 
         Application faîte par Alexandre Yu, Simon Langlois-Tino, Jean Pohardy et Timothé Pouplin
         """)
 
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
-        print("-------------------------------------------")
         while True:
-            print("""Quel sport voulez-vous étudier ?\n
-            1. Basketball\n
-            2. Football européen\n
-            3. Tennis\n
-            4. Volleyball\n
-            5. League-of-Legends\n\n
+            print("-------------------------------------------")
+            print("""Quel sport voulez-vous étudier ?
+            1. Basketball
+            2. Football européen
+            3. Tennis
+            4. Volleyball
+            5. League-of-Legends
 
-            -1. Revenir en arrière
+            0. Revenir en arrière
             """)
             result = input("Indiquez votre réponse : ")
             if not result.isalnum():
                 print("Le résultat doit être un entier")
-            elif int(result) not in {-1, 1, 2, 3, 4, 5}:
+            elif int(result) not in {0, 1, 2, 3, 4, 5}:
                 print("L'entier renseigné n'est pas valide")
             else:
                 result = int(result)
-                if result == -1:
-                    break
+                if result == 0:
+                    return
                 else:
                     search = Recherche(self._sports[result])
                     search.cherche()
-                    break
+                    return
 
     def main_menu(self):
         """
         Fonction principale permettant de faire tourner l'application
         """
-        print("-------------------------------------------")
         print("Bonjour, \n Que voulez-vous faire ?\n")
         while True:
+            print("-------------------------------------------")
             print("1. Traiter une base de donnée\n2. Se connecter avec un compte administrateur")
-            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n-1. Quitter l'application")
+            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n0. Quitter l'application")
             result: str = input("Réponse : ")
             if not result.isalnum():
                 print("La valeur renseignée n'est pas valide")
-            elif int(result) not in {1, 2, 3, -1}:
+            elif int(result) not in {1, 2, 3, 0}:
                 print("La valeur renseignée n'est pas correct")
             else:
                 result = int(result)
-                if result == -1:
-                    break
+                if result == 0:
+                    return
                 elif result == 2:
                     self.connect()
                 elif result == 1:

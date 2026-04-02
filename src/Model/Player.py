@@ -1,56 +1,47 @@
 
 from .Personne import Personne
+from typing import Any
 
 
 class Player(Personne):
     def __init__(
         self,
         id: int,
-        full_name: str,
-        sport: str,
-        age: int,
-        etat_physique: str = None,
-        taille: int = None,
+        first_name: str = None,
+        last_name: str = None,
+        full_name: str = None,
         sexe: str = None,
-        palmares: int = None
+        age: int = None,
+        lieu_naissance: str = None,
+        pseudo: str = None,
+        equipe: Any = None,
+        nationalite_equipe: str = None,
+        sport: str = None,
+        poste: str = None,
+        numero_maillot: int = None,
+        main_forte: str = None,
+        taille: int = None,
+        poids: int = None
     ) -> None:
-        super().__init__(full_name, age, sexe)
-        if not isinstance(id, int):
-            raise TypeError("'id' doit être une instance de int")
-        if not isinstance(sport, str):
-            raise TypeError("'sport' doit être une instance de str")
-        if not isinstance(etat_physique, str) and etat_physique in ("blesse", "en_forme", None):
-            raise TypeError("'etat_physique' doit être une instance de etat_physique dans ('blesse', 'en_forme', None)")
-        if not isinstance(palmares, int):
-            raise TypeError("palamares doit être une instance de int")
-        if not isinstance(taille, int):
-            raise TypeError("taille doit être une instance de int")
+        super().__init__(first_name, last_name, full_name, lieu_naissance, age, sexe)
         self.id = id
+        self.pseudo = pseudo
+        self.equipe = equipe
+        self.nationalite_equipe = nationalite_equipe
         self.sport = sport
-        self.palmares = palmares
-        self.etat_physique = etat_physique
+        self.poste = poste
+        self.numero_maillot = numero_maillot
+        self.main_forte = main_forte
         self.taille = taille
-
+        self.poids = poids
+    
     def __repr__(self) -> str:
-        return f"Nom:{self.full_name}, Sport:{self.sport}"
+        return f"Player( Nom:{self.full_name}, Sport:{self.sport})"
 
     def __str__(self) -> str:
-        return f"Le joueur s'appelle {self.full_name} et se distingue en {self.sport}."
+        return f"""Nom joueu{"se" if self.sexe == "femme" else "r"}: {self.first_name} {self.last_name}\n
+        ID: {self.id}\n
+        Sport: {self.sport}\n
+        Age: {self.age} ans\n
+        """
 
-    def victoire_finale(self) -> None:
-        if self.palmares is None:
-            self.palmares = 1
-        else:
-            self.palmares += 1
-
-    def set_palmares(self, valeur: int) -> None:
-        for _ in range(valeur):
-            self.victoire_finale
-
-    def blessure(self) -> None:
-        if self.etat_physique == "en_forme" or self.etat_physique is None:
-            self.blesse = "blesse"
-
-    def retabli(self) -> None:
-        if self.etat_physique == "blesse" or self.etat_physique is None:
-            self.etat_physique = "en_forme"
