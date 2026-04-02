@@ -1,3 +1,5 @@
+from ..Query.recherche import recherche
+
 class Menu:
     """ """
 
@@ -47,10 +49,34 @@ class Menu:
                 else:
                     break
 
+    def help(self):
+        """Fonction d'aide indiquant différentes informations sur l'application
+        
+        
+        """
+
     def main_menu(self):
         """
         Fonction principale permettant de faire tourner l'application
         """
         print("-------------------------------------------")
-        print("Bonjour, \n Que voulez-vous faire ?")
-        print("")
+        print("Bonjour, \n Que voulez-vous faire ?\n")
+        while True:
+            print("1. Traiter une base de donnée\n2. Se connecter avec un compte administrateur")
+            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n-1. Quitter l'application")
+            result: str = input("Réponse : ")
+            if not result.isalnum():
+                print("La valeur renseignée n'est pas valide")
+            elif int(result) not in {1, 2, 3, -1}:
+                print("La valeur renseignée n'est pas correct")
+            else:
+                result = int(result)
+                if result == -1:
+                    break
+                elif result == 2:
+                    self.connect()
+                elif result == 1:
+                    self.proposition_sports()
+                else:
+                    self.help()
+        

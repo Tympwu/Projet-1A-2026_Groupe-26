@@ -55,7 +55,7 @@ class DAO:
             self.__data = self.__data.dropna()
         self.__data.reset_index(drop=True, inplace=True)
 
-    def get_types(self) -> pd.DataFrame:
+    def renvoyer_types(self) -> pd.DataFrame:
         return self.__data.dtypes
 
     def description(self) -> pd.DataFrame:
