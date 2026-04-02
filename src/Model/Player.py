@@ -9,29 +9,34 @@ class Player(Personne):
         full_name: str,
         sport: str,
         age: int,
-        etat_physique: str = None,
+        blessé: bool = False,
         sexe: str = None,
-        palmares: int = None
+        palmares: list[str] = None
     ) -> None:
         super().__init__(full_name, age, sexe)
         if not isinstance(id, int):
             raise TypeError("'id' doit être une instance de int")
         if not isinstance(sport, str):
             raise TypeError("'sport' doit être une instance de str")
-        if not isinstance(etat_physique, str) and etat_physique in ("blesse", "en_forme", None):
+        if not isinstance(blessé, str) and blessé in ("blesse", "en_forme", None):
             raise TypeError("'etat_physique' doit être une instance de etat_physique dans ('blesse', 'en_forme', None)")
-        if not isinstance(palmares, int):
-            raise TypeError("palamares doit être une instance de int")
+        if not all(isinstance(p, str) for p in palmares):
+            raise TypeError("palamares doit être une liste de str")
         self.id = id
         self.sport = sport
         self.palmares = palmares
-        self.etat_physique = etat_physique
+        self.blessé = blessé
     
     def __repr__(self) -> str:
-        return f"Nom:{self.full_name}, Sport:{self.sport}"
+        return f"Player( Nom:{self.full_name}, Sport:{self.sport})"
 
     def __str__(self) -> str:
-        return f"Le joueur s'appelle {self.full_name} et se distingue en {self.sport}."
+        return f"""Nom joueu{"se" if self.sexe == "femme" else "r"}: {self.full_name}\n
+        ID: {self.id}\n
+        Sport: {self.sport}\n
+        Age: {self.age} ans\n
+        Palmarès: {self.palmares}\n
+        Blessé{"e" if self.sexe == "femme" else ""}: {"Oui" if self.blessé is True else "Non"}."""
 
     def victoire_finale(self) -> None:
         if self.palmares is None:
@@ -44,9 +49,9 @@ class Player(Personne):
             self.victoire_finale
 
     def blessure(self) -> None:
-        if self.etat_physique == "en_forme" or self.etat_physique is None:
-            self.blesse = "blesse"
+        if self.etat_physique == "en forme" or self.etat_physique is None:
+            self.blesse = "blessé"
 
     def retabli(self) -> None:
-        if self.etat_physique == "blesse" or self.etat_physique is None:
-            self.etat_physique = "en_forme"
+        if self.etat_physique == "blessé" or self.etat_physique is None:
+            self.etat_physique = "en forme"

@@ -20,4 +20,6 @@ class Personne:
         return NotImplemented
 
     def __str__(self) -> str:
-        return f'Le nom complet de cette personne est {self.full_name}.'
+        return f"""Nom: {self.full_name}\n
+        Age: {self.age}\n
+        Sexe: {self.sexe}."""

@@ -16,10 +16,10 @@ class Coach(Personne):
         self.palamres_coach = palmares_coach
    
     def victoire_finale_coach(self) -> None:
-        if self.palmares is None:
-            self.palmares = 1
+        if self.palmares_coach is None:
+            self.palmares_coach = 1
         else:
-            self.palmares += 1
+            self.palmares_coach += 1
 
     def set_palmares_coach(self, valeur: int) -> None:
         for _ in range(valeur):
