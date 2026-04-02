@@ -3,12 +3,13 @@ from typing import Any
 
 
 class DAO:
-    def __init__(self, fichier: str, col_prive: list[str]):
-        assert isinstance(fichier, str), "Le type de fichier ne correspond pas"
-        assert isinstance(col_prive, list), "Le type de col_prive ne correspond pas"
-        self.__fichier: str = fichier
-        self.__data: pd.DataFrame = pd.read_csv(fichier)
-        self.__col_prive: list[str] = col_prive
+    def __init__(self, fichier: str, col_prive: list[str] | None = None):
+    assert isinstance(fichier, str), "Le type de fichier ne correspond pas"
+    assert isinstance(col_prive, list) or col_prive is None, "Le type de col_prive ne correspond pas"
+    
+    self.__fichier: str = fichier
+    self.__data: pd.DataFrame = pd.read_csv(fichier)
+    self.__col_prive: list[str] = col_prive if col_prive is not None else []
 
     @property
     def data(self):
