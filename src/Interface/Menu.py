@@ -1,4 +1,4 @@
-from ..Query.recherche import recherche
+from ..Query.recherche import Recherche
 
 class Menu:
     """ """
@@ -6,6 +6,12 @@ class Menu:
     def __init__(self):
         self.__admin: bool = False
         self.__password_admin: str = "azerty"
+        self._sports: dict[int, str] = {
+            1: "basketball", 
+            2: "football_european_leagues",
+            5: "league_of_legends",
+            3: "tennis",
+            4: "volleyball"}
 
     def connect(self):
         """
@@ -51,9 +57,49 @@ class Menu:
 
     def help(self):
         """Fonction d'aide indiquant différentes informations sur l'application
-        
-        
         """
+
+        print("""-------------------------------------------\n
+        Application permettant de traiter et d'analyser des données sur des bases de données
+        de différents sports / e-sports.\n
+        Pour l'instant les sports / e-sports supportés sont : \n
+        Basketball\n
+        Football européen\n
+        Tennis\n
+        Volleyball\n
+        League-of-Legends\n\n
+
+        A tout moment, si vous répondez -1 à une question cela permettra de revenir en arrière\n\n
+
+        Application faîte par Alexandre Yu, Simon Langlois-Tino, Jean Pohardy et Timothé Pouplin
+        """)
+
+    def proposition_sports(self):
+        """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
+        print("-------------------------------------------")
+        while True:
+            print("""Quel sport voulez-vous étudier ?\n
+            1. Basketball\n
+            2. Football européen\n
+            3. Tennis\n
+            4. Volleyball\n
+            5. League-of-Legends\n\n
+
+            -1. Revenir en arrière
+            """)
+            result = input("Indiquez votre réponse : ")
+            if not result.isalnum():
+                print("Le résultat doit être un entier")
+            elif int(result) not in {-1, 1, 2, 3, 4, 5}:
+                print("L'entier renseigné n'est pas valide")
+            else:
+                result = int(result)
+                if result == -1:
+                    break
+                else:
+                    search = Recherche(self._sports[result])
+                    search.cherche()
+                    break
 
     def main_menu(self):
         """
