@@ -10,6 +10,7 @@ class Player(Personne):
         sport: str,
         age: int,
         etat_physique: str = None,
+        taille: int = None,
         sexe: str = None,
         palmares: int = None
     ) -> None:
@@ -22,11 +23,14 @@ class Player(Personne):
             raise TypeError("'etat_physique' doit être une instance de etat_physique dans ('blesse', 'en_forme', None)")
         if not isinstance(palmares, int):
             raise TypeError("palamares doit être une instance de int")
+        if not isinstance(taille, int):
+            raise TypeError("taille doit être une instance de int")
         self.id = id
         self.sport = sport
         self.palmares = palmares
         self.etat_physique = etat_physique
-    
+        self.taille = taille
+
     def __repr__(self) -> str:
         return f"Nom:{self.full_name}, Sport:{self.sport}"
 
