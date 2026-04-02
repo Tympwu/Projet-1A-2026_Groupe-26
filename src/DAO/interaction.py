@@ -1,14 +1,18 @@
 import pandas as pd
 from typing import Any
+from pathlib import Path
 
 
 class DAO:
     def __init__(self, fichier: str, col_prive: list[str] | None = None):
         assert isinstance(fichier, str), "Le type de fichier ne correspond pas"
         assert isinstance(col_prive, list) or col_prive is None, "Le type de col_prive ne correspond pas"
-        
+
+        base = Path(__file__).parent.parent.parent
+        full_path = base / fichier
         self.__fichier: str = fichier
-        self.__data: pd.DataFrame = pd.read_csv(fichier)
+        self.__data = pd.read_csv(full_path)
+        #self.__data: pd.DataFrame = pd.read_csv(fichier)
         self.__col_prive: list[str] = col_prive if col_prive is not None else []
 
     @property
