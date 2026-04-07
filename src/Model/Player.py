@@ -16,6 +16,7 @@ class Player(Personne):
         pseudo: str = None,
         equipe: Any = None,
         nationalite: str = None,
+        continent: str = None,
         sport: str = None,
         poste: str = None,
         numero_maillot: int = None,
