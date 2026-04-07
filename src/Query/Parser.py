@@ -133,6 +133,9 @@ class Volleyball_Parser(Parser):
                 taille=self.fetch_safety_data(row["height"], int),
                 sport="Volleyball")
             self.list_player[player.id] = player
+
+
+
 class League_of_legend_Parser(Parser):
 
 
@@ -166,8 +169,7 @@ class Basketball_Parser(Parser):
             self.dict_player_player[player.id] = player
 
 class Football_Parser(Parser):
-    
-def __init__(self):
+    def __init__(self):
         super().__init__("football")
 
     def parse_players(self, data: pd.DataFrame):
