@@ -69,3 +69,6 @@ class Tennis_Parser(Parser):
 
     def parse_team(self, data: pd.DataFrame):
         pass
+
+class Football_Parser(Parser):
+    
