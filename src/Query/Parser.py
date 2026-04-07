@@ -61,7 +61,7 @@ class Tennis_Parser(Parser):
     def parse_competition(self, data: pd.DataFrame):
 
 
-        
+
         pass
 
     def parse_matches(self, data: pd.DataFrame):
@@ -69,6 +69,18 @@ class Tennis_Parser(Parser):
 
     def parse_team(self, data: pd.DataFrame):
         pass
+
+
+
+
+
+
+class Volleyball_Parser(Parser):
+
+class League_of_legend_Parser(Parser):
+
+class Basketball_Parser(Parser):
+
 
 class Football_Parser(Parser):
     
