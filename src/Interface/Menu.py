@@ -99,9 +99,10 @@ class Menu:
                 if result == 0:
                     return
                 else:
+                    self.sport_choosen = result
                     search = Recherche(self._sports[result])
-                    search.cherche()
-                    return
+                    search.loader()
+                    return self.search_parser()
 
     def main_menu(self):
         """
@@ -127,4 +128,9 @@ class Menu:
                     self.proposition_sports()
                 else:
                     self.help()
+        
+    def search_parser(self):
+        """
+        Fonction permettant de lier et utiliser les bons parser correspondant aux sports
+        """
         
