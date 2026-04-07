@@ -20,22 +20,23 @@ class Parser(ABC):
         try:
             return convert_to(data)
         except ValueError:
+            type(data)
             return None
 
     @abstractmethod
-    def parse_players(self, data):
+    def parse_players(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_matches(self, data):
+    def parse_matches(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_competition(self, data):
+    def parse_competition(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_team(self, data):
+    def parse_team(self, data, other=None):
         pass
 
 
@@ -43,10 +44,10 @@ class Tennis_Parser(Parser):
     def __init__(self):
         super().__init__("tennis")
 
-    def parse_players(self, data: pd.DataFrame, sexe: str):
+    def parse_players(self, data: pd.DataFrame, other: str):
         """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes correspondantes
-
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux joueurs de Tennis
         """
         for index, row in data.iterrows():
             dob = str(self.fetch_safety_data(row["dob"], int))
@@ -54,7 +55,7 @@ class Tennis_Parser(Parser):
             print(dob)
             player = Player(
                 id=self.fetch_safety_data(row["player_id"], int),
-                sexe=sexe,
+                sexe=other,
                 first_name=self.fetch_safety_data(row["name_first"], str),
                 last_name=self.fetch_safety_data(row["name_last"], str),
                 main_forte=self.fetch_safety_data(row["hand"], str),
@@ -64,13 +65,18 @@ class Tennis_Parser(Parser):
                 sport="Tennis")
             self.dict_player[player.id] = player
 
-    def parse_competition(self, data: pd.DataFrame):
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux compétitions de Tennis
+        """
         pass
 
-    def parse_matches(self, data: pd.DataFrame):
-        pass
-
-    def parse_team(self, data: pd.DataFrame):
+    def parse_matches(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Équipes de Tennis
+        """
         pass
 
 
@@ -80,21 +86,16 @@ class Badminton_Parser(Parser):
     
     def parse_players(self, data: pd.DataFrame):
         self.list_player = {}
-        # --- Fetch full name and continent ---
-        full_name = self.fetch_safety_data(row["name_full"], str).strip()
-        continent = self.fetch_safety_data(row["continent"], str).strip()
-
-        # --- Split the name into parts ---
-        parts = full_name.split()
-
-        # --- Determine first_name and last_name according to continent ---
-        if continent.lower() == "africa":
-            first_name = parts[0]
-            last_name = " ".join(parts[1:])  # everything else
-        else:
-            first_name = " ".join(parts[:-1])  # all but last
-            last_name = parts[-1]              # last word
         for index, row in data.iterrows():
+            full_name = self.fetch_safety_data(row["name_full"], str).strip()
+            continent = self.fetch_safety_data(row["continent"], str).strip()
+            parts = full_name.split()
+            if continent.lower() == "africa":
+                first_name = parts[0]
+                last_name = " ".join(parts[1:])
+            else:
+                first_name = " ".join(parts[:-1])
+                last_name = parts[-1]
             player = Player(
                 id=index,
                 first_name=first_name,
@@ -122,9 +123,7 @@ class League_of_legend_Parser(Parser):
 class Basketball_Parser(Parser):
     pass
 
-
-class Football_European_leagues_Parser(Parser):
-    
+class Football_European_leagues_Parser(Parser): 
     def __init__(self):
         super().__init__("football_european_leagues")
 
