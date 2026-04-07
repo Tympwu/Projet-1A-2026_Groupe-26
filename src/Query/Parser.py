@@ -81,18 +81,16 @@ class Badminton_Parser(Parser):
     
     def parse_players(self, data: pd.DataFrame):
         self.list_player = {}
-        full_name = self.fetch_safety_data(row["name_full"], str).strip()
-        continent = self.fetch_safety_data(row["continent"], str).strip()
-
-        parts = full_name.split()
-
-        if continent.lower() == "africa":
-            first_name = parts[0]
-            last_name = " ".join(parts[1:])
-        else:
-            first_name = " ".join(parts[:-1])
-            last_name = parts[-1]
         for index, row in data.iterrows():
+            full_name = self.fetch_safety_data(row["name_full"], str).strip()
+            continent = self.fetch_safety_data(row["continent"], str).strip()
+            parts = full_name.split()
+            if continent.lower() == "africa":
+                first_name = parts[0]
+                last_name = " ".join(parts[1:])
+            else:
+                first_name = " ".join(parts[:-1])
+                last_name = parts[-1]
             player = Player(
                 id=index,
                 first_name=first_name,
