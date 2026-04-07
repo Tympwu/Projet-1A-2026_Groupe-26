@@ -9,7 +9,7 @@ class Menu:
         self.__admin: bool = False
         self.__password_admin: str = "azerty"
         self._sports: dict[int, str] = {
-            1: "basketball", 
+            1: "basketball",
             2: "football_european_leagues",
             5: "league_of_legends",
             3: "tennis",
@@ -111,7 +111,7 @@ class Menu:
                 elif result == 1:
                     self.proposition_sports()
                 else:
-                    self.help()    
+                    self.help()
 
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
@@ -151,6 +151,10 @@ class Menu:
             print("Joueurs chargés")
             self.parser.parse_equipes(self.search.dao["equipe"].data)
             print("Equipes chargées")
+            self.parser.parse_matchs(self.search.dao["match"].data,
+                                     other=self.search.dao["country"].data)
+            print("Matchs chargés")
+            print(self.parser.dict_matchs)
 
         if self.sport_choosen == 3:
             self.__parser = Tennis_Parser()

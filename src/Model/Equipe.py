@@ -6,8 +6,8 @@ class Equipe:
     def __init__(
         self,
         id: int,
-        joueurs_equipe: set[Player],
-        coach_equipe: set[Coach],
+        joueurs_equipe: set[Player] = None,
+        coach_equipe: set[Coach] = None,
         nom_equipe: str = None,
         nom_abrev: str = None,
         nickname: str = None,
