@@ -116,30 +116,33 @@ class Badminton_Parser(Parser):
 
 
 class Volleyball_Parser(Parser):
-
+    pass
 class League_of_legend_Parser(Parser):
-
+    pass
 class Basketball_Parser(Parser):
+    pass
 
-
+<<<<<<< HEAD
 class Football_Parser(Parser): 
     def __init__(self):
         super().__init__("football")
+=======
+class Football_European_leagues_Parser(Parser):
+    
+    def __init__(self):
+        super().__init__("football_european_leagues")
+>>>>>>> 773615608b5d4f1c80e647c4a4da3a9a65a81ac3
 
     def parse_players(self, data: pd.DataFrame):
-        self.list_player = {}
         for index, row in data.iterrows():
-            dob = str(self.fetch_safety_data(row["birthday"], int))
-            dob = dob[:4] + "-" + dob[4:6] + "-" + dob[6:8]
-            print(dob)
             player = Player(
                 id=self.fetch_safety_data(row["player_api_id"], int),
                 full_name=self.fetch_safety_data(row["player_name"], str),
-                dob=dob,
+                dob=self.fetch_safety_data(row["birthday"], str),
                 taille=self.fetch_safety_data(row["height (cm)"], int),
-                poid=self.fetch_safety_data(row["weight (kg)"], int),
+                poids=self.fetch_safety_data(row["weight (kg)"], int),
                 sport="Football")
-            self.list_player[player.id] = player
+            self.dict_player[player.id] = player
 
     def parse_competition(self, data: pd.DataFrame):
         pass
