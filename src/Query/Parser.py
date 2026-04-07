@@ -28,7 +28,7 @@ class Parser(ABC):
         pass
 
     @abstractmethod
-    def parse_matches(self, data, other=None):
+    def parse_matchs(self, data, other=None):
         pass
 
     @abstractmethod
@@ -36,7 +36,7 @@ class Parser(ABC):
         pass
 
     @abstractmethod
-    def parse_team(self, data, other=None):
+    def parse_equipes(self, data, other=None):
         pass
 
 
@@ -65,14 +65,14 @@ class Tennis_Parser(Parser):
                 sport="Tennis")
             self.dict_player[player.id] = player
 
-    def parse_competition(self, data: pd.DataFrame, other=None):
+    def parse_matchs(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux compétitions de Tennis
+        correspondantes. Cette dernière est spécifique aux Match de Tennis
         """
         pass
 
-    def parse_matches(self, data: pd.DataFrame, other=None):
+    def parse_equipes(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Équipes de Tennis
@@ -85,6 +85,10 @@ class Badminton_Parser(Parser):
         super().__init__("badminton")
     
     def parse_players(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux joueurs de Badminton
+        """
         for index, row in data.iterrows():
             full_name = self.fetch_safety_data(row["name"], str).strip()
             continent = self.fetch_safety_data(row["continent"], str).strip()
@@ -104,10 +108,25 @@ class Badminton_Parser(Parser):
                 sport="badminton")
             self.dict_player[player.id] = player
 
-    def parse_competition(self, data: pd.DataFrame):
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux compétition de Badminton
+        """
         pass
 
-    def parse_matches(self, data: pd.DataFrame):
+    def parse_matchs(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Matchs de Badminton
+        """
+        pass
+
+    def parse_equipes(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Equipes de Badminton
+        """
         pass
 
 
@@ -119,8 +138,11 @@ class Volleyball_Parser(Parser):
     def __init__(self):
         super().__init__("volleyball")
 
-    def parse_players(self, data: pd.DataFrame):
-        self.list_player = {}
+    def parse_players(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Joueurs de Volleyball
+        """
         for index, row in data.iterrows():
             player = Player(
                 sexe="H",
@@ -131,7 +153,7 @@ class Volleyball_Parser(Parser):
                 nationalite=self.fetch_safety_data(row["country_code"], str),
                 taille=self.fetch_safety_data(row["height"], int),
                 sport="Volleyball")
-            self.list_player[player.id] = player
+            self.dict_player[player.id] = player
 
 
 
@@ -143,11 +165,14 @@ class Basketball_Parser(Parser):
         super().__init__("tennis")
 
     def parse_players(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Joueurs de Basketball
+        """
         for index, row in data.iterrows():
             dob = str(self.fetch_safety_data(row["birthdate"], int))
             if len(dob) != 10:
                 dob = dob[:9] + "0"
-                print(dob)
             taille=self.fetch_safety_data(row["height"], str)
             taille1=int(taille[0])
             taille2=int(taille[2:])
@@ -165,13 +190,17 @@ class Basketball_Parser(Parser):
                 poids=poids,
                 equipe=dict_equipe[self.fetch_safety_data(row["team_id"], int)],
                 sport="Basketball")
-            self.dict_player_player[player.id] = player
+            self.dict_player[player.id] = player
 
-class Football_Parser(Parser):
+class Football_European_leagues_Parser(Parser):
     def __init__(self):
         super().__init__("football")
 
-    def parse_players(self, data: pd.DataFrame):
+    def parse_players(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Joueurs de Football européen
+        """
         for index, row in data.iterrows():
             player = Player(
                 id=self.fetch_safety_data(row["player_api_id"], int),
@@ -182,7 +211,11 @@ class Football_Parser(Parser):
                 sport="Football")
             self.dict_player[player.id] = player
 
-    def parse_team(self, data: pd.DataFrame):
+    def parse_equipes(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Equipes de Football européen
+        """
         for index, row in data.iterrows():
             equipe = Equipe(
                 id=self.fetch_safety_data(row["team_api_id"], int),
@@ -191,8 +224,16 @@ class Football_Parser(Parser):
                 )
             self.dict_equipe[equipe.id] = equipe
 
-    def parse_competition(self, data: pd.DataFrame):
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Compétitions de Football européen
+        """
         pass
 
-    def parse_matches(self, data: pd.DataFrame):
+    def parse_matchs(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Matchs de Football européen
+        """
         pass
