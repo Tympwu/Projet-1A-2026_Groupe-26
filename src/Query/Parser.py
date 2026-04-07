@@ -36,7 +36,16 @@ class Tennis_Parser(Parser):
                 first_name=row["name_first"],
                 last_name=row["name_last"],
                 main_forte=row["hand"],
-                age=2026 - int(row["dob"][:3]),
+                age=2026 - int(str(row["dob"])[:3]),
                 nationalite=row["ioc"],
                 taille=row["height"])
             self.list_player[int(row["player_id"])] = player
+    
+    def parse_competition(self, data: pd.DataFrame):
+        pass
+
+    def parse_matches(self, data: pd.DataFrame):
+        pass
+
+    def parse_team(self, data: pd.DataFrame):
+        pass

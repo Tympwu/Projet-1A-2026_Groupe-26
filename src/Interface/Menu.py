@@ -1,4 +1,5 @@
 from ..Query.recherche import Recherche
+from ..Query.Parser import Tennis_Parser
 
 
 class Menu:
@@ -13,6 +14,14 @@ class Menu:
             5: "league_of_legends",
             3: "tennis",
             4: "volleyball"}
+
+    @property
+    def parser(self):
+        return self.__parser
+
+    @property
+    def search(self):
+        return self.__search
 
     def connect(self):
         """
@@ -76,6 +85,31 @@ class Menu:
         Application faîte par Alexandre Yu, Simon Langlois-Tino, Jean Pohardy et Timothé Pouplin
         """)
 
+    def main_menu(self):
+        """
+        Fonction principale permettant de faire tourner l'application
+        """
+        print("Bonjour, \n Que voulez-vous faire ?\n")
+        while True:
+            print("-------------------------------------------")
+            print("1. Traiter une base de donnée\n2. Se connecter avec un compte administrateur")
+            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n0. Quitter l'application")
+            result: str = input("Réponse : ")
+            if not result.isalnum():
+                print("La valeur renseignée n'est pas valide")
+            elif int(result) not in {1, 2, 3, 0}:
+                print("La valeur renseignée n'est pas correct")
+            else:
+                result = int(result)
+                if result == 0:
+                    return
+                elif result == 2:
+                    self.connect()
+                elif result == 1:
+                    self.proposition_sports()
+                else:
+                    self.help()    
+    
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
         while True:
@@ -100,37 +134,15 @@ class Menu:
                     return
                 else:
                     self.sport_choosen = result
-                    search = Recherche(self._sports[result])
-                    search.loader()
+                    self.__search = Recherche(self._sports[result])
+                    self.search.loader()
                     return self.search_parser()
 
-    def main_menu(self):
-        """
-        Fonction principale permettant de faire tourner l'application
-        """
-        print("Bonjour, \n Que voulez-vous faire ?\n")
-        while True:
-            print("-------------------------------------------")
-            print("1. Traiter une base de donnée\n2. Se connecter avec un compte administrateur")
-            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n0. Quitter l'application")
-            result: str = input("Réponse : ")
-            if not result.isalnum():
-                print("La valeur renseignée n'est pas valide")
-            elif int(result) not in {1, 2, 3, 0}:
-                print("La valeur renseignée n'est pas correct")
-            else:
-                result = int(result)
-                if result == 0:
-                    return
-                elif result == 2:
-                    self.connect()
-                elif result == 1:
-                    self.proposition_sports()
-                else:
-                    self.help()
-        
     def search_parser(self):
         """
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
-        
+        if self.sport_choosen == 3:
+            self.__parser = Tennis_Parser()
+            self.parser.parse_players(self.search.dao["atp_players_2024"].data)
+            print("Done")
