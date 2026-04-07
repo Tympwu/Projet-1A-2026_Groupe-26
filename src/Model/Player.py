@@ -16,6 +16,7 @@ class Player(Personne):
         pseudo: str = None,
         equipe: Any = None,
         nationalite: str = None,
+        continent: str = None,
         sport: str = None,
         poste: str = None,
         numero_maillot: int = None,
@@ -25,7 +26,10 @@ class Player(Personne):
         stat: dict[str, int] = None,
         role: str = None
     ) -> None:
-        super().__init__(first_name, last_name, full_name, lieu_naissance, dob, sexe)
+        super().__init__(
+            first_name=first_name, last_name=last_name, full_name=full_name,
+            lieu_naissance=lieu_naissance, dob=dob, sexe=sexe
+        )
         self.id = id
         self.pseudo = pseudo
         self.equipe = equipe
