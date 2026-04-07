@@ -8,7 +8,7 @@ class Personne:
         first_name: str,
         last_name: str,
         full_name: str,
-        age: int,
+        dob: str,
         lieu_naissance: str,
         sexe: str = None
     ) -> None:
