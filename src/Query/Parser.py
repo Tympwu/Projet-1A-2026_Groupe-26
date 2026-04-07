@@ -12,7 +12,7 @@ class Parser(ABC):
     def __init__(self, sport):
         self.sport = sport
         self.dict_player: dict[int, Player] = {}
-        self.dict_matches: dict[int, Match] = {}
+        self.dict_matchs: dict[int, Match] = {}
         self.dict_equipe: dict[int, Equipe] = {}
         self.dict_coach: dict[int, Coach] = {}
 
@@ -224,6 +224,26 @@ class Football_European_leagues_Parser(Parser):
                 )
             self.dict_equipe[equipe.id] = equipe
 
+    def parse_matchs(self, data: pd.DataFrame, other: list[pd.DataFrame]):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Matchs de Football européen
+        """
+        dict_contry_id: dict[int, str] = {} 
+        for index, row in other.iterrows():
+            dict_contry_id[row["id"] ] = row["name"]
+        for index, row in data.iterrows():
+            match = Match(
+                id_match=self.fetch_safety_data(row["match_api_id"], int),
+                region=dict_contry_id[self.fetch_safety_data(row["contry_id"], int)],
+                equipe1=self.dict_equipe[self.fetch_safety_data(row["home_team_api_id"], int)],
+                equipe2=self.dict_equipe[self.fetch_safety_data(row["away_team_api_id"], int)],
+                score1=self.fetch_safety_data(row["home_team_goal"], int),
+                score2=self.fetch_safety_data(row["away_team_goal"], int),
+
+                )
+            self.dict_matchs[match.id_match] = match
+
     def parse_competition(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
@@ -231,9 +251,3 @@ class Football_European_leagues_Parser(Parser):
         """
         pass
 
-    def parse_matchs(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Matchs de Football européen
-        """
-        pass

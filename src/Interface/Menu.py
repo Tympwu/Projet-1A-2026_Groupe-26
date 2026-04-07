@@ -149,6 +149,9 @@ class Menu:
             self.__parser = Football_European_leagues_Parser()
             self.parser.parse_players(self.search.dao["player"].data)
             print("Done")
+            self.parser.parse_equipes(self.search.dao["equipe"].data)
+            print("Equipes chargées")
+
         if self.sport_choosen == 3:
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
