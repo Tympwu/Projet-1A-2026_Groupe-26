@@ -87,7 +87,7 @@ class Badminton_Parser(Parser):
     def parse_players(self, data: pd.DataFrame):
         self.list_player = {}
         for index, row in data.iterrows():
-            full_name = self.fetch_safety_data(row["name_full"], str).strip()
+            full_name = self.fetch_safety_data(row["name"], str).strip()
             continent = self.fetch_safety_data(row["continent"], str).strip()
             parts = full_name.split()
             if continent.lower() == "africa":
