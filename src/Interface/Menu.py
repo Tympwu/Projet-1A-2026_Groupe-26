@@ -1,5 +1,5 @@
 from ..Query.recherche import Recherche
-from ..Query.Parser import Tennis_Parser, Parser
+from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser
 
 
 class Menu:
@@ -112,7 +112,7 @@ class Menu:
                     self.proposition_sports()
                 else:
                     self.help()    
-    
+
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
         while True:
@@ -146,14 +146,13 @@ class Menu:
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
         if self.sport_choosen == 2:
-            self.__parser = ()
-            self.parser.parse_players(self.search.dao["atp_players_2024"].data, sexe="H")
-            self.parser.parse_players(self.search.dao["wta_players_2024"].data, sexe="F")
+            self.__parser = Football_European_leagues_Parser()
+            self.parser.parse_players(self.search.dao["player"].data)
             print("Done")
-            print(self.parser.list_player)
+            print(self.parser.dict_player)
         if self.sport_choosen == 3:
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, sexe="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, sexe="F")
             print("Done")
-            print(self.parser.list_player)
+            print(self.parser.dict_player)
