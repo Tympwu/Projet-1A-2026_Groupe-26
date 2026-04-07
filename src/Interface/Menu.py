@@ -1,5 +1,5 @@
 from ..Query.recherche import Recherche
-from ..Query.Parser import Tennis_Parser
+from ..Query.Parser import Tennis_Parser, Parser
 
 
 class Menu:
@@ -14,6 +14,9 @@ class Menu:
             5: "league_of_legends",
             3: "tennis",
             4: "volleyball"}
+        self.__parser: Parser = None
+        self.__search: Recherche = None
+        self.sport_choosen: int = None
 
     @property
     def parser(self):
@@ -146,3 +149,4 @@ class Menu:
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data)
             print("Done")
+            print(self.parser.list_player)
