@@ -10,14 +10,12 @@ class Personne:
         full_name: str = None,
         dob: str = None,
         lieu_naissance: str = None,
-        age: str = None,
         sexe: str = None
     ) -> None:
         self.first_name = first_name
         self.last_name = last_name
-        if full_name is None:
-            self.full_name = self.first_name + " " + self.last_name
-        self.age = age
+        self.full_name = full_name
+        self.dob = dob
         self.sexe = sexe
 
     def __eq__(self, other: Any) -> bool:
@@ -26,7 +24,8 @@ class Personne:
         return NotImplemented
 
     def __str__(self) -> str:
-        return f"""Nom: {self.full_name}\n
-        Age: {self.age}\n
-        Sexe: {self.sexe}\n
-        Lieu de naissance: {self.lieu_naissance}."""
+        result = ""
+        for nom_argument, valeur in self.__dict__.items():
+            if valeur is not None:
+                result += f"\n{nom_argument} : {valeur}"
+        return result
