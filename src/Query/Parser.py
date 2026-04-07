@@ -84,8 +84,7 @@ class Badminton_Parser(Parser):
     def __init__(self):
         super().__init__("badminton")
     
-    def parse_players(self, data: pd.DataFrame):
-        self.list_player = {}
+    def parse_players(self, data: pd.DataFrame, other=None):
         for index, row in data.iterrows():
             full_name = self.fetch_safety_data(row["name"], str).strip()
             continent = self.fetch_safety_data(row["continent"], str).strip()
@@ -103,7 +102,7 @@ class Badminton_Parser(Parser):
                 nationalite=self.fetch_safety_data(row["country"], str),
                 continent = self.fetch_safety_data(row["continent"], str),
                 sport="badminton")
-            self.list_player[player.id] = player
+            self.dict_player[player.id] = player
 
     def parse_competition(self, data: pd.DataFrame):
         pass
