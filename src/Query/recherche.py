@@ -12,14 +12,14 @@ class Recherche:
     def __data_basketball(self):
         self.dao["game"] = DAO(fichier="data/basketball/game.csv")
         self.dao["player"] = DAO(fichier="data/basketball/player.csv")
-        self.dao["team"] = DAO(fichier="data/basketball/team.csv" )
+        self.dao["team"] = DAO(fichier="data/basketball/team.csv")
 
     def __data_football_european_leagues(self):
         self.dao["country"] = DAO(fichier="data/football_european_leagues/country.csv")
         self.dao["league"] = DAO(fichier="data/football_european_leagues/league.csv")
-        self.dao["match"] = DAO(fichier="data/football_european_leagues/")
-        self.dao["player"] = DAO(fichier="data/football_european_leagues/")
-        self.dao["team"] = DAO(fichier="data/football_european_leagues/")
+        self.dao["match"] = DAO(fichier="data/football_european_leagues/match.csv")
+        self.dao["player"] = DAO(fichier="data/football_european_leagues/player.csv")
+        self.dao["team"] = DAO(fichier="data/football_european_leagues/team.csv")
 
     def __data_league_of_legends(self):
         self.dao["coach"] = DAO(fichier="data/league_of_legends/coach.csv")

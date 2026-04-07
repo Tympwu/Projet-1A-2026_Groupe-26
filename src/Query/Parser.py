@@ -97,7 +97,7 @@ class Football_European_leagues_Parser(Parser):
                 full_name=self.fetch_safety_data(row["player_name"], str),
                 dob=self.fetch_safety_data(row["birthday"], str),
                 taille=self.fetch_safety_data(row["height (cm)"], int),
-                poid=self.fetch_safety_data(row["weight (kg)"], int),
+                poids=self.fetch_safety_data(row["weight (kg)"], int),
                 sport="Football")
             self.dict_player[player.id] = player
 
