@@ -75,7 +75,44 @@ class Tennis_Parser(Parser):
         pass
 
 
+class Badminton_Parser(Parser):
+    def __init__(self):
+        super().__init__("badminton")
+    
+    def parse_players(self, data: pd.DataFrame):
+        self.list_player = {}
+        # --- Fetch full name and continent ---
+        full_name = self.fetch_safety_data(row["name_full"], str).strip()
+        continent = self.fetch_safety_data(row["continent"], str).strip()
 
+        # --- Split the name into parts ---
+        parts = full_name.split()
+
+        # --- Determine first_name and last_name according to continent ---
+        if continent.lower() == "africa":
+            first_name = parts[0]
+            last_name = " ".join(parts[1:])  # everything else
+        else:
+            first_name = " ".join(parts[:-1])  # all but last
+            last_name = parts[-1]              # last word
+        for index, row in data.iterrows():
+            player = Player(
+                id=index,
+                first_name=first_name,
+                last_name=last_name,
+                nationalite=self.fetch_safety_data(row["country"], str),
+                continent = self.fetch_safety_data(row["continent"], str),
+                sport="badminton")
+            self.list_player[player.id] = player
+
+    def parse_competition(self, data: pd.DataFrame):
+        pass
+
+    def parse_matches(self, data: pd.DataFrame):
+        pass
+
+
+    
 
 
 
@@ -86,10 +123,16 @@ class League_of_legend_Parser(Parser):
 class Basketball_Parser(Parser):
     pass
 
+<<<<<<< HEAD
+class Football_Parser(Parser): 
+    def __init__(self):
+        super().__init__("football")
+=======
 class Football_European_leagues_Parser(Parser):
     
     def __init__(self):
         super().__init__("football_european_leagues")
+>>>>>>> 773615608b5d4f1c80e647c4a4da3a9a65a81ac3
 
     def parse_players(self, data: pd.DataFrame):
         for index, row in data.iterrows():
