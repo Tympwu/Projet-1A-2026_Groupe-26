@@ -145,10 +145,10 @@ class Menu:
         """
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
-        if self.sport_choosen == 2:
+        if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
             self.parser.parse_players(self.search.dao["player"].data)
-            print("Done")
+            print("Joueurs chargés")
             self.parser.parse_equipes(self.search.dao["equipe"].data)
             print("Equipes chargées")
 
@@ -156,5 +156,5 @@ class Menu:
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
-            print("Done")
+            print("Joueurs chargés")
             print(self.parser.dict_player)
