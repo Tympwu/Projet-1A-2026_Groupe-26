@@ -37,7 +37,7 @@ class Player(Personne):
         self.taille = taille
         self.poids = poids
         self.stat = stat
-        self.role =
+        self.role = role
     
     def __repr__(self) -> str:
         return f"Player( Nom:{self.full_name}, Sport:{self.sport})"
