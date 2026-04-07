@@ -166,12 +166,12 @@ class Basketball_Parser(Parser):
             dob = str(self.fetch_safety_data(row["birthdate"], int))
             if len(dob) != 10:
                 dob = dob[:9] + "0"
-            taille=self.fetch_safety_data(row["height"], str)
-            taille1=int(taille[0])
-            taille2=int(taille[2:])
-            taille=30,48*taille1 + 2,54*taille2
-            poids=self.fetch_safety_data(row["weight"], int)
-            poids=0,454*poids
+            taille = self.fetch_safety_data(row["height"], str)
+            taille1 = int(taille[0])
+            taille2 = int(taille[2:])
+            taille = 30.48*taille1 + 2.54*taille2
+            poids = self.fetch_safety_data(row["weight"], int)
+            poids = 0.454*poids
             player = Player(
                 id=self.fetch_safety_data(row["person_id"], int),
                 first_name=self.fetch_safety_data(row["first_name"], str),
@@ -181,7 +181,7 @@ class Basketball_Parser(Parser):
                 role=self.fetch_safety_data(row["position"], str),
                 taille=taille,
                 poids=poids,
-                equipe=dict_equipe[self.fetch_safety_data(row["team_id"], int)],
+                equipe=self.dict_equipe[self.fetch_safety_data(row["team_id"], int)],
                 sport="Basketball")
             self.dict_player[player.id] = player
 
