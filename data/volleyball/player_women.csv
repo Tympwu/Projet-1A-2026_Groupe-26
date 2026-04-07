@@ -1,0 +1,156 @@
+name,country_code,height,birth_date,birth_place,nickname
+CAZAUTE Helena,FRA,184,1997-12-17,Narbonne,Caz
+BAUER Christina,FRA,196,1988-01-01,Bergen,
+SYLVES Amandha,FRA,194,2000-12-29,Baie-mahault,
+GELIN Juliette,FRA,162,2001-11-02,Montpellier,Juju
+ROTAR Amelie,FRA,188,2000-10-24,,
+GIARDINO Amandine,FRA,172,1995-03-30,La Seyne-sur-mer,
+OLINGA ANDELA Leandra,FRA,185,1997-08-12,,
+RESPAUT Emilie,FRA,176,2003-04-25,Saint-raphael,
+STOJILJKOVIC Nina,FRA,180,1996-09-01,Paris,
+BAH Halimatou,FRA,185,2003-12-21,Epinay-sous-senart,
+GICQUEL Lucille,FRA,189,1997-11-13,Rennes,Lulu
+SCHALK Maeva,FRA,185,2005-12-14,,
+NDIAYE Iman,FRA,188,2002-01-13,Paris,
+ERDEM DUNDAR Eda,TUR,188,1987-06-22,Istanbul,"Edi, Eduska"
+OZBAY Cansu,TUR,179,1996-10-17,Izmir,
+SAHIN Elif,TUR,184,2001-01-19,Ankara,
+ORGE Gizem,TUR,172,1993-04-26,Ankara,Minister of Defence
+GUNES Zehra,TUR,198,1999-07-07,Istanbul,
+ARICI Beyza,TUR,190,1995-07-27,,
+KALAC Asli,TUR,185,1995-12-13,Istanbul,
+VARGAS Melissa Teresa,TUR,194,1999-10-16,Cienfuegos,Vargas Airlines
+KARAKURT Ebrar,TUR,195,2000-01-17,Balikesir,
+BALADIN Hande,TUR,187,1997-09-01,K?tahya,
+DIKEN Meliha,TUR,182,1993-09-17,Gradacac,Melly
+AYDIN Ilkin,TUR,179,2000-01-05,,
+CEBECIOGLU Derya,TUR,181,2000-10-24,Mersin,
+SIMIYU Loice Masitsa,KEN,182,2001-08-20,,Bouncer
+KUNDU Agripina Khayesi,KEN,155,1993-04-24,Kakamega,
+ATUKA Trizah,KEN,189,1992-04-14,Kakamega,
+OWINO Pamella Adhiambo,KEN,172,2001-09-26,Kisumu County,
+KIPRONO Sharon Chepchumba,KEN,183,1998-10-26,,Chumba
+MUKUVILANI Edith,KEN,184,1994-07-20,,Wisah
+KASAYA Leonida,KEN,168,1993-10-10,Kakamega,
+MISOKI Emmanculate Nekesa,KEN,184,2003-06-06,,
+MUTINDA Esther Kemene,KEN,176,1999-04-21,,
+NAMUTIRA Juliana,KEN,181,1999-05-14,Kakamenga,"Bulldozer, Tila"
+KAEI Lorine Chebet,KEN,179,1999-10-08,Mt. Elgon,
+BARASA Belinda Nanjala,KEN,188,2001-04-28,,
+TAPIA CRUZ Alondra Denis,DOM,193,2004-05-19,La Vega,
+RODRIGUEZ FUNG Ariana,DOM,184,2005-11-03,,
+de la CRUZ de PENA Bethania,DOM,188,1987-05-13,Santo Domingo,"Big Beth, Bethy, Betty"
+MARTINEZ Brayelin Elizabeth,DOM,201,1996-09-11,Santo Domingo,Brats
+CASTILLO Brenda,DOM,167,1992-06-05,Haina,"Chinchin, Shorty, Minor, La Peque"
+ARIAS PEREZ Candida Estefany,DOM,194,1992-03-11,Yaguate,"Yaguate, Candi"
+GONZALEZ LOPEZ Gaila Ceneida,DOM,190,1997-06-25,Santo Domingo,Zurda de Oro (Golden Lefty)
+GONZALEZ Geraldine Sthefany,DOM,200,2002-04-18,,
+MARTINEZ Jineiry,DOM,192,1997-12-03,Santo Domingo,La Chiqui
+GUILLEN PAREDES Madeline Jazmin,DOM,186,2001-06-04,Manoguayabo,
+MARTE FRICA Niverka Dharlenis,DOM,178,1990-10-19,Santo Domingo,"Nive, Clic-Clic, The Chancellor"
+PENA ISABEL Yonkaira Paola,DOM,190,1993-05-10,Santo Domingo,Yonky
+DIAO Linyu,CHN,183,1994-04-07,Huai'an,
+DING Xia,CHN,180,1990-01-13,Shijiazhuang,Little Ant
+GAO Yi,CHN,195,1998-07-22,Zaozhuang,
+GONG Xiangyu,CHN,189,1997-04-21,Lianyungang,Xiao Yuzhou (Little Universe)
+LI Yingying,CHN,195,2000-02-19,Qiqihar,Meimei (Little Sister)
+WANG Mengjie,CHN,173,1995-11-14,Jinan,Xiao Ke'ai (Little Cutie)
+WU Mengjie,CHN,195,2002-09-10,Jiangsu,
+YUAN Xinyue,CHN,202,1996-12-21,Chongqing,Little Apple
+ZHANG Changning,CHN,195,1995-11-06,Changzhou,Baobao (Baby)
+ZHUANG Yushan,CHN,184,2003-04-28,,
+WANG Yuanyuan,CHN,196,1997-07-14,Jingning County,
+ZHENG Yixin,CHN,189,1995-05-06,Zhangzhou,Little Fresh
+ZHU Ting,CHN,198,1994-11-29,Zhengzhou,"MVP Harvester, Queen Ting"
+CARLINI Lauren,USA,185,1995-02-28,"Geneva, Il",LC
+DREWS Andrea,USA,191,1993-12-25,"Elkhart, In",Annie
+HANCOCK Micha,USA,180,1992-11-10,"Mcalester, Ok",
+LARSON Jordan,USA,188,1986-10-16,"Fremont, Ne","Jor, Govnah, The Governor"
+OGBOGU Chiaka,USA,188,1995-04-15,"Newark, Nj",
+PLUMMER Kathryn,USA,198,1998-10-16,"Long Beach, Ca",
+POULTER Jordyn,USA,188,1997-07-31,"Naperville, Il",
+RETTKE Dana,USA,203,1999-01-21,"Riverside, Il","Dane, Danye"
+ROBINSON Kelsey,USA,188,1992-06-25,"Elmhurst, Il",Ke$ha
+SKINNER Avery,USA,186,1999-04-25,"Katy, Tx",
+THOMPSON Jordan,USA,193,1997-05-05,"Edina, Mn",
+WASHINGTON Haleigh,USA,190,1995-09-22,"Denver, Co","Hales, Hales Storm"
+WONG-ORANTES Justine,USA,168,1995-10-06,"Torrance, Ca",
+SEKI Nanami,JPN,171,1999-06-12,Funabashi,Sena
+ARAKI Ayaka,JPN,184,2001-09-02,Onojo,
+WADA Yukiko,JPN,174,2002-01-08,Kyoto,
+IWASAKI Koyomi,JPN,175,1989-05-01,Komae,
+MIYABE Airi,JPN,182,1998-07-29,Amagasaki,
+INOUE Arisa,JPN,178,1995-05-08,Maizuru,Shouma
+KOJIMA Manami,JPN,158,1994-11-07,Sendai,
+FUKUDOME Satomi,JPN,162,1997-11-23,Kyoto,Sutton
+MORIYA Akane,JPN,165,1991-01-08,Suzaka,
+YAMADA Nichika,JPN,184,2000-02-24,Toyota,Hana (Flower)
+ISHIKAWA Mayu,JPN,174,2000-05-14,Okazaki,
+HAYASHI Kotona,JPN,173,1999-11-13,Kyoto,Rin
+NISHIDA Sarina,JPN,180,1996-05-21,Fukuoka,
+ORRO Alessia,ITA,178,1998-07-18,Oristano,
+CAMBI Carlotta,ITA,178,1996-05-28,San Miniato,
+EGONU Paola Ogechi,ITA,193,1998-12-18,Cittadella,
+ANTROPOVA Ekaterina,ITA,202,2003-03-19,Akureyri,
+SYLLA Myriam Fatime,ITA,184,1995-01-08,Palermo,Miri
+BOSETTI Caterina Chiara,ITA,179,1994-02-02,Tradate,Cate
+OMORUYI Oghosasere Loveth,ITA,184,2002-08-25,Lodi,
+DANESI Anna,ITA,195,1996-04-20,Brescia,
+FAHR Sarah Luisa,ITA,192,2001-09-12,Kulmbach,
+LUBIAN Marina,ITA,193,2000-04-11,Moncalieri,
+de GENNARO Monica,ITA,174,1987-01-08,Piano Di Sorrento,Moky
+SPIRITO Ilaria,ITA,174,1994-02-20,Albisola Superiore,
+ALAGIERSKA Klaudia,POL,190,1996-01-02,Milan?wek,Lala
+CZYRNIANSKA Martyna,POL,191,2003-10-13,Krynica-zdr?j,Czyrna
+JURCZYK Magdalena,POL,183,1995-10-28,Cergowa,
+KORNELUK Agnieszka,POL,200,1994-10-17,Poznan,
+LUKASIK Martyna,POL,189,1999-11-26,Gdansk,
+MEDRZYK Natalia,POL,183,1992-01-13,Lebork,Mama
+ROZANSKI Olivia,POL,185,1997-06-05,Albi,
+SMARZEK Malwina,POL,191,1996-06-03,Laska,
+STENZEL Maria,POL,168,1998-11-25,Koscian,Mery
+STYSIAK Magdalena,POL,203,2000-12-03,Turow,Megi
+SZCZYGLOWSKA Aleksandra,POL,172,1998-03-22,Elblag,Ola
+WENERSKA Katarzyna,POL,180,1993-03-09,Swiecie,Kasia
+WOLOSZ Joanna,POL,181,1990-04-07,Elblag,
+OLUOCH Veronica Adhiambo,KEN,180,1999-06-05,Ugenya,
+ALEKSIC Maja,SRB,188,1997-06-06,Uzice,
+BOSKOVIC Tijana,SRB,193,1997-03-08,Trebinje,Tica
+BUSA Bianka,SRB,187,1994-07-25,Vrbas,Buki
+DRCA Bojana,SRB,186,1988-03-29,Belgrade,Bosha
+KURTAGIC Hena,SRB,195,2004-08-27,Novi Pazar,
+LAZOVIC Katarina,SRB,182,1999-09-12,Belgrade,Laza
+LOZO Sara,SRB,186,1997-04-29,Jagodina,
+MILENKOVIC Bojana,SRB,185,1997-03-06,Belgrade,
+OGNJENOVIC Maja,SRB,183,1984-08-06,Zrenjanin,
+POPOVIC Silvija,SRB,178,1986-03-15,Niksic,
+POPOVIC Mina,SRB,187,1994-09-16,Kraljevo,
+STEVANOVIC Jovana,SRB,192,1992-06-30,Belgrade,Jole
+UZELAC Aleksandra,SRB,188,2004-07-27,Zrenjanin,
+da SILVA Ana Carolina,BRA,183,1991-04-08,Belo Horizonte,Carol
+MENEZES OLIVEIRA de SOUZA Ana Cris,BRA,192,2004-04-07,Rio De Janeiro,
+DUARTE ALECRIM Diana,BRA,194,1999-02-22,,
+BRAGA GUIMARAES Gabriela,BRA,180,1994-05-19,Belo Horizonte,Gabi
+BERGMANN Julia Isabelle,BRA,191,2001-02-21,Munich,
+GERALDO TEIXEIRA Lorenne,BRA,187,1996-01-08,Conselheiro Lafaiete,
+SILVA CARNEIRO Macris Fernanda,BRA,178,1989-03-03,Santo Andre,Fada Vegana (Portuguese for Vegan Fairy)
+ARAUJO Natalia,BRA,162,1997-04-10,Sao Paulo,Natinha
+ALEXANDRE COSTA NUNES Nyeme Victor,BRA,175,1998-10-11,Barra Do Corda,Doutora Nyeme
+MONTIBELLER Rosamaria,BRA,185,1994-04-09,Nova Trento,
+RATZKE Roberta Silva,BRA,185,1990-04-28,Curitiba,
+DAHER de MENEZES Thaisa,BRA,196,1987-05-15,Rio De Janeiro,Mama Daher
+LEMES SANTOS Tainara,BRA,190,2000-03-09,Jandira,
+GIOVANNINI Gaia,ITA,182,2001-12-17,San Giovanni In Persiceto,
+van AALEN Sarah,NED,186,2000-01-21,Stogumber,
+PLAK Celeste,NED,190,1995-10-26,Tuitjenhorn,
+KNOLLEMA Jolien,NED,189,2003-01-05,Groningen,
+LOHUIS Juliet,NED,190,1996-09-10,Oldenzaal,
+BUIJS Anne,NED,191,1991-12-02,Geleen,
+BONGAERTS Britt,NED,185,1996-11-03,Roermond,
+BAIJENS Indy,NED,193,2001-02-04,Zaandam,
+JASPER Marrit,NED,180,1996-02-28,Sneek,
+DAALDEROP Nika,NED,189,1998-11-29,Amsterdam,
+TIMMERMAN Eline,NED,192,1998-12-30,Rijssen,
+REESINK Florien,NED,174,1998-06-09,Borne,
+DAMBRINK Elles,NED,184,2003-06-22,Ouderkerk Aan Den Ijssel,
+MARRING Nova,NED,184,2001-09-06,Groningen,

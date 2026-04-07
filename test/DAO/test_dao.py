@@ -1,10 +1,13 @@
-import pytest
 import pandas as pd
+import pytest
 import numpy as np
 from unittest.mock import patch
+import sys
+from pathlib import Path
 
+sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from ...src.DAO.interaction import DAO
+from src.DAO.interaction import DAO
 
 
 # ---------------------------------------------------------------------------
@@ -23,13 +26,15 @@ SAMPLE_CSV = "data/test.csv"
 
 @pytest.fixture
 def dao():
-    with patch("pandas.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.interaction.pd.read_csv",
+               return_value=SAMPLE_DATA.copy()):
         return DAO(SAMPLE_CSV)
 
 
 @pytest.fixture
 def dao_prive():
-    with patch("pandas.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.interaction.pd.read_csv",
+               return_value=SAMPLE_DATA.copy()):
         return DAO(SAMPLE_CSV, col_prive=["email"])
 
 
@@ -40,7 +45,8 @@ def dao_nan():
         "nom": ["Alice", None, "Charlie"],
         "age": [30, 25, np.nan],
     })
-    with patch("pandas.read_csv", return_value=donnees):
+    with patch("src.DAO.interaction.pd.read_csv",
+               return_value=donnees):
         return DAO(SAMPLE_CSV)
 
 
@@ -51,7 +57,8 @@ def dao_doublons():
         "nom": ["Alice", "Alice", "Bob"],
         "age": [30, 30, 25],
     })
-    with patch("pandas.read_csv", return_value=donnees):
+    with patch("src.DAO.interaction.pd.read_csv",
+               return_value=donnees):
         return DAO(SAMPLE_CSV)
 
 
@@ -64,7 +71,7 @@ def test_init_fichier_valide(dao):
 
 
 def test_init_fichier_mauvais_type_leve_assertion():
-    with patch("pandas.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
         with pytest.raises(AssertionError):
             DAO(123)
 
@@ -78,7 +85,7 @@ def test_init_col_prive_none_accepte(dao):
 
 
 def test_init_col_prive_mauvais_type_leve_assertion():
-    with patch("pandas.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
         with pytest.raises(AssertionError):
             DAO(SAMPLE_CSV, col_prive="email")
 

@@ -1,0 +1,126 @@
+date,phase,round,matchday,group,team_home,team_away,score_team_home,score_team_away
+2021-09-14,group,RO32,1,F,Young Boys,Manchester United,2,1
+2021-09-14,group,RO32,1,G,Sevilla,Red Bull Salzburg,1,1
+2021-09-14,group,RO32,1,E,Dynamo Kyiv,Benfica,0,0
+2021-09-14,group,RO32,1,H,Chelsea,Zenit,1,0
+2021-09-14,group,RO32,1,E,Barcelona,Bayern Munich,0,3
+2021-09-14,group,RO32,1,H,Malmö FF,Juventus,0,3
+2021-09-14,group,RO32,1,F,Villarreal,Atalanta,2,2
+2021-09-14,group,RO32,1,G,Lille,VfL Wolfsburg,0,0
+2021-09-15,group,RO32,1,D,Sheriff Tiraspol,Shakhtar Donetsk,2,0
+2021-09-15,group,RO32,1,C,Beşiktaş,Borussia Dortmund,1,2
+2021-09-15,group,RO32,1,B,Atlético Madrid,Porto,0,0
+2021-09-15,group,RO32,1,A,Club Brugge,Paris Saint-Germain,1,1
+2021-09-15,group,RO32,1,D,Inter Milan,Real Madrid,0,1
+2021-09-15,group,RO32,1,B,Liverpool,Milan,3,2
+2021-09-15,group,RO32,1,C,Sporting CP,Ajax,1,5
+2021-09-15,group,RO32,1,A,Manchester City,RB Leipzig,6,3
+2021-09-28,group,RO32,2,C,Ajax,Beşiktaş,2,0
+2021-09-28,group,RO32,2,D,Shakhtar Donetsk,Inter Milan,0,0
+2021-09-28,group,RO32,2,A,Paris Saint-Germain,Manchester City,2,0
+2021-09-28,group,RO32,2,D,Real Madrid,Sheriff Tiraspol,1,2
+2021-09-28,group,RO32,2,B,Milan,Atlético Madrid,1,2
+2021-09-28,group,RO32,2,B,Porto,Liverpool,1,5
+2021-09-28,group,RO32,2,C,Borussia Dortmund,Sporting CP,1,0
+2021-09-28,group,RO32,2,A,RB Leipzig,Club Brugge,1,2
+2021-09-29,group,RO32,2,F,Atalanta,Young Boys,1,0
+2021-09-29,group,RO32,2,H,Zenit,Malmö FF,4,0
+2021-09-29,group,RO32,2,G,Red Bull Salzburg,Lille,2,1
+2021-09-29,group,RO32,2,H,Juventus,Chelsea,1,0
+2021-09-29,group,RO32,2,E,Benfica,Barcelona,3,0
+2021-09-29,group,RO32,2,E,Bayern Munich,Dynamo Kyiv,5,0
+2021-09-29,group,RO32,2,G,VfL Wolfsburg,Sevilla,1,1
+2021-09-29,group,RO32,2,F,Manchester United,Villarreal,2,1
+2021-10-19,group,RO32,3,A,Club Brugge,Manchester City,1,5
+2021-10-19,group,RO32,3,C,Beşiktaş,Sporting CP,1,4
+2021-10-19,group,RO32,3,A,Paris Saint-Germain,RB Leipzig,3,2
+2021-10-19,group,RO32,3,C,Ajax,Borussia Dortmund,4,0
+2021-10-19,group,RO32,3,B,Atlético Madrid,Liverpool,2,3
+2021-10-19,group,RO32,3,D,Inter Milan,Sheriff Tiraspol,3,1
+2021-10-19,group,RO32,3,B,Porto,Milan,1,0
+2021-10-19,group,RO32,3,D,Shakhtar Donetsk,Real Madrid,0,5
+2021-10-20,group,RO32,3,E,Barcelona,Dynamo Kyiv,1,0
+2021-10-20,group,RO32,3,G,Red Bull Salzburg,VfL Wolfsburg,3,1
+2021-10-20,group,RO32,3,G,Lille,Sevilla,0,0
+2021-10-20,group,RO32,3,H,Zenit,Juventus,0,1
+2021-10-20,group,RO32,3,F,Young Boys,Villarreal,1,4
+2021-10-20,group,RO32,3,F,Manchester United,Atalanta,3,2
+2021-10-20,group,RO32,3,E,Benfica,Bayern Munich,0,4
+2021-10-20,group,RO32,3,H,Chelsea,Malmö FF,4,0
+2021-11-02,group,RO32,4,G,VfL Wolfsburg,Red Bull Salzburg,2,1
+2021-11-02,group,RO32,4,H,Malmö FF,Chelsea,0,1
+2021-11-02,group,RO32,4,H,Juventus,Zenit,4,2
+2021-11-02,group,RO32,4,G,Sevilla,Lille,1,2
+2021-11-02,group,RO32,4,E,Bayern Munich,Benfica,5,2
+2021-11-02,group,RO32,4,F,Villarreal,Young Boys,2,0
+2021-11-02,group,RO32,4,F,Atalanta,Manchester United,2,2
+2021-11-02,group,RO32,4,E,Dynamo Kyiv,Barcelona,0,1
+2021-11-03,group,RO32,4,D,Real Madrid,Shakhtar Donetsk,2,1
+2021-11-03,group,RO32,4,B,Milan,Porto,1,1
+2021-11-03,group,RO32,4,D,Sheriff Tiraspol,Inter Milan,1,3
+2021-11-03,group,RO32,4,A,RB Leipzig,Paris Saint-Germain,2,2
+2021-11-03,group,RO32,4,C,Borussia Dortmund,Ajax,1,3
+2021-11-03,group,RO32,4,A,Manchester City,Club Brugge,4,1
+2021-11-03,group,RO32,4,B,Liverpool,Atlético Madrid,2,0
+2021-11-03,group,RO32,4,C,Sporting CP,Beşiktaş,4,0
+2021-11-23,group,RO32,5,F,Villarreal,Manchester United,0,2
+2021-11-23,group,RO32,5,E,Dynamo Kyiv,Bayern Munich,1,2
+2021-11-23,group,RO32,5,G,Sevilla,VfL Wolfsburg,2,0
+2021-11-23,group,RO32,5,E,Barcelona,Benfica,0,0
+2021-11-23,group,RO32,5,H,Chelsea,Juventus,4,0
+2021-11-23,group,RO32,5,H,Malmö FF,Zenit,1,1
+2021-11-23,group,RO32,5,F,Young Boys,Atalanta,3,3
+2021-11-23,group,RO32,5,G,Lille,Red Bull Salzburg,1,0
+2021-11-24,group,RO32,5,D,Inter Milan,Shakhtar Donetsk,2,0
+2021-11-24,group,RO32,5,C,Beşiktaş,Ajax,1,2
+2021-11-24,group,RO32,5,B,Atlético Madrid,Milan,0,1
+2021-11-24,group,RO32,5,B,Liverpool,Porto,2,0
+2021-11-24,group,RO32,5,D,Sheriff Tiraspol,Real Madrid,0,3
+2021-11-24,group,RO32,5,A,Manchester City,Paris Saint-Germain,2,1
+2021-11-24,group,RO32,5,C,Sporting CP,Borussia Dortmund,3,1
+2021-11-24,group,RO32,5,A,Club Brugge,RB Leipzig,0,5
+2021-12-07,group,RO32,6,A,RB Leipzig,Manchester City,2,1
+2021-12-07,group,RO32,6,A,Paris Saint-Germain,Club Brugge,4,1
+2021-12-07,group,RO32,6,C,Ajax,Sporting CP,4,2
+2021-12-07,group,RO32,6,D,Real Madrid,Inter Milan,2,0
+2021-12-07,group,RO32,6,B,Porto,Atlético Madrid,1,3
+2021-12-07,group,RO32,6,B,Milan,Liverpool,1,2
+2021-12-07,group,RO32,6,D,Shakhtar Donetsk,Sheriff Tiraspol,1,1
+2021-12-07,group,RO32,6,C,Borussia Dortmund,Beşiktaş,5,0
+2021-12-08,group,RO32,6,H,Zenit,Chelsea,3,3
+2021-12-08,group,RO32,6,H,Juventus,Malmö FF,1,0
+2021-12-08,group,RO32,6,E,Bayern Munich,Barcelona,3,0
+2021-12-08,group,RO32,6,G,Red Bull Salzburg,Sevilla,1,0
+2021-12-08,group,RO32,6,F,Manchester United,Young Boys,1,1
+2021-12-08,group,RO32,6,G,VfL Wolfsburg,Lille,1,3
+2021-12-08,group,RO32,6,E,Benfica,Dynamo Kyiv,2,0
+2021-12-09,group,RO32,6,F,Atalanta,Villarreal,2,3
+2022-02-15,knockout,RO16,,,Paris Saint-Germain,Real Madrid,1,0
+2022-02-15,knockout,RO16,,,Sporting CP,Manchester City,0,5
+2022-02-16,knockout,RO16,,,Inter Milan,Liverpool,0,2
+2022-02-16,knockout,RO16,,,Red Bull Salzburg,Bayern Munich,1,1
+2022-02-02,knockout,RO16,,,Villarreal,Juventus,1,1
+2022-02-02,knockout,RO16,,,Chelsea,Lille,2,0
+2022-02-23,knockout,RO16,,,Benfica,Ajax,2,2
+2022-02-23,knockout,RO16,,,Atlético Madrid,Manchester United,1,1
+2022-03-08,knockout,RO16,,,Bayern Munich,Red Bull Salzburg,7,1
+2022-03-08,knockout,RO16,,,Liverpool,Inter Milan,0,1
+2022-03-09,knockout,RO16,,,Manchester City,Sporting CP,0,0
+2022-03-09,knockout,RO16,,,Real Madrid,Paris Saint-Germain,3,1
+2022-03-15,knockout,RO16,,,Manchester United,Atlético Madrid,0,1
+2022-03-15,knockout,RO16,,,Ajax,Benfica,0,1
+2022-03-16,knockout,RO16,,,Juventus,Villarreal,0,3
+2022-03-16,knockout,RO16,,,Lille,Chelsea,1,2
+2022-04-05,knockout,RO8,,,Manchester City,Atlético Madrid,1,0
+2022-04-05,knockout,RO8,,,Benfica,Liverpool,1,3
+2022-04-06,knockout,RO8,,,Chelsea,Real Madrid,1,3
+2022-04-06,knockout,RO8,,,Villarreal,Bayern Munich,1,0
+2022-04-12,knockout,RO8,,,Real Madrid,Chelsea,2,3
+2022-04-12,knockout,RO8,,,Bayern Munich,Villarreal,1,1
+2022-04-13,knockout,RO8,,,Atlético Madrid,Manchester City,0,0
+2022-04-13,knockout,RO8,,,Liverpool,Benfica,3,3
+2022-04-26,knockout,RO4,,,Manchester City,Real Madrid,4,3
+2022-04-27,knockout,RO4,,,Liverpool,Villarreal,2,0
+2022-05-03,knockout,RO4,,,Villarreal,Liverpool,2,3
+2022-05-04,knockout,RO4,,,Real Madrid,Manchester City,3,1
+2022-05-28,knockout,RO2,,,Liverpool,Real Madrid,0,1
