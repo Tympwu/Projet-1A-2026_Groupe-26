@@ -82,27 +82,24 @@ class League_of_legend_Parser(Parser):
 class Basketball_Parser(Parser):
 
 
-class Football_Parser(Parser):
+class Football_European_leagues_Parser(Parser):
     
 def __init__(self):
-        super().__init__("football")
+        super().__init__("football_european_leagues")
 
     def parse_players(self, data: pd.DataFrame):
         self.list_player = {}
         for index, row in data.iterrows():
-            dob = str(self.fetch_safety_data(row["dob"], int))
+            dob = str(self.fetch_safety_data(row["birthday"], int))
             dob = dob[:4] + "-" + dob[4:6] + "-" + dob[6:8]
             print(dob)
             player = Player(
-                id=self.fetch_safety_data(row["player_id"], int),
-                sexe="H",
-                first_name=self.fetch_safety_data(row["name_first"], str),
-                last_name=self.fetch_safety_data(row["name_last"], str),
-                main_forte=self.fetch_safety_data(row["hand"], str),
+                id=self.fetch_safety_data(row["player_api_id"], int),
+                full_name=self.fetch_safety_data(row["player_name"], str),
                 dob=dob,
-                nationalite=self.fetch_safety_data(row["ioc"], str),
-                taille=self.fetch_safety_data(row["height"], int),
-                sport="Tennis")
+                taille=self.fetch_safety_data(row["height (cm)"], int),
+                poid=self.fetch_safety_data(row["weight (kg)"], int),
+                sport="Football")
             self.list_player[player.id] = player
 
     def parse_competition(self, data: pd.DataFrame):
