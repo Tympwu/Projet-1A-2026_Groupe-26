@@ -20,22 +20,23 @@ class Parser(ABC):
         try:
             return convert_to(data)
         except ValueError:
+            type(data)
             return None
 
     @abstractmethod
-    def parse_players(self, data):
+    def parse_players(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_matches(self, data):
+    def parse_matches(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_competition(self, data):
+    def parse_competition(self, data, other=None):
         pass
 
     @abstractmethod
-    def parse_team(self, data):
+    def parse_team(self, data, other=None):
         pass
 
 
@@ -43,7 +44,7 @@ class Tennis_Parser(Parser):
     def __init__(self):
         super().__init__("tennis")
 
-    def parse_players(self, data: pd.DataFrame, sexe: str):
+    def parse_players(self, data: pd.DataFrame, other: str):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes correspondantes
 
@@ -54,7 +55,7 @@ class Tennis_Parser(Parser):
             print(dob)
             player = Player(
                 id=self.fetch_safety_data(row["player_id"], int),
-                sexe=sexe,
+                sexe=other,
                 first_name=self.fetch_safety_data(row["name_first"], str),
                 last_name=self.fetch_safety_data(row["name_last"], str),
                 main_forte=self.fetch_safety_data(row["hand"], str),
