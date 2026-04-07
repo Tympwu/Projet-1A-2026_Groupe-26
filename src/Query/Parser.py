@@ -122,16 +122,11 @@ class League_of_legend_Parser(Parser):
 class Basketball_Parser(Parser):
     pass
 
-<<<<<<< HEAD
-class Football_Parser(Parser): 
-    def __init__(self):
-        super().__init__("football")
-=======
+
 class Football_European_leagues_Parser(Parser):
     
     def __init__(self):
         super().__init__("football_european_leagues")
->>>>>>> 773615608b5d4f1c80e647c4a4da3a9a65a81ac3
 
     def parse_players(self, data: pd.DataFrame):
         for index, row in data.iterrows():
@@ -144,11 +139,17 @@ class Football_European_leagues_Parser(Parser):
                 sport="Football")
             self.dict_player[player.id] = player
 
+    def parse_team(self, data: pd.DataFrame):
+        for index, row in data.iterrows():
+            equipe = Equipe(
+                id=self.fetch_safety_data(row["team_api_id"], int),
+                nom_equipe=self.fetch_safety_data(row["team_long_name"], str),
+                nom_abrev=self.fetch_safety_data(row["team_short_name"], str)
+                )
+            self.dict_equipe[equipe.id] = equipe
+
     def parse_competition(self, data: pd.DataFrame):
         pass
 
     def parse_matches(self, data: pd.DataFrame):
-        pass
-
-    def parse_team(self, data: pd.DataFrame):
         pass
