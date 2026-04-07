@@ -25,7 +25,7 @@ class Player(Personne):
         stat: dict[str, int] = None,
         role: str = None
     ) -> None:
-        super().__init__(first_name, last_name, full_name, lieu_naissance, age, sexe)
+        super().__init__(first_name, last_name, full_name, lieu_naissance, dob, sexe)
         self.id = id
         self.pseudo = pseudo
         self.equipe = equipe
@@ -37,15 +37,15 @@ class Player(Personne):
         self.taille = taille
         self.poids = poids
         self.stat = stat
-        self.role =
-    
+        self.role = role
+
     def __repr__(self) -> str:
         return f"Player( Nom:{self.full_name}, Sport:{self.sport})"
 
     def __str__(self) -> str:
-        return f"""Nom joueu{"se" if self.sexe == "femme" else "r"}: {self.first_name} {self.last_name}\n
-        ID: {self.id}\n
-        Sport: {self.sport}\n
-        Age: {self.age} ans\n
-        """
+        result = ""
+        for nom_argument, valeur in self.__dict__.items():
+            if valeur is not None:
+                result += f"\n{nom_argument} : {valeur}"
+        return result
 
