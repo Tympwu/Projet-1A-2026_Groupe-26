@@ -1,14 +1,29 @@
 from .Equipe import Equipe
 
 
+from .Player import Player
+
+
 class Match:
     """"""
 
     def __init__(
-        self, id_match: int, lieux_match: str, equipe1: Equipe | None = None,
-        equipe2: Equipe | None = None, score_equipe1: int | None = None,
-        score_equipe2: int | None = None, best_of: int = 1
+        self, id_match: int | None = None,
+        region: str | None = None,
+        equipe1: Equipe | None = None,
+        equipe2: Equipe | None = None,
+        joueur1: Player | None = None,
+        joueur2: Player | None = None,
+        score1: int | None = None,
+        score2: int | None = None,
+        best_of: int = 1,
+        date_match: str | None = None,
+        temps_match: float | None = None
     ) -> None:
+        if not (isinstance(id_match, int) or id_match is None):
+            raise TypeError("l'attribut id_match doit être du type int ou None")
+        if not isinstance(region, str):
+            raise TypeError("L'attribut region doit être du type")
         if not (isinstance(equipe1, Equipe) or equipe1 is None):
             raise TypeError("l'attribut equipe1 doit être du type equipe ou None")
         if not (isinstance(equipe2, Equipe) or equipe2 is None):
@@ -17,160 +32,105 @@ class Match:
             raise ValueError(
                 "les attributs equipe1 et equipe2 doivent être différent s'ils sont renseignés"
                 )
-        if not (isinstance(score_equipe1, int) or score_equipe1 is None) or score_equipe1 < 0:
-            raise ValueError("l'attribut score_equipe1 doit être un entier naturel positif")
-        if not (isinstance(score_equipe2, int) or score_equipe2 is None) or score_equipe2 < 0:
-            raise ValueError("l'attribut score_equipe2 doit être un entier naturel positif")
-        if not isinstance(lieux_match, str):
-            raise TypeError("L'attribut lieux_match doit être du type")
+        if not (isinstance(joueur1, Player) or joueur1 is None):
+            raise TypeError("l'attribut joueur1 doit être du type Player ou None")
+        if not (isinstance(joueur2, Player) or joueur2 is None):
+            raise TypeError("l'attribut joueur2 doit être du type Player ou None")
+        if (joueur1 is not None) and (joueur2 is not None) and (joueur1 == joueur2):
+            raise ValueError(
+                "les attributs joueur1 et joureur2 doivent être différent s'ils sont renseignés"
+                )
+        if not (isinstance(score1, int) or score1 is None) or score1 < 0:
+            raise ValueError("l'attribut score1 doit être un entier naturel positif")
+        if not (isinstance(score2, int) or score2 is None) or score2 < 0:
+            raise ValueError("l'attribut score2 doit être un entier naturel positif")
+        if not isinstance(best_of, int) or best_of < 0:
+            raise ValueError("l'attribut best_of doit être un entier naturel positif")
+        if not (isinstance(date_match, str) or date_match is None):
+            raise TypeError("l'attribut date_match doit être du type str")
+        if not (isinstance(temps_match, float) or temps_match is None) or temps_match < 0:
+            raise ValueError("l'attribut temps_match doit être du type float et doit être positif")
+        self.id_match = id_match
+        self.region = region
         self.equipe1 = equipe1
         self.equipe2 = equipe2
+        self.joueur1 = joueur1
+        self.joueur2 = joueur2
+        self.score1 = score1
+        self.score2 = score2
         self.best_of = best_of
-        self.lieux_match = lieux_match
-        self.score_equipe1 = score_equipe1
-        self.score_equipe2 = score_equipe2
-
-    @property
-    def equipe1(self) -> Equipe | None:
-        return self.equipe1
-
-    @property
-    def equipe2(self) -> Equipe | None:
-        return self.equipe2
-
-    @property
-    def best_of(self) -> Equipe | None:
-        return self.best_of
-
-    @property
-    def score_equipe1(self) -> int | None:
-        return self.score_equipe1
-
-    def score_equipe2(self) -> int | None:
-        return self.score_equipe2
-
-    @property
-    def lieux_match(self) -> str:
-        return self.lieux_match
+        self.date_match = date_match
+        self.temps_match = temps_match
 
     def __str__(self) -> str:
-        return f"Voici le Match:\nL'Equipe 1: {self.equipe1.nom}\nL'Equipe 2: {self.equipe2.nom}"
-        f"best of: {self.best_of}\nscore equipe 1: {self.score_equipe1}\n"
-        f"score equipe2: {self.score_equipe2}\nlieux du match: {self.lieux_match}"
+        if self.equipe1 is not None and self.equipe2 is not None:
+            return f"""Voici le Match:\n
+            Identifiant du match: {self.id_match}\n
+            L'Equipe 1: {self.equipe1.nom}\n
+            L'Equipe 2: {self.equipe2.nom}\n
+            best of: {self.best_of}\n
+            score equipe 1: {self.score1}\n
+            score equipe 2: {self.score2}\n
+            lieux du match: {self.region}\n
+            date du match: {self.date_match}\n
+            temps du match: {self.temps_match}
+            """
+        elif self.joueur1 is not None and self.joueur2 is not None:
+            return f"""Voici le Match:\n
+            Identifiant du match: {self.id_match}\n
+            Joueur 1: {self.joueur1.full_name}\n
+            Joueur 2: {self.joueur2.full_name}\n
+            best of: {self.best_of}\n
+            score joueur 1: {self.score1}\n
+            score joueur 2: {self.score2}\n
+            lieux du match: {self.region}\n
+            date du match: {self.date_match}\n
+            temps du match: {self.temps_match}
+            """
+        else:
+            return f"""Voici le Match:\n
+            Identifiant du match: {self.id_match}\n
+            les 2 adversaires ne sont pas renseignés\n
+            best of: {self.best_of}\n
+            score 1er adversaire: {self.score1}\n
+            score 2ème adversaire: {self.score2}\n
+            lieux du match: {self.region}\n
+            date du match: {self.date_match}\n
+            temps du match: {self.temps_match}
+            """
 
-    def ajouter_equipe1(self, equipe1: Equipe) -> None:
-        """
-        Permet d'ajouter l'équipe1 au match
-
-        Parameter:
-        ----------
-        - equipe1: Equipe
-
-        Return:
-        -------
-        None
-        """
-        if not isinstance(equipe1, Equipe):
-            raise TypeError("l'attribut equipe1 est du type Equipe")
-        if self.equipe1 is not None:
-            raise ValueError("l'attribut equipe1 est déjà fournit dans le match")
-        if equipe1 == self.equipe2:
-            raise ValueError(
-                "l'attribut equipe1 est déjà fournit dans le match (c'est la 2eme equipe)"
-                )
-        self.equipe1 = equipe1
-
-    def ajouter_equipe2(self, equipe2: Equipe) -> None:
-        """
-        Permet d'ajouter l'équipe2 au match
-
-        Parameter:
-        ----------
-        - equipe2: Equipe
-
-        Return:
-        -------
-        None
-        """
-        if not isinstance(equipe2, Equipe):
-            raise TypeError("l'attribut equipe2 est du type Equipe")
-        if self.equipe_1 is not None:
-            raise ValueError("l'attribut equipe_1 est déjà fournit dans le match")
-        if equipe2 == self.equipe1:
-            raise ValueError(
-                "l'attribut equipe2 est déjà fournit dans le match (c'est la 1ère equipe)"
-                )
-        self.equipe2 = equipe2
-
-    def ajouter_equipes(self, equipe1: Equipe, equipe2: Equipe) -> None:
-        """
-        Permet d'ajouter les 2 équipes du match
-
-        Parameters:
-        -----------
-        -equipe1: Equipe
-        -equipe2: Equipe
-
-        Return:
-        -------
-        None
-        """
-        self.ajouter_equipe1(equipe1)
-        self.ajouter_equipe2(equipe2)
-
-    def ajouter_scores(self, score_equipe1: int, score_equipe2: int) -> None:
+    def ajouter_scores(self, score1: int, score2: int) -> None:
         """
         Permet d'ajouter le score du match entre les 2 équipes (renseignés au prealable)
 
         Parameters:
         -----------
-        - score_equipe1: int
-        - score_equipe2: int
+        - score1: int
+        - score2: int
 
         Return:
         -------
         None
         """
-        if (not isinstance(score_equipe1, int)) or score_equipe1 < 0:
-            raise ValueError("l'attribut score_equipe1 est un entier positif")
-        if (not isinstance(score_equipe2, int)) or score_equipe2 < 0:
-            raise ValueError("l'attribut score_equipe2 est un entier positif")
+        if (not isinstance(score1, int)) or score1 < 0:
+            raise ValueError("l'attribut score1 est un entier positif")
+        if (not isinstance(score2, int)) or score2 < 0:
+            raise ValueError("l'attribut score2 est un entier positif")
         if self.equipe_1 is None:
             raise ValueError("l'attribut equipe1 du match vaut None")
         if self.equipe_2 is None:
             raise ValueError("l'attribut equipe2 du match vaut None")
-        if (self.score_equipe1 is not None) or (self.score_equipe2 is not None):
+        if (self.score1 is not None) or (self.score2 is not None):
             raise ValueError("les scores ont déjà été enregistrés")
-        if score_equipe1 + score_equipe2 == self.best_of:
-            self.score_equipe1 = score_equipe1
-            self.score_equipe2 = score_equipe2
+        if score1 + score2 == self.best_of:
+            self.score1 = score1
+            self.score2 = score2
         else:
-            if max(score_equipe1, score_equipe2) == (self.best_of + 1) / 2:
-                self.score_equipe1 = score_equipe1
-                self.score_equipe2 = score_equipe2
+            if max(score1, score2) == (self.best_of + 1) / 2:
+                self.score1 = score1
+                self.score2 = score2
             else:
                 raise ValueError("score non compatible avec le format (attribut best_of)")
-
-    def ajouter_equipes_et_scores(
-        self, equipe1: Equipe, equipe2: Equipe,
-        score_equipe1: int, score_equipe2: int
-            ) -> None:
-        """
-        Permet d'ajouter les équipes d'un match ainsi que leurs scores
-
-        Parameters:
-        -----------
-        - score_equipe1: int
-        - score_equipe2: int
-        -equipe1: Equipe
-        -equipe2: Equipe
-
-        Return:
-        -------
-        None
-        """
-        self.ajouter_equipes(equipe_1=equipe1, equipe_2=equipe2)
-        self.ajouter_scores(score_equipe_1=score_equipe1, score_equipe_2=score_equipe2)
 
     def renvoyer_equipe_gagnante(self) -> Equipe | None:
         """
@@ -182,7 +142,7 @@ class Match:
         Equipe
 
         """
-        if self.score_equipe1 is None or self.score_equipe2 is None:
+        if self.score1 is None or self.score2 is None:
             raise ValueError("les scores n'ont pas été mis")
         else:
             if self.score_equipe_1 > self.score_equipe_2:
@@ -203,7 +163,43 @@ class Match:
         if self.score_equipe_1 is None or self.score_equipe_2 is None:
             raise ValueError("les scores n'ont pas été mis")
         else:
-            if self.score_equipe2 > self.score_equipe1:
+            if self.score2 > self.score1:
                 return self.equipe1
             else:
                 return self.equipe2
+
+    def renvoyer_joueur_gagnant(self) -> Player | None:
+        """
+        Permet une fois les joueurs d'un match et leurs scores renseignés de renvoyé le joueur
+        gagnant
+
+        Return:
+        -------
+        Equipe
+
+        """
+        if self.score1 is None or self.score2 is None:
+            raise ValueError("les scores n'ont pas été mis")
+        else:
+            if self.score1 > self.score2:
+                return self.joueur1
+            else:
+                return self.joueur2
+
+    def renvoyer_joueur_perdant(self) -> Equipe | None:
+        """
+        Permet une fois les joueurs d'un match et leurs scores renseignés de renvoyé le joueur
+        perdant
+
+        Return:
+        -------
+        Equipe
+
+        """
+        if self.score1 is None or self.score2 is None:
+            raise ValueError("les scores n'ont pas été mis")
+        else:
+            if self.score2 > self.score1:
+                return self.joueur1
+            else:
+                return self.joueur2
