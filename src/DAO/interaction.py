@@ -9,7 +9,7 @@ class DAO:
         assert isinstance(col_prive, list) or col_prive is None, "Le type de col_prive ne correspond pas"
 
         base = Path(__file__).parent.parent.parent
-        full_path = base / fichier
+        full_path = base / "data" / fichier  
         self.__fichier: str = fichier
         self.__data = pd.read_csv(full_path)
         #self.__data: pd.DataFrame = pd.read_csv(fichier)
@@ -64,8 +64,8 @@ class DAO:
             self.__data.dropna(subset=[colonne], inplace=True)
         self.__data.reset_index(drop=True, inplace=True)
     
-    def renvoyer_types(self) -> pd.DataFrame:
-        return self.__data.dtypes
+    def renvoyer_types(self) -> None:
+        print(self.__data.dtypes)
 
     def description(self) -> pd.DataFrame:
         return self.__data.describe(include="all")

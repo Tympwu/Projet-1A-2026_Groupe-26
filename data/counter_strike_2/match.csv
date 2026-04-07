@@ -1,0 +1,107 @@
+date,stage,round,best_of,team_1,team_2,score_team_1,score_team_2
+2025-11-24,1,1,1,B8,M80,0,1
+2025-11-24,1,1,1,Imperial Esports,Rare Atom,1,0
+2025-11-24,1,1,1,Legacy,FlyQuest,0,1
+2025-11-24,1,1,1,PARIVISION,The Huns Esports,1,0
+2025-11-24,1,1,1,GamerLegion,Fluxo,0,1
+2025-11-24,1,1,1,Ninjas in Pyjamas,NRG,0,1
+2025-11-24,1,1,1,FaZe Clan,Lynn Vision Gaming,1,0
+2025-11-24,1,1,1,Fnatic,RED Canids,1,0
+2025-11-24,1,2,1,Imperial Esports,FlyQuest,0,1
+2025-11-24,1,2,1,PARIVISION,M80,0,1
+2025-11-24,1,2,1,Fnatic,Fluxo,0,1
+2025-11-24,1,2,1,FaZe Clan,NRG,0,1
+2025-11-24,1,2,1,Legacy,Rare Atom,1,0
+2025-11-24,1,2,1,B8,The Huns Esports,1,0
+2025-11-24,1,2,1,GamerLegion,RED Canids,0,1
+2025-11-24,1,2,1,Ninjas in Pyjamas,Lynn Vision Gaming,1,0
+2025-11-25,1,3,3,FlyQuest,Fluxo,2,0
+2025-11-25,1,3,3,M80,NRG,2,0
+2025-11-25,1,3,1,Legacy,RED Canids,1,0
+2025-11-25,1,3,1,B8,PARIVISION,1,0
+2025-11-25,1,3,1,Fnatic,Imperial Esports,1,0
+2025-11-25,1,3,1,FaZe Clan,Ninjas in Pyjamas,0,1
+2025-11-25,1,3,3,GamerLegion,Rare Atom,2,0
+2025-11-25,1,3,3,Lynn Vision Gaming,The Huns Esports,0,2
+2025-11-26,1,4,3,Fluxo,Ninjas in Pyjamas,0,2
+2025-11-26,1,4,3,B8,Legacy,2,0
+2025-11-26,1,4,3,NRG,Fnatic,1,2
+2025-11-26,1,4,3,RED Canids,FaZe Clan,1,2
+2025-11-26,1,4,3,PARIVISION,GamerLegion,2,0
+2025-11-26,1,4,3,Imperial Esports,The Huns Esports,2,0
+2025-11-27,1,5,3,Fluxo,FaZe Clan,1,2
+2025-11-27,1,5,3,NRG,Imperial Esports,0,2
+2025-11-27,1,5,3,PARIVISION,Legacy,2,1
+2025-11-29,2,1,1,3DMAX,Fnatic,0,1
+2025-11-29,2,1,1,Astralis,Ninjas in Pyjamas,0,1
+2025-11-29,2,1,1,TYLOO,PARIVISION,1,0
+2025-11-29,2,1,1,Passion UA,FaZe Clan,0,1
+2025-11-29,2,1,1,Aurora Gaming,M80,1,0
+2025-11-29,2,1,1,Natus Vincere,FlyQuest,1,0
+2025-11-29,2,1,1,Team Liquid,B8,0,1
+2025-11-29,2,1,1,MIBR,Imperial Esports,0,1
+2025-11-29,2,2,1,TYLOO,Ninjas in Pyjamas,0,1
+2025-11-29,2,2,1,Natus Vincere,Imperial Esports,1,0
+2025-11-29,2,2,1,Aurora Gaming,FaZe Clan,0,1
+2025-11-29,2,2,1,B8,Fnatic,1,0
+2025-11-29,2,2,1,3DMAX,FlyQuest,1,0
+2025-11-29,2,2,1,Astralis,M80,0,1
+2025-11-29,2,2,1,MIBR,Passion UA,0,1
+2025-11-29,2,2,1,Team Liquid,PARIVISION,0,1
+2025-11-30,2,3,3,FaZe Clan,Ninjas in Pyjamas,2,0
+2025-11-30,2,3,3,Natus Vincere,B8,2,0
+2025-11-30,2,3,1,TYLOO,M80,0,1
+2025-11-30,2,3,1,Passion UA,3DMAX,0,1
+2025-11-30,2,3,1,Aurora Gaming,PARIVISION,0,1
+2025-11-30,2,3,1,Fnatic,Imperial Esports,0,1
+2025-11-30,2,3,3,Astralis,FlyQuest,2,0
+2025-11-30,2,3,3,Team Liquid,MIBR,2,0
+2025-12-01,2,4,3,Ninjas in Pyjamas,PARIVISION,0,2
+2025-12-01,2,4,3,Imperial Esports,M80,2,1
+2025-12-01,2,4,3,B8,3DMAX,2,1
+2025-12-01,2,4,3,Fnatic,Passion UA,0,2
+2025-12-01,2,4,3,Aurora Gaming,Astralis,1,2
+2025-12-01,2,4,3,TYLOO,Team Liquid,1,2
+2025-12-02,2,5,3,Passion UA,M80,2,1
+2025-12-02,2,5,3,Team Liquid,Astralis,2,0
+2025-12-02,2,5,3,Ninjas in Pyjamas,3DMAX,0,2
+2025-12-04,3,1,1,The MongolZ,Imperial Esports,0,1
+2025-12-04,3,1,1,MOUZ,PARIVISION,1,0
+2025-12-04,3,1,1,Team Spirit,Team Liquid,1,0
+2025-12-04,3,1,1,G2 Esports,Passion UA,1,0
+2025-12-04,3,1,1,Team Vitality,FaZe Clan,0,1
+2025-12-04,3,1,1,paiN Gaming,3DMAX,1,0
+2025-12-04,3,1,1,FURIA,Natus Vincere,1,0
+2025-12-04,3,1,1,Team Falcons,B8,0,1
+2025-12-04,3,2,1,G2 Esports,paiN Gaming,1,0
+2025-12-04,3,2,1,Team Spirit,FaZe Clan,1,0
+2025-12-04,3,2,1,MOUZ,B8,1,0
+2025-12-04,3,2,1,FURIA,Imperial Esports,1,0
+2025-12-04,3,2,1,Team Vitality,3DMAX,1,0
+2025-12-04,3,2,1,Team Falcons,Passion UA,1,0
+2025-12-04,3,2,1,The MongolZ,Team Liquid,1,0
+2025-12-04,3,2,1,Natus Vincere,PARIVISION,1,0
+2025-12-05,3,3,3,MOUZ,Team Spirit,1,2
+2025-12-05,3,3,3,FURIA,G2 Esports,2,0
+2025-12-05,3,3,1,FaZe Clan,The MongolZ,0,1
+2025-12-05,3,3,1,B8,Team Vitality,0,1
+2025-12-05,3,3,1,Imperial Esports,Team Falcons,0,1
+2025-12-05,3,3,1,paiN Gaming,Natus Vincere,0,1
+2025-12-05,3,3,3,Team Liquid,Passion UA,0,2
+2025-12-05,3,3,3,PARIVISION,3DMAX,1,2
+2025-12-06,3,4,3,Natus Vincere,Team Vitality,0,2
+2025-12-06,3,4,3,MOUZ,Team Falcons,2,1
+2025-12-06,3,4,3,G2 Esports,The MongolZ,0,2
+2025-12-06,3,4,3,B8,paiN Gaming,2,0
+2025-12-06,3,4,3,Imperial Esports,Passion UA,0,2
+2025-12-06,3,4,3,FaZe Clan,3DMAX,2,0
+2025-12-07,3,5,3,B8,Natus Vincere,0,2
+2025-12-07,3,5,3,FaZe Clan,Passion UA,2,0
+2025-12-07,3,5,3,G2 Esports,Team Falcons,1,2
+2025-12-11,PlayOffs,RO8,3,Team Spirit,Team Falcons,2,0
+2025-12-11,PlayOffs,RO8,3,The MongolZ,Team Vitality,0,2
+2025-12-12,PlayOffs,RO8,3,MOUZ,FaZe Clan,0,2
+2025-12-12,PlayOffs,RO8,3,Natus Vincere,FURIA,2,1
+2025-12-13,PlayOffs,RO4,3,Team Spirit,Team Vitality,0,2
+2025-12-13,PlayOffs,RO4,3,FaZe Clan,Natus Vincere,2,1
+2025-12-14,PlayOffs,RO2,5,Team Vitality,FaZe Clan,3,1
