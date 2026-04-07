@@ -1,26 +1,16 @@
 
 from .Personne import Personne
+from typing import Any
 
 
 class Coach(Personne):
     def __init__(
         self,
         full_name: str,
-        age: int,
+        equipe: Any,
+        nationalite: str = None,
+        pseudo: str = None,
+        dob: str = None,
         sexe: str = None,
-        palmares_coach: int = None
     ) -> None:
         super().__init__(full_name, age, sexe)
-        if not isinstance(palmares_coach, int):
-            raise TypeError("palamres_coach doit être une instance de int")
-        self.palamres_coach = palmares_coach
-   
-    def victoire_finale_coach(self) -> None:
-        if self.palmares_coach is None:
-            self.palmares_coach = 1
-        else:
-            self.palmares_coach += 1
-
-    def set_palmares_coach(self, valeur: int) -> None:
-        for _ in range(valeur):
-            self.victoire_finale_coach

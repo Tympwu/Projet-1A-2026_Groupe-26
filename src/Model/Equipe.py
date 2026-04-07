@@ -18,24 +18,28 @@ class Equipe:
     """
     def __init__(
         self,
-        nom_equipe: str,
-        joueurs_equipe: set[*Player],
-        coach_equipe: set[*Coach],
+        id: int,
+        joueurs_equipe: set[Player],
+        coach_equipe: set[Coach],
+        nom_equipe: str = None,
+        nom_abrev: str = None,
+        nickname: str = None,
+        ville_equipe: str = None,
         region_equipe: str = None,
         pays_equipe: str = None,
-        statut_equipe: str = None
+        continent_equipe: str = None,
+        ligue: str = None,
+        annee_fondation: int = None
     ) -> None:
-        liste_pays = ["FRA","BEL", "GBR"]
-        #liste_statut
-        if not isinstance(nom_equipe, str):
-            raise TypeError("L'attribut nom_equipe doit être de type str")
-        if not all(isinstance(p, Player) for p in joueurs_equipe):
-            raise TypeError("L'attribut joueurs_equipe doit être de type list[Player]")
-        if not all(isinstance(c, Coach) for c in coach_equipe):
-            raise TypeError("L'attribut nom_coach_equipe doit être de type list[Coach]")
-        if not isinstance(pays_equipe, str):
-            raise TypeError("L'attribut pays_equipe doit être de type str")
-        if not pays_equipe in liste_pays:
-            raise ValueError("l'attribut pays doit être exprimer en code ISO (FRA pour France)")
-        if not isinstance(statut_equipe, str):
-            raise TypeError("L'attribut statut_equipe doit être de type str ")
+        self.id: int = id
+        self.joueurs_equipe: set[Player] = joueurs_equipe
+        self.coach_equipe: set[Coach] = coach_equipe
+        self.nom_equipe: str | None = nom_equipe
+        self.nom_abrev: str | None = nom_abrev
+        self.nickname: str | None = nickname
+        self.ville_equipe: str | None = ville_equipe
+        self.region_equipe: str | None = region_equipe
+        self.pays_equipe: str | None = pays_equipe
+        self.continent_equipe: str | None = continent_equipe
+        self.ligue: str | None = ligue
+        self.annee_fondation: int | None = annee_fondation
