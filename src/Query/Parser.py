@@ -138,11 +138,17 @@ class Football_European_leagues_Parser(Parser):
                 sport="Football")
             self.dict_player[player.id] = player
 
+    def parse_team(self, data: pd.DataFrame):
+        for index, row in data.iterrows():
+            equipe = Equipe(
+                id=self.fetch_safety_data(row["team_api_id"], int),
+                nom_equipe=self.fetch_safety_data(row["team_long_name"], str),
+                nom_abrev=self.fetch_safety_data(row["team_short_name"], str)
+                )
+            self.dict_equipe[equipe.id] = equipe
+
     def parse_competition(self, data: pd.DataFrame):
         pass
 
     def parse_matches(self, data: pd.DataFrame):
-        pass
-
-    def parse_team(self, data: pd.DataFrame):
         pass
