@@ -145,8 +145,15 @@ class Menu:
         """
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
+        if self.sport_choosen == 2:
+            self.__parser = ()
+            self.parser.parse_players(self.search.dao["atp_players_2024"].data, sexe="H")
+            self.parser.parse_players(self.search.dao["wta_players_2024"].data, sexe="F")
+            print("Done")
+            print(self.parser.list_player)
         if self.sport_choosen == 3:
             self.__parser = Tennis_Parser()
-            self.parser.parse_players(self.search.dao["atp_players_2024"].data)
+            self.parser.parse_players(self.search.dao["atp_players_2024"].data, sexe="H")
+            self.parser.parse_players(self.search.dao["wta_players_2024"].data, sexe="F")
             print("Done")
             print(self.parser.list_player)
