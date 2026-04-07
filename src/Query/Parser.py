@@ -59,6 +59,9 @@ class Tennis_Parser(Parser):
             self.list_player[player.id] = player
 
     def parse_competition(self, data: pd.DataFrame):
+
+
+        
         pass
 
     def parse_matches(self, data: pd.DataFrame):
