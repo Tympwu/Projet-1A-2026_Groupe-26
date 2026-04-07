@@ -54,16 +54,16 @@ class DAO:
         self.__data = self.__data.drop(index=id).reset_index(drop=True)
 
     def enlever_valeur_duplique(self) -> None:
-        self.__data = self.__data.drop_duplicates(inplace = True)
-        self.__data = self.__data.reset_index(drop=True, inplace=True)
-
-    def enlever_valeur_manquante(self, colonne: str | None = None) -> None:
-        if colonne is not None:
-            self.__data = self.__data.dropna(subset=[colonne])
-        else:
-            self.__data = self.__data.dropna()
+        self.__data.drop_duplicates(inplace = True)
         self.__data.reset_index(drop=True, inplace=True)
 
+    def enlever_valeur_manquante(self, colonne=None) -> None:
+        if colonne is None:
+            self.__data.dropna(inplace=True)
+        else:
+            self.__data.dropna(subset=[colonne], inplace=True)
+        self.__data.reset_index(drop=True, inplace=True)
+    
     def renvoyer_types(self) -> pd.DataFrame:
         return self.__data.dtypes
 
