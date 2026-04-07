@@ -43,14 +43,18 @@ class DAO:
         self.__data = pd.concat([self.__data, pd.DataFrame([ligne])], ignore_index=True)
 
     def modifier(self, id: int, data: dict) -> None:
+        if id not in self.__data.index:
+            raise KeyError(f"Index {id} inexistant")
         for col, val in data.items():
             self.__data.at[id, col] = val
 
     def supprimer(self, id: int) -> None:
+        if id not in self.__data.index:
+            raise KeyError
         self.__data = self.__data.drop(index=id).reset_index(drop=True)
 
     def enlever_valeur_duplique(self) -> None:
-        self.__data = self.__data.drop_duplicates()
+        self.__data = self.__data.drop_duplicates(inplace = True)
         self.__data = self.__data.reset_index(drop=True, inplace=True)
 
     def enlever_valeur_manquante(self, colonne: str | None = None) -> None:
