@@ -1,0 +1,257 @@
+round,section,match,player_1,player_2,score_player_1,score_player_2,seed_player_1,seed_player_2
+1,1.0,1,Gukesh D,,Bye,,1,
+1,1.0,2,"Nogerbek, Kazybek",Raja Rithvik R,5,3,128,129.0
+1,1.0,3,"Gurel, Ediz","Efimov, Igor",2,0,65,192.0
+1,1.0,4,"Svane, Frederik","Husbands, Orlando",2,0,64,193.0
+1,1.0,5,"Sargsyan, Shant",,Bye,,33,
+1,1.0,6,"Cori, Jorge","Ansat, Aldiyar",3,1,96,161.0
+1,1.0,7,"Yilmaz, Mustafa",Harshavardhan G B,1.5,0.5,97,160.0
+1,1.0,8,"Bu, Xiangzhi",,Bye,,32,
+2,1.0,1,Gukesh D,"Nogerbek, Kazybek",1.5,0.5,1,128.0
+2,1.0,2,"Gurel, Ediz","Svane, Frederik",0.5,1.5,65,64.0
+2,1.0,3,"Sargsyan, Shant","Cori, Jorge",3.5,2.5,33,96.0
+2,1.0,4,"Yilmaz, Mustafa","Bu, Xiangzhi",2.5,1.5,97,32.0
+3,1.0,1,Gukesh D,"Svane, Frederik",0.5,1.5,1,64.0
+3,1.0,2,"Sargsyan, Shant","Yilmaz, Mustafa",1.5,0.5,33,97.0
+4,1.0,1,"Svane, Frederik","Sargsyan, Shant",2.5,1.5,64,33.0
+1,2.0,1,"Yu, Yangyi",,Bye,,17,
+1,2.0,2,"Lupulescu, Constantin","Blohberger, Felix",0.5,1.5,112,145.0
+1,2.0,3,Narayanan S L,"Rojas Salas, Steven",3,1,81,176.0
+1,2.0,4,"Vitiugov, Nikita",,Bye,,48,
+1,2.0,5,"Theodorou, Nikolas",,Bye,,49,
+1,2.0,6,"Indjic, Aleksandar","Schnaider, Ilan",1.5,0.5,80,177.0
+1,2.0,7,"Petrov, Nikita","Ghazarian, Kirk",walkover,,113,144.0
+1,2.0,8,"Sindarov, Javokhir",,Bye,,16,
+2,2.0,1,"Yu, Yangyi","Blohberger, Felix",4.5,3.5,17,145.0
+2,2.0,2,Narayanan S L,"Vitiugov, Nikita",5,3,81,48.0
+2,2.0,3,"Theodorou, Nikolas","Indjic, Aleksandar",2.5,1.5,49,80.0
+2,2.0,4,"Petrov, Nikita","Sindarov, Javokhir",0.5,1.5,113,16.0
+3,2.0,1,"Yu, Yangyi",Narayanan S L,2.5,1.5,17,81.0
+3,2.0,2,"Theodorou, Nikolas","Sindarov, Javokhir",0.5,1.5,49,16.0
+4,2.0,1,"Yu, Yangyi","Sindarov, Javokhir",1.5,2.5,17,16.0
+1,3.0,1,"Mamedyarov, Shakhriyar",,Bye,,9,
+1,3.0,2,"Kantor, Gergely","Rodrigue-Lemieux, Shawn",1.5,0.5,120,137.0
+1,3.0,3,"Bacrot, Etienne","Mwali, Chitumbo",walkover,,73,184.0
+1,3.0,4,"Grandelius, Nils","Damaj, Mohammed",1.5,0.5,56,201.0
+1,3.0,5,"Oparin, Grigoriy",,Bye,,41,
+1,3.0,6,"Dardha, Daniel",Banh Gia Huy,2,0,88,169.0
+1,3.0,7,"Nesterov, Arseniy","Atabayev, Saparmyrat",1.5,0.5,105,152.0
+1,3.0,8,"Harikrishna, Pentala",,Bye,,24,
+2,3.0,1,"Mamedyarov, Shakhriyar","Kantor, Gergely",3,1,9,120.0
+2,3.0,2,"Bacrot, Etienne","Grandelius, Nils",1.5,2.5,73,56.0
+2,3.0,3,"Oparin, Grigoriy","Dardha, Daniel",1.5,2.5,41,88.0
+2,3.0,4,"Nesterov, Arseniy","Harikrishna, Pentala",0.5,1.5,105,24.0
+3,3.0,1,"Mamedyarov, Shakhriyar","Grandelius, Nils",0.5,1.5,9,56.0
+3,3.0,2,"Dardha, Daniel","Harikrishna, Pentala",0.5,1.5,88,24.0
+4,3.0,1,"Grandelius, Nils","Harikrishna, Pentala",1.5,2.5,56,24.0
+1,4.0,1,"Van Foreest, Jorden",,Bye,,25,
+1,4.0,2,"Neiksans, Arturs","Suleymenov, Alisher",1.5,2.5,104,153.0
+1,4.0,3,"Henriquez Villagra, Cristobal","Agibileg, Uurtsaikh",2.5,1.5,89,168.0
+1,4.0,4,"Sarana, Alexey",,Bye,,40,
+1,4.0,5,"Martinez Alcantara, Jose Eduardo","Huh, Isaak",2,0,57,200.0
+1,4.0,6,"Ivic, Velimir","Orozbaev, Eldiyar",2,0,72,185.0
+1,4.0,7,"Flores, Diego","Makhnev, Denis",1.5,2.5,121,136.0
+1,4.0,8,"Abdusattorov, Nodirbek",,Bye,,8,
+2,4.0,1,"Van Foreest, Jorden","Suleymenov, Alisher",1.5,0.5,25,153.0
+2,4.0,2,"Henriquez Villagra, Cristobal","Sarana, Alexey",0.5,1.5,89,40.0
+2,4.0,3,"Martinez Alcantara, Jose Eduardo","Ivic, Velimir",4.5,3.5,57,72.0
+2,4.0,4,"Makhnev, Denis","Abdusattorov, Nodirbek",1.5,2.5,136,8.0
+3,4.0,1,"Van Foreest, Jorden","Sarana, Alexey",1,3,25,40.0
+3,4.0,2,"Martinez Alcantara, Jose Eduardo","Abdusattorov, Nodirbek",2,0,57,8.0
+4,4.0,1,"Sarana, Alexey","Martinez Alcantara, Jose Eduardo",0.5,1.5,40,57.0
+1,5.0,1,"So, Wesley",,Bye,,5,
+1,5.0,2,"Bogner, Sebastian","Stremavicius, Titas",1.5,2.5,124,133.0
+1,5.0,3,"Tari, Aryan","Manon, Reja Neer",1.5,0.5,69,188.0
+1,5.0,4,"Pranav, V","Boulrens, Ala Eddine",2,0,60,197.0
+1,5.0,5,"Nguyen, Thai Dai Van",,Bye,,37,
+1,5.0,6,"Iniyan, Pa","Berdayes Ason, Dylan Isidro",1.5,0.5,92,165.0
+1,5.0,7,"Huschenbeth, Niclas","Bellahcene, Bilel",1.5,0.5,101,156.0
+1,5.0,8,"Yakubboev, Nodirbek",,Bye,,28,
+2,5.0,1,"So, Wesley","Stremavicius, Titas",0.5,1.5,5,133.0
+2,5.0,2,"Tari, Aryan","Pranav, V",1.5,2.5,69,60.0
+2,5.0,3,"Nguyen, Thai Dai Van","Iniyan, Pa",1.5,0.5,37,92.0
+2,5.0,4,"Huschenbeth, Niclas","Yakubboev, Nodirbek",0.5,1.5,101,28.0
+3,5.0,1,"Stremavicius, Titas","Pranav, V",0.5,1.5,133,60.0
+3,5.0,2,"Nguyen, Thai Dai Van","Yakubboev, Nodirbek",1,3,37,28.0
+4,5.0,1,"Pranav, V","Yakubboev, Nodirbek",0.5,1.5,60,28.0
+1,6.0,1,"Liang, Awonder",,Bye,,21,
+1,6.0,2,"Warmerdam, Max",Lalit Babu M R,5,3,108,149.0
+1,6.0,3,"Svane, Rasmus","Vazquez, Facundo",1.5,0.5,85,172.0
+1,6.0,4,"Mamedov, Rauf",,Bye,,44,
+1,6.0,5,"Rodshtein, Maxim","Qin, Oscar Shu Xuan",2,0,53,204.0
+1,6.0,6,"Sargissian, Gabriel","Liyanage, Ranindu Dilshan",1.5,0.5,76,181.0
+1,6.0,7,"Ghosh, Diptayan","Peng, Xiongjian",3,1,117,140.0
+1,6.0,8,"Nepomniachtchi, Ian",,Bye,,12,
+2,6.0,1,"Liang, Awonder","Warmerdam, Max",2,0,21,108.0
+2,6.0,2,"Svane, Rasmus","Mamedov, Rauf",6,5,85,44.0
+2,6.0,3,"Rodshtein, Maxim","Sargissian, Gabriel",2,4,53,76.0
+2,6.0,4,"Ghosh, Diptayan","Nepomniachtchi, Ian",1.5,0.5,117,12.0
+3,6.0,1,"Liang, Awonder","Svane, Rasmus",1.5,0.5,21,85.0
+3,6.0,2,"Sargissian, Gabriel","Ghosh, Diptayan",1.5,0.5,76,117.0
+4,6.0,1,"Liang, Awonder","Sargissian, Gabriel",1.5,2.5,21,76.0
+1,7.0,1,"Le, Quang Liem",,Bye,,13,
+1,7.0,2,"Jobava, Baadur","Cardoso Cardoso, Jose Gabriel",2.5,1.5,116,141.0
+1,7.0,3,"Yuffa, Daniil","Thavandiran, Shiyam",5,3,77,180.0
+1,7.0,4,"Xiong, Jeffery","Li, Yiheng",1.5,0.5,52,205.0
+1,7.0,5,"Deac, Bogdan-Daniel",,Bye,,45,
+1,7.0,6,"Suleymanli, Aydin","Laohawirapap, Prin",2,0,84,173.0
+1,7.0,7,Karthik Venkataraman,"Garcia Pantoja, Roberto",1.5,0.5,109,148.0
+1,7.0,8,"Aravindh, Chithambaram VR.",,Bye,,20,
+2,7.0,1,"Le, Quang Liem","Jobava, Baadur",1.5,0.5,13,116.0
+2,7.0,2,"Yuffa, Daniil","Xiong, Jeffery",0,2,77,52.0
+2,7.0,3,"Deac, Bogdan-Daniel","Suleymanli, Aydin",2.5,1.5,45,84.0
+2,7.0,4,Karthik Venkataraman,"Aravindh, Chithambaram VR.",1.5,0.5,109,20.0
+3,7.0,1,"Le, Quang Liem","Xiong, Jeffery",1.5,0.5,13,52.0
+3,7.0,2,"Deac, Bogdan-Daniel",Karthik Venkataraman,1.5,2.5,45,109.0
+4,7.0,1,"Le, Quang Liem",Karthik Venkataraman,1.5,0.5,13,109.0
+1,8.0,1,"Bluebaum, Matthias",,Bye,,29,
+1,8.0,2,"Adly, Ahmed","Grigoryan, Karen H.",4.5,3.5,100,157.0
+1,8.0,3,"Zemlyanskii, Ivan","Pantsulaia, Levan",1.5,0.5,93,164.0
+1,8.0,4,"Robson, Ray",,Bye,,36,
+1,8.0,5,"Donchenko, Alexander","Kigigha, Bomo Lovet",2,0,61,196.0
+1,8.0,6,"Anton Guijarro, David","Silva, David",2,0,68,189.0
+1,8.0,7,"Can, Emre","Maksimovic, Bojan",1,3,125,132.0
+1,8.0,8,"Giri, Anish",,Bye,,4,
+2,8.0,1,"Bluebaum, Matthias","Adly, Ahmed",1.5,0.5,29,100.0
+2,8.0,2,"Zemlyanskii, Ivan","Robson, Ray",1.5,0.5,93,36.0
+2,8.0,3,"Donchenko, Alexander","Anton Guijarro, David",1.5,0.5,61,68.0
+2,8.0,4,"Maksimovic, Bojan","Giri, Anish",0.5,1.5,132,4.0
+3,8.0,1,"Bluebaum, Matthias","Zemlyanskii, Ivan",1.5,0.5,29,93.0
+3,8.0,2,"Donchenko, Alexander","Giri, Anish",1.5,0.5,61,4.0
+4,8.0,1,"Bluebaum, Matthias","Donchenko, Alexander",0.5,1.5,29,61.0
+1,9.0,1,Praggnanandhaa R,,Bye,,3,
+1,9.0,2,"Subelj, Jan","Kuybokarov, Temur",1,3,126,131.0
+1,9.0,3,"Hovhannisyan, Robert",Kavin Mohan,2.5,1.5,67,190.0
+1,9.0,4,"Sadhwani, Raunak","Barrish, Daniel",1.5,0.5,62,195.0
+1,9.0,5,"Murzin, Volodar",,Bye,,35,
+1,9.0,6,"Meier, Georg",Neelash Saha,1.5,0.5,94,163.0
+1,9.0,7,"Bai, Jinshi","Fawzy, Adham",1.5,0.5,99,158.0
+1,9.0,8,"Dubov, Daniil",,Bye,,30,
+2,9.0,1,Praggnanandhaa R,"Kuybokarov, Temur",5,3,3,131.0
+2,9.0,2,"Hovhannisyan, Robert","Sadhwani, Raunak",3,1,67,62.0
+2,9.0,3,"Murzin, Volodar","Meier, Georg",0.5,1.5,35,94.0
+2,9.0,4,"Bai, Jinshi","Dubov, Daniil",2,4,99,30.0
+3,9.0,1,Praggnanandhaa R,"Hovhannisyan, Robert",1.5,0.5,3,67.0
+3,9.0,2,"Meier, Georg","Dubov, Daniil",2.5,3.5,94,30.0
+4,9.0,1,Praggnanandhaa R,"Dubov, Daniil",1.5,2.5,3,30.0
+1,10.0,1,"Vidit, Santosh Gujrathi",,Bye,,19,
+1,10.0,2,"Brkic, Ante","Oro, Faustino",3,5,110,147.0
+1,10.0,3,"Ivanchuk, Vasyl","Mohammad Fahad, Rahman",1.5,0.5,83,174.0
+1,10.0,4,"Shankland, Sam",,Bye,,46,
+1,10.0,5,"Erdogmus, Yagiz Kaan","Abugenda, Nagi",2,0,51,206.0
+1,10.0,6,"Mendonca, Leon Luke","Wang, Shixu B",0.5,1.5,78,179.0
+1,10.0,7,"Supi, Luis Paulo","Galaviz Medina, Sion Radamantys",2.5,1.5,115,142.0
+1,10.0,8,"Rapport, Richard",,Bye,,14,
+2,10.0,1,"Vidit, Santosh Gujrathi","Oro, Faustino",2.5,1.5,19,147.0
+2,10.0,2,"Ivanchuk, Vasyl","Shankland, Sam",0,2,83,46.0
+2,10.0,3,"Erdogmus, Yagiz Kaan","Wang, Shixu B",2,0,51,179.0
+2,10.0,4,"Supi, Luis Paulo","Rapport, Richard",0,2,115,14.0
+3,10.0,1,"Vidit, Santosh Gujrathi","Shankland, Sam",2.5,3.5,19,46.0
+3,10.0,2,"Erdogmus, Yagiz Kaan","Rapport, Richard",1.5,2.5,51,14.0
+4,10.0,1,"Shankland, Sam","Rapport, Richard",3,1,46,14.0
+1,11.0,1,"Vachier-Lagrave, Maxime",,Bye,,11,
+1,11.0,2,"Ganguly, Surya Shekhar","Ahmadzada, Ahmad",2,0,118,139.0
+1,11.0,3,"Martirosyan, Haik M.","Cahaya, Satria Duta",1.5,0.5,75,182.0
+1,11.0,4,"Artemiev, Vladislav","Ndahangwapo, Heskiel",2,0,54,203.0
+1,11.0,5,"Navara, David",,Bye,,43,
+1,11.0,6,"Grebnev, Aleksey","Quizon, Daniel",1.5,0.5,86,171.0
+1,11.0,7,"Kourkoulos-Arditis, Stamatis",Divya Deshmukh,2,0,107,150.0
+1,11.0,8,Nihal Sarin,,Bye,,22,
+2,11.0,1,"Vachier-Lagrave, Maxime","Ganguly, Surya Shekhar",1.5,0.5,11,118.0
+2,11.0,2,"Martirosyan, Haik M.","Artemiev, Vladislav",1.5,2.5,75,54.0
+2,11.0,3,"Navara, David","Grebnev, Aleksey",0.5,1.5,43,86.0
+2,11.0,4,"Kourkoulos-Arditis, Stamatis",Nihal Sarin,2.5,1.5,107,22.0
+3,11.0,1,"Vachier-Lagrave, Maxime","Artemiev, Vladislav",6,5,11,54.0
+3,11.0,2,"Grebnev, Aleksey","Kourkoulos-Arditis, Stamatis",1.5,0.5,86,107.0
+4,11.0,1,"Vachier-Lagrave, Maxime","Grebnev, Aleksey",1.5,2.5,11,86.0
+1,12.0,1,"Esipenko, Andrey",,Bye,,27,
+1,12.0,2,"Abasov, Nijat","Suyarov, Mukhammadzokhid",2,0,102,155.0
+1,12.0,3,"Idani, Pouya","Cori Quispe, Kevin Joel",2,0,91,166.0
+1,12.0,4,"Karthikeyan, Murali",,Bye,,38,
+1,12.0,5,"Kollars, Dmitrij","Salih, Akar Ali Salih",2,0,59,198.0
+1,12.0,6,Pranesh M,"Akhmedinov, Satbek",1.5,0.5,70,187.0
+1,12.0,7,"Kovalev, Vladislav","Velten, Paul",1.5,0.5,123,134.0
+1,12.0,8,"Keymer, Vincent",,Bye,,6,
+2,12.0,1,"Esipenko, Andrey","Abasov, Nijat",2,0,27,102.0
+2,12.0,2,"Idani, Pouya","Karthikeyan, Murali",4.5,3.5,91,38.0
+2,12.0,3,"Kollars, Dmitrij",Pranesh M,1,3,59,70.0
+2,12.0,4,"Kovalev, Vladislav","Keymer, Vincent",0,2,123,6.0
+3,12.0,1,"Esipenko, Andrey","Idani, Pouya",3.5,2.5,27,91.0
+3,12.0,2,Pranesh M,"Keymer, Vincent",0.5,1.5,70,6.0
+4,12.0,1,"Esipenko, Andrey","Keymer, Vincent",4,2,27,6.0
+1,13.0,1,"Wei, Yi",,Bye,,7,
+1,13.0,2,"Piorun, Kacper","Lobanov, Sergei",2.5,1.5,122,135.0
+1,13.0,3,"Amin, Bassem","Mandizha, Farai",walkover,,71,186.0
+1,13.0,4,"Gledura, Benjamin","Amdouni, Zoubaier",2,0,58,199.0
+1,13.0,5,"Saric, Ivan",,Bye,,39,
+1,13.0,6,"Daneshvar, Bardiya","Salinas Herrera, Pablo",1.5,0.5,90,167.0
+1,13.0,7,"Motylev, Alexander","Avila Pavas, Santiago",2,0,103,154.0
+1,13.0,8,"Maghsoodloo, Parham",,Bye,,26,
+2,13.0,1,"Wei, Yi","Piorun, Kacper",2,0,7,122.0
+2,13.0,2,"Amin, Bassem","Gledura, Benjamin",0.5,1.5,71,58.0
+2,13.0,3,"Saric, Ivan","Daneshvar, Bardiya",1.5,0.5,39,90.0
+2,13.0,4,"Motylev, Alexander","Maghsoodloo, Parham",0.5,1.5,103,26.0
+3,13.0,1,"Wei, Yi","Gledura, Benjamin",2.5,1.5,7,58.0
+3,13.0,2,"Saric, Ivan","Maghsoodloo, Parham",0.5,1.5,39,26.0
+4,13.0,1,"Wei, Yi","Maghsoodloo, Parham",5,3,7,26.0
+1,14.0,1,"Sevian, Samuel",,Bye,,23,
+1,14.0,2,"Tin, Jingyao","Lashkin, Jegor",3,1,106,151.0
+1,14.0,3,"Najer, Evgeniy","Rakotomaharo, Fy Antenaina",1.5,0.5,87,170.0
+1,14.0,4,"Christiansen, Johan-Sebastian",,Bye,,42,
+1,14.0,5,"Adams, Michael","Alrehaili, Ahmed Abdullah S",2,0,55,202.0
+1,14.0,6,"Cheparinov, Ivan","Cordoba Roa, Angel Gabriel",1.5,0.5,74,183.0
+1,14.0,7,"Lodici, Lorenzo","Samadov, Read",1.5,0.5,119,138.0
+1,14.0,8,"Niemann, Hans Moke",,Bye,,10,
+2,14.0,1,"Sevian, Samuel","Tin, Jingyao",3,1,23,106.0
+2,14.0,2,"Najer, Evgeniy","Christiansen, Johan-Sebastian",1.5,0.5,87,42.0
+2,14.0,3,"Adams, Michael","Cheparinov, Ivan",6,4,55,74.0
+2,14.0,4,"Lodici, Lorenzo","Niemann, Hans Moke",2.5,1.5,119,10.0
+3,14.0,1,"Sevian, Samuel","Najer, Evgeniy",3,1,23,87.0
+3,14.0,2,"Adams, Michael","Lodici, Lorenzo",0.5,1.5,55,119.0
+4,14.0,1,"Sevian, Samuel","Lodici, Lorenzo",6,5,23,119.0
+1,15.0,1,"Aronian, Levon",,Bye,,15,
+1,15.0,2,"Bartel, Mateusz",Aronyak Ghosh,2,4,114,143.0
+1,15.0,3,"Salem, A.R. Saleh","Tran, Thanh Tu",2,0,79,178.0
+1,15.0,4,"Mishra, Abhimanyu",,Bye,,50,
+1,15.0,5,"Wojtaszek, Radoslaw",,Bye,,47,
+1,15.0,6,"Lagarde, Maxime","Amartuvshin, Ganzorig",1.5,0.5,82,175.0
+1,15.0,7,"Fier, Alexandr","Parligras, Mircea-Emilian",1.5,0.5,111,146.0
+1,15.0,8,"Fedoseev, Vladimir",,Bye,,18,
+2,15.0,1,"Aronian, Levon",Aronyak Ghosh,1.5,0.5,15,143.0
+2,15.0,2,"Salem, A.R. Saleh","Mishra, Abhimanyu",1.5,0.5,79,50.0
+2,15.0,3,"Wojtaszek, Radoslaw","Lagarde, Maxime",2.5,1.5,47,82.0
+2,15.0,4,"Fier, Alexandr","Fedoseev, Vladimir",0.5,1.5,111,18.0
+3,15.0,1,"Aronian, Levon","Salem, A.R. Saleh",1.5,0.5,15,79.0
+3,15.0,2,"Wojtaszek, Radoslaw","Fedoseev, Vladimir",2,0,47,18.0
+4,15.0,1,"Aronian, Levon","Wojtaszek, Radoslaw",1.5,0.5,15,47.0
+1,16.0,1,"Alekseenko, Kirill",,Bye,,31,
+1,16.0,2,"Woodward, Andy","Gusain, Himal",2,0,98,159.0
+1,16.0,3,"Cheng, Bobby","Siddharth, Jagadeesh",1.5,0.5,95,162.0
+1,16.0,4,"Leko, Peter",,Bye,,34,
+1,16.0,5,"Vokhidov, Shamsiddin","Ilkhomi, Jaloliddin",2,0,63,194.0
+1,16.0,6,"Chigaev, Maksim","Elbilia, Jacques",1.5,0.5,66,191.0
+1,16.0,7,"Mekhitarian, Krikor Sevag","Petrov, Martin",0.5,1.5,127,130.0
+1,16.0,8,Erigaisi Arjun,,Bye,,2,
+2,16.0,1,"Alekseenko, Kirill","Woodward, Andy",1.5,0.5,31,98.0
+2,16.0,2,"Cheng, Bobby","Leko, Peter",0.5,1.5,95,34.0
+2,16.0,3,"Vokhidov, Shamsiddin","Chigaev, Maksim",3,1,63,66.0
+2,16.0,4,"Petrov, Martin",Erigaisi Arjun,0,2,130,2.0
+3,16.0,1,"Alekseenko, Kirill","Leko, Peter",0,2,31,34.0
+3,16.0,2,"Vokhidov, Shamsiddin",Erigaisi Arjun,0.5,1.5,63,2.0
+4,16.0,1,"Leko, Peter",Erigaisi Arjun,1,3,34,2.0
+5,,1,"Svane, Frederik","Sindarov, Javokhir",0.5,1.5,64,16.0
+5,,2,"Harikrishna, Pentala","Martinez Alcantara, Jose Eduardo",2.5,3.5,24,57.0
+5,,3,"Yakubboev, Nodirbek","Sargissian, Gabriel",1.5,0.5,28,76.0
+5,,4,"Le, Quang Liem","Donchenko, Alexander",3.5,4.5,13,61.0
+5,,5,"Dubov, Daniil","Shankland, Sam",1,3,30,46.0
+5,,6,"Grebnev, Aleksey","Esipenko, Andrey",1.5,2.5,86,27.0
+5,,7,"Wei, Yi","Sevian, Samuel",1.5,0.5,7,23.0
+5,,8,"Aronian, Levon",Erigaisi Arjun,0.5,1.5,15,2.0
+6,,1,"Sindarov, Javokhir","Martinez Alcantara, Jose Eduardo",3.5,2.5,16,57.0
+6,,2,"Yakubboev, Nodirbek","Donchenko, Alexander",1.5,0.5,28,61.0
+6,,3,"Shankland, Sam","Esipenko, Andrey",2,4,46,27.0
+6,,4,"Wei, Yi",Erigaisi Arjun,2.5,1.5,7,2.0
+7,,1,"Sindarov, Javokhir","Yakubboev, Nodirbek",2.5,1.5,16,28.0
+7,,2,"Esipenko, Andrey","Wei, Yi",1.5,2.5,27,7.0
+8,,1,"Yakubboev, Nodirbek","Esipenko, Andrey",0,2,28,27.0
+8,,2,"Sindarov, Javokhir","Wei, Yi",2.5,1.5,16,7.0
