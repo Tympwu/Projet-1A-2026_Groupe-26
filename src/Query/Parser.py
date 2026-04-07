@@ -122,13 +122,6 @@ class Badminton_Parser(Parser):
         """
         pass
 
-    def parse_equipes(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Equipes de Badminton
-        """
-        pass
-
 
     
 
@@ -220,7 +213,8 @@ class Football_European_leagues_Parser(Parser):
             equipe = Equipe(
                 id=self.fetch_safety_data(row["team_api_id"], int),
                 nom_equipe=self.fetch_safety_data(row["team_long_name"], str),
-                nom_abrev=self.fetch_safety_data(row["team_short_name"], str)
+                nom_abrev=self.fetch_safety_data(row["team_short_name"], str),
+                joueurs_equipe=[joueurs for joueurs in self.dict_player.items() if joueurs.equipe = ]
                 )
             self.dict_equipe[equipe.id] = equipe
 
