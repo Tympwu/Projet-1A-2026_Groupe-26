@@ -62,7 +62,7 @@ class Match:
         self.date_match = date_match
         self.temps_match = temps_match
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         if self.equipe1 is not None and self.equipe2 is not None:
             return f"""Voici le Match:\n
             Identifiant du match: {self.id_match}\n
@@ -203,3 +203,11 @@ class Match:
                 return self.joueur1
             else:
                 return self.joueur2
+
+    def afficher_match(self):
+        """Fonction permettant d'afficher le match et les résultats"""
+        max_len = max(filter(lambda a: a != None, [len(joueur1.pseudo), len(joueur1.full_name),
+                       len(joueur2.full_name), len(joueur2.pseudo),
+                       len(equipe_1.nom_abrev), len(equipe_1.nom_equipe),
+                       len(equipe_2.nom_abrev), len(equipe_2.nom_equipe)]))
+        
