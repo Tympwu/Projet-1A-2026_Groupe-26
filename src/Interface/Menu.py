@@ -1,5 +1,5 @@
 from ..Query.recherche import Recherche
-from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser
+from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser, League_of_legend_Parser
 
 
 class Menu:
@@ -156,9 +156,20 @@ class Menu:
             print("Matchs chargés")
             print(self.parser.dict_matchs)
 
-        if self.sport_choosen == 3:
+        if self.sport_choosen == 3: # Tennis
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
             print("Joueurs chargés")
             print(self.parser.dict_player)
+            
+        if self.sport_choosen == 5: # leagues of legends
+            self.__parser = League_of_legend_Parser()
+            self.parser.parse_equipes(self.search.dao["team"].data)
+            print("Equipe sans joueurs chargées")
+            print(self.parser.dict_equipe)
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargées et ajoutés dans les équipes")
+            print(self.parser.dict_player)
+            print(f"\n")
+            print(self.parser.dict_equipe)

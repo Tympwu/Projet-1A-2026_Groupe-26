@@ -81,6 +81,7 @@ class Tennis_Parser(Parser):
 
 
 class Badminton_Parser(Parser):
+
     def __init__(self):
         super().__init__("badminton")
     
@@ -123,10 +124,6 @@ class Badminton_Parser(Parser):
         pass
 
 
-    
-
-
-
 class Volleyball_Parser(Parser):
     def __init__(self):
         super().__init__("volleyball")
@@ -149,11 +146,65 @@ class Volleyball_Parser(Parser):
             self.dict_player[player.id] = player
 
 
-
 class League_of_legend_Parser(Parser):
-    pass
+
+    def __init__(self):
+        super().__init__("leagues_of_legends")
+
+    def parse_equipes(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Equipes de leagues of legends
+        """
+        for index, row in data.iterrows():
+            equipe = Equipe(
+                id=index,
+                nom_equipe=self.fetch_safety_data(row["team"], str),
+                nom_abrev=self.fetch_safety_data(row["team_abbreviation"], str),
+                region_equipe=self.fetch_safety_data(row["region"], str),
+                pays_equipe=self.fetch_safety_data(row["location"], str),
+                )
+            self.dict_equipe[equipe.id] = equipe
+
+
+    def parse_players(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Joueurs de leagues of legends
+        """
+        for index, row in data.iterrows():
+            player = Player(
+                id=index,
+                full_name=self.fetch_safety_data(row["name"], str),
+                dob=self.fetch_safety_data(row["birthdate"], str),
+                pseudo=self.fetch_safety_data(row["pseudo"], str),
+                role=self.fetch_safety_data(row["role"], int),
+                sport="League of legends",
+                nationalite=self.fetch_safety_data(row["country_of_birth"], str),
+                equipe=self.fetch_safety_data(row["team"], str))
+            self.dict_player[player.id] = player
+
+            for equipe in self.dict_equipe.values():
+                if equipe.nom_equipe == player.equipe:
+                    self.dict_equipe[equipe.id].ajouter_joueur(player)
+
+
+    def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Matchs de leagues of legends
+        """
+        pass
+
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Compétitions de leagues of legends
+        """
+        pass
 
 class Basketball_Parser(Parser):
+
     def __init__(self):
         super().__init__("tennis")
 
@@ -224,7 +275,7 @@ class Football_European_leagues_Parser(Parser):
         """
         dict_contry_id: dict[int, str] = {}
         for index, row in other.iterrows():
-            dict_contry_id[row["id"] ] = row["name"]
+            dict_contry_id[row["id"]] = row["name"]
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"],str)
             date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]

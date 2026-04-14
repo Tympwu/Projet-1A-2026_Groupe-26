@@ -37,3 +37,10 @@ class Equipe:
             if valeur is not None:
                 result += f"\n{nom_argument} : {valeur}"
         return result
+
+    def ajouter_joueur(self, joueur: Player | None = None) -> None:
+        if isinstance(joueur, Player) and (joueur is not None):
+            if self.joueurs_equipe is None:
+                self.joueurs_equipe = set()
+            self.joueurs_equipe.add(joueur)
+
