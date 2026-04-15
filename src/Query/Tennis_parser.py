@@ -63,7 +63,7 @@ class Tennis_Parser(Parser):
                 joueur2=self.fetch_safety_data(row["loser_id"], int),
                 score1=get_set_scores(self.fetch_safety_data(row["score"], str))[0],
                 score2=get_set_scores(self.fetch_safety_data(row["score"], str))[1],
-                match_num=get_set_scores(self.fetch_safety_data(row["match_num"], int)),
+                match_num=self.fetch_safety_data(row["match_num"], int),
                 best_of=self.fetch_safety_data(row["best_of"], int),
                 temps_match=self.fetch_safety_data(row["minutes"], int)
             )
