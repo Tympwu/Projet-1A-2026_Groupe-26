@@ -18,7 +18,6 @@ class Player(Personne):
         nationalite: str = None,
         continent: str = None,
         sport: str = None,
-        poste: str = None,
         numero_maillot: int = None,
         main_forte: str = None,
         taille: int = None,
