@@ -20,7 +20,7 @@ class Parser(ABC):
         try:
             return convert_to(data)
         except ValueError:
-            type(data)
+            print(type(data))
             return None
 
     @abstractmethod
@@ -52,7 +52,6 @@ class Tennis_Parser(Parser):
         for index, row in data.iterrows():
             dob = str(self.fetch_safety_data(row["dob"], int))
             dob = dob[:4] + "-" + dob[4:6] + "-" + dob[6:8]
-            print(dob)
             player = Player(
                 id=self.fetch_safety_data(row["player_id"], int),
                 sexe=other,
@@ -70,7 +69,34 @@ class Tennis_Parser(Parser):
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Match de Tennis
         """
-        pass
+        def get_set_scores(score):
+            sets = []
+            res_score = [0,0]
+            for s in score.split():
+                main_score = s.split("(")[0]
+                if main_score in ["RET","W/O","DEF"]:
+                    return 
+                else:
+                    games1, games2 = main_score.split("-")
+                    sets.append((int(games1), int(games2)))
+            for set in sets:
+                if set[0]>set[1]:
+                    res_score[0]+=1
+                else:
+                    res_score[1]+=1
+            return (res_score[0],res_score[1])
+        
+        for index, row in data.iterrows():
+            match = Match(
+                id = index,
+                joueur1 = self.fetch_safety_data(row["winner_id"], int),
+                joueur2 = self.fetch_safety_data(row["loser_id"], int),
+                score1 = get_set_scores(self.fetch_safety_data(row["score"], str))[0],
+                score2 = get_set_scores(self.fetch_safety_data(row["score"], str))[1],
+                best_of = self.fetch_safety_data(row["best_of"], int),
+                temps_match = self.fetch_safety_data(row["minutes"], int)
+            )
+            self.dict_matchs[index]=match
 
     def parse_equipes(self, data: pd.DataFrame, other=None):
         """
@@ -105,7 +131,7 @@ class Badminton_Parser(Parser):
                 first_name=first_name,
                 last_name=last_name,
                 nationalite=self.fetch_safety_data(row["country"], str),
-                continent = self.fetch_safety_data(row["continent"], str),
+                continent=self.fetch_safety_data(row["continent"], str),
                 sport="badminton")
             self.dict_player[player.id] = player
 

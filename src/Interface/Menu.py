@@ -1,5 +1,5 @@
 from ..Query.recherche import Recherche
-from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser, League_of_legend_Parser
+from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser, League_of_legend_Parser, Basketball_Parser
 
 
 class Menu:
@@ -145,6 +145,16 @@ class Menu:
         """
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
+        if self.sport_choosen == 1:  # Basketball
+            self.__parser = Basketball_Parser()
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargés\n")
+            self.parser.parse_equipes(self.search.dao["team"].data)
+            print("Equipes chargées\n")
+            self.parser.parse_matchs(self.search.dao["game"].data)
+            print("Matchs chargés\n")
+            print(self.parser.dict_matchs)
+
         if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
             self.parser.parse_players(self.search.dao["player"].data)

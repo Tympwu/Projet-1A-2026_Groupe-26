@@ -6,7 +6,6 @@ from .Player import Player
 
 class Match:
     """"""
-
     def __init__(
         self, id_match: int | None = None,
         region: str | None = None,
@@ -16,6 +15,7 @@ class Match:
         joueur2: Player | None = None,
         score1: int | None = None,
         score2: int | None = None,
+        score: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: float | None = None,
