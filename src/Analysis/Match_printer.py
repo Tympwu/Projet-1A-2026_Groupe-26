@@ -16,11 +16,7 @@ class Match_printer:
         return res
 
     def all_match_printer(self):
-<<<<<<< HEAD
         pass
-=======
-        pass
-
 
 """
         # Calcule la largeur du texte (sans compter l'étoile au début et à la fin)
@@ -44,4 +40,3 @@ class Match_printer:
     # Affiche le résultat
     print(res)
     """
->>>>>>> b7db1dc450fa8455101b1db32610b79ccaa1ba28
