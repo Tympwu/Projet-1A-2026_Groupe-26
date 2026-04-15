@@ -138,7 +138,7 @@ class League_of_legend_Parser(Parser):
 
 class Basketball_Parser(Parser):
     def __init__(self):
-        super().__init__("tennis")
+        super().__init__("basketball")
 
     def parse_players(self, data: pd.DataFrame, other=None):
         for index, row in data.iterrows():
