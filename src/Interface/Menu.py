@@ -213,7 +213,7 @@ class Menu:
                                   3: self.add_data, 4: self.export_data}
             if result == 0:
                 return
-            else:
+            elif result != -1:
                 fonctions_possible[result]()
 
     def visualise_data(self):

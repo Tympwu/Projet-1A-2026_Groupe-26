@@ -20,7 +20,8 @@ class Parser(ABC):
         try:
             return convert_to(data)
         except ValueError:
-            print(type(data))
+            print("Erreur de conversion de type, celui voulu est " + str(convert_to) + " et celui donné est " +str(type(data)))
+            print(data)
             return None
 
     @abstractmethod
