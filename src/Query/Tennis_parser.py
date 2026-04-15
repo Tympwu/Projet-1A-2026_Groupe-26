@@ -91,6 +91,6 @@ class Tennis_Parser(Parser):
                     match = matchs
                 )
                 list_competition.append(self.fetch_safety_data(row["tourney_id"], str))
-                self.dict_competition[index]=competition
+                self.dict_competition[index] = competition
     
     
