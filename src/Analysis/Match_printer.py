@@ -15,6 +15,10 @@ class Match_printer:
         """
         return res
 
+    def all_match_printer(self):
+        pass
+
+
 """
         # Calcule la largeur du texte (sans compter l'étoile au début et à la fin)
     largeur_: int = max([largeur] + [len(string) for string in texte])
@@ -36,6 +40,4 @@ class Match_printer:
 
     # Affiche le résultat
     print(res)
-"""
-    def all_match_printer(self):
-        pass
+    """
