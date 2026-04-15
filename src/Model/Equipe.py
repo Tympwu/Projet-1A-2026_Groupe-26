@@ -44,3 +44,10 @@ class Equipe:
                 self.joueurs_equipe = set()
             self.joueurs_equipe.add(joueur)
 
+    def ajouter_coach(self, coach: Coach | None = None) -> None:
+        if isinstance(coach, Coach) and (Coach is not None):
+            if self.coach_equipe is None:
+                self.coach_equipe = set()
+            self.coach_equipe.add(coach)
+
+
