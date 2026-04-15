@@ -181,6 +181,9 @@ class Menu:
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
             print("Joueurs chargés")
+            self.parser.parse_matchs(self.search.dao["wta_matches_2024"].data)
+            self.parser.parse_matchs(self.search.dao["atp_matches_2024"].data)
+            print("Matchs chargés")
 
         if self.sport_choosen == 5:  # leagues of legends
             self.__parser = League_of_legend_Parser()
