@@ -42,7 +42,7 @@ class Player(Personne):
         self.role = role
 
     def __repr__(self) -> str:
-        return f"Player( Nom:{self.full_name}, Sport:{self.sport})"
+        return str(self)
 
     def __str__(self) -> str:
         result = ""
