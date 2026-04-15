@@ -51,6 +51,3 @@ class Player(Personne):
                 result += f"\n{nom_argument} : {valeur}"
         return result
 
-    def __hash__(self):
-        return hash(self.id)
-

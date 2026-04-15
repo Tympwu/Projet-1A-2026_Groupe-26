@@ -281,6 +281,45 @@ class Basketball_Parser(Parser):
                 sport="Basketball")
             self.dict_player[player.id] = player
 
+    def parse_equipes(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Equipes de Football européen
+        """
+        for index, row in data.iterrows():
+            equipe = Equipe(
+                id=self.fetch_safety_data(row["id"], int),
+                nom_equipe=self.fetch_safety_data(row["full_name"], str),
+                nom_abrev=self.fetch_safety_data(row["abbreviation"], str),
+                nickname=self.fetch_safety_data(row["nickname"], str),
+                ville_equipe=self.fetch_safety_data(row["city"], str),
+                region_equipe=self.fetch_safety_data(row["state"], str),
+                )
+            self.dict_equipe[equipe.id] = equipe
+
+    def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Matchs de Football européen
+        """
+        for index, row in data.iterrows():
+            match = Match(
+                id_match=self.fetch_safety_data(row["game_id"], int),
+                equipe1=self.dict_equipe[self.fetch_safety_data(row["team_id_home"], int)],
+                equipe2=self.dict_equipe[self.fetch_safety_data(row["team_id_away"], int)],
+                score1=self.fetch_safety_data(row["pts_home"], int),
+                score2=self.fetch_safety_data(row["pts_away"], int),
+                date_match=self.fetch_safety_data(row["game_date"], str)
+                )
+            self.dict_matchs[match.id_match] = match
+
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Compétitions de Football européen
+        """
+        pass
+
 class Football_European_leagues_Parser(Parser):
     def __init__(self):
         super().__init__("football")
