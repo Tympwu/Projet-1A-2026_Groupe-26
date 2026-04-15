@@ -62,7 +62,7 @@ class Match:
         self.date_match = date_match
         self.temps_match = temps_match
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         if self.equipe1 is not None and self.equipe2 is not None:
             return f"""Voici le Match:\n
             Identifiant du match: {self.id_match}\n
