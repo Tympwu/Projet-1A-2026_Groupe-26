@@ -3,6 +3,7 @@ import pandas as pd
 
 from ..Model.Player import Player
 from ..Model.match import Match
+from ..Model.Competition import Competition
 # from ..Model.Equipe import Equipe
 # from ..Model.Coach import Coach
 
@@ -42,7 +43,7 @@ class Tennis_Parser(Parser):
             for s in score.split():
                 main_score = s.split("(")[0]
                 if main_score in ["RET", "W/O", "DEF"]:
-                    return
+                    return (1,0)
                 else:
                     games1, games2 = main_score.split("-")
                     sets.append((int(games1), int(games2)))
@@ -52,7 +53,7 @@ class Tennis_Parser(Parser):
                 else:
                     res_score[1] += 1
             return (res_score[0], res_score[1])
-        
+    
         for index, row in data.iterrows():
             match = Match(
                 id=index,
@@ -64,10 +65,18 @@ class Tennis_Parser(Parser):
                 temps_match=self.fetch_safety_data(row["minutes"], int)
             )
             self.dict_matchs[index] = match
-
-    def parse_equipes(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Équipes de Tennis
-        """
-        pass
+            
+    def parse_competition(self, data: pd.DataFrame, other=None):
+        for index, row in data.iterrows():
+            competition = Competition(
+                self.id= index
+                self.sport = sport
+                self.nom= nom
+                self.surface= surface
+                self.draw_size= draw_size
+                self.level= level
+                self.date = date
+                self.match= {}
+            )
+    
+    
