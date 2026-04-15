@@ -19,7 +19,7 @@ class Match:
         score: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
-        temps_match: float | None = None,
+        temps_match: str | None = None,
         stats_match: dict[str, Any] | None = None
     ) -> None:
         if not (isinstance(id_match, int) or id_match is None):
@@ -50,8 +50,8 @@ class Match:
             raise ValueError("l'attribut best_of doit être un entier naturel positif")
         if not (isinstance(date_match, str) or date_match is None):
             raise TypeError("l'attribut date_match doit être du type str")
-        if not (isinstance(temps_match, float) or temps_match is None):
-            raise ValueError("l'attribut temps_match doit être du type float et doit être positif")
+        if not (isinstance(temps_match, str) or temps_match is None):
+            raise ValueError("l'attribut temps_match doit être du type str")
         self.id_match = id_match
         self.region = region
         self.equipe1 = equipe1
@@ -119,9 +119,9 @@ class Match:
             raise ValueError("l'attribut score1 est un entier positif")
         if (not isinstance(score2, int)) or score2 < 0:
             raise ValueError("l'attribut score2 est un entier positif")
-        if self.equipe_1 is None:
+        if self.equipe1 is None:
             raise ValueError("l'attribut equipe1 du match vaut None")
-        if self.equipe_2 is None:
+        if self.equipe2 is None:
             raise ValueError("l'attribut equipe2 du match vaut None")
         if (self.score1 is not None) or (self.score2 is not None):
             raise ValueError("les scores ont déjà été enregistrés")

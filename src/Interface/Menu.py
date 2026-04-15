@@ -6,6 +6,7 @@ from ..Query.Basketball_parser import Basketball_Parser
 # from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
+from ..Analysis.Match_printer import Match_printer
 
 
 class Menu:
@@ -23,6 +24,7 @@ class Menu:
         self.__parser: Parser = None
         self.__search: Recherche = None
         self.sport_choosen: int = None
+        self.__match_printer: Match_printer = None
 
     @property
     def parser(self):
@@ -151,34 +153,6 @@ class Menu:
         """
         if self.sport_choosen == 1:  # Basketball
             self.__parser = Basketball_Parser()
-            self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargés\n")
-            self.parser.parse_equipes(self.search.dao["team"].data)
-            print("Equipes chargées\n")
-            self.parser.parse_matchs(self.search.dao["game"].data)
-            print("Matchs chargés\n")
-            print(self.parser.dict_matchs)
-
-        if self.sport_choosen == 2:  # Football european
-            self.__parser = Football_European_leagues_Parser()
-            self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargés\n")
-            self.parser.parse_equipes(self.search.dao["equipe"].data)
-            print("Equipes chargées\n")
-            self.parser.parse_matchs(self.search.dao["match"].data,
-                                     other=self.search.dao["country"].data)
-            print("Matchs chargés\n")
-            print(self.parser.dict_matchs)
-
-        if self.sport_choosen == 3:  # Tennis
-            self.__parser = Tennis_Parser()
-            self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
-            self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
-            print("Joueurs chargés\n")
-            print(self.parser.dict_player)
-
-        if self.sport_choosen == 5:  # leagues of legends
-            self.__parser = League_of_legend_Parser()
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             print(self.parser.dict_equipe)
@@ -187,11 +161,37 @@ class Menu:
             print(self.parser.dict_player)
             print("\n")
             print(self.parser.dict_equipe)
-            self.parser.parse_coach(self.search.dao["coach"].data)
-            print(self.parser.dict_coach)
-            print("Coach chargées et ajouté dans les equipes\n")
-            self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
+            self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
             print("Macth chargés\n")
+
+        if self.sport_choosen == 2:  # Football european
+            self.__parser = Football_European_leagues_Parser()
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargés")
+            self.parser.parse_equipes(self.search.dao["equipe"].data)
+            print("Equipes chargées")
+            self.parser.parse_matchs(self.search.dao["match"].data,
+                                     other=self.search.dao["country"].data)
+            print("Matchs chargés")
+            # Création des printer pour chaque données correspondantes
+            self.__match_printer = Match_printer(self.parser.dict_matchs)
+
+        if self.sport_choosen == 3:  # Tennis
+            self.__parser = Tennis_Parser()
+            self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
+            self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
+            print("Joueurs chargés")
+
+        if self.sport_choosen == 5:  # leagues of legends
+            self.__parser = League_of_legend_Parser()
+            self.parser.parse_equipes(self.search.dao["team"].data)
+            print("Equipe sans joueurs chargées")
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargées et ajoutés dans les équipes")
+            self.parser.parse_coach(self.search.dao["coach"].data)
+            print("Coach chargées et ajouté dans les equipes")
+            self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
+            print("Macth chargés")
 
         # Après avoir importé les données
         self.analyse_data()
@@ -204,8 +204,8 @@ class Menu:
             print("2. Analyser des liens")
             print("3. Ajouter des données")
             print("4. Exporter des données\n")
-            print("0. Revenir en arrière\n\n")
-            result = self.answer_question({1, 2, 3, 4})
+            print("0. Revenir au menu principal\n\n")
+            result = self.answer_question({0, 1, 2, 3, 4})
             fonctions_possible = {1: self.visualise_data, 2: self.analyse_link,
                                   3: self.add_data, 4: self.export_data}
             if result == 0:
@@ -236,19 +236,13 @@ class Menu:
             print("0. Revenir en arrière\n\n")
             result = input("Réponse : ")
             if result == "":
-                print("hi")
+                self.__match_printer.all_match_printer()
             if not result.isnumeric():
                 print("La valeur renseignée n'est pas valide")
             elif result == "0":
                 return
             else:
                 result = int(result)
-     
-
-
-
-
-
 
     def analyse_link(self):
         pass
