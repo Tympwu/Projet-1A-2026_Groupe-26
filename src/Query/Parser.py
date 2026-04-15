@@ -300,20 +300,14 @@ class Basketball_Parser(Parser):
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Matchs de Football européen
         """
-        dict_contry_id: dict[int, str] = {}
-        for index, row in other.iterrows():
-            dict_contry_id[row["id"]] = row["name"]
         for index, row in data.iterrows():
-            date_match = self.fetch_safety_data(row["date"],str)
-            date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]
             match = Match(
-                id_match=self.fetch_safety_data(row["match_api_id"], int),
-                region=dict_contry_id[self.fetch_safety_data(row["country_id"], int)],
-                equipe1=self.dict_equipe[self.fetch_safety_data(row["home_team_api_id"], int)],
-                equipe2=self.dict_equipe[self.fetch_safety_data(row["away_team_api_id"], int)],
-                score1=self.fetch_safety_data(row["home_team_goal"], int),
-                score2=self.fetch_safety_data(row["away_team_goal"], int),
-                date_match=date_match
+                id_match=self.fetch_safety_data(row["game_id"], int),
+                equipe1=self.dict_equipe[self.fetch_safety_data(row["team_id_home"], int)],
+                equipe2=self.dict_equipe[self.fetch_safety_data(row["team_id_away"], int)],
+                score1=self.fetch_safety_data(row["pts_home"], int),
+                score2=self.fetch_safety_data(row["pts_away"], int),
+                date_match=self.fetch_safety_data(row["game_date"], str)
                 )
             self.dict_matchs[match.id_match] = match
 
