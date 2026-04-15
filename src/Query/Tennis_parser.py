@@ -75,8 +75,8 @@ class Tennis_Parser(Parser):
                 date_data = str(self.fetch_safety_data(row["tourney_date"], int))
                 date = date_data[:4] + "-" + date_data[4:6] + "-" + date_data[6:8]
                 for match in self.dict_matchs:
-                    if match.tourney_id 
-                    matchs = {}
+                    if match.tourney_id:
+                        matchs = {}
                 competition = Competition(
                     id = self.fetch_safety_data(row["tourney_id"], str),
                     sport = "tennis",
