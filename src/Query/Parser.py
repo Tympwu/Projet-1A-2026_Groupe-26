@@ -5,7 +5,7 @@ from ..Model.Player import Player
 from ..Model.match import Match
 from ..Model.Equipe import Equipe
 from ..Model.Coach import Coach
-
+from ..Model.Competition import Competition
 
 class Parser(ABC):
     def __init__(self, sport):
@@ -14,6 +14,7 @@ class Parser(ABC):
         self.dict_matchs: dict[int, Match] = {}
         self.dict_equipe: dict[int, Equipe] = {}
         self.dict_coach: dict[int, Coach] = {}
+        self.dict_competition: dict[int, Competition] = {}
 
     def fetch_safety_data(self, data: Any, convert_to: type):
         try:
@@ -36,4 +37,8 @@ class Parser(ABC):
 
     @abstractmethod
     def parse_equipes(self, data, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Équipes de Tennis
+        """
         pass
