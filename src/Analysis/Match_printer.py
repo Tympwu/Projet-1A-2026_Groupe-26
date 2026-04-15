@@ -16,4 +16,32 @@ class Match_printer:
         return res
 
     def all_match_printer(self):
+<<<<<<< HEAD
         pass
+=======
+        pass
+
+
+"""
+        # Calcule la largeur du texte (sans compter l'étoile au début et à la fin)
+    largeur_: int = max([largeur] + [len(string) for string in texte])
+
+    # Définis le format pour l'alignement
+    format_: str
+    if alignement == "gauche":
+        format_ = "<"
+    elif alignement == "droite":
+        format_ = ">"
+    else:
+        format_ = "^"
+
+    # Calcule la première ligne (qui est identique à la dernière ligne)
+    premiere_ligne: list[str] = ["*" * (largeur_ + 2)]
+
+    # Calcule la chaîne de caractères finale
+    res: str = "\n".join(premiere_ligne + [f"*{string:{format_}{largeur_}}*" for string in texte] + premiere_ligne)
+
+    # Affiche le résultat
+    print(res)
+    """
+>>>>>>> b7db1dc450fa8455101b1db32610b79ccaa1ba28
