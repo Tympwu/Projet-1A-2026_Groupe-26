@@ -19,7 +19,7 @@ class Recherche:
         self.dao["league"] = DAO(fichier="data/football_european_leagues/league.csv")
         self.dao["match"] = DAO(fichier="data/football_european_leagues/match.csv")
         self.dao["player"] = DAO(fichier="data/football_european_leagues/player.csv")
-        self.dao["team"] = DAO(fichier="data/football_european_leagues/team.csv")
+        self.dao["equipe"] = DAO(fichier="data/football_european_leagues/team.csv")
 
     def __data_league_of_legends(self):
         self.dao["coach"] = DAO(fichier="data/league_of_legends/coach.csv")

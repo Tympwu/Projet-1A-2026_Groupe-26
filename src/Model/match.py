@@ -18,7 +18,7 @@ class Match:
         score2: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
-        temps_match: float | None = None
+        temps_match: float | None = None,
     ) -> None:
         if not (isinstance(id_match, int) or id_match is None):
             raise TypeError("l'attribut id_match doit être du type int ou None")
@@ -40,15 +40,15 @@ class Match:
             raise ValueError(
                 "les attributs joueur1 et joureur2 doivent être différent s'ils sont renseignés"
                 )
-        if not (isinstance(score1, int) or score1 is None) or score1 < 0:
+        if not (isinstance(score1, int) or score1 is None):
             raise ValueError("l'attribut score1 doit être un entier naturel positif")
-        if not (isinstance(score2, int) or score2 is None) or score2 < 0:
+        if not (isinstance(score2, int) or score2 is None):
             raise ValueError("l'attribut score2 doit être un entier naturel positif")
         if not isinstance(best_of, int) or best_of < 0:
             raise ValueError("l'attribut best_of doit être un entier naturel positif")
         if not (isinstance(date_match, str) or date_match is None):
             raise TypeError("l'attribut date_match doit être du type str")
-        if not (isinstance(temps_match, float) or temps_match is None) or temps_match < 0:
+        if not (isinstance(temps_match, float) or temps_match is None):
             raise ValueError("l'attribut temps_match doit être du type float et doit être positif")
         self.id_match = id_match
         self.region = region
@@ -66,14 +66,14 @@ class Match:
         if self.equipe1 is not None and self.equipe2 is not None:
             return f"""Voici le Match:\n
             Identifiant du match: {self.id_match}\n
-            L'Equipe 1: {self.equipe1.nom}\n
-            L'Equipe 2: {self.equipe2.nom}\n
+            L'Equipe 1: {self.equipe1.nom_equipe}\n
+            L'Equipe 2: {self.equipe2.nom_equipe}\n
             best of: {self.best_of}\n
             score equipe 1: {self.score1}\n
             score equipe 2: {self.score2}\n
             lieux du match: {self.region}\n
             date du match: {self.date_match}\n
-            temps du match: {self.temps_match}
+            temps du match: {self.temps_match}\n
             """
         elif self.joueur1 is not None and self.joueur2 is not None:
             return f"""Voici le Match:\n
@@ -203,3 +203,11 @@ class Match:
                 return self.joueur1
             else:
                 return self.joueur2
+
+    def afficher_match(self):
+        """Fonction permettant d'afficher le match et les résultats"""
+        max_len = max(filter(lambda a: a != None, [len(joueur1.pseudo), len(joueur1.full_name),
+                       len(joueur2.full_name), len(joueur2.pseudo),
+                       len(equipe_1.nom_abrev), len(equipe_1.nom_equipe),
+                       len(equipe_2.nom_abrev), len(equipe_2.nom_equipe)]))
+        

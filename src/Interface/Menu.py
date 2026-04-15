@@ -1,5 +1,5 @@
 from ..Query.recherche import Recherche
-from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser
+from ..Query.Parser import Tennis_Parser, Parser, Football_European_leagues_Parser, League_of_legend_Parser
 
 
 class Menu:
@@ -9,7 +9,7 @@ class Menu:
         self.__admin: bool = False
         self.__password_admin: str = "azerty"
         self._sports: dict[int, str] = {
-            1: "basketball", 
+            1: "basketball",
             2: "football_european_leagues",
             5: "league_of_legends",
             3: "tennis",
@@ -111,7 +111,7 @@ class Menu:
                 elif result == 1:
                     self.proposition_sports()
                 else:
-                    self.help()    
+                    self.help()
 
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
@@ -145,13 +145,31 @@ class Menu:
         """
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
-        if self.sport_choosen == 2:
+        if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
             self.parser.parse_players(self.search.dao["player"].data)
-            print("Done")
-        if self.sport_choosen == 3:
+            print("Joueurs chargés")
+            self.parser.parse_equipes(self.search.dao["equipe"].data)
+            print("Equipes chargées")
+            self.parser.parse_matchs(self.search.dao["match"].data,
+                                     other=self.search.dao["country"].data)
+            print("Matchs chargés")
+            print(self.parser.dict_matchs)
+
+        if self.sport_choosen == 3: # Tennis
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
-            print("Done")
+            print("Joueurs chargés")
             print(self.parser.dict_player)
+            
+        if self.sport_choosen == 5: # leagues of legends
+            self.__parser = League_of_legend_Parser()
+            self.parser.parse_equipes(self.search.dao["team"].data)
+            print("Equipe sans joueurs chargées")
+            print(self.parser.dict_equipe)
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargées et ajoutés dans les équipes")
+            print(self.parser.dict_player)
+            print(f"\n")
+            print(self.parser.dict_equipe)
