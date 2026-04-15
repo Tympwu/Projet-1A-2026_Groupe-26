@@ -15,13 +15,16 @@ class Parser(ABC):
         self.dict_equipe: dict[int, Equipe] = {}
         self.dict_coach: dict[int, Coach] = {}
         self.dict_competition: dict[int, Competition] = {}
+        self.nan_find = False
 
     def fetch_safety_data(self, data: Any, convert_to: type):
         try:
             return convert_to(data)
         except ValueError:
-            print("Erreur de conversion de type, celui voulu est " + str(convert_to) + " et celui donné est " +str(type(data)))
-            print(data)
+            if not self.nan_find and data != "nan":
+                self.nan_find = True
+                print("Erreur de conversion de type, celui voulu est " + str(convert_to) + " et celui donné est " +str(type(data)))
+                print("Des valeurs manquent à la table de données, certaines erreurs peuvent donc apparaître par la suite")
             return None
 
     @abstractmethod
