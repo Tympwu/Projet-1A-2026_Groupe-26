@@ -54,7 +54,7 @@ class DAO:
         self.__data = self.__data.drop(index=id).reset_index(drop=True)
 
     def enlever_valeur_duplique(self) -> None:
-        self.__data.drop_duplicates(inplace = True)
+        self.__data.drop_duplicates(inplace=True)
         self.__data.reset_index(drop=True, inplace=True)
 
     def enlever_valeur_manquante(self, colonne=None) -> None:
