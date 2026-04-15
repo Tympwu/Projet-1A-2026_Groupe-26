@@ -213,8 +213,9 @@ class Match:
 
     def afficher_match(self):
         """Fonction permettant d'afficher le match et les résultats"""
-        max_len = max(filter(lambda a: a != None, [len(joueur1.pseudo), len(joueur1.full_name),
-                       len(joueur2.full_name), len(joueur2.pseudo),
-                       len(equipe_1.nom_abrev), len(equipe_1.nom_equipe),
-                       len(equipe_2.nom_abrev), len(equipe_2.nom_equipe)]))
+        max_len = max(filter(lambda a: a is not None,
+                       [len(self.joueur1.pseudo), len(self.joueur1.full_name),
+                       len(self.joueur2.full_name), len(self.joueur2.pseudo),
+                       len(self.equipe_1.nom_abrev), len(self.equipe_1.nom_equipe),
+                       len(self.equipe_2.nom_abrev), len(self.equipe_2.nom_equipe)]))
         
