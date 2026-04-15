@@ -164,7 +164,7 @@ class League_of_legend_Parser(Parser):
                 region_equipe=self.fetch_safety_data(row["region"], str),
                 pays_equipe=self.fetch_safety_data(row["location"], str),
                 )
-            self.dict_equipe[equipe.id] = equipe
+            self.dict_equipe[equipe.nom_equipe] = equipe
 
 
     def parse_players(self, data: pd.DataFrame, other=None):
@@ -186,7 +186,7 @@ class League_of_legend_Parser(Parser):
 
             for equipe in self.dict_equipe.values():
                 if equipe.nom_equipe == player.equipe:
-                    self.dict_equipe[equipe.id].ajouter_joueur(player)
+                    self.dict_equipe[equipe.nom_equipe].ajouter_joueur(player)
 
     def parse_coach(self, data: pd.DataFrame, other=None):
         """
@@ -206,8 +206,7 @@ class League_of_legend_Parser(Parser):
 
             for equipe in self.dict_equipe.values():
                 if equipe.nom_equipe == coach.equipe:
-                    self.dict_equipe[equipe.id].ajouter_coach(coach)
-
+                    self.dict_equipe[equipe.nom_equipe].ajouter_coach(coach)
 
     def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
         """
@@ -219,7 +218,7 @@ class League_of_legend_Parser(Parser):
             self.dict_nom_abbreg_nom_equipe[
                 self.fetch_safety_data(row["team_abbreviation"], str)
                 ] = self.fetch_safety_data(row["team"], str)
-
+        print(self.dict_nom_abbreg_nom_equipe)
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
             date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]
