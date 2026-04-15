@@ -14,7 +14,10 @@ class Personne:
     ) -> None:
         self.first_name = first_name
         self.last_name = last_name
-        self.full_name = full_name
+        if full_name is None:
+            self.full_name = self.first_name + self.last_name
+        else:
+            self.full_name = full_name
         self.dob = dob
         self.sexe = sexe
 
