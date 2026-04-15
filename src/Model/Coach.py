@@ -6,6 +6,7 @@ from typing import Any
 class Coach(Personne):
     def __init__(
         self,
+        id: int = None,
         first_name: str = None,
         last_name: str = None,
         full_name: str = None,
@@ -22,10 +23,13 @@ class Coach(Personne):
         self.nationalite = nationalite
         self.pseudo = pseudo
         self.role = role
-
+        self.id = id
     def __str__(self) -> str:
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is not None:
                 result += f"\n{nom_argument} : {valeur}"
         return result
+
+    def __hash__(self):
+        return hash(self.id)
