@@ -1,4 +1,4 @@
-from Parser import Parser
+from .Parser import Parser
 import pandas as pd
 
 from ..Model.Player import Player
