@@ -18,6 +18,7 @@ class Match:
         score1: int | None = None,
         score2: int | None = None,
         score: int | None = None,
+        match_num: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: str | None = None,
@@ -54,6 +55,7 @@ class Match:
         if not (isinstance(temps_match, str) or temps_match is None):
             raise ValueError("l'attribut temps_match doit être du type str")
         self.id_match = id_match
+        self.tourney_id = tourney_id
         self.region = region
         self.equipe1 = equipe1
         self.equipe2 = equipe2
@@ -61,6 +63,8 @@ class Match:
         self.joueur2 = joueur2
         self.score1 = score1
         self.score2 = score2
+        self.score = score
+        self.match_num = match_num
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match
@@ -210,8 +214,9 @@ class Match:
 
     def afficher_match(self):
         """Fonction permettant d'afficher le match et les résultats"""
-        max_len = max(filter(lambda a: a != None, [len(joueur1.pseudo), len(joueur1.full_name),
-                       len(joueur2.full_name), len(joueur2.pseudo),
-                       len(equipe_1.nom_abrev), len(equipe_1.nom_equipe),
-                       len(equipe_2.nom_abrev), len(equipe_2.nom_equipe)]))
+        max_len = max(filter(lambda a: a is not None,
+                       [len(self.joueur1.pseudo), len(self.joueur1.full_name),
+                       len(self.joueur2.full_name), len(self.joueur2.pseudo),
+                       len(self.equipe_1.nom_abrev), len(self.equipe_1.nom_equipe),
+                       len(self.equipe_2.nom_abrev), len(self.equipe_2.nom_equipe)]))
         
