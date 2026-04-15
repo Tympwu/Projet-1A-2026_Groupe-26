@@ -11,6 +11,22 @@ class Basketball_Parser(Parser):
     def __init__(self):
         super().__init__("basketball")
 
+    def parse_equipes(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Equipes de Football européen
+        """
+        for index, row in data.iterrows():
+            equipe = Equipe(
+                id=self.fetch_safety_data(row["id"], int),
+                nom_equipe=self.fetch_safety_data(row["full_name"], str),
+                nom_abrev=self.fetch_safety_data(row["abbreviation"], str),
+                nickname=self.fetch_safety_data(row["nickname"], str),
+                ville_equipe=self.fetch_safety_data(row["city"], str),
+                region_equipe=self.fetch_safety_data(row["state"], str),
+                )
+            self.dict_equipe[equipe.id] = equipe
+
     def parse_players(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
@@ -38,22 +54,6 @@ class Basketball_Parser(Parser):
                 equipe=self.dict_equipe[self.fetch_safety_data(row["team_id"], int)],
                 sport="Basketball")
             self.dict_player[player.id] = player
-
-    def parse_equipes(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Equipes de Football européen
-        """
-        for index, row in data.iterrows():
-            equipe = Equipe(
-                id=self.fetch_safety_data(row["id"], int),
-                nom_equipe=self.fetch_safety_data(row["full_name"], str),
-                nom_abrev=self.fetch_safety_data(row["abbreviation"], str),
-                nickname=self.fetch_safety_data(row["nickname"], str),
-                ville_equipe=self.fetch_safety_data(row["city"], str),
-                region_equipe=self.fetch_safety_data(row["state"], str),
-                )
-            self.dict_equipe[equipe.id] = equipe
 
     def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
         """

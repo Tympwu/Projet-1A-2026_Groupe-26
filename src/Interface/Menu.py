@@ -153,12 +153,16 @@ class Menu:
         """
         if self.sport_choosen == 1:  # Basketball
             self.__parser = Basketball_Parser()
-            self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargés")
             self.parser.parse_equipes(self.search.dao["team"].data)
-            print("Equipes chargées")
-            self.parser.parse_matchs(self.search.dao["game"].data)
-            print("Matchs chargés")
+            print("Equipe sans joueurs chargées")
+            print(self.parser.dict_equipe)
+            self.parser.parse_players(self.search.dao["player"].data)
+            print("Joueurs chargées et ajoutés dans les équipes\n")
+            print(self.parser.dict_player)
+            print("\n")
+            print(self.parser.dict_equipe)
+            self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
+            print("Macth chargés\n")
 
         if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
@@ -239,12 +243,6 @@ class Menu:
                 return
             else:
                 result = int(result)
-     
-
-
-
-
-
 
     def analyse_link(self):
         pass
