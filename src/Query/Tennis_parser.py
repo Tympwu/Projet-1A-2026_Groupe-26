@@ -46,8 +46,10 @@ class Tennis_Parser(Parser):
                 if main_score in ["RET", "W/O", "DEF"]:
                     return (1, 0)
                 else:
+                    if "[" in main_score:
+                        main_score = main_score.split("[")[1].split("]")[0]
                     games1, games2 = main_score.split("-")
-                    sets.append((int(games1), int(games2)))
+                    sets.append((int(float(games1)), int((float(games2)))))
             for set in sets:
                 if set[0] > set[1]:
                     res_score[0] += 1
@@ -59,13 +61,13 @@ class Tennis_Parser(Parser):
             match = Match(
                 id_match=index,
                 tourney_id=self.fetch_safety_data(row["tourney_id"], str),
-                joueur1=self.fetch_safety_data(row["winner_id"], int),
-                joueur2=self.fetch_safety_data(row["loser_id"], int),
+                joueur1=self.dict_player[self.fetch_safety_data(row["winner_id"], int)],
+                joueur2=self.dict_player[self.fetch_safety_data(row["loser_id"], int)],
                 score1=get_set_scores(self.fetch_safety_data(row["score"], str))[0],
                 score2=get_set_scores(self.fetch_safety_data(row["score"], str))[1],
                 match_num=self.fetch_safety_data(row["match_num"], int),
                 best_of=self.fetch_safety_data(row["best_of"], int),
-                temps_match=self.fetch_safety_data(row["minutes"], int)
+                temps_match=self.fetch_safety_data(row["minutes"], str)
             )
             self.dict_matchs[match.id_match] = match
             
