@@ -243,12 +243,6 @@ class Menu:
                 return
             else:
                 result = int(result)
-     
-
-
-
-
-
 
     def analyse_link(self):
         pass
