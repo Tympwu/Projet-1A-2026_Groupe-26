@@ -1,12 +1,11 @@
 from .Equipe import Equipe
-
+from typing import Any
 
 from .Player import Player
 
 
 class Match:
     """"""
-
     def __init__(
         self, id_match: int | None = None,
         region: str | None = None,
@@ -16,13 +15,15 @@ class Match:
         joueur2: Player | None = None,
         score1: int | None = None,
         score2: int | None = None,
+        score: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: float | None = None,
+        stats_match: dict[str, Any] | None = None
     ) -> None:
         if not (isinstance(id_match, int) or id_match is None):
             raise TypeError("l'attribut id_match doit être du type int ou None")
-        if not isinstance(region, str):
+        if not (isinstance(region, str) or region is None):
             raise TypeError("L'attribut region doit être du type")
         if not (isinstance(equipe1, Equipe) or equipe1 is None):
             raise TypeError("l'attribut equipe1 doit être du type equipe ou None")
@@ -61,6 +62,7 @@ class Match:
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match
+        self.stats_match = stats_match
 
     def __repr__(self) -> str:
         if self.equipe1 is not None and self.equipe2 is not None:
