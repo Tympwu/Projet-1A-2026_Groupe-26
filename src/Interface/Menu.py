@@ -148,19 +148,19 @@ class Menu:
         if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
             self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargés")
+            print("Joueurs chargés\n")
             self.parser.parse_equipes(self.search.dao["equipe"].data)
-            print("Equipes chargées")
+            print("Equipes chargées\n")
             self.parser.parse_matchs(self.search.dao["match"].data,
                                      other=self.search.dao["country"].data)
-            print("Matchs chargés")
+            print("Matchs chargés\n")
             print(self.parser.dict_matchs)
 
         if self.sport_choosen == 3: # Tennis
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
-            print("Joueurs chargés")
+            print("Joueurs chargés\n")
             print(self.parser.dict_player)
             
         if self.sport_choosen == 5: # leagues of legends
@@ -169,15 +169,12 @@ class Menu:
             print("Equipe sans joueurs chargées")
             print(self.parser.dict_equipe)
             self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargées et ajoutés dans les équipes")
+            print("Joueurs chargées et ajoutés dans les équipes\n")
             print(self.parser.dict_player)
             print(f"\n")
             print(self.parser.dict_equipe)
             self.parser.parse_coach(self.search.dao["coach"].data)
-            print(f"\n")
             print(self.parser.dict_coach)
-            print(f"\n")
-            print("Coach chargées et ajouté dans les equipes")
-            self.parser.parse_matchs(self.search.dao["match"].data)
-            print(f"\n")
-            print("Macth chargés")
+            print("Coach chargées et ajouté dans les equipes\n")
+            self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
+            print("Macth chargés\n")

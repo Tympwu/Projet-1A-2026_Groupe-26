@@ -147,7 +147,7 @@ class Volleyball_Parser(Parser):
 
 
 class League_of_legend_Parser(Parser):
-    
+
     def __init__(self):
         super().__init__("leagues_of_legends")
 
@@ -216,7 +216,9 @@ class League_of_legend_Parser(Parser):
         """
         self.dict_nom_abbreg_nom_equipe = dict()
         for index, row in other.iterrows():
-            self.dict_nom_abbreg_nom_equipe[self.fetch_safety_data(row["team_abbreviation"], str)] = self.fetch_safety_data(row["team"])
+            self.dict_nom_abbreg_nom_equipe[
+                self.fetch_safety_data(row["team_abbreviation"], str)
+                ] = self.fetch_safety_data(row["team"], str)
 
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
@@ -228,7 +230,7 @@ class League_of_legend_Parser(Parser):
                 equipe2=self.dict_equipe[
                     self.dict_nom_abbreg_nom_equipe[self.fetch_safety_data(row["team_red"], str)]],
                 temps_match=self.fetch_safety_data(row["time"], str),
-                date_match=date_match,
+                date_match=date_match
                 )
             if self.fetch_safety_data(row["winner"], str) == match.equipe1.nom_equipe:
                 match.ajouter_scores(score1=1, score2=0)

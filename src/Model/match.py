@@ -19,7 +19,7 @@ class Match:
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: float | None = None,
-        stats_match: dict(str, Any) | None = None
+        stats_match: dict[str, Any] | None = None
     ) -> None:
         if not (isinstance(id_match, int) or id_match is None):
             raise TypeError("l'attribut id_match doit être du type int ou None")
