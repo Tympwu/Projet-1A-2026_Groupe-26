@@ -10,7 +10,8 @@ class Competition:
         surface : str | None = None,
         draw_size : int | None = None,
         level : str | None = None,
-        date : str | None = None
+        date : str | None = None,
+        match : dict[int, Match] | None = None
     ):
         self.id: int = id
         self.sport: str = sport
@@ -19,7 +20,7 @@ class Competition:
         self.draw_size: int = draw_size
         self.level: str = level
         self.date: str = date
-        self.match: dict[str, Match] = {}
+        self.match: dict[int, Match] = match
 
     def __str__(self):
         result = "Compétition : \n"

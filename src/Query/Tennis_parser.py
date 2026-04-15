@@ -67,7 +67,7 @@ class Tennis_Parser(Parser):
                 best_of=self.fetch_safety_data(row["best_of"], int),
                 temps_match=self.fetch_safety_data(row["minutes"], int)
             )
-            self.dict_matchs[index] = match
+            self.dict_matchs[match.id_match] = match
             
     def parse_competition(self, data: pd.DataFrame, other=None):
         list_competition = []
@@ -81,17 +81,17 @@ class Tennis_Parser(Parser):
                     if match.tourney_id == tourney_id_temp:
                         matchs[match.match_num] = match
                 competition = Competition(
-                    id = tourney_id_temp,
-                    sport = "tennis",
-                    nom = self.fetch_safety_data(row["tourney_name"], str),
-                    surface = self.fetch_safety_data(row["surface"], str),
-                    draw_size = self.fetch_safety_data(row["draw_size"], int),
-                    level = self.fetch_safety_data(row["tourney_level"], int),
-                    date = date,
-                    match = matchs
+                    id=tourney_id_temp,
+                    sport="tennis",
+                    nom=self.fetch_safety_data(row["tourney_name"], str),
+                    surface=self.fetch_safety_data(row["surface"], str),
+                    draw_size=self.fetch_safety_data(row["draw_size"], int),
+                    level=self.fetch_safety_data(row["tourney_level"], int),
+                    date=date,
+                    match=matchs
                 )
                 list_competition.append(self.fetch_safety_data(row["tourney_id"], str))
-                self.dict_competition[index] = competition
+                self.dict_competition[competition.id] = competition
     
     def parse_equipes(self, data, other=None):
         """
