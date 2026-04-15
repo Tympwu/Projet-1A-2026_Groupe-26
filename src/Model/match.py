@@ -54,6 +54,7 @@ class Match:
         if not (isinstance(temps_match, str) or temps_match is None):
             raise ValueError("l'attribut temps_match doit être du type str")
         self.id_match = id_match
+        self.tourney_id = tourney_id
         self.region = region
         self.equipe1 = equipe1
         self.equipe2 = equipe2
@@ -61,6 +62,8 @@ class Match:
         self.joueur2 = joueur2
         self.score1 = score1
         self.score2 = score2
+        self.score = score
+        self.match_num = match_num
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match

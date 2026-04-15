@@ -44,7 +44,7 @@ class Tennis_Parser(Parser):
             for s in score.split():
                 main_score = s.split("(")[0]
                 if main_score in ["RET", "W/O", "DEF"]:
-                    return (1,0)
+                    return (1, 0)
                 else:
                     games1, games2 = main_score.split("-")
                     sets.append((int(games1), int(games2)))
@@ -57,15 +57,15 @@ class Tennis_Parser(Parser):
     
         for index, row in data.iterrows():
             match = Match(
-                id = index,
-                tourney_id = self.fetch_safety_data(row["tourney_id"], str),
-                joueur1 = self.fetch_safety_data(row["winner_id"], int),
-                joueur2 = self.fetch_safety_data(row["loser_id"], int),
-                score1 = get_set_scores(self.fetch_safety_data(row["score"], str))[0],
-                score2 = get_set_scores(self.fetch_safety_data(row["score"], str))[1],
-                match_num = get_set_scores(self.fetch_safety_data(row["match_num"], int)),
-                best_of = self.fetch_safety_data(row["best_of"], int),
-                temps_match = self.fetch_safety_data(row["minutes"], int)
+                id_match=index,
+                tourney_id=self.fetch_safety_data(row["tourney_id"], str),
+                joueur1=self.fetch_safety_data(row["winner_id"], int),
+                joueur2=self.fetch_safety_data(row["loser_id"], int),
+                score1=get_set_scores(self.fetch_safety_data(row["score"], str))[0],
+                score2=get_set_scores(self.fetch_safety_data(row["score"], str))[1],
+                match_num=get_set_scores(self.fetch_safety_data(row["match_num"], int)),
+                best_of=self.fetch_safety_data(row["best_of"], int),
+                temps_match=self.fetch_safety_data(row["minutes"], int)
             )
             self.dict_matchs[index] = match
             
@@ -77,7 +77,7 @@ class Tennis_Parser(Parser):
                 matchs = {}
                 date_data = str(self.fetch_safety_data(row["tourney_date"], int))
                 date = date_data[:4] + "-" + date_data[4:6] + "-" + date_data[6:8]
-                for match in self.dict_matchs:
+                for match in self.dict_matchs.values():
                     if match.tourney_id == tourney_id_temp:
                         matchs[match.match_num] = match
                 competition = Competition(
@@ -93,4 +93,9 @@ class Tennis_Parser(Parser):
                 list_competition.append(self.fetch_safety_data(row["tourney_id"], str))
                 self.dict_competition[index] = competition
     
-    
+    def parse_equipes(self, data, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Équipes de Tennis
+        """
+        pass
