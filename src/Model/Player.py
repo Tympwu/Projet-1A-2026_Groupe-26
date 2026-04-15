@@ -34,7 +34,6 @@ class Player(Personne):
         self.equipe = equipe
         self.nationalite_equipe = nationalite
         self.sport = sport
-        self.poste = poste
         self.numero_maillot = numero_maillot
         self.main_forte = main_forte
         self.taille = taille
@@ -51,7 +50,4 @@ class Player(Personne):
             if valeur is not None:
                 result += f"\n{nom_argument} : {valeur}"
         return result
-
-    def __hash__(self):
-        return hash(self.id)
 
