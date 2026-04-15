@@ -8,7 +8,7 @@ class Match:
     """"""
     def __init__(
         self, id_match: int | None = None,
-        tourney_id : int | None = None,
+        tourney_id : str | None = None,
         region: str | None = None,
         equipe1: Equipe | None = None,
         equipe2: Equipe | None = None,
@@ -17,6 +17,7 @@ class Match:
         score1: int | None = None,
         score2: int | None = None,
         score: int | None = None,
+        match_num: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: str | None = None,
