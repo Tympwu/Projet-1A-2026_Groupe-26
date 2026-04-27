@@ -9,7 +9,7 @@ class Match:
     def __init__(
         self,
         id_match: int | None = None,
-        tourney_id : int | None = None,
+        tourney_id: int | None = None,
         region: str | None = None,
         equipe1: Equipe | None = None,
         equipe2: Equipe | None = None,
@@ -211,12 +211,3 @@ class Match:
                 return self.joueur1
             else:
                 return self.joueur2
-
-    def afficher_match(self):
-        """Fonction permettant d'afficher le match et les résultats"""
-        max_len = max(filter(lambda a: a is not None,
-                       [len(self.joueur1.pseudo), len(self.joueur1.full_name),
-                       len(self.joueur2.full_name), len(self.joueur2.pseudo),
-                       len(self.equipe_1.nom_abrev), len(self.equipe_1.nom_equipe),
-                       len(self.equipe_2.nom_abrev), len(self.equipe_2.nom_equipe)]))
-        

@@ -9,6 +9,7 @@ from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Analysis.Match_printer import Match_printer
 from ..Analysis.Joueur_printer import Joueur_printer
 from ..Analysis.Equipe_printer import Equipe_printer
+
 from ..Interface.Recherche import Recherche
 
 
@@ -59,7 +60,7 @@ class Menu:
                 return
             elif mdp == self.__password_admin:
                 self.__admin = True
-                print("Connexion réussie !\n \n")
+                print("Connexion réussie ! \U0001F513\n \n")
                 connexion_reussie = True
             else:
                 print("Mot de passe éronné !\n")
@@ -177,7 +178,7 @@ class Menu:
             self.parser.parse_matchs(self.search.dao["match"].data,
                                      other=self.search.dao["country"].data)
             print("Matchs chargés")
-            
+
         if self.sport_choosen == 3:  # Tennis
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
@@ -201,13 +202,14 @@ class Menu:
 
         # Création des printer correspondants
         self.__joueur_printer = Joueur_printer(self.parser.dict_player)
+        self.__equipe_printer = Equipe_printer(self.parser.dict_equipe)
         self.__match_printer = Match_printer(self.parser.dict_matchs, team_sport=self.team_sport)
 
         # Création du module de rercherche des données
-        self.__recherche_data = Recherche(self.sport_choosen, {
+        self.__recherche_data = Recherche(self._sports[self.sport_choosen], {
             "matchs": self.__match_printer,
             "joueurs": self.__joueur_printer,
-            "equipes": None}
+            "equipes": self.__equipe_printer}
         )
 
         # Après avoir importé les données

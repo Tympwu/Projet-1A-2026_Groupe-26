@@ -1,6 +1,6 @@
-
 from .Personne import Personne
 from typing import Any
+from tabulate import tabulate
 
 
 class Coach(Personne):
@@ -18,18 +18,18 @@ class Coach(Personne):
         sexe: str = None,
         role: str = None
     ) -> None:
+        self.id = id
         super().__init__(first_name, last_name, full_name, lieu_naissance, dob, sexe)
         self.equipe = equipe
         self.nationalite = nationalite
         self.pseudo = pseudo
         self.role = role
-        self.id = id
+        
     def __str__(self) -> str:
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items() if value is not None
+        }
+        return tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
 
     def __hash__(self):
         return hash(self.id)

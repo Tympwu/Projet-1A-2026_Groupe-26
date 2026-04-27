@@ -1,4 +1,5 @@
 from typing import Any
+from tabulate import tabulate
 
 
 class Personne:
@@ -15,7 +16,7 @@ class Personne:
         self.first_name = first_name
         self.last_name = last_name
         if full_name is None:
-            self.full_name = self.first_name + self.last_name
+            self.full_name = self.first_name + " " + self.last_name
         else:
             self.full_name = full_name
         self.dob = dob
@@ -27,8 +28,7 @@ class Personne:
         return NotImplemented
 
     def __str__(self) -> str:
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items() if value is not None
+        }
+        return tabulate(dict_result, headers="keys", tablefmt="rounded_grid")

@@ -78,7 +78,7 @@ class League_of_legend_Parser(Parser):
             self.dict_nom_abbreg_nom_equipe[
                 self.fetch_safety_data(row["team_abbreviation"], str)
                 ] = self.fetch_safety_data(row["team"], str)
-        print(self.dict_nom_abbreg_nom_equipe)
+        # print(self.dict_nom_abbreg_nom_equipe)
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
             date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]
