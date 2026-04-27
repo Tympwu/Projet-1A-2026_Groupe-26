@@ -2,11 +2,13 @@ from ..Query.recherche import Recherche
 from ..Query.Parser import Parser
 from ..Query.Tennis_parser import Tennis_Parser
 from ..Query.Basketball_parser import Basketball_Parser
-# from ..Query.Badminton_parser import Badminton_Parser
+from ..Query.Badminton_parser import Badminton_Parser
 # from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Analysis.Match_printer import Match_printer
+from ..Analysis.Joueur_printer import Joueur_printer
+from ..Analysis.Equipe_printer import Equipe_printer
 
 
 class Menu:
@@ -20,11 +22,15 @@ class Menu:
             2: "football_european_leagues",
             5: "league_of_legends",
             3: "tennis",
-            4: "volleyball"}
+            4: "volleyball",
+            5: "League-of-Legends",
+            6: "Badminton"}
         self.__parser: Parser = None
         self.__search: Recherche = None
         self.sport_choosen: int = None
         self.__match_printer: Match_printer = None
+        self.__equipe_printer: Equipe_printer = None
+        self.__joueur_printer: Joueur_printer = None
 
     @property
     def parser(self):
@@ -155,14 +161,17 @@ class Menu:
             self.__parser = Basketball_Parser()
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
-            print(self.parser.dict_equipe)
+            # print(self.parser.dict_equipe)
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargées et ajoutés dans les équipes\n")
-            print(self.parser.dict_player)
-            print("\n")
-            print(self.parser.dict_equipe)
+            # print(self.parser.dict_player)
+            # print("\n")
+            # print(self.parser.dict_equipe)
             self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
             print("Macth chargés\n")
+            # Création de printer pour match
+            self.__match_printer = Match_printer(self.parser.dict_matchs, True)
+            self.__joueur_printer = Joueur_printer(self.parser.dict_player)
 
         if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
@@ -238,14 +247,28 @@ class Menu:
             print("Pour un élément précis notez son indice, sinon juste validez")
             print("0. Revenir en arrière\n\n")
             result = input("Réponse : ")
-            if result == "":
-                self.__match_printer.all_match_printer()
-            if not result.isnumeric():
-                print("La valeur renseignée n'est pas valide")
-            elif result == "0":
-                return
+            if wanted == "match":
+                if result == "":
+                    self.__match_printer.all_match_printer()
+                if not result.isnumeric():
+                    print("La valeur renseignée n'est pas valide")
+                elif result == "0":
+                    return
+                else:
+                    result = int(result)
+            elif wanted == "equipes":
+                pass
+            elif wanted == "joueurs":
+                if result == "":
+                    self.__joueur_printer.all_player_printer()
+                if not result.isnumeric():
+                    print("La valeur renseignée n'est pas valide")
+                elif result == "0":
+                    return
+                else:
+                    self.__joueur_printer.single_player_printer(int(result))
             else:
-                result = int(result)
+                print("Cette option n'existe pas")
 
     def analyse_link(self):
         pass

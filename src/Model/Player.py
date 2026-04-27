@@ -36,8 +36,8 @@ class Player(Personne):
         self.sport = sport
         self.numero_maillot = numero_maillot
         self.main_forte = main_forte
-        self.taille = taille
-        self.poids = poids
+        self.taille = round(taille, 2)
+        self.poids = round(poids, 2)
         self.stat = stat
         self.role = role
 
@@ -47,8 +47,13 @@ class Player(Personne):
     def __str__(self) -> str:
         result = ""
         for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
+            if valeur is None:
+                continue
+            if nom_argument == "equipe":
+                if valeur is not None:
+                    result += f"\n{nom_argument} : {valeur.nom_equipe} | "
+            else:
+                result += f"\n{nom_argument} : {valeur} | "
         return result
 
     def __hash__(self):
