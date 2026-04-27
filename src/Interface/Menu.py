@@ -1,14 +1,15 @@
-from ..Query.recherche import Recherche
+from ..Query.data_load import Data_loader
 from ..Query.Parser import Parser
 from ..Query.Tennis_parser import Tennis_Parser
 from ..Query.Basketball_parser import Basketball_Parser
-from ..Query.Badminton_parser import Badminton_Parser
+# from ..Query.Badminton_parser import Badminton_Parser
 # from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Analysis.Match_printer import Match_printer
 from ..Analysis.Joueur_printer import Joueur_printer
 from ..Analysis.Equipe_printer import Equipe_printer
+from ..Interface.Recherche import Recherche
 
 
 class Menu:
@@ -20,14 +21,15 @@ class Menu:
         self._sports: dict[int, str] = {
             1: "basketball",
             2: "football_european_leagues",
-            5: "league_of_legends",
             3: "tennis",
             4: "volleyball",
-            5: "League-of-Legends",
+            5: "league_of_legends",
             6: "Badminton"}
         self.__parser: Parser = None
-        self.__search: Recherche = None
+        self.__search: Data_loader = None
         self.sport_choosen: int = None
+        self.team_sport: bool = True
+        self.__recherche_data: Recherche | None = None
         self.__match_printer: Match_printer = None
         self.__equipe_printer: Equipe_printer = None
         self.__joueur_printer: Joueur_printer = None
@@ -128,7 +130,7 @@ class Menu:
                 self.connect()
             elif result == 1:
                 self.proposition_sports()
-            else:
+            elif result != -1:
                 self.help()
 
     def proposition_sports(self):
@@ -147,9 +149,9 @@ class Menu:
             result = self.answer_question({0, 1, 2, 3, 4, 5})
             if result == 0:
                 return
-            else:
+            elif result != -1:
                 self.sport_choosen = result
-                self.__search = Recherche(self._sports[result])
+                self.__search = Data_loader(self._sports[result])
                 self.search.loader()
                 return self.search_parser()
 
@@ -161,17 +163,10 @@ class Menu:
             self.__parser = Basketball_Parser()
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
-            # print(self.parser.dict_equipe)
             self.parser.parse_players(self.search.dao["player"].data)
-            print("Joueurs chargées et ajoutés dans les équipes\n")
-            # print(self.parser.dict_player)
-            # print("\n")
-            # print(self.parser.dict_equipe)
+            print("Joueurs chargées et ajoutés dans les équipes")
             self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
-            print("Macth chargés\n")
-            # Création de printer pour match
-            self.__match_printer = Match_printer(self.parser.dict_matchs, True)
-            self.__joueur_printer = Joueur_printer(self.parser.dict_player)
+            print("Match chargés\n")
 
         if self.sport_choosen == 2:  # Football european
             self.__parser = Football_European_leagues_Parser()
@@ -182,9 +177,7 @@ class Menu:
             self.parser.parse_matchs(self.search.dao["match"].data,
                                      other=self.search.dao["country"].data)
             print("Matchs chargés")
-            # Création des printer pour chaque données correspondantes
-            self.__match_printer = Match_printer(self.parser.dict_matchs)
-
+            
         if self.sport_choosen == 3:  # Tennis
             self.__parser = Tennis_Parser()
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
@@ -193,6 +186,7 @@ class Menu:
             self.parser.parse_matchs(self.search.dao["wta_matches_2024"].data)
             self.parser.parse_matchs(self.search.dao["atp_matches_2024"].data)
             print("Matchs chargés")
+            self.team_sport = False
 
         if self.sport_choosen == 5:  # leagues of legends
             self.__parser = League_of_legend_Parser()
@@ -204,6 +198,17 @@ class Menu:
             print("Coach chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
             print("Macth chargés")
+
+        # Création des printer correspondants
+        self.__joueur_printer = Joueur_printer(self.parser.dict_player)
+        self.__match_printer = Match_printer(self.parser.dict_matchs, team_sport=self.team_sport)
+
+        # Création du module de rercherche des données
+        self.__recherche_data = Recherche(self.sport_choosen, {
+            "matchs": self.__match_printer,
+            "joueurs": self.__joueur_printer,
+            "equipes": None}
+        )
 
         # Après avoir importé les données
         self.analyse_data()
@@ -218,57 +223,16 @@ class Menu:
             print("4. Exporter des données\n")
             print("0. Revenir au menu principal\n\n")
             result = self.answer_question({0, 1, 2, 3, 4})
-            fonctions_possible = {1: self.visualise_data, 2: self.analyse_link,
+            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.analyse_link,
                                   3: self.add_data, 4: self.export_data}
+            # Créer des modules dans des fichiers à part pour chacune de ces catégories,
+            # visualiser données est quasiment fait, analyser données en train d'être fait
+            # partiellement par Jean, le 3 pour l'instant on abandonne et le 4 peut être fait
+            # rapidement.
             if result == 0:
                 return
             elif result != -1:
                 fonctions_possible[result]()
-
-    def visualise_data(self):
-        while True:
-            print("-------------------------------------------")
-            print("Que voulez-vous voir ?")
-            print("1. Les joueurs")
-            print("2. Les équipes")
-            print("3. Les matchs\n")
-            print("0. Revenir en arrière\n\n")
-            result = self.answer_question({0, 1, 2, 3})
-            result_match = {1: "joueurs", 2: "equipes", 3: "match"}
-            if result == 0:
-                return
-            else:
-                self.visualise_precise_data(result_match[result])
-
-    def visualise_precise_data(self, wanted: str):
-        while True:
-            print("-------------------------------------------")
-            print("Voulez-vous voir un élément précis ou l'ensemble ?")
-            print("Pour un élément précis notez son indice, sinon juste validez")
-            print("0. Revenir en arrière\n\n")
-            result = input("Réponse : ")
-            if wanted == "match":
-                if result == "":
-                    self.__match_printer.all_match_printer()
-                if not result.isnumeric():
-                    print("La valeur renseignée n'est pas valide")
-                elif result == "0":
-                    return
-                else:
-                    result = int(result)
-            elif wanted == "equipes":
-                pass
-            elif wanted == "joueurs":
-                if result == "":
-                    self.__joueur_printer.all_player_printer()
-                if not result.isnumeric():
-                    print("La valeur renseignée n'est pas valide")
-                elif result == "0":
-                    return
-                else:
-                    self.__joueur_printer.single_player_printer(int(result))
-            else:
-                print("Cette option n'existe pas")
 
     def analyse_link(self):
         pass

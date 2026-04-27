@@ -67,6 +67,7 @@ class Player(Personne):
         dob: str = None,
         lieu_naissance: str = None,
         pseudo: str = None,
+        id_equipe: int = None,
         equipe: Any = None,
         nationalite: str = None,
         continent: str = None,
@@ -84,11 +85,17 @@ class Player(Personne):
         )
         self.id = id
         self.pseudo = pseudo
+        self.id_equipe = id_equipe
         self.equipe = equipe
         self.nationalite_equipe = nationalite
+        self.continent = continent
         self.sport = sport
         self.numero_maillot = numero_maillot
         self.main_forte = main_forte
+        self.taille = round(taille, 2) if taille is not None else None
+        self.poids = round(poids, 2) if poids is not None else None
+        self.stat = stat
+        self.role = role
 
     def __repr__(self) -> str:
         """Représentation officielle de l'objet Player.
@@ -122,11 +129,10 @@ class Player(Personne):
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:
                 continue
-            if nom_argument == "equipe":
-                if valeur is not None:
-                    result += f"\n{nom_argument} : {valeur.nom_equipe} | "
+            if nom_argument == "id_equipe":
+                continue
             else:
-                result += f"\n{nom_argument} : {valeur} | "
+                result += f"\n{nom_argument} : {valeur}"
         return result
 
     def __hash__(self):

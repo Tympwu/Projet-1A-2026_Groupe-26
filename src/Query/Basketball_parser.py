@@ -51,7 +51,8 @@ class Basketball_Parser(Parser):
                 role=self.fetch_safety_data(row["position"], str),
                 taille=taille,
                 poids=poids,
-                equipe=self.dict_equipe[self.fetch_safety_data(row["team_id"], int)],
+                equipe=self.dict_equipe[self.fetch_safety_data(row["team_id"], int)].nom_equipe,
+                id_equipe=self.fetch_safety_data(row["team_id"], int),
                 sport="Basketball")
             self.dict_player[player.id] = player
 

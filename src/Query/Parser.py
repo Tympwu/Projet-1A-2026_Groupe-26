@@ -12,7 +12,7 @@ class Parser(ABC):
         self.sport = sport
         self.dict_player: dict[int, Player] = {}
         self.dict_matchs: dict[int, Match] = {}
-        self.dict_equipe: dict[int, Equipe] = {}
+        self.dict_equipe: dict[int|str, Equipe] = {}
         self.dict_coach: dict[int, Coach] = {}
         self.dict_competition: dict[int, Competition] = {}
         self.nan_find = False
@@ -28,19 +28,19 @@ class Parser(ABC):
             return None
 
     @abstractmethod
-    def parse_players(self, data, other=None):
+    def parse_players(self, data, other: Any):
         pass
 
     @abstractmethod
-    def parse_matchs(self, data, other=None):
+    def parse_matchs(self, data, other: Any):
         pass
 
     @abstractmethod
-    def parse_competition(self, data, other=None):
+    def parse_competition(self, data, other: Any):
         pass
 
     @abstractmethod
-    def parse_equipes(self, data, other=None):
+    def parse_equipes(self, data, other: Any):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Équipes de Tennis
