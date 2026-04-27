@@ -33,7 +33,7 @@ class Basketball_Parser(Parser):
         correspondantes. Cette dernière est spécifique aux Joueurs de Basketball
         """
         for index, row in data.iterrows():
-            dob = str(self.fetch_safety_data(row["birthdate"], int))
+            dob = self.fetch_safety_data(row["birthdate"], str)
             if len(dob) != 10:
                 dob = dob[:9] + "0"
             taille = self.fetch_safety_data(row["height"], str)
