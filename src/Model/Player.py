@@ -109,7 +109,18 @@ class Player(Personne):
         return str(self)
 
     def __str__(self) -> str:
-        """Fonction permettant d'afficher une représentation d'un joueur."""
+        """Renvoie un tableau correspondant à l'affichage du joueur.
+
+        Examples
+        ---------
+        >>> j1 = Player(id=1, full_name='Gérard Bill')
+        >>> print(j1)
+        ╭────────────┬──────────────╮
+        │         id │ full_name    │
+        ├────────────┼──────────────┤
+        │          1 │ Gérard Bill  │
+        ╰────────────┴──────────────╯
+        """
         dict_result = {
             element: [value] for element, value in self.__dict__.items() if value is not None
         }

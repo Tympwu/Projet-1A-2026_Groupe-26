@@ -115,14 +115,17 @@ class Equipe:
             self.coach_equipe.add(coach)
 
     def __str__(self):
-        """Convertit l'équipe en chaîne de caractères.
+        """Renvoie un tableau correspondant à l'affichage des équipes.
 
         Examples
         ---------
         >>> e1 = Equipe(id=1, nom_equipe='PSG')
         >>> print(e1)
-        id : 1
-        nom_equipe : PSG
+        ╭────────────┬──────────────╮
+        │         id │ nom_equipe   │
+        ├────────────┼──────────────┤
+        │          1 │ PSG          │
+        ╰────────────┴──────────────╯
         """
         # On récupère les données des 3 catégories (Equipe, Joueurs et Coach) puis
         # on créer un tableau avec les données correspondantes
