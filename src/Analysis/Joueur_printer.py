@@ -11,7 +11,7 @@ class Joueur_printer:
         for player in self.data.values():
             value = getattr(player, attr, None)
             if value is not None and str(value).lower() == str(val).lower():
-                count+=1
+                count += 1
                 print(player)
                 found = True
         if not found:
