@@ -109,16 +109,11 @@ class Player(Personne):
         return str(self)
 
     def __str__(self) -> str:
-        """Fonction permettant d'afficher une représentation de l'Equipe."""
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is None:
-                continue
-            if nom_argument == "id_equipe":
-                continue
-            else:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
+        """Fonction permettant d'afficher une représentation d'un joueur."""
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items() if value is not None
+        }
+        return tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
 
     def __hash__(self):
         """Calcule le hash du joueur.

@@ -72,22 +72,6 @@ class Equipe:
         self.ligue = ligue
         self.annee_fondation = annee_fondation
 
-    def __str__(self) -> str:
-        """Convertit l'équipe en chaîne de caractères.
-
-        Examples
-        ---------
-        >>> e1 = Equipe(id=1, nom_equipe='PSG')
-        >>> print(e1)
-        id : 1
-        nom_equipe : PSG
-        """
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
-
     def ajouter_joueur(self, joueur: Player | None = None) -> None:
         """Permet de rajouter des joueurs à l'équipe.
 
@@ -131,9 +115,14 @@ class Equipe:
             self.coach_equipe.add(coach)
 
     def __str__(self):
-        """
-        Fonction d'affichage d'une équipe, l'affichage est de la forme Equipe, 
-        puis Joueurs puis Coach
+        """Convertit l'équipe en chaîne de caractères.
+
+        Examples
+        ---------
+        >>> e1 = Equipe(id=1, nom_equipe='PSG')
+        >>> print(e1)
+        id : 1
+        nom_equipe : PSG
         """
         # On récupère les données des 3 catégories (Equipe, Joueurs et Coach) puis
         # on créer un tableau avec les données correspondantes
