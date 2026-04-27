@@ -16,6 +16,7 @@ class Player(Personne):
         dob: str = None,
         lieu_naissance: str = None,
         pseudo: str = None,
+        id_equipe: int = None,
         equipe: Any = None,
         nationalite: str = None,
         continent: str = None,
@@ -33,6 +34,7 @@ class Player(Personne):
         )
         self.id = id
         self.pseudo = pseudo
+        self.id_equipe = id_equipe
         self.equipe = equipe
         self.nationalite_equipe = nationalite
         self.continent = continent
@@ -52,6 +54,8 @@ class Player(Personne):
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:
+                continue
+            if nom_argument == "id_equipe":
                 continue
             else:
                 result += f"\n{nom_argument} : {valeur}"
