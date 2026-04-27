@@ -9,7 +9,7 @@ class Match:
     def __init__(
         self,
         id_match: int | None = None,
-        tourney_id : int | None = None,
+        tourney_id: int | None = None,
         region: str | None = None,
         equipe1: Equipe | None = None,
         equipe2: Equipe | None = None,

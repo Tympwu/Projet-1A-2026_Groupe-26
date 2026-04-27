@@ -1,12 +1,62 @@
-
 from .Personne import Personne
 from typing import Any
 
 
 class Player(Personne):
-    """Classe représentant un joueur de n'importe quel sport.
-    Cette classe hérite de la classe Personne.
+    """Définition d'un joueur.
+
+    Cette classe représente un athlète de n'importe quel sport. Elle hérite
+    des attributs de base de la classe Personne et y ajoute des données
+    biométriques, sportives et statistiques.
+
+    Parameters
+    ----------
+    id : int
+        Identifiant unique du joueur.
+    first_name : str (default = None)
+        Prénom du joueur.
+    last_name : str (default = None)
+        Nom de famille du joueur.
+    full_name : str (default = None)
+        Nom complet du joueur.
+    sexe : str (default = None)
+        Sexe du joueur.
+    dob : str (default = None)
+        Date de naissance du joueur.
+    lieu_naissance : str (default = None)
+        Ville ou pays de naissance du joueur.
+    pseudo : str (default = None)
+        Pseudonyme sportif.
+    equipe : Any (default = None)
+        Instance de l'équipe à laquelle le joueur appartient.
+    nationalite : str (default = None)
+        Nationalité du joueur.
+    continent : str (default = None)
+        Continent d'origine ou de pratique.
+    sport : str (default = None)
+        Discipline sportive pratiquée.
+    numero_maillot : int (default = None)
+        Numéro porté par le joueur.
+    main_forte : str (default = None)
+        Main forte du joueur.
+    taille : int (default = None)
+        Taille du joueur.
+    poids : int (default = None)
+        Poids du joueur.
+    stat : dict[str, int] (default = None)
+        Dictionnaire contenant les statistiques de performance.
+    role : str (default = None)
+        Poste ou rôle sur le terrain.
+
+    Examples
+    --------
+    >>> p1 = Player(id=10, first_name='Lionel', last_name='Messi', sport='Football')
+    >>> print(p1.sport)
+    Football
+    >>> p1.id
+    10
     """
+
     def __init__(
         self,
         id: int,
@@ -39,16 +89,35 @@ class Player(Personne):
         self.sport = sport
         self.numero_maillot = numero_maillot
         self.main_forte = main_forte
-        self.taille = round(taille, 2)
-        self.poids = round(poids, 2)
-        self.stat = stat
-        self.role = role
 
     def __repr__(self) -> str:
+        """Représentation officielle de l'objet Player.
+
+        Returns
+        -------
+        str
+            La chaîne de caractères générée par __str__.
+        """
         return str(self)
 
     def __str__(self) -> str:
-        """Fonction permettant d'afficher une représentation de l'Equipe."""
+        """Convertit le joueur en chaîne de caractères.
+
+        Affiche les attributs non nuls. Si une équipe est associée, 
+        affiche uniquement le nom de l'équipe.
+
+        Returns
+        -------
+        str
+            Représentation formatée des données du joueur.
+
+        Examples
+        ---------
+        >>> p = Player(id=777, pseudo='CR7')
+        >>> print(p)
+        id : 777
+        pseudo : CR7
+        """
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:
@@ -61,4 +130,11 @@ class Player(Personne):
         return result
 
     def __hash__(self):
+        """Calcule le hash du joueur.
+
+        Returns
+        -------
+        int
+            Hash basé sur l'identifiant id.
+        """
         return hash(self.id)

@@ -4,14 +4,14 @@ from .match import Match
 class Competition:
     def __init__(
         self,
-        sport : str | None = None,
-        id : int | None = None,
-        nom : str | None = None,
-        surface : str | None = None,
-        draw_size : int | None = None,
-        level : str | None = None,
-        date : str | None = None,
-        match : dict[int, Match] | None = None
+        sport: str | None = None,
+        id: int | None = None,
+        nom: str | None = None,
+        surface: str | None = None,
+        draw_size: int | None = None,
+        level: str | None = None,
+        date: str | None = None,
+        match: dict[int, Match] | None = None
     ):
         self.id: int = id
         self.sport: str = sport

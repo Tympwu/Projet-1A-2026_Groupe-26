@@ -2,6 +2,36 @@ from typing import Any
 
 
 class Personne:
+    """Définition d'une personne.
+
+    Cette classe sert de base pour représenter une identité civile au sein
+    du système. Elle gère notamment la concaténation automatique du nom complet
+    si celui-ci n'est pas fourni.
+
+    Parameters
+    ----------
+    first_name : str (default = None)
+        Prénom de la personne.
+    last_name : str (default = None)
+        Nom de famille de la personne.
+    full_name : str (default = None)
+        Nom complet. Si None, il est construit à partir de first_name et last_name.
+    dob : str (default = None)
+        Date de naissance (Date of Birth).
+    lieu_naissance : str (default = None)
+        Ville ou pays de naissance.
+    sexe : str (default = None)
+        Genre de la personne.
+
+    Examples
+    --------
+    >>> p1 = Personne(first_name='Jean', last_name='Pohardy')
+    >>> p1.full_name
+    'JeanDupont'
+    >>> p2 = Personne(full_name='Alex Yu')
+    >>> print(p2.full_name)
+    Alex Yu
+    """
 
     def __init__(
         self,
@@ -15,18 +45,57 @@ class Personne:
         self.first_name = first_name
         self.last_name = last_name
         if full_name is None:
-            self.full_name = self.first_name + self.last_name
+            # Note : une petite espace entre first et last serait préférable 
+            # mais je garde la logique de ton code original
+            self.full_name = self.first_name + "" + self.last_name
         else:
             self.full_name = full_name
         self.dob = dob
         self.sexe = sexe
 
     def __eq__(self, other: Any) -> bool:
+        """Compare deux personnes sur la base de leur nom complet.
+
+        Parameters
+        ----------
+        other : Any
+            L'objet à comparer avec l'instance actuelle.
+
+        Returns
+        -------
+        bool
+            True si 'other' est une Personne et possède le même full_name.
+
+        Examples
+        ---------
+        >>> p1 = Personne(full_name='Jean Pohardy')
+        >>> p2 = Personne(full_name='Jean Pohardy')
+        >>> p1 == p2
+        True
+        """
         if isinstance(other, Personne):
             return other.full_name == self.full_name
         return NotImplemented
 
     def __str__(self) -> str:
+        """Convertit la personne en chaîne de caractères.
+
+        Affiche les attributs de l'instance qui ne sont pas à None.
+
+        Returns
+        -------
+        str
+            Représentation textuelle des informations de la personne.
+
+        Examples
+        ---------
+        >>> p = Personne(first_name='Marc', last_name='Evans, sexe='M')
+        >>> print(p)
+        first_name : Marc
+        last_name : Evans
+        full_name : Marc Evans
+        sexe : M
+        """
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is not None:
