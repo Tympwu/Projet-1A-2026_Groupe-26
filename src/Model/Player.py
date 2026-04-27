@@ -4,6 +4,9 @@ from typing import Any
 
 
 class Player(Personne):
+    """Classe représentant un joueur de n'importe quel sport.
+    Cette classe hérite de la classe Personne.
+    """
     def __init__(
         self,
         id: int,
@@ -45,6 +48,7 @@ class Player(Personne):
         return str(self)
 
     def __str__(self) -> str:
+        """Fonction permettant d'afficher une représentation de l'Equipe."""
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:
