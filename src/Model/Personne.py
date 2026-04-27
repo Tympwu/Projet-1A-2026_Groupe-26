@@ -1,4 +1,5 @@
 from typing import Any
+from tabulate import tabulate
 
 
 class Personne:
@@ -45,9 +46,7 @@ class Personne:
         self.first_name = first_name
         self.last_name = last_name
         if full_name is None:
-            # Note : une petite espace entre first et last serait préférable 
-            # mais je garde la logique de ton code original
-            self.full_name = self.first_name + "" + self.last_name
+            self.full_name = self.first_name + " " + self.last_name
         else:
             self.full_name = full_name
         self.dob = dob

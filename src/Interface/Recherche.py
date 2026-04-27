@@ -15,6 +15,10 @@ class Recherche:
             "id", "first_name", "last_name", "full_name", "sexe", "pseudo", "equipe", "taille",
             "nationalite", "continent", "numero_maillot", "main_forte", "poids", "role"
         ]
+        self.equipe_attr_allowed = [
+            "id", "nom_equipe", "nom_abrev", "nickname", "ville_equipe", "region_equipe",
+            "pays_equipe", "continent_equipe", "ligue", "annee_fondation"
+        ]
 
     def answer_question(self, autorise_value: set):
         result: str = input("Réponse : ")
@@ -40,11 +44,14 @@ class Recherche:
             print("3. Les matchs\n")
             print("0. Revenir en arrière\n\n")
             result = self.answer_question({0, 1, 2, 3})
-            result_match = {1: self.menu_recherche_joueurs, 2: "equipes", 3: "match"}
+            result_match = {1: self.menu_recherche_joueurs, 2: self.menu_recherche_equipe, 3: "match"}
             if result == 0:
                 return
             elif result != -1:
-                result_match[result]()
+                if result == 2 and self.sport in {"tennis"}:
+                    print("Il n'y a pas d'équipe dans ce sport")
+                else:
+                    result_match[result]()
 
     def visualise_precise_data(self, wanted: str):
         """
@@ -121,5 +128,49 @@ class Recherche:
                 attr = attributes[int(choix) - 1]
                 valeur = input(f"Valeur pour {attr} : ")
                 self.printer["joueurs"].single_player_printer(attr, valeur)
+            else:
+                print("Réponse invalide\n\n")
+
+    def menu_recherche_equipe(self):
+        """
+        Fonction permettant de gérer l'affichage d'une ou plusieurs équipes
+        """
+        sample_equipe = next(iter(self.printer["equipes"].data.values()))
+        filtered_attr = [
+            k for k, v in sample_equipe.__dict__.items()
+            if v is not None and k in self.equipe_attr_allowed
+        ]
+
+        while True:
+            print("-------------------------------------------")
+            print("\n===== MENU ÉQUIPES =====\n")
+            print("0. Retour")
+            print("1. Afficher toutes les équipes")
+            print("2. Recherche avancée\n\n")
+
+            choice = input("Réponse : ")
+            if choice == "0":
+                return
+            elif choice == "1":
+                self.printer["equipes"].all_equipe_printer()
+            elif choice == "2":
+                self.recherche_par_attribut_equipe(filtered_attr)
+            else:
+                print("Cette option n'existe pas\n\n")
+
+    def recherche_par_attribut_equipe(self, attributes: list[str]):
+        while True:
+            print("-------------------------------------------")
+            print("\n===== RECHERCHE ÉQUIPES =====\n\nRecherche par:")
+            for i, attr in enumerate(attributes, 1):
+                print(f"{i}. {attr}")
+            print("0. Retour\n\n")
+            choix = str(input("Réponse : "))
+            if choix == "0":
+                return
+            if choix.isnumeric() and int(choix) in range(1, len(attributes)+1):
+                attr = attributes[int(choix) - 1]
+                valeur = input(f"Valeur pour {attr} : ")
+                self.printer["equipes"].single_equipe_printer(attr, valeur)
             else:
                 print("Réponse invalide\n\n")

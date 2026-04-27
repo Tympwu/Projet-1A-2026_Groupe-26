@@ -1,5 +1,6 @@
 from .Personne import Personne
 from typing import Any
+from tabulate import tabulate
 
 
 class Player(Personne):
@@ -79,11 +80,11 @@ class Player(Personne):
         stat: dict[str, int] = None,
         role: str = None
     ) -> None:
+        self.id = id
         super().__init__(
             first_name=first_name, last_name=last_name, full_name=full_name,
             lieu_naissance=lieu_naissance, dob=dob, sexe=sexe
         )
-        self.id = id
         self.pseudo = pseudo
         self.id_equipe = id_equipe
         self.equipe = equipe
@@ -108,23 +109,7 @@ class Player(Personne):
         return str(self)
 
     def __str__(self) -> str:
-        """Convertit le joueur en chaîne de caractères.
-
-        Affiche les attributs non nuls. Si une équipe est associée, 
-        affiche uniquement le nom de l'équipe.
-
-        Returns
-        -------
-        str
-            Représentation formatée des données du joueur.
-
-        Examples
-        ---------
-        >>> p = Player(id=777, pseudo='CR7')
-        >>> print(p)
-        id : 777
-        pseudo : CR7
-        """
+        """Fonction permettant d'afficher une représentation de l'Equipe."""
         result = ""
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:

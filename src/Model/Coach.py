@@ -1,5 +1,6 @@
 from .Personne import Personne
 from typing import Any
+from tabulate import tabulate
 
 class Coach(Personne):
     """Définition d'un coach.
@@ -55,6 +56,7 @@ class Coach(Personne):
         sexe: str = None,
         role: str = None
     ) -> None:
+        self.id = id
         super().__init__(first_name, last_name, full_name, lieu_naissance, dob, sexe)
         self.equipe = equipe
         self.nationalite = nationalite

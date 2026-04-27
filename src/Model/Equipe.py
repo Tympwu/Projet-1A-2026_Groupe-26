@@ -1,5 +1,6 @@
 from .Coach import Coach
 from .Player import Player
+from tabulate import tabulate
 
 
 class Equipe:
@@ -128,3 +129,49 @@ class Equipe:
             if self.coach_equipe is None:
                 self.coach_equipe = set()
             self.coach_equipe.add(coach)
+
+    def __str__(self):
+        """
+        Fonction d'affichage d'une équipe, l'affichage est de la forme Equipe, 
+        puis Joueurs puis Coach
+        """
+        # On récupère les données des 3 catégories (Equipe, Joueurs et Coach) puis
+        # on créer un tableau avec les données correspondantes
+
+        # ÉQUIPES
+        dict_result_equipe = {
+            element: [value] for element, value in self.__dict__.items() if not (
+                (value is None) or (element in {"joueurs_equipe", "coach_equipe"}))
+        }
+        tab_equipe = tabulate(dict_result_equipe, headers="keys", tablefmt="rounded_grid")
+
+        # JOUEURS
+        if self.joueurs_equipe is not None:
+            dict_result_joueur = []
+            for player in self.joueurs_equipe:
+                dict_result_joueur.append([
+                    player.id, player.full_name, player.dob, player.equipe, player.sexe])
+            tab_joueurs = tabulate(
+                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
+                missingval="\U0000274C"
+            )
+        else:
+            tab_joueurs = "Aucun"
+
+        # COACH
+        if self.coach_equipe is not None:
+            dict_result_coach = []
+            for player in self.coach_equipe:
+                dict_result_coach.append([
+                    player.id, player.full_name, player.dob, player.equipe, player.sexe
+                ])
+            tab_coach = tabulate(
+                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
+                missingval="\U0000274C"
+            )
+        else:
+            tab_coach = "Aucun"
+
+        return f"{tab_equipe}\n\nJoueurs :\n{tab_joueurs}\n\nCoach :\n{tab_coach}"

@@ -1,3 +1,6 @@
+from tabulate import tabulate
+
+
 class Joueur_printer:
     """
     Classe permettant d'afficher un ou plusieurs joueurs de tout sports
@@ -20,5 +23,11 @@ class Joueur_printer:
 
     def all_player_printer(self):
         print("\n===== LISTE DES JOUEURS =====")
+        tab = []
         for player in self.data.values():
-            print(player)
+            tab.append([player.id, player.full_name, player.dob, player.equipe, player.sexe])
+        print(tabulate(
+            tab, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+            tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
+            missingval="\U0000274C"
+        ))
