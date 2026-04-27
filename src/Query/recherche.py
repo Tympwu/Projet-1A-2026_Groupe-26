@@ -42,6 +42,9 @@ class Recherche:
         self.dao["player_men"] = DAO(fichier="data/volleyball/player_men.csv")
         self.dao["player_women"] = DAO(fichier="data/volleyball/player_women.csv")
 
+    def __data_badminton(self):
+        pass
+    
     def handle_unknown():
         raise ValueError("Sport non pris en charge")
 
@@ -51,6 +54,7 @@ class Recherche:
             "football_european_leagues": self.__data_football_european_leagues,
             "league_of_legends": self.__data_league_of_legends,
             "tennis": self.__data_tennis,
-            "volleyball": self.__data_volleyball
+            "volleyball": self.__data_volleyball,
+            "Badminton": self.__data_badminton
         }
         action[self.sport]()

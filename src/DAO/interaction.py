@@ -26,6 +26,14 @@ class DAO:
         return self.__fichier
 
     def sauvegarde(self, admin=False):
+        """
+        Sauvegarde les données dans un csv
+        
+        Parameters
+        ----------
+        admin : bool, optional
+            _description_, by default False
+        """
         nom = input("Nom du fichier: ") + ".csv"
         if admin:
             df = self.__data
@@ -37,27 +45,82 @@ class DAO:
         return self.__data[colonne]
 
     def filtrer(self, colonne: str, valeur: list[Any]) -> pd.DataFrame:
+        """
+        Filtre les lignes du DataFrame en fonction des valeurs d'une colonne en entrée
+
+        Parameters
+        ----------
+        colonne : str
+            Nom de la colonne sur laquelle appliquer le filtre.
+        valeur : list[Any]
+            Liste des valeurs à rechercher dans la colonne.
+
+        Returns
+        -------
+        pd.DataFrame
+            Un nouveau DataFrame contenant uniquement les lignes pour lesquelles
+            la valeur de la colonne spécifiée appartient à la liste fournie.
+        """
         return self.__data[self.__data[colonne].isin(valeur)]
 
-    def inserer(self, ligne: dict) -> None:
+    def inserer(self, ligne: dict[str, Any]) -> None:
+        """
+        Insère des données dans un tableaux selon un dictionnaire en entrée
+        
+        Parameters
+        ----------
+        ligne : dict
+            données à insérer, ["colonne", valeur]
+
+        """
         self.__data = pd.concat([self.__data, pd.DataFrame([ligne])], ignore_index=True)
 
-    def modifier(self, id: int, data: dict) -> None:
+    def modifier(self, id: int, data: dict[str, Any]) -> None:
+        """
+        Modifie les données du tableau selon l'id de la ligne souhaité selon le dictionnaire de données en entrée
+
+        Parameters
+        ----------
+        id : int
+            identifiant de la ligne
+        data : dict
+            données à modifiées, ["colonne", valeur]
+
+        """
         if id not in self.__data.index:
             raise KeyError(f"Index {id} inexistant")
         for col, val in data.items():
             self.__data.at[id, col] = val
 
     def supprimer(self, id: int) -> None:
+        """
+        Supprime les données d'un tableau selon l'index
+        
+        Parameters
+        ----------
+        id : int
+
+        """
         if id not in self.__data.index:
             raise KeyError
         self.__data = self.__data.drop(index=id).reset_index(drop=True)
 
     def enlever_valeur_duplique(self) -> None:
+        """
+        Enlève les valeurs dupliquées
+        """
         self.__data.drop_duplicates(inplace=True)
         self.__data.reset_index(drop=True, inplace=True)
 
     def enlever_valeur_manquante(self, colonne=None) -> None:
+        """
+        Enlève les valeurs manquantes d'un tableau selon la colonne choisie
+        
+        Parameters
+        ----------
+        colonne : _type_, optional
+            _description_, by default None
+        """
         if colonne is None:
             self.__data.dropna(inplace=True)
         else:
@@ -65,7 +128,18 @@ class DAO:
         self.__data.reset_index(drop=True, inplace=True)
 
     def renvoyer_types(self) -> None:
+        """
+        Affiche le type des données du tableau
+        """
         print(self.__data.dtypes)
 
     def description(self) -> pd.DataFrame:
+        """
+        Renvoie la description des données du tableau
+        
+        Returns
+        -------
+        pd.DataFrame
+            _description_
+        """
         return self.__data.describe(include="all")

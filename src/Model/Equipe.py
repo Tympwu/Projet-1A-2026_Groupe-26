@@ -39,12 +39,28 @@ class Equipe:
         return result
 
     def ajouter_joueur(self, joueur: Player | None = None) -> None:
+        """
+        Permet de rajouter des joueurs à l'équipe
+        
+        Parameters
+        ----------
+        joueur : Player | None, optional
+
+        """
         if isinstance(joueur, Player) and (joueur is not None):
             if self.joueurs_equipe is None:
                 self.joueurs_equipe = set()
             self.joueurs_equipe.add(joueur)
 
     def ajouter_coach(self, coach: Coach | None = None) -> None:
+        """
+        Permet d'ajouter un coach à l'équipe
+        
+        Parameters
+        ----------
+        coach : Coach | None, optional
+
+        """
         if isinstance(coach, Coach) and (Coach is not None):
             if self.coach_equipe is None:
                 self.coach_equipe = set()

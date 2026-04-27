@@ -11,7 +11,7 @@ class Badminton_Parser(Parser):
 
     def __init__(self):
         super().__init__("badminton")
-    
+
     def parse_players(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
