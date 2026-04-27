@@ -224,7 +224,7 @@ class Menu:
                                   3: self.add_data, 4: self.export_data}
             if result == 0:
                 return
-            elif result != -1:
+            else:
                 fonctions_possible[result]()
 
     def visualise_data(self):
