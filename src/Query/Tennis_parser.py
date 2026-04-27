@@ -72,6 +72,10 @@ class Tennis_Parser(Parser):
             self.dict_matchs[match.id_match] = match
             
     def parse_competition(self, data: pd.DataFrame, other=None):
+        """
+        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
+        correspondantes. Cette dernière est spécifique aux Compétitions de Tennis
+        """
         list_competition = []
         for index, row in data.iterrows():
             tourney_id_temp = self.fetch_safety_data(row["tourney_id"], str)
