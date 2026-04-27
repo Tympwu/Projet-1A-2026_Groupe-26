@@ -18,7 +18,7 @@ class Tennis_Parser(Parser):
         correspondantes. Cette dernière est spécifique aux joueurs de Tennis
         """
         for index, row in data.iterrows():
-            dob = str(self.fetch_safety_data(row["dob"], int))
+            dob = str(self.fetch_safety_data(row["dob"], str))
             dob = dob[:4] + "-" + dob[4:6] + "-" + dob[6:8]
             player = Player(
                 id=self.fetch_safety_data(row["player_id"], int),
@@ -28,7 +28,7 @@ class Tennis_Parser(Parser):
                 main_forte=self.fetch_safety_data(row["hand"], str),
                 dob=dob,
                 nationalite=self.fetch_safety_data(row["ioc"], str),
-                taille=self.fetch_safety_data(row["height"], int),
+                taille=self.fetch_safety_data(row["height"], float),
                 sport="Tennis"
             )
             self.dict_player[player.id] = player
