@@ -2,7 +2,7 @@
 from ..DAO.interaction import DAO
 
 
-class Recherche:
+class Data_loader:
     def __init__(self, sport: str):
         if not isinstance(sport, str):
             raise TypeError("sport doit être une chaîne de caractères")

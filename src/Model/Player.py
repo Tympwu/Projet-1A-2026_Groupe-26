@@ -54,7 +54,7 @@ class Player(Personne):
             if valeur is None:
                 continue
             else:
-                result += f"\n{nom_argument} : {valeur} | "
+                result += f"\n{nom_argument} : {valeur}"
         return result
 
     def __hash__(self):
