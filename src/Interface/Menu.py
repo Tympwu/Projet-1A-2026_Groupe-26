@@ -20,10 +20,9 @@ class Menu:
         self._sports: dict[int, str] = {
             1: "basketball",
             2: "football_european_leagues",
-            5: "league_of_legends",
             3: "tennis",
             4: "volleyball",
-            5: "League-of-Legends",
+            5: "league_of_legends",
             6: "Badminton"}
         self.__parser: Parser = None
         self.__search: Recherche = None
@@ -184,6 +183,7 @@ class Menu:
             print("Matchs chargés")
             # Création des printer pour chaque données correspondantes
             self.__match_printer = Match_printer(self.parser.dict_matchs)
+            self.__joueur_printer = Joueur_printer(self.parser.dict_player)
 
         if self.sport_choosen == 3:  # Tennis
             self.__parser = Tennis_Parser()
@@ -193,6 +193,7 @@ class Menu:
             self.parser.parse_matchs(self.search.dao["wta_matches_2024"].data)
             self.parser.parse_matchs(self.search.dao["atp_matches_2024"].data)
             print("Matchs chargés")
+            self.__joueur_printer = Joueur_printer(self.parser.dict_player)
 
         if self.sport_choosen == 5:  # leagues of legends
             self.__parser = League_of_legend_Parser()
@@ -204,6 +205,7 @@ class Menu:
             print("Coach chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
             print("Macth chargés")
+            self.__joueur_printer = Joueur_printer(self.parser.dict_player)
 
         # Après avoir importé les données
         self.analyse_data()
@@ -237,17 +239,19 @@ class Menu:
             result_match = {1: "joueurs", 2: "equipes", 3: "match"}
             if result == 0:
                 return
+            if result == 1:
+                self.menu_recherche_joueurs()
             else:
                 self.visualise_precise_data(result_match[result])
 
     def visualise_precise_data(self, wanted: str):
         while True:
-            print("-------------------------------------------")
-            print("Voulez-vous voir un élément précis ou l'ensemble ?")
-            print("Pour un élément précis notez son indice, sinon juste validez")
-            print("0. Revenir en arrière\n\n")
-            result = input("Réponse : ")
             if wanted == "match":
+                print("-------------------------------------------")
+                print("Voulez-vous voir un élément précis ou l'ensemble ?")
+                print("Pour un élément précis notez son indice, sinon juste validez")
+                print("0. Revenir en arrière\n\n")
+                result = input("Réponse : ")
                 if result == "":
                     self.__match_printer.all_match_printer()
                 if not result.isnumeric():
@@ -258,7 +262,7 @@ class Menu:
                     result = int(result)
             elif wanted == "equipes":
                 pass
-            elif wanted == "joueurs":
+            elif wanted == "joueurs": # non nécessaire ?
                 if result == "":
                     self.__joueur_printer.all_player_printer()
                 if not result.isnumeric():
@@ -266,9 +270,66 @@ class Menu:
                 elif result == "0":
                     return
                 else:
-                    self.__joueur_printer.single_player_printer(int(result))
+                    self.__joueur_printer.single_player_printer("id", int(result))
             else:
                 print("Cette option n'existe pas")
+
+    def menu_recherche_joueurs(self):
+        sample_player = next(iter(self.__joueur_printer.data.values()))
+        # attributes = list(sample_player.__dict__.keys())
+        allowed = ["id",
+                   "first_name",
+                   "last_name",
+                   "full_name",
+                   "sexe",
+                   "pseudo",
+                   "equipe",
+                   "taille",
+                   "nationalite",
+                   "continent",
+                   "numero_maillot",
+                   "main_forte",
+                   "poids",
+                   "role"]
+        filtered_attr = [
+            k for k, v in sample_player.__dict__.items()
+            if v is not None and k in allowed
+        ]
+
+        while True:
+            print("-------------------------------------------")
+            print("\n===== MENU JOUEURS =====\n")
+            print("0. Retour")
+            print("1. Afficher tous les joueurs")
+            print("2. Recherche avancée\n\n")
+
+            choice = input("Réponse : ")
+            if choice == "0":
+                return
+            elif choice == "1":
+                self.__joueur_printer.all_player_printer()
+            elif choice == "2":
+                self.recherche_par_attribut_joueur(filtered_attr)
+            else:
+                print("Cette option n'existe pas\n\n")
+
+    def recherche_par_attribut_joueur(self, attributes: list[str]):
+        while True:
+            print("-------------------------------------------")
+            print("\n===== RECHERCHE JOUEUR =====\n\nRecherche par:")
+            for i, attr in enumerate(attributes, 1):
+                print(f"{i}. {attr}")
+            print("0. Retour\n\n")
+            choix = str(input("Réponse : "))
+            if choix == "0":
+                return
+            if choix.isnumeric() and int(choix) in range(1, len(attributes)+1):
+                attr = attributes[int(choix) - 1]
+                valeur = input(f"Valeur pour {attr} : ")
+                self.__joueur_printer.single_player_printer(attr, valeur)
+            else:
+                print("Réponse invalide\n\n")
+            
 
     def analyse_link(self):
         pass

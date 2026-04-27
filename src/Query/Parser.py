@@ -12,7 +12,7 @@ class Parser(ABC):
         self.sport = sport
         self.dict_player: dict[int, Player] = {}
         self.dict_matchs: dict[int, Match] = {}
-        self.dict_equipe: dict[int, Equipe] = {}
+        self.dict_equipe: dict[int|str, Equipe] = {}
         self.dict_coach: dict[int, Coach] = {}
         self.dict_competition: dict[int, Competition] = {}
         self.nan_find = False

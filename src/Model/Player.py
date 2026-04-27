@@ -1,4 +1,3 @@
-
 from .Personne import Personne
 from typing import Any
 
@@ -33,11 +32,12 @@ class Player(Personne):
         self.pseudo = pseudo
         self.equipe = equipe
         self.nationalite_equipe = nationalite
+        self.continent = continent
         self.sport = sport
         self.numero_maillot = numero_maillot
         self.main_forte = main_forte
-        self.taille = round(taille, 2)
-        self.poids = round(poids, 2)
+        self.taille = round(taille, 2) if taille is not None else None
+        self.poids = round(poids, 2) if poids is not None else None
         self.stat = stat
         self.role = role
 
@@ -49,9 +49,6 @@ class Player(Personne):
         for nom_argument, valeur in self.__dict__.items():
             if valeur is None:
                 continue
-            if nom_argument == "equipe":
-                if valeur is not None:
-                    result += f"\n{nom_argument} : {valeur.nom_equipe} | "
             else:
                 result += f"\n{nom_argument} : {valeur} | "
         return result
