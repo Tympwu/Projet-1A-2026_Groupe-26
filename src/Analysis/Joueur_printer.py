@@ -19,7 +19,8 @@ class Joueur_printer:
                 found = True
         if not found:
             print("Aucun joueur trouvé")
-        print("\n"+str(count) + " résultats trouvés")
+        else:
+            print("\n"+str(count) + " résultats trouvés")
 
     def all_player_printer(self):
         print("\n===== LISTE DES JOUEURS =====")
