@@ -14,7 +14,6 @@ class Diagramme_en_Barre(Graphique):
         couleur: str = "red",
         valeur_par_defaut: int = 0
     ) -> None:
-        # Gestion des listes vides (évite le bug des listes partagées)
 
         super().__init__(titre, data1, data2)
 
@@ -51,7 +50,7 @@ class Diagramme_en_Barre(Graphique):
             index = self.data1.index(self.valeur_par_defaut)
             self.data1[index] = valeur
         else:
-            # Sinon, on ajoute à la fin et on équilibre pour créer un "Sans nom"
+            # Sinon, on ajoute à la fin et on équilibre pour créer une colonne "Sans nom"
             self.data1.append(valeur)
             self._equilibrer_donnees()
 
@@ -74,7 +73,7 @@ class Diagramme_en_Barre(Graphique):
         self.data1.append(valeur)
         self.data2.append(nom)
 
-    def enregistrer_image(self, nom) -> None:
+    def afficher_image(self) -> None:
         largeur, hauteur = self.format_image[0], self.format_image[1]
         plt.figure(figsize=(largeur, hauteur))
         
@@ -85,18 +84,20 @@ class Diagramme_en_Barre(Graphique):
         plt.xticks(rotation=45, ha='right')
         
         plt.grid(axis='y', linestyle='--', alpha=0.7)
-        plt.tight_layout() # Évite que les labels soient coupés au bord de l'image
+        plt.tight_layout()  # Évite que les labels soient coupés au bord de l'image
         plt.show()
-        plt.savefig("Test.png")
+    
+    def enregistrer_image(self, nom) -> None:
+        plt.savefig(nom)
 
 
-
+"""
 # Bloc test
 if __name__ == "__main__":
 
     mon_graph = Diagramme_en_Barre(
         titre="Test de mon Projet",
-        data1=[45, 12, 88],
+        data1=[50, 12, 88],
         data2=["Janvier"],
         couleur="skyblue"
     )
@@ -114,3 +115,4 @@ if __name__ == "__main__":
 
     # 3. Lancement de l'affichage
     mon_graph.afficher()
+"""
