@@ -2,6 +2,7 @@ from .Personne import Personne
 from typing import Any
 from tabulate import tabulate
 
+
 class Coach(Personne):
     """Définition d'un coach.
 
@@ -41,6 +42,18 @@ class Coach(Personne):
     full_name : Zinedine Zidane
     equipe : Real Madrid
     """
+
+    id: int
+    first_name: str
+    last_name: str
+    full_name: str
+    lieu_naissance: str
+    equipe: Any
+    nationalite: str
+    pseudo: str
+    dob: str
+    sexe: str
+    role: str
 
     def __init__(
         self,

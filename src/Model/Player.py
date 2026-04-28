@@ -28,8 +28,10 @@ class Player(Personne):
         Ville ou pays de naissance du joueur.
     pseudo : str (default = None)
         Pseudonyme sportif.
-    equipe : Any (default = None)
-        Instance de l'équipe à laquelle le joueur appartient.
+    equipe : str (default = None)
+        nom de l'équipe à laquelle le joueur appartient.
+    id_equipe : int (defautl = None)
+        id de l'équipe à laquelle le joueur appartient.
     nationalite : str (default = None)
         Nationalité du joueur.
     continent : str (default = None)
@@ -57,6 +59,26 @@ class Player(Personne):
     >>> p1.id
     10
     """
+
+    id: int
+    first_name: str 
+    last_name: str 
+    full_name: str
+    sexe: str
+    dob: str
+    lieu_naissance: str
+    pseudo: str
+    id_equipe: int
+    equipe: str
+    nationalite: str
+    continent: str
+    sport: str
+    numero_maillot: int
+    main_forte: str
+    taille: int
+    poids: int
+    stat: dict[str, int]
+    role: str
 
     def __init__(
         self,

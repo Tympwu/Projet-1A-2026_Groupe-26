@@ -5,8 +5,34 @@ from tabulate import tabulate
 from .Player import Player
 
 
+
 class Match:
-    """"""
+    """
+    Classe représentant un match 
+    
+    Returns
+    -------
+    _type_
+        _description_
+
+    """
+    
+    id_match: int | None
+    tourney_id: int | None
+    region: str | None
+    equipe1: Equipe | None
+    equipe2: Equipe | None
+    joueur1: Player | None
+    joueur2: Player | None
+    score1: int | None
+    score2: int | None
+    score: int | None
+    match_num: int | None
+    best_of: int
+    date_match: str | None
+    temps_match: str | None
+    stats_match: dict[str, Any] | None
+    
     def __init__(
         self,
         id_match: int | None = None,
@@ -49,7 +75,7 @@ class Match:
             raise ValueError("l'attribut score1 doit être un entier naturel positif")
         if not (isinstance(score2, int) or score2 is None):
             raise ValueError("l'attribut score2 doit être un entier naturel positif")
-        if not isinstance(best_of, int) or best_of < 0:
+        if not (isinstance(best_of, int) or best_of is None) or best_of < 0:
             raise ValueError("l'attribut best_of doit être un entier naturel positif")
         if not (isinstance(date_match, str) or date_match is None):
             raise TypeError("l'attribut date_match doit être du type str")
