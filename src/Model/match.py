@@ -73,20 +73,15 @@ class Match:
 
     def __str__(self) -> str:
         if self.equipe1 is None:
-            self.team_sport = False
-        else:
-            self.team_sport = True
-        
-        if self.team_sport:
             participants = {
-                "id": [self.equipe1.id, self.equipe2.id],
-                "nom": [self.equipe1.nom_equipe, self.equipe2.nom_equipe],
+                "id": [self.joueur1.id, self.joueur2.id],
+                "nom": [self.joueur1.full_name, self.joueur2.full_name],
                 "score": [self.score1, self.score2]
             }
         else:
             participants = {
-                "id": [self.joueur1.id, self.joueur2.id],
-                "nom": [self.joueur1.full_name, self.joueur2.full_name],
+                "id": [self.equipe1.id, self.equipe2.id],
+                "nom": [self.equipe1.nom_equipe, self.equipe2.nom_equipe],
                 "score": [self.score1, self.score2]
             }
         
@@ -101,43 +96,6 @@ class Match:
 
         tab_match = tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
         tab_score = tabulate(participants, headers="keys", tablefmt="rounded_grid")
-        return f"{tab_match}\n\nParticipants :\n{tab_score}"
-
-        if self.equipe1 is not None and self.equipe2 is not None:
-            return f"""Voici le Match:\n
-            Identifiant du match: {self.id_match}\n
-            L'Equipe 1: {self.equipe1.nom_equipe}\n
-            L'Equipe 2: {self.equipe2.nom_equipe}\n
-            best of: {self.best_of}\n
-            score equipe 1: {self.score1}\n
-            score equipe 2: {self.score2}\n
-            lieux du match: {self.region}\n
-            date du match: {self.date_match}\n
-            temps du match: {self.temps_match}\n
-            """
-        elif self.joueur1 is not None and self.joueur2 is not None:
-            return f"""Voici le Match:\n
-            Identifiant du match: {self.id_match}\n
-            Joueur 1: {self.joueur1.full_name}\n
-            Joueur 2: {self.joueur2.full_name}\n
-            best of: {self.best_of}\n
-            score joueur 1: {self.score1}\n
-            score joueur 2: {self.score2}\n
-            lieux du match: {self.region}\n
-            date du match: {self.date_match}\n
-            temps du match: {self.temps_match}
-            """
-        else:
-            return f"""Voici le Match:\n
-            Identifiant du match: {self.id_match}\n
-            les 2 adversaires ne sont pas renseignés\n
-            best of: {self.best_of}\n
-            score 1er adversaire: {self.score1}\n
-            score 2ème adversaire: {self.score2}\n
-            lieux du match: {self.region}\n
-            date du match: {self.date_match}\n
-            temps du match: {self.temps_match}
-            """
 
     def ajouter_scores(self, score1: int, score2: int) -> None:
         """

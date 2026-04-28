@@ -19,6 +19,10 @@ class Recherche:
             "id", "nom_equipe", "nom_abrev", "nickname", "ville_equipe", "region_equipe",
             "pays_equipe", "continent_equipe", "ligue", "annee_fondation"
         ]
+        self.match_attr_allowed = [
+            "id_match", "tourney_id", "region", "match_num", "best_of",
+            "date_match", "temps_match", "stats_match"
+        ]
 
     def answer_question(self, autorise_value: set):
         result: str = input("Réponse : ")
@@ -44,7 +48,11 @@ class Recherche:
             print("3. Les matchs\n")
             print("0. Revenir en arrière\n\n")
             result = self.answer_question({0, 1, 2, 3})
-            result_match = {1: self.menu_recherche_joueurs, 2: self.menu_recherche_equipe, 3: "match"}
+            result_match = {
+                1: self.menu_recherche_joueurs,
+                2: self.menu_recherche_equipe,
+                3: self.menu_recherche_match
+            }
             if result == 0:
                 return
             elif result != -1:
@@ -52,39 +60,6 @@ class Recherche:
                     print("Il n'y a pas d'équipe dans ce sport")
                 else:
                     result_match[result]()
-
-    def visualise_precise_data(self, wanted: str):
-        """
-        A définir, à garder ?
-        """
-        while True:
-            if wanted == "matchs":
-                print("-------------------------------------------")
-                print("Voulez-vous voir un élément précis ou l'ensemble ?")
-                print("Pour un élément précis notez son indice, sinon juste validez")
-                print("0. Revenir en arrière\n\n")
-                result = input("Réponse : ")
-                if result == "":
-                    self.__match_printer.all_match_printer()
-                if not result.isnumeric():
-                    print("La valeur renseignée n'est pas valide")
-                elif result == "0":
-                    return
-                else:
-                    result = int(result)
-            elif wanted == "equipes":
-                pass
-            elif wanted == "joueurs":
-                if result == "":
-                    self.__joueur_printer.all_player_printer()
-                if not result.isnumeric():
-                    print("La valeur renseignée n'est pas valide")
-                elif result == "0":
-                    return
-                else:
-                    self.__joueur_printer.single_player_printer("id", int(result))
-            else:
-                print("Cette option n'existe pas")
 
     def menu_recherche_joueurs(self):
         """
@@ -174,3 +149,49 @@ class Recherche:
                 self.printer["equipes"].single_equipe_printer(attr, valeur)
             else:
                 print("Réponse invalide\n\n")
+
+    def menu_recherche_match(self):
+        """
+        Fonction permettant de gérer l'affichage d'un ou plusieurs matchs
+        """
+        sample_matchs = next(iter(self.printer["matchs"].data.values()))
+        # attributes = list(sample_player.__dict__.keys())
+        filtered_attr = [
+            k for k, v in sample_matchs.__dict__.items()
+            if v is not None and k in self.match_attr_allowed
+        ]
+
+        while True:
+            print("-------------------------------------------")
+            print("\n===== MENU MATCHS =====\n")
+            print("0. Retour")
+            print("1. Afficher tous les matchs")
+            print("2. Recherche avancée\n\n")
+
+            choice = input("Réponse : ")
+            if choice == "0":
+                return
+            elif choice == "1":
+                self.printer["matchs"].all_match_printer()
+            elif choice == "2":
+                self.recherche_par_attribut_match(filtered_attr)
+            else:
+                print("Cette option n'existe pas\n\n")
+
+    def recherche_par_attribut_match(self, attributes: list[str]):
+        while True:
+            print("-------------------------------------------")
+            print("\n===== RECHERCHE MATCHS =====\n\nRecherche par:")
+            for i, attr in enumerate(attributes, 1):
+                print(f"{i}. {attr}")
+            print("0. Retour\n\n")
+            choix = str(input("Réponse : "))
+            if choix == "0":
+                return
+            if choix.isnumeric() and int(choix) in range(1, len(attributes)+1):
+                attr = attributes[int(choix) - 1]
+                valeur = input(f"Valeur pour {attr} : ")
+                self.printer["matchs"].single_match_printer(attr, valeur)
+            else:
+                print("Réponse invalide\n\n")
+

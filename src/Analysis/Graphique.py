@@ -25,3 +25,28 @@ class Graphique():
     self.titre = titre
     self.data1 = data1
     self.data2 = data2
+
+    def menu_graph(self):
+        """
+        Fonction permettant de savoir quelles données affichées entre joueurs, matchs et autre
+        """
+        while True:
+            print("-------------------------------------------")
+            print("Que voulez-vous voir ?")
+            print("1. Les joueurs")
+            print("2. Les équipes")
+            print("3. Les matchs\n")
+            print("0. Revenir en arrière\n\n")
+            result = self.answer_question({0, 1, 2, 3})
+            result_match = {
+                1: self.menu_recherche_joueurs,
+                2: self.menu_recherche_equipe,
+                3: self.menu_recherche_match
+            }
+            if result == 0:
+                return
+            elif result != -1:
+                if result == 2 and self.sport in {"tennis"}:
+                    print("Il n'y a pas d'équipe dans ce sport")
+                else:
+                    result_match[result]()

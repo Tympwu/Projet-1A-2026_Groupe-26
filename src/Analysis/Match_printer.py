@@ -27,18 +27,30 @@ class Match_printer:
         tab = []
         if self.team_sport is True:
             for match in self.data.values():
-                tab.append([match.id_match, match.equipe1, match.equipe2, match.score1, match.score2])
+                tab.append([
+                    match.id_match, match.best_of, match.date_match,
+                    match.equipe1.nom_equipe, match.equipe2.nom_equipe,
+                    match.score1, match.score2
+                ])
             print(tabulate(
-                tab, headers=["Id", "Équipe 1", "Équipe 2", "Score équipe 1", "Score équipe 2"],
-                tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
+                tab, headers=[
+                    "Id", "Best of", "Date du match", "Équipe 1",
+                    "Équipe 2", "Score équipe 1", "Score équipe 2"
+                ],
+                tablefmt="grid",
                 missingval="\U0000274C"
             ))
         else:
             for match in self.data.values():
-                tab.append([match.id_match, match.joueur1, match.joueur2, match.score1, match.score2])
+                tab.append([
+                    match.id_match, match.best_of, match.date_match,
+                    match.joueur1, match.joueur2, match.score1, match.score2
+                ])
             print(tabulate(
-                tab, headers=["Id", "Joueur 1", "Joueur 2", "Score joueur 1", "Score joueur 2"],
-                tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
+                tab, headers=[
+                    "Id", "Best of", "Date du match", "Joueur 1",
+                    "Joueur 2", "Score joueur 1", "Score joueur 2"],
+                tablefmt="grid",
                 missingval="\U0000274C"
             ))
 
