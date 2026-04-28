@@ -91,7 +91,8 @@ class Equipe:
         if isinstance(joueur, Player) and (joueur is not None):
             if self.joueurs_equipe is None:
                 self.joueurs_equipe = set()
-            self.joueurs_equipe.add(joueur)
+            if joueur not in self.joueurs_equipe:
+                self.joueurs_equipe.add(joueur)
 
     def ajouter_coach(self, coach: Coach | None = None) -> None:
         """Permet d'ajouter un coach à l'équipe.
