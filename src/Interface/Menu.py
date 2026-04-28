@@ -1,4 +1,5 @@
-from typing import ABC, Callable
+from typing import Callable
+from abc import ABC
 from ..Query.Parser import Parser
 
 
@@ -10,16 +11,7 @@ class Menu(ABC):
     def __init__(self, parser: Parser | None = None, sport: str | None = None):
         self.__admin: bool = False
         self.sport = sport
-        if parser:
-            self.parser = parser
-        else:
-            self.parser = Parser(self.sport)
-        self.parser_match_name = {
-            "Joueurs": self.parser.dict_player,
-            "Matchs": self.parser.dict_matchs,
-            "Équipes": self.parser.dict_equipe,
-            "Coachs": self.parser.dict_coach
-        }
+        self.__parser = None
         self.person_parameters_allowed_match = {
             "Joueurs": [
                 "id", "first_name", "last_name", "full_name", "sexe", "pseudo", "equipe", "taille",
@@ -33,6 +25,18 @@ class Menu(ABC):
                 "id_match", "tourney_id", "region", "match_num", "best_of",
                 "date_match", "temps_match", "stats_match"
             ]
+        }
+
+    def initialize_parser(self, parser):
+        """
+        Permet d'initialiser globalement le parser et d'autres paramètres relatifs à ce dernier
+        """
+        self.parser = parser
+        self.parser_match_name = {
+            "Joueurs": self.parser.dict_player,
+            "Matchs": self.parser.dict_matchs,
+            "Équipes": self.parser.dict_equipe,
+            "Coachs": self.parser.dict_coach
         }
 
     def answer_question(self, autorise_value: list):
@@ -71,9 +75,9 @@ class Menu(ABC):
         """
         for i, ele in enumerate(donnee, 1):
             print(f"{i}. {ele}")
-        print("0. Revenir en arrière\n\n")
+        print("\n0. Revenir en arrière\n\n")
 
-    def choose_data(
+    def menu_question(
         self, question: str, data: list[str],
         result_match: dict[int, Callable | str], break_on_call=True
     ):
@@ -82,7 +86,7 @@ class Menu(ABC):
 
         Parameters
         ----------
-        data: list[str]
+        data : list[str]
             Paramètre contenant la liste des éléments à afficher
         question : str
             Question à poser à l'utilisateur
@@ -105,7 +109,7 @@ class Menu(ABC):
             self.print_list(data)
             result = self.answer_question(result_match.keys())
             if result == 0:
-                return
+                return 0
             elif result != -1:
                 if callable(result_match[result]):
                     result_match[result]()

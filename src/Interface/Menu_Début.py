@@ -9,15 +9,15 @@ from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Analysis.Match_printer import Match_printer
 from ..Analysis.Joueur_printer import Joueur_printer
 from ..Analysis.Equipe_printer import Equipe_printer
-
+from ..Interface.Menu import Menu
 from ..Interface.Menu_Recherche import Recherche
 
 
-class Menu_Début:
+class Menu_Début(Menu):
     """ """
 
     def __init__(self):
-        self.__admin: bool = False
+        super().__init__()
         self.__password_admin: str = "azerty"
         self._sports: dict[int, str] = {
             1: "basketball",
@@ -26,7 +26,7 @@ class Menu_Début:
             4: "volleyball",
             5: "league_of_legends",
             6: "Badminton"}
-        self.__parser: Parser = None
+        self.parser: Parser = None
         self.__search: Data_loader = None
         self.sport_choosen: int = None
         self.team_sport: bool = True
@@ -34,10 +34,6 @@ class Menu_Début:
         self.__match_printer: Match_printer = None
         self.__equipe_printer: Equipe_printer = None
         self.__joueur_printer: Joueur_printer = None
-
-    @property
-    def parser(self):
-        return self.__parser
 
     @property
     def search(self):
@@ -69,21 +65,13 @@ class Menu_Début:
         """
         Fonction permettant de se déconnecter
         """
-        print("-------------------------------------------")
-        confirmation = ""
-        while confirmation != "oui":
-            confirmation = input(
-                "Voulez-vous vraiment vous déconnecter ? (oui / non)\n"
-            )
-            if not confirmation.isalpha():
-                print("La réponse doit être des caractères ! \n")
-            else:
-                if confirmation.lower() not in ("oui", "non"):
-                    print("La réponse n'est pas valide")
-                elif confirmation.lower() == "oui":
-                    self.__admin = False
-                else:
-                    return
+        result = self.menu_question(
+            "Voulez-vous vraiment vous déconnecter ?",
+            ["oui", "non"],
+            {1: True, 2: False})
+        if result:
+            self.__admin = False
+        return
 
     def help(self):
         """Fonction d'aide indiquant différentes informations sur l'application
@@ -105,34 +93,24 @@ class Menu_Début:
         Application faîte par Alexandre Yu, Simon Langlois-Tino, Jean Pohardy et Timothé Pouplin
         """)
 
-    def answer_question(self, autorise_value: set):
-        result: str = input("Réponse : ")
-        if not result.isnumeric():
-            print("La valeur renseignée n'est pas valide")
-        elif int(result) not in autorise_value:
-            print("La valeur renseignée n'est pas correct")
-        else:
-            result = int(result)
-        return result
-
     def main_menu(self):
         """
         Fonction principale permettant de faire tourner l'application
         """
-        print("Bonjour, \n Que voulez-vous faire ?\n")
-        while True:
-            print("-------------------------------------------")
-            print("1. Traiter une base de donnée\n2. Se connecter avec un compte administrateur")
-            print("3. Obtenir de l'aide vis-à-vis de l'application\n\n0. Quitter l'application")
-            result = self.answer_question({1, 2, 3, 0})
-            if result == 0:
-                return
-            elif result == 2:
-                self.connect()
-            elif result == 1:
-                self.proposition_sports()
-            elif result != -1:
-                self.help()
+        if self.__admin:  # Tri de l'information de si la personne est connecté
+            question_admin = "Se déconnecter du compte administrateur"
+            function_admin = self.deconnect
+        else:
+            question_admin = "Se connecter avec un compte administrateur"
+            function_admin = self.connect
+        
+        self.menu_question(
+            "Bonjour, \n Que voulez-vous faire ?\n",
+            ["Traiter une base de donnée",
+             question_admin,
+             "Obtenir de l'aide"],
+            {1: self.proposition_sports, 2: function_admin, 3: self.help},
+            break_on_call=False)
 
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
@@ -161,7 +139,7 @@ class Menu_Début:
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
         if self.sport_choosen == 1:  # Basketball
-            self.__parser = Basketball_Parser()
+            self.initialize_parser(Basketball_Parser())
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
@@ -170,7 +148,7 @@ class Menu_Début:
             print("Match chargés\n")
 
         if self.sport_choosen == 2:  # Football european
-            self.__parser = Football_European_leagues_Parser()
+            self.initialize_parser(Football_European_leagues_Parser())
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargés")
             self.parser.parse_equipes(self.search.dao["equipe"].data)
@@ -180,7 +158,7 @@ class Menu_Début:
             print("Matchs chargés")
 
         if self.sport_choosen == 3:  # Tennis
-            self.__parser = Tennis_Parser()
+            self.initialize_parser(Tennis_Parser())
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
             print("Joueurs chargés")
@@ -190,7 +168,7 @@ class Menu_Début:
             self.team_sport = False
 
         if self.sport_choosen == 5:  # leagues of legends
-            self.__parser = League_of_legend_Parser()
+            self.initialize_parser(League_of_legend_Parser())
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
@@ -225,7 +203,7 @@ class Menu_Début:
             print("4. Exporter des données\n")
             print("0. Revenir au menu principal\n\n")
             result = self.answer_question({0, 1, 2, 3, 4})
-            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.,
+            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: None,
                                   3: self.add_data, 4: self.export_data}
             # Créer des modules dans des fichiers à part pour chacune de ces catégories,
             # visualiser données est quasiment fait, analyser données en train d'être fait
