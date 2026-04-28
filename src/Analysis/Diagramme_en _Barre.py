@@ -74,7 +74,7 @@ class Diagramme_en_Barre(Graphique):
         self.data1.append(valeur)
         self.data2.append(nom)
 
-    def enregistrer_image(self, nom) -> None:
+    def afficher_image(self) -> None:
         largeur, hauteur = self.format_image[0], self.format_image[1]
         plt.figure(figsize=(largeur, hauteur))
         
@@ -85,12 +85,14 @@ class Diagramme_en_Barre(Graphique):
         plt.xticks(rotation=45, ha='right')
         
         plt.grid(axis='y', linestyle='--', alpha=0.7)
-        plt.tight_layout() # Évite que les labels soient coupés au bord de l'image
+        plt.tight_layout()  # Évite que les labels soient coupés au bord de l'image
         plt.show()
-        plt.savefig("Test.png")
+    
+    def enregistrer_image(self, nom) -> None:
+        plt.savefig(nom)
 
 
-
+"""
 # Bloc test
 if __name__ == "__main__":
 
@@ -114,3 +116,4 @@ if __name__ == "__main__":
 
     # 3. Lancement de l'affichage
     mon_graph.afficher()
+"""
