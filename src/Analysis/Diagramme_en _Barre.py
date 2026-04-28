@@ -14,7 +14,6 @@ class Diagramme_en_Barre(Graphique):
         couleur: str = "red",
         valeur_par_defaut: int = 0
     ) -> None:
-        # Gestion des listes vides (évite le bug des listes partagées)
 
         super().__init__(titre, data1, data2)
 
@@ -51,7 +50,7 @@ class Diagramme_en_Barre(Graphique):
             index = self.data1.index(self.valeur_par_defaut)
             self.data1[index] = valeur
         else:
-            # Sinon, on ajoute à la fin et on équilibre pour créer un "Sans nom"
+            # Sinon, on ajoute à la fin et on équilibre pour créer une colonne "Sans nom"
             self.data1.append(valeur)
             self._equilibrer_donnees()
 
@@ -98,7 +97,7 @@ if __name__ == "__main__":
 
     mon_graph = Diagramme_en_Barre(
         titre="Test de mon Projet",
-        data1=[45, 12, 88],
+        data1=[50, 12, 88],
         data2=["Janvier"],
         couleur="skyblue"
     )
