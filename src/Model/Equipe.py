@@ -72,22 +72,6 @@ class Equipe:
         self.ligue = ligue
         self.annee_fondation = annee_fondation
 
-    def __str__(self) -> str:
-        """Convertit l'équipe en chaîne de caractères.
-
-        Examples
-        ---------
-        >>> e1 = Equipe(id=1, nom_equipe='PSG')
-        >>> print(e1)
-        id : 1
-        nom_equipe : PSG
-        """
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
-
     def ajouter_joueur(self, joueur: Player | None = None) -> None:
         """Permet de rajouter des joueurs à l'équipe.
 
@@ -107,7 +91,8 @@ class Equipe:
         if isinstance(joueur, Player) and (joueur is not None):
             if self.joueurs_equipe is None:
                 self.joueurs_equipe = set()
-            self.joueurs_equipe.add(joueur)
+            if joueur not in self.joueurs_equipe:
+                self.joueurs_equipe.add(joueur)
 
     def ajouter_coach(self, coach: Coach | None = None) -> None:
         """Permet d'ajouter un coach à l'équipe.
@@ -131,9 +116,17 @@ class Equipe:
             self.coach_equipe.add(coach)
 
     def __str__(self):
-        """
-        Fonction d'affichage d'une équipe, l'affichage est de la forme Equipe, 
-        puis Joueurs puis Coach
+        """Renvoie un tableau correspondant à l'affichage des équipes.
+
+        Examples
+        ---------
+        >>> e1 = Equipe(id=1, nom_equipe='PSG')
+        >>> print(e1)
+        ╭────────────┬──────────────╮
+        │         id │ nom_equipe   │
+        ├────────────┼──────────────┤
+        │          1 │ PSG          │
+        ╰────────────┴──────────────╯
         """
         # On récupère les données des 3 catégories (Equipe, Joueurs et Coach) puis
         # on créer un tableau avec les données correspondantes
@@ -167,7 +160,7 @@ class Equipe:
                     player.id, player.full_name, player.dob, player.equipe, player.sexe
                 ])
             tab_coach = tabulate(
-                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                dict_result_coach, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
                 tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
                 missingval="\U0000274C"
             )

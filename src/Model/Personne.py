@@ -77,26 +77,26 @@ class Personne:
         return NotImplemented
 
     def __str__(self) -> str:
-        """Convertit la personne en chaîne de caractères.
+        """Convertit la personne en tableau de données.
 
         Affiche les attributs de l'instance qui ne sont pas à None.
 
         Returns
         -------
         str
-            Représentation textuelle des informations de la personne.
+            Représentation tabulaire des informations de la personne.
 
         Examples
         ---------
         >>> p = Personne(first_name='Marc', last_name='Evans, sexe='M')
         >>> print(p)
-        first_name : Marc
-        last_name : Evans
-        full_name : Marc Evans
-        sexe : M
+        ╭────────────┬──────────────┬──────────────╮
+        │ first_name │   last_name  │ sexe         │
+        ├────────────┼──────────────┼──────────────┤
+        │       Marc │     Evans    │ M            │
+        ╰────────────┴──────────────┴──────────────╯
         """
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items() if value is not None
+        }
+        return tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
