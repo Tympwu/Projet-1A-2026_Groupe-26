@@ -55,6 +55,8 @@ class Basketball_Parser(Parser):
                 id_equipe=self.fetch_safety_data(row["team_id"], int),
                 sport="Basketball")
             self.dict_player[player.id] = player
+            self.dict_equipe[self.fetch_safety_data(row["team_id"], int)].ajouter_joueur(player)
+
 
     def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
         """

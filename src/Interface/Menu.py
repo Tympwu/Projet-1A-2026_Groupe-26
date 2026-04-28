@@ -225,7 +225,7 @@ class Menu:
             print("4. Exporter des données\n")
             print("0. Revenir au menu principal\n\n")
             result = self.answer_question({0, 1, 2, 3, 4})
-            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.analyse_link,
+            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.,
                                   3: self.add_data, 4: self.export_data}
             # Créer des modules dans des fichiers à part pour chacune de ces catégories,
             # visualiser données est quasiment fait, analyser données en train d'être fait
