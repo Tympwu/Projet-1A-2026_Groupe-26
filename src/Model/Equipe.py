@@ -159,7 +159,7 @@ class Equipe:
                     player.id, player.full_name, player.dob, player.equipe, player.sexe
                 ])
             tab_coach = tabulate(
-                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                dict_result_coach, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
                 tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
                 missingval="\U0000274C"
             )
