@@ -1,5 +1,5 @@
-from src.Interface.Menu import Menu
+from src.Interface.Menu_Début import Menu_Début
 
 
-Interface = Menu()
+Interface = Menu_Début()
 Interface.main_menu()

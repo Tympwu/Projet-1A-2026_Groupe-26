@@ -13,7 +13,7 @@ from ..Analysis.Equipe_printer import Equipe_printer
 from ..Interface.Menu_Recherche import Recherche
 
 
-class Menu:
+class Menu_Début:
     """ """
 
     def __init__(self):
