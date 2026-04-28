@@ -1,5 +1,6 @@
 from .Equipe import Equipe
 from typing import Any
+from tabulate import tabulate
 
 from .Player import Player
 
@@ -71,6 +72,37 @@ class Match:
         self.stats_match = stats_match
 
     def __str__(self) -> str:
+        if self.equipe1 is None:
+            self.team_sport = False
+        else:
+            self.team_sport = True
+        
+        if self.team_sport:
+            participants = {
+                "id": [self.equipe1.id, self.equipe2.id],
+                "nom": [self.equipe1.nom_equipe, self.equipe2.nom_equipe],
+                "score": [self.score1, self.score2]
+            }
+        else:
+            participants = {
+                "id": [self.joueur1.id, self.joueur2.id],
+                "nom": [self.joueur1.full_name, self.joueur2.full_name],
+                "score": [self.score1, self.score2]
+            }
+        
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items()
+            if not ((value is None) or (element in {
+                "equipe1", "equipe2", "joueur1", "joueur2",
+                "score1", "score2", "score"
+                })
+                )
+        }
+
+        tab_match = tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
+        tab_score = tabulate(participants, headers="keys", tablefmt="rounded_grid")
+        return f"{tab_match}\n\nParticipants :\n{tab_score}"
+
         if self.equipe1 is not None and self.equipe2 is not None:
             return f"""Voici le Match:\n
             Identifiant du match: {self.id_match}\n
