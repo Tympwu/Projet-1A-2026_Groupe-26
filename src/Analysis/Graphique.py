@@ -1,6 +1,7 @@
 from typing import Any
-from Gra
-class Graphique():
+from abc import abstractmethod, ABC
+
+class Graphique(ABC):
     """
     Class qui regroupe les caractéristiques commune des graphiques
 
@@ -16,12 +17,12 @@ class Graphique():
         data1: list[Any] = [],
         data2: list[Any] = []
     ) -> None:
-    if not isinstance(titre, str):
-        raise TypeError("l'attribut titre doit être du type str")
-    if not isinstance(data1, list):
-        raise TypeError("l'attribut data1 doit être du type liste")
-    if not isinstance(data2, list):
-        raise TypeError("l'attribut data2 doit être du type liste")
-    self.titre = titre
-    self.data1 = data1
-    self.data2 = data2
+        if not isinstance(titre, str):
+            raise TypeError("l'attribut titre doit être du type str")
+        if not isinstance(data1, list):
+            raise TypeError("l'attribut data1 doit être du type liste")
+        if not isinstance(data2, list):
+            raise TypeError("l'attribut data2 doit être du type liste")
+        self.titre = titre
+        self.data1 = data1
+        self.data2 = data2
