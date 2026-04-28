@@ -91,7 +91,8 @@ class Equipe:
         if isinstance(joueur, Player) and (joueur is not None):
             if self.joueurs_equipe is None:
                 self.joueurs_equipe = set()
-            self.joueurs_equipe.add(joueur)
+            if joueur not in self.joueurs_equipe:
+                self.joueurs_equipe.add(joueur)
 
     def ajouter_coach(self, coach: Coach | None = None) -> None:
         """Permet d'ajouter un coach à l'équipe.
@@ -159,7 +160,7 @@ class Equipe:
                     player.id, player.full_name, player.dob, player.equipe, player.sexe
                 ])
             tab_coach = tabulate(
-                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                dict_result_coach, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
                 tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
                 missingval="\U0000274C"
             )

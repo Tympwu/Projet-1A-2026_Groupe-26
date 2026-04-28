@@ -47,6 +47,8 @@ class Football_European_leagues_Parser(Parser):
         for index, row in other.iterrows():
             dict_contry_id[row["id"]] = row["name"]
         for index, row in data.iterrows():
+            list_joueur_home_id = []
+            list_joueur_away_id = []
             date_match = self.fetch_safety_data(row["date"],str)
             date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]
             match = Match(
@@ -59,6 +61,20 @@ class Football_European_leagues_Parser(Parser):
                 date_match=date_match
                 )
             self.dict_matchs[match.id_match] = match
+            for i in range(1,12):
+                if self.fetch_safety_data(row["home_player_"+str(i)], int) is not None:
+                    list_joueur_home_id.append(self.fetch_safety_data(row["home_player_"+str(i)], int))
+                if self.fetch_safety_data(row["away_player_"+str(i)], int) is not None:    
+                    list_joueur_home_id.append(self.fetch_safety_data(row["away_player_"+str(i)], int))
+            for joueur_home in list_joueur_home_id:
+                self.dict_equipe[self.fetch_safety_data(row["home_team_api_id"], int)].ajouter_joueur(
+                    self.dict_player[joueur_home]
+                    )
+            for joueur_away in list_joueur_away_id:
+                self.dict_equipe[self.fetch_safety_data(row["away_team_api_id"], int)].ajouter_joueur(
+                    self.dict_player[joueur_away]
+                    )
+
 
     def parse_competition(self, data: pd.DataFrame, other=None):
         """
