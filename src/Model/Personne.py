@@ -34,6 +34,13 @@ class Personne:
     Alex Yu
     """
 
+    first_name: str
+    last_name: str
+    full_name: str
+    dob: str
+    lieu_naissance: str
+    sexe: str
+
     def __init__(
         self,
         first_name: str = None,
@@ -45,10 +52,15 @@ class Personne:
     ) -> None:
         self.first_name = first_name
         self.last_name = last_name
-        if full_name is None:
+        # if full_name is None:
+        #     self.full_name = self.first_name + " " + self.last_name
+        # else:
+        #     self.full_name = full_name
+        if self.first_name is not None and self.last_name is not None:
             self.full_name = self.first_name + " " + self.last_name
         else:
-            self.full_name = full_name
+            self.full_name = None
+        self.lieu_naissance = lieu_naissance
         self.dob = dob
         self.sexe = sexe
 

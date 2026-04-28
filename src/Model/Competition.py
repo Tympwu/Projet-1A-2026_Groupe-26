@@ -2,6 +2,16 @@ from .match import Match
 
 
 class Competition:
+
+    sport: str | None
+    id: int | None 
+    nom: str | None 
+    surface: str | None 
+    draw_size: int | None 
+    level: str | None 
+    date: str | None
+    match: dict[int, Match] | None
+    
     def __init__(
         self,
         sport: str | None = None,
