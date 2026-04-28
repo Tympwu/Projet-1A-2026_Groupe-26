@@ -2,6 +2,7 @@ from .Personne import Personne
 from typing import Any
 from tabulate import tabulate
 
+
 class Coach(Personne):
     """Définition d'un coach.
 

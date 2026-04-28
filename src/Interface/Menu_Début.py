@@ -10,6 +10,13 @@ from ..Analysis.Match_printer import Match_printer
 from ..Analysis.Joueur_printer import Joueur_printer
 from ..Analysis.Equipe_printer import Equipe_printer
 
+
+from ..Model.Coach import Coach
+from ..Model.Competition import Competition
+from ..Model.Equipe import Equipe
+from ..Model.match import Match
+from ..Model.Player import Player
+
 from ..Interface.Menu_Recherche import Recherche
 
 
@@ -106,14 +113,15 @@ class Menu_Début:
         """)
 
     def answer_question(self, autorise_value: set):
-        result: str = input("Réponse : ")
-        if not result.isnumeric():
-            print("La valeur renseignée n'est pas valide")
-        elif int(result) not in autorise_value:
-            print("La valeur renseignée n'est pas correct")
-        else:
-            result = int(result)
-        return result
+        while True:
+            result: str = input("Réponse : ")
+            if not result.isnumeric():
+                print("La valeur renseignée n'est pas valide")
+            elif int(result) not in autorise_value:
+                print("La valeur renseignée n'est pas correct")
+            else:
+                result = int(result)
+                return result
 
     def main_menu(self):
         """
@@ -225,7 +233,7 @@ class Menu_Début:
             print("4. Exporter des données\n")
             print("0. Revenir au menu principal\n\n")
             result = self.answer_question({0, 1, 2, 3, 4})
-            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.,
+            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.analyse_link,
                                   3: self.add_data, 4: self.export_data}
             # Créer des modules dans des fichiers à part pour chacune de ces catégories,
             # visualiser données est quasiment fait, analyser données en train d'être fait
@@ -240,6 +248,112 @@ class Menu_Début:
         pass
 
     def add_data(self):
+
+        sport = self._sports[self.sport_choosen]
+        sport_sans_equipe = {"tennis"}
+
+        options = {
+            1: self.__parser.dict_player,
+            2: self.__parser.dict_equipe,
+            3: self.__parser.dict_matchs
+        }
+
+        classes = {
+            1: Player,
+            2: Equipe,
+            3: Match
+        }
+        
+        classes_print = {
+            1: "Joueur",
+            2: "Equipe",
+            3: "Match"
+        }
+
+        while True:
+
+            print("-------------------------------------------")
+            print("Que voulez-vous faire désormais ?")
+
+            print("1. Ajouter des joueurs")
+
+            if sport.lower() not in sport_sans_equipe:
+                print("2. Ajouter des équipes")
+
+            print("3. Ajouter des matchs")
+            print("0. Revenir au menu principal\n")
+
+            result = self.answer_question({0, 1, 2, 3})
+
+            if result == 0:
+                return
+
+            data_dict = options[result]
+            cls = classes[result]
+
+            new_data = self.collect_input_data(data_dict, cls)
+            instance = cls(**new_data)
+
+            # stockage dynamique
+            key = getattr(instance, "id", None) or getattr(instance, "id_match", None)
+
+            data_dict[key] = instance
+
+            print("\n" + str(classes_print[result]) + " créé :")
+            print(instance)
+  
+    def collect_input_data(self, data_dict, cls):
+
+        def convert_value(value, expected_type):
+            if value == "":
+                return None
+            try:
+                if expected_type == int:
+                    return int(value)
+                if expected_type == float:
+                    return round(float(value), 2)
+                if expected_type == str:
+                    return value
+                return value
+            except ValueError:
+                print(f"Valeur invalide pour type {expected_type.__name__}")
+                return None
+
+        sample = next(iter(data_dict.values()))
+        annotations = cls.__annotations__
+        used_attr = {
+            attr: attr_type
+            for attr, attr_type in annotations.items()
+            if any(getattr(obj, attr, None) is not None for obj in data_dict.values())
+        }
+        attributes = list(sample.__dict__.keys())
+        new_data = {}
+        max_id = max(data_dict.keys(), default=0)
+        if "id" in attributes:
+            new_data["id"] = max_id + 1
+        elif "id_match" in attributes:
+            new_data["id_match"] = max_id + 1
+
+        print("\n--- Saisie des données ---")
+        for attr, attr_type in used_attr.items():
+            if attr in {"id", "id_match"}:
+                continue
+            while True:
+                value = input(f"{attr} ({attr_type.__name__}) : ")
+                converted = convert_value(value, attr_type)
+                if converted is not None or value == "":
+                    new_data[attr] = converted
+                    break
+                print("Type invalide, recommencez")
+
+        print("\nDonnées créées :")
+        print(new_data)
+        return new_data
+
+    def supprimer_data(self):
+        pass
+
+    def modifier_data(self):
         pass
 
     def export_data(self):
