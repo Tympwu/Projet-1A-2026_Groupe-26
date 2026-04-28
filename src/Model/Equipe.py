@@ -142,9 +142,9 @@ class Equipe:
             dict_result_joueur = []
             for player in self.joueurs_equipe:
                 dict_result_joueur.append([
-                    player.id, player.full_name, player.dob, player.equipe, player.sexe])
+                    player.id, player.full_name, player.dob, player.sexe])
             tab_joueurs = tabulate(
-                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Équipe", "Sexe"],
+                dict_result_joueur, headers=["Id", "Name", "Date de naissance", "Sexe"],
                 tablefmt="grid", colalign=("right", "center", "center", "left", "left"),
                 missingval="\U0000274C"
             )
