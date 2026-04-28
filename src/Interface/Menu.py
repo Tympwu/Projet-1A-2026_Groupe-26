@@ -239,8 +239,25 @@ class Menu:
     def analyse_link(self):
         pass
 
-    def add_data(self):
-        pass
+    def add_data(self, sport: str):
+        sport_sans_equipe = {"tennis"}
+        while True:
+            print("-------------------------------------------")
+            print("Que voulez-vous faire désormais ?")
+            print("1. Ajouter des joueurs")
+            if sport.lower() not in sport_sans_equipe:
+                print("2. Ajouter des équipes")
+            print("3. Ajouter des matchs")
+            print("0. Revenir au menu principal\n\n")
+            result = self.answer_question({0, 1, 2, 3})
+            if result == 0:
+                return
+            else:
+                
+                
+            
+            
+        
 
     def export_data(self):
         pass
