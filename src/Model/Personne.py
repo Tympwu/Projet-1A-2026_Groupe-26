@@ -43,6 +43,7 @@ class Personne:
 
     def __init__(
         self,
+        id: int = None,
         first_name: str = None,
         last_name: str = None,
         full_name: str = None,
@@ -50,6 +51,21 @@ class Personne:
         lieu_naissance: str = None,
         sexe: str = None
     ) -> None:
+        if (id is not None) and (not isinstance(id, int)):
+            raise ValueError("l'attribut id doit être du type int ou None")
+        if  (first_name is not None) and (not isinstance(first_name, str)):
+            raise ValueError("l'attribut first_name doit être du type str ou None")
+        if  (last_name is not None) and (not isinstance(last_name, str)):
+            raise ValueError("l'attribut last_name doit être du type str ou None")
+        if  (full_name is not None) and (not isinstance(full_name, str)):
+            raise ValueError("l'attribut full_name doit être du type str ou None")
+        if  (dob is not None) and (not isinstance(dob, str)):
+            raise ValueError("l'attribut dob doit être du type str ou None")
+        if  (lieu_naissance is not None) and (not isinstance(lieu_naissance, str)):
+            raise ValueError("l'attribut doit être du type ou None")
+        if  (sexe is not None) and (not isinstance(sexe, str)):
+            raise ValueError("l'attribut sexe doit être du type str ou None")
+
         self.first_name = first_name
         self.last_name = last_name
         # if full_name is None:
