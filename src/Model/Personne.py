@@ -34,13 +34,6 @@ class Personne:
     Alex Yu
     """
 
-    first_name: str
-    last_name: str
-    full_name: str
-    dob: str
-    lieu_naissance: str
-    sexe: str
-
     def __init__(
         self,
         id: int = None,
@@ -62,20 +55,16 @@ class Personne:
         if  (dob is not None) and (not isinstance(dob, str)):
             raise ValueError("l'attribut dob doit être du type str ou None")
         if  (lieu_naissance is not None) and (not isinstance(lieu_naissance, str)):
-            raise ValueError("l'attribut doit être du type ou None")
+            raise ValueError("l'attribut lieu_naissance doit être du type str ou None")
         if  (sexe is not None) and (not isinstance(sexe, str)):
             raise ValueError("l'attribut sexe doit être du type str ou None")
-
+        self.id = id
         self.first_name = first_name
         self.last_name = last_name
-        # if full_name is None:
-        #     self.full_name = self.first_name + " " + self.last_name
-        # else:
-        #     self.full_name = full_name
-        if self.first_name is not None and self.last_name is not None:
+        if (first_name is not None) and (last_name is not None) and (full_name is None):
             self.full_name = self.first_name + " " + self.last_name
         else:
-            self.full_name = None
+            self.full_name = full_name
         self.lieu_naissance = lieu_naissance
         self.dob = dob
         self.sexe = sexe
@@ -118,11 +107,11 @@ class Personne:
         ---------
         >>> p = Personne(first_name='Marc', last_name='Evans, sexe='M')
         >>> print(p)
-        ╭────────────┬──────────────┬──────────────╮
-        │ first_name │   last_name  │ sexe         │
-        ├────────────┼──────────────┼──────────────┤
-        │       Marc │     Evans    │ M            │
-        ╰────────────┴──────────────┴──────────────╯
+        ╭────────────┬──────────────┬──────────────┬──────────────╮
+        │ first_name │   last_name  │ Full_name    │ sexe         │
+        ├────────────┼──────────────┼──────────────┼──────────────┤
+        │       Marc │     Evans    │ Marc Evans   │ M            │
+        ╰────────────┴──────────────┴──────────────┴──────────────╯
         """
         dict_result = {
             element: [value] for element, value in self.__dict__.items() if value is not None

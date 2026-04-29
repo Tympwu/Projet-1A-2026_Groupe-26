@@ -1,3 +1,7 @@
+import re
+
+import pytest
+
 from src.Model.Personne import Personne
 
 
@@ -28,7 +32,7 @@ def test_Personne_init():
         (1, 1, None, None, None, None, "l'attribut first_name doit être du type str ou None"),
         (1, None, 1, None, None, None, "l'attribut last_name doit être du type str ou None"),
         (1, None, None, 1, None, None, "l'attribut sexe doit être du type str ou None"),
-        (1, None, None, None, 1, None, "l'attribut bob doit être du type str ou None"),
+        (1, None, None, None, 1, None, "l'attribut dob doit être du type str ou None"),
         (1, None, None, None, None, 1, "l'attribut lieu_naissance doit être du type str ou None"),
     ],
 )
@@ -46,20 +50,19 @@ def test_Personne_eq() -> None:
     P1 = Personne(first_name="Edouard", last_name="Elric")
     P2 = Personne(full_name="Edouard Elric")
     P3 = Personne(full_name="Edouard  Elric")
-    P4 = Personne(id = 5)
-    P5 = Personne(id = 4)
-    assert Personne(P1).__eq__(P1) == True
-    assert Personne(P2).__eq__(P1) == True
-    assert Personne(P3).__eq__(P2) == False
-    assert Personne(P4).__eq__(P5) == True
+    P4 = Personne(id=5)
+    P5 = Personne(id=4)
+    assert P1.__eq__(P1) is True
+    assert P2.__eq__(P1) is True
+    assert P3.__eq__(P2) is False
+    assert P4.__eq__(P5) is True
+
 
 def test_Personne_str() -> None:
-    P1 = Personne(first_name="Marc", last_name="Evans", sexe = "M")
-    assert str(P1) == "╭────────────┬──────────────┬──────────────╮\n" +
-    "│ first_name │   last_name  │ sexe         │\n"+
-    "├────────────┼──────────────┼──────────────┤\n"+
-    "│       Marc │     Evans    │ M            │\n"+
-    "╰────────────┴──────────────┴──────────────╯"
-
-
-
+    P1 = Personne(first_name="Marc", last_name="Evans", sexe="M")
+    assert str(P1) == (
+        "╭──────────────┬─────────────┬─────────────┬────────╮\n" +
+        "│ first_name   │ last_name   │ full_name   │ sexe   │\n" +
+        "├──────────────┼─────────────┼─────────────┼────────┤\n" +
+        "│ Marc         │ Evans       │ Marc Evans  │ M      │\n" +
+        "╰──────────────┴─────────────┴─────────────┴────────╯")
