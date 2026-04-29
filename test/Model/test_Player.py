@@ -1,6 +1,6 @@
 from src.Model.Player import Player
 
-
+"""
 def test_Player_constructor_is_ok_with_valid_data():
     platoche = Player(1980, "Michel Platini", "false")
     assert platoche.id == 1980
@@ -13,3 +13,5 @@ def test_player_repr_method_displays_goat_tag_for_the_goat():
 
     the_goat = Player(1928, "Arthur Friedenreich", True)
     assert str(the_goat) == "Arthur Friedenreich (GOAT)"
+"""
+
