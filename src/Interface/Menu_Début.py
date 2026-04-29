@@ -60,7 +60,7 @@ class Menu_Début(Menu):
             if mdp == "0":
                 return
             elif mdp == self.__password_admin:
-                self.__admin = True
+                self.admin = True
                 print("Connexion réussie ! \U0001F513\n \n")
                 connexion_reussie = True
             else:
@@ -75,8 +75,17 @@ class Menu_Début(Menu):
             ["oui", "non"],
             {1: True, 2: False})
         if result:
-            self.__admin = False
+            self.admin = False
         return
+
+    def connect_deconnect(self):
+        """
+        Fonction permettant de faire l'intermédiaire entre la position connecté et pas connecté
+        """
+        if self.admin:
+            self.deconnect()
+        else:
+            self.connect()
 
     def help(self):
         """Fonction d'aide indiquant différentes informations sur l'application
@@ -100,22 +109,16 @@ class Menu_Début(Menu):
 
     def main_menu(self):
         """
-        Fonction principale permettant de faire tourner l'application
+        Fonction initiale permettant de faire tourner l'application
         """
-        if self.__admin:  # Tri de l'information de si la personne est connecté
-            question_admin = "Se déconnecter du compte administrateur"
-            function_admin = self.deconnect
-        else:
-            question_admin = "Se connecter avec un compte administrateur"
-            function_admin = self.connect
-        
         self.menu_question(
             "Bonjour, \n Que voulez-vous faire ?\n",
             ["Traiter une base de donnée",
-             question_admin,
+             "Se connecter au / déconnecter du compte administrateur",
              "Obtenir de l'aide"],
-            {1: self.proposition_sports, 2: function_admin, 3: self.help},
+            {1: self.proposition_sports, 2: self.connect_deconnect, 3: self.help},
             break_on_call=False)
+
 
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""

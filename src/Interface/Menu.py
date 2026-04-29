@@ -9,9 +9,9 @@ class Menu(ABC):
     menus intéragissant avec l'utilisateur
     """
     def __init__(self, parser: Parser | None = None, sport: str | None = None):
-        self.__admin: bool = False
+        self.admin: bool = False
         self.sport = sport
-        self.__parser = None
+        self.parser = None
         self.person_parameters_allowed_match = {
             "Joueurs": [
                 "id", "first_name", "last_name", "full_name", "sexe", "pseudo", "equipe", "taille",
@@ -79,21 +79,26 @@ class Menu(ABC):
 
     def menu_question(
         self, question: str, data: list[str],
-        result_match: dict[int, Callable | str], break_on_call=True
+        result_match: dict[int, Callable | str], break_on_call=False
     ):
         """
-        Fonction permettant de demander une réponse parmis une liste d'éléments données
+        Fonction permettant de créer et gérer une interface avec l'utilisateur pour une question
+        précise
 
         Parameters
         ----------
-        data : list[str]
-            Paramètre contenant la liste des éléments à afficher
         question : str
             Question à poser à l'utilisateur
-        result_match : dict[int, Callable]
-            Dictionnaire permettant de lier le résultat à la fonction voulu correspondante
-        break_on_call : bool
-            Paramètre indiquant la nécessité de reposer la question à l'avenir ou pas
+        data : list[str]
+            Liste contenant les éléments à afficher dans l'ordre voulu, cet ordre aura un impact
+            pour result_match
+        result_match : dict[int, Callable | str]
+            Dictionnaire permettant de lier le résultat donné par l'utilisateur (1, 2, 3...) à
+            la fonction voulu correspondante ou à la valeur voulu qui sera renvoyée.
+            Le dictionnaire est de la forme : {1 : réponse_1, 2 : réponse_2, ...}.
+            Si les valeurs sont des fonctions, ces dernières seront appelées directement
+        break_on_call : bool = False
+            Définit si la boucle while continue de tourner après l'appel au résultat
 
         Returns
         -------
