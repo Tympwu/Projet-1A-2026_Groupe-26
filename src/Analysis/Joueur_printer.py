@@ -8,7 +8,7 @@ class Joueur_printer:
     def __init__(self, data: dict):
         self.data = data
 
-    def single_player_printer(self, attr, val):
+    def single_printer(self, attr, val):
         found = False
         count = 0
         for player in self.data.values():
@@ -22,7 +22,7 @@ class Joueur_printer:
         else:
             print("\n"+str(count) + " résultats trouvés")
 
-    def all_player_printer(self):
+    def all_printer(self):
         print("\n===== LISTE DES JOUEURS =====")
         tab = []
         for player in self.data.values():

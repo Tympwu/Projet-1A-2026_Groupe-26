@@ -9,7 +9,7 @@ class Match_printer:
         self.data = data
         self.team_sport = team_sport
 
-    def single_match_printer(self, attr, val):
+    def single_printer(self, attr, val):
         found = False
         count = 0
         for match in self.data.values():
@@ -22,7 +22,7 @@ class Match_printer:
             print("Aucun match trouvé")
         print("\n"+str(count) + " résultats trouvés")
 
-    def all_match_printer(self):
+    def all_printer(self):
         print("\n===== LISTE DES MATCHS =====")
         tab = []
         if self.team_sport is True:

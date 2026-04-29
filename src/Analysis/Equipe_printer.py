@@ -8,7 +8,7 @@ class Equipe_printer:
     def __init__(self, data: dict):
         self.data = data
 
-    def single_equipe_printer(self, attr, val):
+    def single_printer(self, attr, val):
         found = False
         count = 0
         for equipe in self.data.values():
@@ -21,7 +21,7 @@ class Equipe_printer:
             print("Aucun joueur trouvé")
         print("\n"+str(count) + " résultats trouvés")
 
-    def all_equipe_printer(self):
+    def all_printer(self):
         print("\n===== LISTE DES ÉQUIPES =====")
         tab = []
         for equipe in self.data.values():

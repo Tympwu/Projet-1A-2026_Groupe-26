@@ -5,10 +5,9 @@ from tabulate import tabulate
 from .Player import Player
 
 
-
 class Match:
     """
-    Classe représentant un match 
+    Classe représentant un match
     
     Returns
     -------
@@ -122,6 +121,8 @@ class Match:
 
         tab_match = tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
         tab_score = tabulate(participants, headers="keys", tablefmt="rounded_grid")
+        return f"{tab_match}\n\nParticipants :\n{tab_score}"
+
 
     def ajouter_scores(self, score1: int, score2: int) -> None:
         """

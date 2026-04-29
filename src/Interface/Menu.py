@@ -2,6 +2,10 @@ from typing import Callable
 from abc import ABC
 from ..Query.Parser import Parser
 
+global glob_parser, sport
+glob_parser = None
+sport = None
+
 
 class Menu(ABC):
     """
@@ -11,17 +15,27 @@ class Menu(ABC):
     def __init__(self, parser: Parser | None = None, sport: str | None = None):
         self.admin: bool = False
         self.sport = sport
-        self.parser = None
-        self.person_parameters_allowed_match = {
-            "Joueurs": [
+        self._sports: dict[int, str] = {
+            1: "basketball",
+            2: "football_european_leagues",
+            3: "tennis",
+            4: "volleyball",
+            5: "league_of_legends",
+            6: "Badminton"}
+        if glob_parser is not None:
+            self.parser = glob_parser
+        else:
+            self.parser = None
+        self.parameters_allowed = {
+            "joueurs": [
                 "id", "first_name", "last_name", "full_name", "sexe", "pseudo", "equipe", "taille",
                 "nationalite", "continent", "numero_maillot", "main_forte", "poids", "role"
                 ],
-            "Équipes": [
+            "equipes": [
                 "id", "nom_equipe", "nom_abrev", "nickname", "ville_equipe", "region_equipe",
                 "pays_equipe", "continent_equipe", "ligue", "annee_fondation"
             ],
-            "Matchs": [
+            "matchs": [
                 "id_match", "tourney_id", "region", "match_num", "best_of",
                 "date_match", "temps_match", "stats_match"
             ]
@@ -31,6 +45,8 @@ class Menu(ABC):
         """
         Permet d'initialiser globalement le parser et d'autres paramètres relatifs à ce dernier
         """
+        global glob_parser
+        glob_parser = parser
         self.parser = parser
         self.parser_match_name = {
             "Joueurs": self.parser.dict_player,
@@ -79,7 +95,7 @@ class Menu(ABC):
 
     def menu_question(
         self, question: str, data: list[str],
-        result_match: dict[int, Callable | str], break_on_call=False
+        result_match: dict[int, Callable | str] | None, break_on_call=False
     ):
         """
         Fonction permettant de créer et gérer une interface avec l'utilisateur pour une question
@@ -96,9 +112,14 @@ class Menu(ABC):
             Dictionnaire permettant de lier le résultat donné par l'utilisateur (1, 2, 3...) à
             la fonction voulu correspondante ou à la valeur voulu qui sera renvoyée.
             Le dictionnaire est de la forme : {1 : réponse_1, 2 : réponse_2, ...}.
-            Si les valeurs sont des fonctions, ces dernières seront appelées directement
+            Si les valeurs sont des fonctions, ces dernières seront appelées directement,
+            Si ce sont des strings ils seront renvoyées.
+
+            Si ce paramètre est à None, un dictionnaire du type {1: 1, 2: 2, ...} sera crée
         break_on_call : bool = False
-            Définit si la boucle while continue de tourner après l'appel au résultat
+            Définit si la boucle while continue de tourner après l'appel au résultat i.e.
+            Si c'est un menu "étape" donc si l'on doit proposer de nouveau ce choix si
+            l'utilisateur décide de revenir en arrière
 
         Returns
         -------
@@ -108,6 +129,8 @@ class Menu(ABC):
             Sinon on renvoit le string correspondant à la réponse de l'utilisateur dans
             le dictionnaire
         """
+        if result_match is None:
+            result_match = {i: i for i in range(len(data))}
         while True:
             print("-------------------------------------------")
             print(question)

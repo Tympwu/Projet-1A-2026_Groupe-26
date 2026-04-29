@@ -10,12 +10,8 @@ from ..Analysis.Match_printer import Match_printer
 from ..Analysis.Joueur_printer import Joueur_printer
 from ..Analysis.Equipe_printer import Equipe_printer
 from ..Interface.Menu import Menu
-from ..Model.Coach import Coach
-from ..Model.Competition import Competition
-from ..Model.Equipe import Equipe
-from ..Model.match import Match
-from ..Model.Player import Player
 from ..Interface.Menu_Recherche import Recherche
+from ..DAO.export_data import Export_data
 
 
 class Menu_Début(Menu):
@@ -119,28 +115,20 @@ class Menu_Début(Menu):
             {1: self.proposition_sports, 2: self.connect_deconnect, 3: self.help},
             break_on_call=False)
 
-
     def proposition_sports(self):
         """Fonction permettant de choisir le sport qui nous intéresse et quelles données analyser"""
         while True:
-            print("-------------------------------------------")
-            print("""Quel sport voulez-vous étudier ?
-            1. Basketball
-            2. Football européen
-            3. Tennis
-            4. Volleyball
-            5. League-of-Legends
-
-            0. Revenir en arrière
-            """)
-            result = self.answer_question({0, 1, 2, 3, 4, 5})
+            result = self.menu_question(
+                "Quel sport voulez-vous étudier ?",
+                ["Basketball", "Football européen", "Tennis", "Volleyball", "League-of-Legends"],
+                None)
             if result == 0:
                 return
-            elif result != -1:
+            else:
                 self.sport_choosen = result
                 self.__search = Data_loader(self._sports[result])
                 self.search.loader()
-                return self.search_parser()
+                self.search_parser()
 
     def search_parser(self):
         """
@@ -155,7 +143,7 @@ class Menu_Début(Menu):
             self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
             print("Match chargés\n")
 
-        if self.sport_choosen == 2:  # Football european
+        elif self.sport_choosen == 2:  # Football european
             self.initialize_parser(Football_European_leagues_Parser())
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargés")
@@ -165,7 +153,7 @@ class Menu_Début(Menu):
                                      other=self.search.dao["country"].data)
             print("Matchs chargés")
 
-        if self.sport_choosen == 3:  # Tennis
+        elif self.sport_choosen == 3:  # Tennis
             self.initialize_parser(Tennis_Parser())
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
@@ -175,7 +163,7 @@ class Menu_Début(Menu):
             print("Matchs chargés")
             self.team_sport = False
 
-        if self.sport_choosen == 5:  # leagues of legends
+        elif self.sport_choosen == 5:  # leagues of legends
             self.initialize_parser(League_of_legend_Parser())
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
@@ -198,141 +186,26 @@ class Menu_Début(Menu):
             "equipes": self.__equipe_printer}
         )
 
+        # Création du module d'export des données correspondant
+        self.__export_data = Export_data()
+
         # Après avoir importé les données
         self.analyse_data()
 
     def analyse_data(self):
-        while True:
-            print("-------------------------------------------")
-            print("Que voulez-vous faire désormais ?")
-            print("1. Visualiser des données")
-            print("2. Analyser des liens")
-            print("3. Ajouter des données")
-            print("4. Exporter des données\n")
-            print("0. Revenir au menu principal\n\n")
-            result = self.answer_question({0, 1, 2, 3, 4})
-            fonctions_possible = {1: self.__recherche_data.visualise_data, 2: self.analyse_link,
-                                  3: self.add_data, 4: self.export_data}
-            # Créer des modules dans des fichiers à part pour chacune de ces catégories,
-            # visualiser données est quasiment fait, analyser données en train d'être fait
-            # partiellement par Jean, le 3 pour l'instant on abandonne et le 4 peut être fait
-            # rapidement.
-            if result == 0:
-                return
-            elif result != -1:
-                fonctions_possible[result]()
+        self.menu_question(
+            "Que voulez-vous faire désormais ?",
+            ["Visualiser des données", "Analyser des liens",
+             "Ajouter des données", "Exporter des données"],
+            {1: self.__recherche_data.visualise_data,
+             2: self.analyse_link,
+             3: self.__export_data.add_data,
+             4: self.__export_data.export_data}
+            )
+        # Créer des modules dans des fichiers à part pour chacune de ces catégories,
+        # visualiser données est quasiment fait, analyser données en train d'être fait
+        # partiellement par Jean, le 3 pour l'instant on abandonne et le 4 peut être fait
+        # rapidement
 
     def analyse_link(self):
-        pass
-
-    def add_data(self):
-
-        sport = self._sports[self.sport_choosen]
-        sport_sans_equipe = {"tennis"}
-
-        options = {
-            1: self.__parser.dict_player,
-            2: self.__parser.dict_equipe,
-            3: self.__parser.dict_matchs
-        }
-
-        classes = {
-            1: Player,
-            2: Equipe,
-            3: Match
-        }
-        
-        classes_print = {
-            1: "Joueur",
-            2: "Equipe",
-            3: "Match"
-        }
-
-        while True:
-
-            print("-------------------------------------------")
-            print("Que voulez-vous faire désormais ?")
-
-            print("1. Ajouter des joueurs")
-
-            if sport.lower() not in sport_sans_equipe:
-                print("2. Ajouter des équipes")
-
-            print("3. Ajouter des matchs")
-            print("0. Revenir au menu principal\n")
-
-            result = self.answer_question({0, 1, 2, 3})
-
-            if result == 0:
-                return
-
-            data_dict = options[result]
-            cls = classes[result]
-
-            new_data = self.collect_input_data(data_dict, cls)
-            instance = cls(**new_data)
-
-            # stockage dynamique
-            key = getattr(instance, "id", None) or getattr(instance, "id_match", None)
-
-            data_dict[key] = instance
-
-            print("\n" + str(classes_print[result]) + " créé :")
-            print(instance)
-  
-    def collect_input_data(self, data_dict, cls):
-
-        def convert_value(value, expected_type):
-            if value == "":
-                return None
-            try:
-                if expected_type == int:
-                    return int(value)
-                if expected_type == float:
-                    return round(float(value), 2)
-                if expected_type == str:
-                    return value
-                return value
-            except ValueError:
-                print(f"Valeur invalide pour type {expected_type.__name__}")
-                return None
-
-        sample = next(iter(data_dict.values()))
-        annotations = cls.__annotations__
-        used_attr = {
-            attr: attr_type
-            for attr, attr_type in annotations.items()
-            if any(getattr(obj, attr, None) is not None for obj in data_dict.values())
-        }
-        attributes = list(sample.__dict__.keys())
-        new_data = {}
-        max_id = max(data_dict.keys(), default=0)
-        if "id" in attributes:
-            new_data["id"] = max_id + 1
-        elif "id_match" in attributes:
-            new_data["id_match"] = max_id + 1
-
-        print("\n--- Saisie des données ---")
-        for attr, attr_type in used_attr.items():
-            if attr in {"id", "id_match"}:
-                continue
-            while True:
-                value = input(f"{attr} ({attr_type.__name__}) : ")
-                converted = convert_value(value, attr_type)
-                if converted is not None or value == "":
-                    new_data[attr] = converted
-                    break
-                print("Type invalide, recommencez")
-
-        print("\nDonnées créées :")
-        print(new_data)
-        return new_data
-
-    def supprimer_data(self):
-        pass
-
-    def modifier_data(self):
-        pass
-
-    def export_data(self):
         pass
