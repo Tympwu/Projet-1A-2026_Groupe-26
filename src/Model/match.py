@@ -15,23 +15,6 @@ class Match:
         _description_
 
     """
-    
-    id_match: int | None
-    tourney_id: int | None
-    region: str | None
-    equipe1: Equipe | None
-    equipe2: Equipe | None
-    joueur1: Player | None
-    joueur2: Player | None
-    score1: int | None
-    score2: int | None
-    score: int | None
-    match_num: int | None
-    best_of: int
-    date_match: str | None
-    temps_match: str | None
-    stats_match: dict[str, Any] | None
-    
     def __init__(
         self,
         id_match: int | None = None,

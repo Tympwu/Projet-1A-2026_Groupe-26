@@ -2,9 +2,9 @@ from typing import Callable
 from abc import ABC
 from ..Query.Parser import Parser
 
-global glob_parser, sport
+global glob_parser, glob_sport
 glob_parser = None
-sport = None
+glob_sport = None
 
 
 class Menu(ABC):
@@ -12,9 +12,12 @@ class Menu(ABC):
     Classe générique englobant les méthodes nécessaires pour chacun des
     menus intéragissant avec l'utilisateur
     """
-    def __init__(self, parser: Parser | None = None, sport: str | None = None):
+    def __init__(self):
         self.admin: bool = False
-        self.sport = sport
+        if glob_sport is not None:
+            self.sport = glob_sport
+        else:
+            self.sport = None
         self._sports: dict[int, str] = {
             1: "basketball",
             2: "football_european_leagues",
@@ -24,6 +27,12 @@ class Menu(ABC):
             6: "Badminton"}
         if glob_parser is not None:
             self.parser = glob_parser
+            self.parser_match_name = {
+                "joueurs": self.parser.dict_player,
+                "matchs": self.parser.dict_matchs,
+                "equipes": self.parser.dict_equipe,
+                "coachs": self.parser.dict_coach
+            }
         else:
             self.parser = None
         self.parameters_allowed = {
@@ -41,12 +50,13 @@ class Menu(ABC):
             ]
         }
 
-    def initialize_parser(self, parser):
+    def initialize_parser(self, parser, sport):
         """
         Permet d'initialiser globalement le parser et d'autres paramètres relatifs à ce dernier
         """
-        global glob_parser
+        global glob_parser, glob_sport
         glob_parser = parser
+        glob_sport = sport
         self.parser = parser
         self.parser_match_name = {
             "Joueurs": self.parser.dict_player,
@@ -130,7 +140,7 @@ class Menu(ABC):
             le dictionnaire
         """
         if result_match is None:
-            result_match = {i: i for i in range(len(data))}
+            result_match = {i: i for i in range(len(data)+1)}
         while True:
             print("-------------------------------------------")
             print(question)

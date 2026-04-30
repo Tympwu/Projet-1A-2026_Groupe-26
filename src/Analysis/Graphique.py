@@ -1,6 +1,7 @@
 from typing import Any
 from abc import abstractmethod, ABC
 
+
 class Graphique(ABC):
     """
     Class qui regroupe les caractéristiques commune des graphiques

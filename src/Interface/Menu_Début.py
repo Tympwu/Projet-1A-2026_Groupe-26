@@ -12,6 +12,7 @@ from ..Analysis.Equipe_printer import Equipe_printer
 from ..Interface.Menu import Menu
 from ..Interface.Menu_Recherche import Recherche
 from ..DAO.export_data import Export_data
+from ..Interface.Menu_Graph import Menu_Graphique
 
 
 class Menu_Début(Menu):
@@ -26,8 +27,9 @@ class Menu_Début(Menu):
             3: "tennis",
             4: "volleyball",
             5: "league_of_legends",
-            6: "Badminton"}
+            6: "badminton"}
         self.parser: Parser = None
+        self.__graph_menu: Menu_Graphique = None
         self.__search: Data_loader = None
         self.sport_choosen: int = None
         self.team_sport: bool = True
@@ -108,7 +110,7 @@ class Menu_Début(Menu):
         Fonction initiale permettant de faire tourner l'application
         """
         self.menu_question(
-            "Bonjour, \n Que voulez-vous faire ?\n",
+            "Bonjour, \nQue voulez-vous faire ?\n",
             ["Traiter une base de donnée",
              "Se connecter au / déconnecter du compte administrateur",
              "Obtenir de l'aide"],
@@ -135,7 +137,7 @@ class Menu_Début(Menu):
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
         if self.sport_choosen == 1:  # Basketball
-            self.initialize_parser(Basketball_Parser())
+            self.initialize_parser(Basketball_Parser(), self._sports[self.sport_choosen])
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
@@ -144,7 +146,9 @@ class Menu_Début(Menu):
             print("Match chargés\n")
 
         elif self.sport_choosen == 2:  # Football european
-            self.initialize_parser(Football_European_leagues_Parser())
+            self.initialize_parser(
+                Football_European_leagues_Parser(), self._sports[self.sport_choosen]
+            )
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargés")
             self.parser.parse_equipes(self.search.dao["equipe"].data)
@@ -154,7 +158,7 @@ class Menu_Début(Menu):
             print("Matchs chargés")
 
         elif self.sport_choosen == 3:  # Tennis
-            self.initialize_parser(Tennis_Parser())
+            self.initialize_parser(Tennis_Parser(), self._sports[self.sport_choosen])
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
             print("Joueurs chargés")
@@ -164,7 +168,7 @@ class Menu_Début(Menu):
             self.team_sport = False
 
         elif self.sport_choosen == 5:  # leagues of legends
-            self.initialize_parser(League_of_legend_Parser())
+            self.initialize_parser(League_of_legend_Parser(), self._sports[self.sport_choosen])
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
@@ -186,7 +190,8 @@ class Menu_Début(Menu):
             "equipes": self.__equipe_printer}
         )
 
-        # Création du module d'export des données correspondant
+        # Création du module d'export des données correspondant et du modèle graphique
+        self.__graph_menu = Menu_Graphique()
         self.__export_data = Export_data()
 
         # Après avoir importé les données
@@ -195,17 +200,10 @@ class Menu_Début(Menu):
     def analyse_data(self):
         self.menu_question(
             "Que voulez-vous faire désormais ?",
-            ["Visualiser des données", "Analyser des liens",
-             "Ajouter des données", "Exporter des données"],
+            ["Visualiser les données", "Construire des graphiques des données",
+             "Ajouter des données", "Exporter les données"],
             {1: self.__recherche_data.visualise_data,
-             2: self.analyse_link,
+             2: self.__graph_menu.main_menu,
              3: self.__export_data.add_data,
              4: self.__export_data.export_data}
             )
-        # Créer des modules dans des fichiers à part pour chacune de ces catégories,
-        # visualiser données est quasiment fait, analyser données en train d'être fait
-        # partiellement par Jean, le 3 pour l'instant on abandonne et le 4 peut être fait
-        # rapidement
-
-    def analyse_link(self):
-        pass

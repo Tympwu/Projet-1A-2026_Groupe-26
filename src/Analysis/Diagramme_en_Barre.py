@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from typing import Any, Optional
-from Graphique import Graphique
+
+from .Graphique import Graphique
 
 class Diagramme_en_Barre(Graphique):
 
