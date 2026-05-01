@@ -2,9 +2,10 @@ from typing import Callable
 from abc import ABC
 from ..Query.Parser import Parser
 
-global glob_parser, glob_sport
+global glob_parser, glob_sport, glob_dao
 glob_parser = None
 glob_sport = None
+glob_dao = None
 
 
 class Menu(ABC):
@@ -25,6 +26,28 @@ class Menu(ABC):
             4: "volleyball",
             5: "league_of_legends",
             6: "Badminton"}
+        self.dao_match_name = {
+            "basketball": {
+                "equipes": "team", "joueurs": "player", "matchs": "game"
+            },
+            "football_european_leagues": {
+                "pays": "country", "league": "competition", "matchs": "match",
+                "joueurs": "player", "equipes": "equipe"
+            },
+            "league_of_legends": {
+                "equipes": "team", "joueurs": "player", "matchs": "match", "coach": "coach"
+            },
+            "tennis": {
+                "matchs": ["atp_matches_2024", "wta_matches_2024"],
+                "joueurs": ["wta_matches_2024", "wta_players_2024"]
+            },
+            "volleyball": {
+                "pays": "country",
+                "coachs": ["coach_men", "coach_women"],
+                "matchs": ["match_men", "match_women"],
+                "joueurs": ["player_men", "player_women"]
+            }
+        }
         if glob_parser is not None:
             self.parser = glob_parser
             self.parser_match_name = {
@@ -33,6 +56,7 @@ class Menu(ABC):
                 "equipes": self.parser.dict_equipe,
                 "coachs": self.parser.dict_coach
             }
+            self.__search = glob_dao
         else:
             self.parser = None
         self.parameters_allowed = {
@@ -50,13 +74,19 @@ class Menu(ABC):
             ]
         }
 
-    def initialize_parser(self, parser, sport):
+    @property
+    def search(self):
+        return self.__search
+
+    def initialize_parser(self, parser, sport, dao):
         """
         Permet d'initialiser globalement le parser et d'autres paramètres relatifs à ce dernier
         """
-        global glob_parser, glob_sport
+        global glob_parser, glob_sport, glob_dao
         glob_parser = parser
         glob_sport = sport
+        glob_dao = dao
+        self.__search = dao
         self.parser = parser
         self.parser_match_name = {
             "Joueurs": self.parser.dict_player,

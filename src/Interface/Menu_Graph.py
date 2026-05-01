@@ -23,7 +23,7 @@ class Menu_Graphique(Menu):
             {1: self._menu_hist, 2: print, 3: print}
         )
 
-    def _menu_hist(self):
+    def _menu_choix_var(self):
         """
         Fonction permettant de représenter des histogrammes
         """
@@ -58,4 +58,5 @@ class Menu_Graphique(Menu):
             data2,
             data_dict2
         )
-        print(var1, var2)
+        print(first_data, var1, second_data, var2)
+

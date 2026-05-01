@@ -30,17 +30,12 @@ class Menu_Début(Menu):
             6: "badminton"}
         self.parser: Parser = None
         self.__graph_menu: Menu_Graphique = None
-        self.__search: Data_loader = None
         self.sport_choosen: int = None
         self.team_sport: bool = True
         self.__recherche_data: Recherche | None = None
         self.__match_printer: Match_printer = None
         self.__equipe_printer: Equipe_printer = None
         self.__joueur_printer: Joueur_printer = None
-
-    @property
-    def search(self):
-        return self.__search
 
     def connect(self):
         """
@@ -129,7 +124,7 @@ class Menu_Début(Menu):
             else:
                 self.sport_choosen = result
                 self.__search = Data_loader(self._sports[result])
-                self.search.loader()
+                self.__search.loader()
                 self.search_parser()
 
     def search_parser(self):
@@ -137,7 +132,9 @@ class Menu_Début(Menu):
         Fonction permettant de lier et utiliser les bons parser correspondant aux sports
         """
         if self.sport_choosen == 1:  # Basketball
-            self.initialize_parser(Basketball_Parser(), self._sports[self.sport_choosen])
+            self.initialize_parser(
+                Basketball_Parser(), self._sports[self.sport_choosen], self.__search
+            )
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
@@ -147,7 +144,7 @@ class Menu_Début(Menu):
 
         elif self.sport_choosen == 2:  # Football european
             self.initialize_parser(
-                Football_European_leagues_Parser(), self._sports[self.sport_choosen]
+                Football_European_leagues_Parser(), self._sports[self.sport_choosen], self.__search
             )
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargés")
@@ -158,7 +155,7 @@ class Menu_Début(Menu):
             print("Matchs chargés")
 
         elif self.sport_choosen == 3:  # Tennis
-            self.initialize_parser(Tennis_Parser(), self._sports[self.sport_choosen])
+            self.initialize_parser(Tennis_Parser(), self._sports[self.sport_choosen], self.__search)
             self.parser.parse_players(self.search.dao["atp_players_2024"].data, other="H")
             self.parser.parse_players(self.search.dao["wta_players_2024"].data, other="F")
             print("Joueurs chargés")
@@ -168,7 +165,9 @@ class Menu_Début(Menu):
             self.team_sport = False
 
         elif self.sport_choosen == 5:  # leagues of legends
-            self.initialize_parser(League_of_legend_Parser(), self._sports[self.sport_choosen])
+            self.initialize_parser(
+                League_of_legend_Parser(), self._sports[self.sport_choosen], self.__search
+            )
             self.parser.parse_equipes(self.search.dao["team"].data)
             print("Equipe sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)

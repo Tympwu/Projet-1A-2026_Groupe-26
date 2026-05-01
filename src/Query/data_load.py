@@ -29,7 +29,7 @@ class Data_loader:
 
     def __data_tennis(self):
         self.dao["atp_matches_2024"] = DAO(fichier="data/tennis/atp_matches_2024.csv")
-        self.dao["atp_players_2024"] = DAO(fichier="data/tennis/atp_players_2024.csv")
+        self.dao["wta_matches_2024"] = DAO(fichier="data/tennis/atp_players_2024.csv")
         self.dao["wta_matches_2024"] = DAO(fichier="data/tennis/wta_matches_2024.csv")
         self.dao["wta_players_2024"] = DAO(fichier="data/tennis/wta_players_2024.csv")
 
