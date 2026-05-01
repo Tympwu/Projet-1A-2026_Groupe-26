@@ -1,7 +1,5 @@
-from typing import Any, Callable
-
-from ..Analysis.Graphique import Graphique
 from ..Analysis.Diagramme_en_Barre import Diagramme_en_Barre
+from ..Analysis.Nuage_de_points import Nuages_de_points
 from ..Interface.Menu import Menu
 
 
@@ -12,51 +10,101 @@ class Menu_Graphique(Menu):
     def __init__(self):
         super().__init__()
         self.hist = Diagramme_en_Barre()
-    
+
     def main_menu(self):
         """
         Fonction permettant de savoir quelles graphique présenter
         """
         self.menu_question(
             "Que voulez-vous voir ?",
-            ["Histogramme", "", ""],
-            {1: self._menu_hist, 2: print, 3: print}
+            ["Histogramme", ""],
+            {1: self.menu_hist, 2: print}
         )
 
-    def _menu_choix_var(self):
+    def _menu_choix_var(
+        self,
+        constraint: tuple[set[str]] | list = [None, None, None, None]
+    ) -> tuple[list, list]:
         """
-        Fonction permettant de représenter des histogrammes
+        Fonction permettant de choisir des variables pour une représentation
+
+        Parameters
+        ----------
+        constraint : tuple[set[str]] | list
+            Tuple d'ensemble contenant de potentielles contraintes de
+            paramètres pour le choix de l'utilisateur
         """
         # Première variable
+        question0 = {"Joueurs", "Équipes", "Matchs", "Coachs"}
+        if constraint[0] is None:
+            constraint[0] = question0
+        question0 = list(question0 & constraint[0])
         first_data = self.menu_question(
-            "Quelles variables voulez-vous en abscisse ?",
-            ["Joueurs", "Équipes", "Matchs", "Coachs"],
-            {1: "joueurs", 2: "equipes", 3: "matchs", 4: "coachs"},
+            "Quelles variables voulez-vous en ordonnée ?",
+            question0,
+            {i: ele.lower() for i, ele in enumerate(question0, 1)},
         )
+
         data1 = self.list_attr(
             self.parser_match_name[first_data],
             self.parameters_allowed[first_data])
-        data_dict1 = {i: ele for i, ele in enumerate(data1, 1)}
+        if constraint[1] is None:
+            constraint[1] = data1
+        question1 = list(set(data1) & constraint[1])
+        data_dict1 = {i: ele for i, ele in enumerate(question1, 1)}
         var1 = self.menu_question(
-            "Quelles variables voulez-vous en abscisse ?",
-            data1,
+            "Quelles variables voulez-vous en ordonnée ?",
+            question1,
             data_dict1
         )
 
         # Deuxième variable
+        question2 = {"Joueurs", "Équipes", "Matchs", "Coachs"}
+        if constraint[2] is None:
+            constraint[2] = question2
+        question2 = list(question2 & constraint[2])
         second_data = self.menu_question(
-            "Quelles variables voulez-vous en ordonnée ?",
-            ["Joueurs", "Équipes", "Matchs", "Coachs"],
-            {1: "joueurs", 2: "equipes", 3: "matchs", 4: "coachs"},
+            "Quelles variables voulez-vous en abscisse ?",
+            question2,
+            {i: ele.lower() for i, ele in enumerate(question2, 1)}
         )
         data2 = self.list_attr(
             self.parser_match_name[second_data],
             self.parameters_allowed[second_data])
-        data_dict2 = {i: ele for i, ele in enumerate(data2, 1)}
+        if constraint[3] is None:
+            constraint[3] = set(data2)
+        question3 = list(set(data2) & constraint[3])
+        data_dict2 = {i: ele for i, ele in enumerate(question3, 1)}
         var2 = self.menu_question(
             "Quelles variables voulez-vous en abscisse ?",
-            data2,
+            question3,
             data_dict2
         )
-        print(first_data, var1, second_data, var2)
 
+        value1 = []
+        value2 = []
+        for element1, element2 in zip(
+            self.parser_match_name[first_data].values(),
+            self.parser_match_name[second_data].values()
+        ):
+            value1.append(element1.__dict__[var1])
+            value2.append(element2.__dict__[var2])
+        return value1, value2
+
+    def menu_hist(self):
+        value1, value2 = self._menu_choix_var([
+            self.data_available[self.sport],
+            self.numeric_parameters,
+            self.data_available[self.sport],
+            None
+        ])
+        titre = input("Quelle titre voulez-vous donnez à votre histogramme ?\nRéponse: ")
+        self.hist = Diagramme_en_Barre(data1=value1, data2=value2, titre=titre)
+        self.hist.afficher_image()
+        if self.menu_question(
+            "Voulez-vous enregistrer ce graphique ?",
+            ["oui", "non"],
+            {1: True, 2: False}
+        ):
+            titre_fichier = input("Quelle titre voulez-vous donner au fichier ?\nRéponse: ")
+            self.hist.enregistrer_image(titre_fichier)

@@ -1,6 +1,5 @@
 from typing import Callable
 from abc import ABC
-from ..Query.Parser import Parser
 
 global glob_parser, glob_sport, glob_dao
 glob_parser = None
@@ -23,31 +22,9 @@ class Menu(ABC):
             1: "basketball",
             2: "football_european_leagues",
             3: "tennis",
-            4: "volleyball",
-            5: "league_of_legends",
+            4: "league_of_legends",
+            5: "volleyball",
             6: "Badminton"}
-        self.dao_match_name = {
-            "basketball": {
-                "equipes": "team", "joueurs": "player", "matchs": "game"
-            },
-            "football_european_leagues": {
-                "pays": "country", "league": "competition", "matchs": "match",
-                "joueurs": "player", "equipes": "equipe"
-            },
-            "league_of_legends": {
-                "equipes": "team", "joueurs": "player", "matchs": "match", "coach": "coach"
-            },
-            "tennis": {
-                "matchs": ["atp_matches_2024", "wta_matches_2024"],
-                "joueurs": ["wta_matches_2024", "wta_players_2024"]
-            },
-            "volleyball": {
-                "pays": "country",
-                "coachs": ["coach_men", "coach_women"],
-                "matchs": ["match_men", "match_women"],
-                "joueurs": ["player_men", "player_women"]
-            }
-        }
         if glob_parser is not None:
             self.parser = glob_parser
             self.parser_match_name = {
@@ -70,8 +47,29 @@ class Menu(ABC):
             ],
             "matchs": [
                 "id_match", "tourney_id", "region", "match_num", "best_of",
-                "date_match", "temps_match", "stats_match"
+                "date_match", "temps_match"  # , "stats_match"
             ]
+        }
+        self.numeric_parameters = {
+            "id", "taille", "numero_maillot", "poids", "id_match",
+            "tourney_id", "match_num", "best_of", "temps_match"
+        }
+        self.data_available = {
+            "basketball": {
+                "Équipes", "Joueurs", "Matchs"
+            },
+            "football_european_leagues": {
+                "Équipes", "Joueurs", "Matchs"
+            },
+            "tennis": {
+                "Joueurs", "Matchs"
+            },
+            "volleyball": {
+
+            },
+            "league_of_legends": {
+                "Équipes", "Joueurs", "Coachs", "Matchs"
+            }
         }
 
     @property
@@ -89,15 +87,15 @@ class Menu(ABC):
         self.__search = dao
         self.parser = parser
         self.parser_match_name = {
-            "Joueurs": self.parser.dict_player,
-            "Matchs": self.parser.dict_matchs,
-            "Équipes": self.parser.dict_equipe,
-            "Coachs": self.parser.dict_coach
+            "joueurs": self.parser.dict_player,
+            "matchs": self.parser.dict_matchs,
+            "equipes": self.parser.dict_equipe,
+            "coachs": self.parser.dict_coach
         }
 
     def answer_question(self, autorise_value: list):
         """
-        Fonction permettant de traiter une réponse et de trier les premiers cas de mauvaises 
+        Fonction permettant de traiter une réponse et de trier les premiers cas de mauvaises
         réponses
         """
         result: str = input("Réponse : ")

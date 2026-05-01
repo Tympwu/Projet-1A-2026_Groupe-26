@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from typing import Any, Optional
+from typing import Any
 
 from .Graphique import Graphique
 
-class Diagramme_en_Barre(Graphique):
 
+class Diagramme_en_Barre(Graphique):
 
     def __init__(
         self,
@@ -20,7 +20,7 @@ class Diagramme_en_Barre(Graphique):
 
         if not all(isinstance(x, (int, float)) for x in self.data1):
             raise TypeError("Les valeurs de data1 doivent être numériques.")
-            
+
         self.data2 = [str(label) for label in data2]
         self.format_image = format_image
         self.couleur = couleur
@@ -31,16 +31,17 @@ class Diagramme_en_Barre(Graphique):
     def _equilibrer_donnees(self) -> None:
         """Méthode interne pour ajuster la taille des listes."""
         len1, len2 = len(self.data1), len(self.data2)
-        # 1er cas: trop de donnée et pas assez de noms de colonnes: on ajoute des noms fictifs ("Sans nom")
+        # 1er cas: trop de donnée et pas assez de noms de colonnes:
+        # on ajoute des noms fictifs ("Sans nom")
         if len1 > len2:
             nb_manquant = len1 - len2
             nouveaux_labels = ["Sans nom" for i in range(nb_manquant)]
             self.data2.extend(nouveaux_labels)
-        # 2ème cas: trop de  noms de colonne et pas assez de donnée: on comble les données avec la valeur par défaut
+        # 2ème cas: trop de  noms de colonne et pas assez de donnée:
+        # n comble les données avec la valeur par défaut
         elif len2 > len1:
             nb_manquant = len2 - len1
             self.data1.extend([self.valeur_par_defaut] * nb_manquant)
-
 
     def ajouter_donnee(self, valeur: float | int) -> None:
         if not isinstance(valeur, (int, float)):
@@ -77,17 +78,17 @@ class Diagramme_en_Barre(Graphique):
     def afficher_image(self) -> None:
         largeur, hauteur = self.format_image[0], self.format_image[1]
         plt.figure(figsize=(largeur, hauteur))
-        
+
         plt.bar(self.data2, self.data1, color=self.couleur)
         plt.title(self.titre)
-        
+
         # inclinaison des labels s'ils sont trop longs
         plt.xticks(rotation=45, ha='right')
-        
+
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()  # Évite que les labels soient coupés au bord de l'image
         plt.show()
-    
+
     def enregistrer_image(self, nom) -> None:
         plt.savefig(nom)
 

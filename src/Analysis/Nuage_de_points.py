@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
-from typing import Any, Optional
-from Graphique import Graphique
+from typing import Any
+from .Graphique import Graphique
+
 
 class Nuages_de_points(Graphique):
 
@@ -21,7 +22,7 @@ class Nuages_de_points(Graphique):
             raise TypeError("Les valeurs de data1 doivent être numériques.")
         if not all(isinstance(x, (int, float)) for x in self.data2):
             raise TypeError("Les valeurs de data2 doivent être numériques.")
-        if  len(data1) != len(data2):
+        if len(data1) != len(data2):
             raise ValueError("les listes data1 et data2 doivent avoir le même nombre d'éléments")
         self.format_image = format_image
         self.couleur = couleur
@@ -45,51 +46,56 @@ class Nuages_de_points(Graphique):
         translucidite: float | None = None,
         taille_point: float | None = None,
         nom_axe1: str | None = None,
-        nom_axe2: str | None  = None,
+        nom_axe2: str | None = None,
         titre: str | None = None,
         format_image: tuple[int, int] | None = None,
         couleur: str | None = None
-        ) -> None:
+    ) -> None:
         if (translucidite is not None) and (translucidite >= 0) and (translucidite <= 1):
             self.translucidite_point = translucidite
         if isinstance(taille_point, (float, int)) and taille_point > 0:
-            self.taille_point  = taille_point
+            self.taille_point = taille_point
         if isinstance(nom_axe1, str):
             self.nom_axe1 = nom_axe1
         if isinstance(nom_axe2, str):
             self.nom_axe1 = nom_axe2
         if isinstance(titre, str):
             self.titre = titre
-        if isinstance(format_image, tuple) and len(format_image) == 2 and format_image[0] > 0 and format_image[1]  > 0:
+        if isinstance(format_image, tuple) and (
+            len(format_image) == 2
+        ) and format_image[0] > 0 and format_image[1] > 0:
             self.format_image = format_image
         if isinstance(couleur, str):
             self.couleur = couleur
-   
-    def enregistrer_image(self, nom: str) -> None:
 
+    def enregistrer_image(self, nom: str) -> None:
         if not isinstance(nom, str):
             raise TypeError("L'attribut nom doit être du type str")
-        
+
         plt.figure(figsize=self.format_image)
-        
+
         # Création du nuage de points
-        plt.scatter(self.data1, self.data2, color=self.couleur, s=self.taille_point, marker='o', alpha=self.translucidite_point)
-        
+        plt.scatter(
+            self.data1, self.data2, color=self.couleur, s=self.taille_point, marker='o',
+            alpha=self.translucidite_point
+        )
+
         # Titres et labels
         plt.title(self.titre)
         plt.xlabel(self.nom_axe1)
         plt.ylabel(self.nom_axe2)
-        
+
         plt.grid(True, linestyle='--', alpha=1)
         plt.tight_layout()
-        
+
         # CRITIQUE : On enregistre AVANT de montrer
         plt.savefig(f"{nom}.png")
         print(f"Image enregistrée sous : {nom}.png")
-        
+
         # Affichage (pour Onyxia, utilise la fenêtre interactive si possible)
         plt.show()
-        
+
+
 """
 # Bloc test
 if __name__ == "__main__":
@@ -111,4 +117,5 @@ if __name__ == "__main__":
 
 
     # 3. Lancement de l'affichage
-    mon_graph.enregistrer_image("test nuage de point") """
+    mon_graph.enregistrer_image("test nuage de point")
+"""

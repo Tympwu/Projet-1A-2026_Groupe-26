@@ -25,8 +25,8 @@ class Menu_Début(Menu):
             1: "basketball",
             2: "football_european_leagues",
             3: "tennis",
-            4: "volleyball",
-            5: "league_of_legends",
+            4: "league_of_legends",
+            5: "volleyball",
             6: "badminton"}
         self.parser: Parser = None
         self.__graph_menu: Menu_Graphique = None
@@ -91,7 +91,6 @@ class Menu_Début(Menu):
         Basketball
         Football européen
         Tennis
-        Volleyball
         League-of-Legends
 
 
@@ -117,7 +116,7 @@ class Menu_Début(Menu):
         while True:
             result = self.menu_question(
                 "Quel sport voulez-vous étudier ?",
-                ["Basketball", "Football européen", "Tennis", "Volleyball", "League-of-Legends"],
+                ["Basketball", "Football européen", "Tennis", "League-of-Legends"],
                 None)
             if result == 0:
                 return
@@ -136,11 +135,11 @@ class Menu_Début(Menu):
                 Basketball_Parser(), self._sports[self.sport_choosen], self.__search
             )
             self.parser.parse_equipes(self.search.dao["team"].data)
-            print("Equipe sans joueurs chargées")
+            print("Equipes sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargées et ajoutés dans les équipes")
             self.parser.parse_matchs(self.search.dao["game"].data, self.search.dao["team"].data)
-            print("Match chargés\n")
+            print("Matchs chargés\n")
 
         elif self.sport_choosen == 2:  # Football european
             self.initialize_parser(
@@ -164,18 +163,18 @@ class Menu_Début(Menu):
             print("Matchs chargés")
             self.team_sport = False
 
-        elif self.sport_choosen == 5:  # leagues of legends
+        elif self.sport_choosen == 4:  # leagues of legends
             self.initialize_parser(
                 League_of_legend_Parser(), self._sports[self.sport_choosen], self.__search
             )
             self.parser.parse_equipes(self.search.dao["team"].data)
-            print("Equipe sans joueurs chargées")
+            print("Equipes sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargées et ajoutés dans les équipes")
             self.parser.parse_coach(self.search.dao["coach"].data)
-            print("Coach chargées et ajouté dans les equipes")
+            print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
-            print("Macth chargés")
+            print("Matchs chargés")
 
         # Création des printer correspondants
         self.__joueur_printer = Joueur_printer(self.parser.dict_player)
@@ -197,12 +196,19 @@ class Menu_Début(Menu):
         self.analyse_data()
 
     def analyse_data(self):
+        choix = [
+            "Visualiser les données", "Construire des graphiques des données",
+            "Exporter les données", "Ajouter des données"]
+        dict_choix = {
+            1: self.__recherche_data.visualise_data,
+            2: self.__graph_menu.main_menu,
+            3: self.__export_data.export_data,
+            4: self.__export_data.add_data}
+        if not self.admin:
+            choix.pop(3)
+            del dict_choix[4]
         self.menu_question(
             "Que voulez-vous faire désormais ?",
-            ["Visualiser les données", "Construire des graphiques des données",
-             "Ajouter des données", "Exporter les données"],
-            {1: self.__recherche_data.visualise_data,
-             2: self.__graph_menu.main_menu,
-             3: self.__export_data.add_data,
-             4: self.__export_data.export_data}
+            choix,
+            dict_choix
             )
