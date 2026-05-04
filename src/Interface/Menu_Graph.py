@@ -1,3 +1,7 @@
+from unidecode import unidecode
+import pandas as pd
+
+
 from ..Analysis.Diagramme_en_Barre import Diagramme_en_Barre
 from ..Analysis.Nuage_de_points import Nuages_de_points
 from ..Interface.Menu import Menu
@@ -17,7 +21,7 @@ class Menu_Graphique(Menu):
         """
         self.menu_question(
             "Que voulez-vous voir ?",
-            ["Histogramme", ""],
+            ["Histogramme", "Nuage de points"],
             {1: self.menu_hist, 2: print}
         )
 
@@ -42,7 +46,7 @@ class Menu_Graphique(Menu):
         first_data = self.menu_question(
             "Quelles variables voulez-vous en ordonnée ?",
             question0,
-            {i: ele.lower() for i, ele in enumerate(question0, 1)},
+            {i: unidecode(ele.lower()) for i, ele in enumerate(question0, 1)},
         )
 
         data1 = self.list_attr(
@@ -66,7 +70,7 @@ class Menu_Graphique(Menu):
         second_data = self.menu_question(
             "Quelles variables voulez-vous en abscisse ?",
             question2,
-            {i: ele.lower() for i, ele in enumerate(question2, 1)}
+            {i: unidecode(ele.lower()) for i, ele in enumerate(question2, 1)}
         )
         data2 = self.list_attr(
             self.parser_match_name[second_data],
@@ -92,14 +96,20 @@ class Menu_Graphique(Menu):
         return value1, value2
 
     def menu_hist(self):
-        value1, value2 = self._menu_choix_var([
+        value1_temp, value2_temp = self._menu_choix_var([
             self.data_available[self.sport],
             self.numeric_parameters,
             self.data_available[self.sport],
             None
         ])
+        value = [[element1, element2] for element1, element2 in zip(value1_temp, value2_temp)]
+        value = pd.DataFrame(value, columns=["first_value", "second_value"])
+        value = value.groupby(['second_value']).mean()
+        print(value)
         titre = input("Quelle titre voulez-vous donnez à votre histogramme ?\nRéponse: ")
-        self.hist = Diagramme_en_Barre(data1=value1, data2=value2, titre=titre)
+        self.hist = Diagramme_en_Barre(
+            data1=value["first_value"], data2=value["second_value"], titre=titre
+        )
         self.hist.afficher_image()
         if self.menu_question(
             "Voulez-vous enregistrer ce graphique ?",

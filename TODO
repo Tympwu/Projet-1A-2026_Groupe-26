@@ -3,4 +3,10 @@ Graphique :
     - Ajouter possibilité de faire diagramme en fonction score des matchs et autres paramètres pertinent mais pas autorisé
 
 Affichage classe :
-    - Affciher stat joueurs / equipes / matchs de base
+    - Afféchier stat joueurs / equipes / matchs de base
+
+Data :
+    - Ajouter données pas que dans parser mais aussi table de données
+
+Générique :
+    - Ajouter volley sport
