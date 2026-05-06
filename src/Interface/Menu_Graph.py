@@ -105,10 +105,9 @@ class Menu_Graphique(Menu):
         value = [[element1, element2] for element1, element2 in zip(value1_temp, value2_temp)]
         value = pd.DataFrame(value, columns=["first_value", "second_value"])
         value = value.groupby(['second_value']).mean()
-        print(value)
         titre = input("Quelle titre voulez-vous donnez à votre histogramme ?\nRéponse: ")
         self.hist = Diagramme_en_Barre(
-            data1=value["first_value"], data2=value["second_value"], titre=titre
+            data1=list(value["first_value"]), data2=list(value.index), titre=titre
         )
         self.hist.afficher_image()
         if self.menu_question(
