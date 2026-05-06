@@ -43,18 +43,6 @@ class Coach(Personne):
     equipe : Real Madrid
     """
 
-    id: int
-    first_name: str
-    last_name: str
-    full_name: str
-    lieu_naissance: str
-    equipe: Any
-    nationalite: str
-    pseudo: str
-    dob: str
-    sexe: str
-    role: str
-
     def __init__(
         self,
         id: int = None,

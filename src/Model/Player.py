@@ -106,7 +106,7 @@ class Player(Personne):
             id=id, first_name=first_name, last_name=last_name, full_name=full_name,
             lieu_naissance=lieu_naissance, dob=dob, sexe=sexe
         )
-        if (pseudo is not None) and (not isinstance(pseudo, str )):
+        if (pseudo is not None) and (not isinstance(pseudo, str)):
             raise ValueError("l'attribut pseudo doit être du type str ou None")
         if (id_equipe is not None) and (not isinstance(id_equipe, int)):
             raise ValueError("l'attribut id_equipe doit être du type int ou None")
@@ -118,13 +118,13 @@ class Player(Personne):
             raise ValueError("l'attribut sport doit être du type str ou None")
         if (numero_maillot is not None) and (not isinstance(numero_maillot, int)):
             raise ValueError("l'attribut numero_maillot doit être du type int ou None")
-        if (main_forte is not None) and (not isinstance(main_forte, str )):
+        if (main_forte is not None) and (not isinstance(main_forte, str)):
             raise ValueError("l'attribut main_forte doit être du type str ou None")
         if (taille is not None) and (not isinstance(taille, (float, int))):
             raise ValueError("l'attribut taille doit être du type float, int ou None")
         if (poids is not None) and (not isinstance(poids, (float, int))):
             raise ValueError("l'attribut poids doit être du type str ou None")
-        if (role is not None) and (not isinstance(role, str )):
+        if (role is not None) and (not isinstance(role, str)):
             raise ValueError("l'attribut role doit être du type str ou None")
         self.pseudo = pseudo
         self.id_equipe = id_equipe

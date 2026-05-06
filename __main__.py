@@ -5,7 +5,7 @@ Interface = Menu_Début()
 Interface.main_menu()
 
 """
-self.dao_match_name = {
+self.dao_match_name = {1
     "basketball": {
         "equipes": "team", "joueurs": "player", "matchs": "game"
     },
