@@ -89,8 +89,8 @@ class Menu(ABC):
         self.parser = parser
         self.parser_match_name = {
             "joueurs": self.parser.dict_player,
-            "matchs": self.parser.dict_matchs,
             "equipes": self.parser.dict_equipe,
+            "matchs": self.parser.dict_matchs,
             "coachs": self.parser.dict_coach
         }
 

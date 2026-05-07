@@ -12,16 +12,22 @@ class Recherche(Menu):
             Sport choisi par l'utilisateur
         """
         super().__init__()
+        self.categorie_allowed = []
+        for key, element in self.parser_match_name.items():
+            if element != {}:
+                self.categorie_allowed.append(key)
 
     def visualise_data(self):
         """
         Fonction permettant de savoir quelles données affichées entre joueurs, matchs et autre
         """
+        possible_answer = ["Les " + element for element in self.categorie_allowed]
+        dict_possible_answer = {i: element for i, element in enumerate(self.categorie_allowed, 1)}
         while True:
             result = self.menu_question(
                 "Que voulez-vous voir ?",
-                ["Les joueurs", "Les équipes", "Les matchs"],
-                {1: "joueurs", 2: "equipes", 3: "matchs"}
+                possible_answer,
+                dict_possible_answer
             )
             if result == 0:
                 return
