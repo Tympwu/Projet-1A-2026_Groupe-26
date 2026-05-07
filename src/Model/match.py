@@ -31,7 +31,6 @@ class Match:
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: str | None = None,
-        stats_match: dict[str, Any] | None = None
     ) -> None:
         if not (isinstance(id_match, int) or id_match is None):
             raise TypeError("l'attribut id_match doit être du type int ou None")
@@ -77,7 +76,6 @@ class Match:
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match
-        self.stats_match = stats_match
 
     def __str__(self) -> str:
         if self.equipe1 is None:

@@ -3,7 +3,7 @@ from ..Query.Parser import Parser
 from ..Query.Tennis_parser import Tennis_Parser
 from ..Query.Basketball_parser import Basketball_Parser
 # from ..Query.Badminton_parser import Badminton_Parser
-# from ..Query.Volleyball_parser import Volleyball_Parser
+from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Interface.Menu import Menu
@@ -30,9 +30,6 @@ class Menu_Début(Menu):
         self.sport_choosen: int = None
         self.team_sport: bool = True
         self.__recherche_data: Recherche | None = None
-        self.__match_printer: Match_printer = None
-        self.__equipe_printer: Equipe_printer = None
-        self.__joueur_printer: Joueur_printer = None
 
     def connect(self):
         """
@@ -172,6 +169,23 @@ class Menu_Début(Menu):
             self.parser.parse_coach(self.search.dao["coach"].data)
             print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
+            print("Matchs chargés")
+
+        elif self.sport_choosen == 5:  # volleyball
+            self.initialize_parser(
+                Volleyball_Parser(), self._sports[self.sport_choosen], self.__search
+            )
+            self.parser.parse_equipes(self.search.dao["country"].data, other="Homme")
+            self.parser.parse_equipes(self.search.dao["country"].data, other="Femme")
+            print("Equipes sans joueurs chargées")
+            self.parser.parse_players(self.search.dao["player_men"].data, other="Homme")
+            self.parser.parse_players(self.search.dao["player_women"].data, other="Femme")
+            print("Joueurs chargées et ajoutés dans les équipes")
+            self.parser.parse_coach(self.search.dao["coach_men"].data, other="Homme")
+            self.parser.parse_coach(self.search.dao["coach_women"].data, other="Femme")
+            print("Coachs chargées et ajouté dans les equipes")
+            self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["contry"].data) # chargement des matchs des hommes
+            self.parser.parse_matchs(self.search.dao["match_women"].data, self.search.dao["contry"].data) # chargement des matchs des femmes
             print("Matchs chargés")
 
         # Création du module de rercherche des données

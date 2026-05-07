@@ -98,12 +98,4 @@ class League_of_legend_Parser(Parser):
 
             self.dict_matchs[match.id_match] = match
 
-        pass
-
-    def parse_competition(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Compétitions de leagues of legends
-        """
-        pass
 
