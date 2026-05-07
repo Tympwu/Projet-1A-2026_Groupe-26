@@ -141,3 +141,11 @@ class Recherche(Menu):
                 tablefmt="grid",
                 missingval="\U0000274C"
             ))
+        elif self.categorie == "coachs":
+            for coach in self.parser_match_name[self.categorie].values():
+                tab.append([coach.id, coach.full_name, coach.equipe, coach.role])
+            print(tabulate(
+                tab, headers=["Id", "Name", "Équipe", "Rôle"],
+                tablefmt="grid",
+                missingval="\U0000274C"
+            ))

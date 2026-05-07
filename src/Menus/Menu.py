@@ -48,7 +48,11 @@ class Menu(ABC):
             ],
             "matchs": [
                 "id_match", "tourney_id", "region", "match_num", "best_of",
-                "date_match", "temps_match"  # , "stats_match"
+                "date_match", "temps_match"
+            ],
+            "coachs": [
+                "id", "first_name", "last_name", "full_name", "lieu_naissance", "nationalite",
+                "pseudo", "dob", "sexe", "role", "equipe"
             ]
         }
         self.numeric_parameters = {

@@ -1,5 +1,4 @@
 from .Personne import Personne
-from typing import Any
 from tabulate import tabulate
 
 
@@ -50,7 +49,7 @@ class Coach(Personne):
         last_name: str = None,
         full_name: str = None,
         lieu_naissance: str = None,
-        equipe: Any = None,
+        equipe: str = None,
         nationalite: str = None,
         pseudo: str = None,
         dob: str = None,
@@ -58,7 +57,14 @@ class Coach(Personne):
         role: str = None
     ) -> None:
         self.id = id
-        super().__init__(first_name, last_name, full_name, lieu_naissance, dob, sexe)
+        super().__init__(
+            id=id,
+            first_name=first_name,
+            last_name=last_name,
+            full_name=full_name,
+            lieu_naissance=lieu_naissance,
+            dob=dob,
+            sexe=sexe)
         self.equipe = equipe
         self.nationalite = nationalite
         self.pseudo = pseudo
