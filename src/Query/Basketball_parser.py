@@ -73,10 +73,3 @@ class Basketball_Parser(Parser):
                 date_match=self.fetch_safety_data(row["game_date"], str)
                 )
             self.dict_matchs[match.id_match] = match
-
-    def parse_competition(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Compétitions de Football européen
-        """
-        pass

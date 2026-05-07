@@ -21,7 +21,6 @@ class Volleyball_Parser(Parser):
                 id=index,
                 nom_equipe=self.fetch_safety_data(row["country_long"], str) + " " + other,
                 nom_abrev=self.fetch_safety_data(row["code"], str),
-                region_equipe=self.fetch_safety_data(row["country_long"], str),
                 pays_equipe=self.fetch_safety_data(row["country_long"], str),
                 )
             self.dict_equipe[equipe.nom_equipe] = equipe
@@ -59,7 +58,6 @@ class Volleyball_Parser(Parser):
                 id=index,
                 full_name=self.fetch_safety_data(row["name"], str),
                 dob=self.fetch_safety_data(row["birth_date"], str),
-                sport="volleyball",
                 nationalite=self.fetch_safety_data(row["country_code"], str),
                 equipe=self.fetch_safety_data(row["country_code"], str),
                 role=self.fetch_safety_data(row["function"], str)
@@ -71,7 +69,7 @@ class Volleyball_Parser(Parser):
                     self.dict_equipe[equipe.nom_equipe].ajouter_coach(coach)
         
 
-    def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
+    def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame, sexe=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Matchs de volleyball masculin
@@ -81,7 +79,7 @@ class Volleyball_Parser(Parser):
         for index, row in other.iterrows():
             self.dict_nom_abbreg_nom_equipe[
                 self.fetch_safety_data(row["code"], str)
-                ] = self.fetch_safety_data(row["country_long"], str)
+                ] = self.fetch_safety_data(row["country_long"], str) + " " + sexe
 
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
@@ -92,7 +90,7 @@ class Volleyball_Parser(Parser):
                 equipe2=self.dict_equipe[
                     self.dict_nom_abbreg_nom_equipe[self.fetch_safety_data(row["country_code_2"], str)]],
                 date_match=date_match,
-                score1=self.fetch_safety_data(row["set_country_1"]),
-                score2=self.fetch_safety_data(row["set_country_2"]),
+                score1=self.fetch_safety_data(row["set_country_1"], int),
+                score2=self.fetch_safety_data(row["set_country_2"], int),
                 )
             self.dict_matchs[match.id_match] = match

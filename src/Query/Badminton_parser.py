@@ -36,13 +36,6 @@ class Badminton_Parser(Parser):
                 sport="badminton")
             self.dict_player[player.id] = player
 
-    def parse_competition(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux compétition de Badminton
-        """
-        pass
-
     def parse_matchs(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes

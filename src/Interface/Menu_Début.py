@@ -111,7 +111,7 @@ class Menu_Début(Menu):
         while True:
             result = self.menu_question(
                 "Quel sport voulez-vous étudier ?",
-                ["Basketball", "Football européen", "Tennis", "League-of-Legends"],
+                ["Basketball", "Football européen", "Tennis", "League-of-Legends", "volleyball"],
                 None)
             if result == 0:
                 return
@@ -176,16 +176,12 @@ class Menu_Début(Menu):
                 Volleyball_Parser(), self._sports[self.sport_choosen], self.__search
             )
             self.parser.parse_equipes(self.search.dao["country"].data, other="Homme")
-            self.parser.parse_equipes(self.search.dao["country"].data, other="Femme")
             print("Equipes sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player_men"].data, other="Homme")
-            self.parser.parse_players(self.search.dao["player_women"].data, other="Femme")
             print("Joueurs chargées et ajoutés dans les équipes")
             self.parser.parse_coach(self.search.dao["coach_men"].data, other="Homme")
-            self.parser.parse_coach(self.search.dao["coach_women"].data, other="Femme")
             print("Coachs chargées et ajouté dans les equipes")
-            self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["contry"].data) # chargement des matchs des hommes
-            self.parser.parse_matchs(self.search.dao["match_women"].data, self.search.dao["contry"].data) # chargement des matchs des femmes
+            self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme")
             print("Matchs chargés")
 
         # Création du module de rercherche des données
