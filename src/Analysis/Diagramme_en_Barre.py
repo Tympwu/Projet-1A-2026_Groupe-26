@@ -13,7 +13,9 @@ class Diagramme_en_Barre(Graphique):
         data2: list[Any] = [],
         format_image: tuple[int, int] = (12, 7),  # format du graphique
         couleur: str = "red",
-        valeur_par_defaut: int = 0
+        valeur_par_defaut: int = 0,
+        nom_axe1: str = "Axe 1",
+        nom_axe2: str = "Axe 2"
     ) -> None:
 
         super().__init__(titre, data1, data2)
@@ -25,6 +27,8 @@ class Diagramme_en_Barre(Graphique):
         self.format_image = format_image
         self.couleur = couleur
         self.valeur_par_defaut = valeur_par_defaut
+        self.nom_axe1: str = nom_axe1
+        self.nom_axe2: str = nom_axe2
 
         self._equilibrer_donnees()
 
@@ -81,6 +85,8 @@ class Diagramme_en_Barre(Graphique):
 
         plt.bar(self.data2, self.data1, color=self.couleur)
         plt.title(self.titre)
+        plt.xlabel(self.nom_axe2)
+        plt.ylabel(self.nom_axe1)
 
         # inclinaison des labels s'ils sont trop longs
         plt.xticks(rotation=45, ha='right')

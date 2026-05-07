@@ -189,7 +189,7 @@ class Menu_Début(Menu):
 
         # Création du module d'export des données correspondant et du modèle graphique
         self.__graph_menu = Menu_Graphique()
-        self.__export_data = Export_data()
+        self.__export_data = Export_data(self.__search)
 
         # Après avoir importé les données
         self.analyse_data()
@@ -201,7 +201,7 @@ class Menu_Début(Menu):
         dict_choix = {
             1: self.__recherche_data.visualise_data,
             2: self.__graph_menu.main_menu,
-            3: self.__export_data.export_data,
+            3: self.__export_data.menu_export_data,
             4: self.__export_data.add_data}
         if not self.admin:
             choix.pop(3)

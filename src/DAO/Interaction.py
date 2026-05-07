@@ -28,7 +28,7 @@ class DAO:
     def sauvegarde(self, admin=False):
         """
         Sauvegarde les données dans un csv
-        
+
         Parameters
         ----------
         admin : bool, optional
@@ -63,17 +63,18 @@ class DAO:
         """
         return self.__data[self.__data[colonne].isin(valeur)]
 
-    def inserer(self, ligne: dict[str, Any]) -> None:
+    def inserer(self, ligne: dict[str, list[Any]] | list[dict[str, Any]]) -> None:
         """
         Insère des données dans un tableaux selon un dictionnaire en entrée
-        
+
         Parameters
         ----------
-        ligne : dict
-            données à insérer, ["colonne", valeur]
+        ligne : dict | list
+            données à insérer, ["colonne", [valeur1, valeur2...]]
+            ou [{"colonne1" : valeur1, "colonne2" : valeur2...}{"colonne1"...}...]
 
         """
-        self.__data = pd.concat([self.__data, pd.DataFrame([ligne])], ignore_index=True)
+        self.__data = pd.concat([self.__data, pd.DataFrame(ligne)], ignore_index=True)
 
     def modifier(self, id: int, data: dict[str, Any]) -> None:
         """
@@ -95,7 +96,7 @@ class DAO:
     def supprimer(self, id: int) -> None:
         """
         Supprime les données d'un tableau selon l'index
-        
+
         Parameters
         ----------
         id : int
@@ -115,7 +116,7 @@ class DAO:
     def enlever_valeur_manquante(self, colonne=None) -> None:
         """
         Enlève les valeurs manquantes d'un tableau selon la colonne choisie
-        
+
         Parameters
         ----------
         colonne : _type_, optional
@@ -136,7 +137,7 @@ class DAO:
     def description(self) -> pd.DataFrame:
         """
         Renvoie la description des données du tableau
-        
+
         Returns
         -------
         pd.DataFrame

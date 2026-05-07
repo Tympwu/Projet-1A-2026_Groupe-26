@@ -48,7 +48,7 @@ class Menu(ABC):
             ],
             "matchs": [
                 "id_match", "tourney_id", "region", "match_num", "best_of",
-                "date_match", "temps_match"
+                "date_match", "temps_match", "score1", "score2", "score"
             ],
             "coachs": [
                 "id", "first_name", "last_name", "full_name", "lieu_naissance", "nationalite",
@@ -61,10 +61,10 @@ class Menu(ABC):
         }
         self.data_available = {
             "basketball": {
-                "Équipes", "Joueurs", "Matchs"
+                "Equipes", "Joueurs", "Matchs"
             },
             "football_european_leagues": {
-                "Équipes", "Joueurs", "Matchs"
+                "Equipes", "Joueurs", "Matchs"
             },
             "tennis": {
                 "Joueurs", "Matchs"
@@ -73,7 +73,7 @@ class Menu(ABC):
 
             },
             "league_of_legends": {
-                "Équipes", "Joueurs", "Coachs", "Matchs"
+                "Equipes", "Joueurs", "Coachs", "Matchs"
             }
         }
 
@@ -116,7 +116,9 @@ class Menu(ABC):
             result = int(result)
         return result
 
-    def list_attr(self, data: dict[int | str, classmethod], allowed_data: list[str]) -> list[str]:
+    def list_attr(
+        self, data: dict[int | str, classmethod], allowed_data: list[str] | None
+    ) -> list[str]:
         """
         Fonction permettant d'extraire l'entièreté des arguments d'une classe du dictionnaire
         Ces arguments doivent aussi être dans allowed_data
@@ -125,14 +127,20 @@ class Menu(ABC):
         ----------
         data : dict[Any | classmethod]
             Dictionnaire contenant l'ensemble des objects spéificique à une classe
-        allowed_data : list[str]
+        allowed_data : list[str] | None
             Liste contenant l'ensemble des paramètres autorisés
         """
         sample_data = next(iter(data.values()))
-        filtered_attr = [
-            k for k, v in sample_data.__dict__.items()
-            if v is not None and k in allowed_data
-        ]
+        if allowed_data is None:
+            filtered_attr = [
+                k for k, v in sample_data.__dict__.items()
+                if v is not None
+            ]
+        else:
+            filtered_attr = [
+                k for k, v in sample_data.__dict__.items()
+                if v is not None and k in allowed_data
+            ]
         return filtered_attr
 
     def print_list(self, donnee: list[str]):

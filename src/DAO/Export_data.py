@@ -3,11 +3,41 @@ from ..Model.Equipe import Equipe
 from ..Model.Match import Match
 from ..Model.Player import Player
 from ..Menus.Menu import Menu
+from .Interaction import DAO
 
 
 class Export_data(Menu):
-    def __init__(self):
+    def __init__(self, loader):
         super().__init__()
+        self.dao: dict[str, DAO] = loader.dao
+        self.data_added: dict[classmethod, list[classmethod]] = {
+            "joueurs": [],
+            "equipes": [],
+            "matchs": [],
+            "coachs": []
+        }
+        self.dao_match_name = {
+            "basketball": {
+                "equipes": "team", "joueurs": "player", "matchs": "game"
+            },
+            "football_european_leagues": {
+                "matchs": "match", "joueurs": "player", "equipes": "equipe"
+                # "pays": "country", "league": "competition"
+            },
+            "league_of_legends": {
+                "equipes": "team", "joueurs": "player", "matchs": "match", "coach": "coach"
+            },
+            "tennis": {
+                "matchs": ["atp_matches_2024", "wta_matches_2024"],
+                "joueurs": ["atp_players_2024", "wta_players_2024"]
+            },
+            "volleyball": {
+                # "pays": "country",
+                "coachs": ["coach_men", "coach_women"],
+                "matchs": ["match_men", "match_women"],
+                "joueurs": ["player_men", "player_women"]
+            }
+        }
 
     def add_data(self):
 
@@ -59,6 +89,7 @@ class Export_data(Menu):
             key = getattr(instance, "id", None) or getattr(instance, "id_match", None)
 
             data_dict[key] = instance
+            self.data_added[classes_print[result].lower() + "s"].append(instance)
 
             print("\n" + str(classes_print[result]) + " créé :")
             print(instance)
@@ -94,10 +125,12 @@ class Export_data(Menu):
             new_data["id"] = max_id + 1
         elif "id_match" in attributes:
             new_data["id_match"] = max_id + 1
+        if "sport" in attributes:
+            new_data["sport"] = self.sport
 
         print("\n--- Saisie des données ---")
         for attr, attr_type in used_attr.items():
-            if attr in {"id", "id_match"}:
+            if attr in {"id", "id_match", "sport"}:
                 continue
             while True:
                 value = input(f"{attr} ({attr_type.__name__}) : ")
@@ -106,9 +139,6 @@ class Export_data(Menu):
                     new_data[attr] = converted
                     break
                 print("Type invalide, recommencez")
-
-        print("\nDonnées créées :")
-        print(new_data)
         return new_data
 
     def supprimer_data(self):
@@ -117,5 +147,41 @@ class Export_data(Menu):
     def modifier_data(self):
         pass
 
-    def export_data(self):
-        pass
+    def menu_export_data(self):
+        """
+        Menu initial pour choisir quelle donnée exporter
+        """
+        # Création des paramètres permettant de poser la question correspondante au sport choisi
+        possibility_answer = ["Les " + element for element in self.data_available[self.sport]]
+        possibility_answer.append("Tout")
+        dict_answer = {i: ele.lower() for i, ele in enumerate(self.data_available[self.sport], 1)}
+        dict_answer[len(dict_answer)] = "Tout"
+
+        result = self.menu_question(
+            "Quelles données voulez-vous exporter ?",
+            possibility_answer,
+            dict_answer
+        )
+        if result == 0:
+            return 0
+        elif result == "Tout":
+            for ele in self.data_available[self.sport]:
+                self.__export_data(ele)
+        else:
+            self.__export_data(result)
+
+    def __export_data(self, categorie):
+        """
+        Fonction permettant d'exporter les données voulues de la catégorie demandée
+        """
+        result = []
+        for element in self.data_added[categorie]:
+            result.append(
+                {key: value for key, value in element.__dict__.items() if value is not None}
+            )
+        if result == []:
+            print("Pas de nouvelles données, la base de donnée initiale a été renvoyée")
+            self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+        else:
+            self.dao[self.dao_match_name[self.sport][categorie]].inserer(result)
+            self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
