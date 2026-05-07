@@ -6,8 +6,9 @@ Affichage classe :
     - Afféchier stat joueurs / equipes / matchs de base
 
 Data :
-    - Ajouter données pas que dans parser mais aussi table de données
-    - Possibilité exporter données ✅
+    - Ajouter données pas que dans parser mais aussi table de données ❌
+    - Possibilité exporter données ✅ (à fixer)
+    - Fixer fonction ajout de données d'Alexandre
 
 Générique :
     - Ajouter volley sport ✅
