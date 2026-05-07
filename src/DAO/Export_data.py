@@ -155,7 +155,7 @@ class Export_data(Menu):
         possibility_answer = ["Les " + element for element in self.data_available[self.sport]]
         possibility_answer.append("Tout")
         dict_answer = {i: ele.lower() for i, ele in enumerate(self.data_available[self.sport], 1)}
-        dict_answer[len(dict_answer)] = "Tout"
+        dict_answer[len(dict_answer)+1] = "Tout"
 
         result = self.menu_question(
             "Quelles données voulez-vous exporter ?",
@@ -166,7 +166,9 @@ class Export_data(Menu):
             return 0
         elif result == "Tout":
             for ele in self.data_available[self.sport]:
-                self.__export_data(ele)
+                print("-------------------------------------------")
+                print(f"Fichier {ele} :")
+                self.__export_data(ele.lower())
         else:
             self.__export_data(result)
 
