@@ -115,15 +115,23 @@ class Menu_Graphique(Menu):
         value = [[element1, element2] for element1, element2 in zip(value1_temp, value2_temp)]
         value = pd.DataFrame(value, columns=["first_value", "second_value"])
         value = value.groupby(['second_value']).mean()
-        titre = input("Quelle titre voulez-vous donnez à votre histogramme ?\nRéponse: ")
+        titre = input("Quelle titre voulez-vous donner à votre histogramme ?\nRéponse: ")
         self.hist = Diagramme_en_Barre(
             data1=list(value["first_value"]), data2=list(value.index), titre=titre
         )
         self.hist.afficher_image()
-        if self.menu_question(
-            "Voulez-vous enregistrer ce graphique ?",
-            ["oui", "non"],
-            {1: True, 2: False}
-        ):
-            titre_fichier = input("Quelle titre voulez-vous donner au fichier ?\nRéponse: ")
-            self.hist.enregistrer_image(titre_fichier)
+        self.hist.enregistrer_image()
+
+    def menu_nuage(self):
+        value1, value2 = self._menu_choix_var([
+            self.data_available[self.sport],
+            self.numeric_parameters,
+            self.data_available[self.sport],
+            self.numeric_parameters
+        ])
+        if value1 == value2 == 0:
+            return 0
+        titre = input("Quelle titre voulez-vous donner à votre histogramme ?\nRéponse: ")
+        self.nuage = Nuages_de_points(titre=titre, data1=value1, data2=value2)
+        self.nuage.afficher_image()
+        self.nuage.enregistrer_image()

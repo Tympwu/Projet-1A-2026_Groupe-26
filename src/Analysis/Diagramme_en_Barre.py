@@ -89,9 +89,6 @@ class Diagramme_en_Barre(Graphique):
         plt.tight_layout()  # Évite que les labels soient coupés au bord de l'image
         plt.show()
 
-    def enregistrer_image(self, nom) -> None:
-        plt.savefig(nom)
-
 
 """
 # Bloc test

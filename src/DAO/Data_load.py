@@ -42,9 +42,6 @@ class Data_loader:
         self.dao["player_men"] = DAO(fichier="data/volleyball/player_men.csv")
         self.dao["player_women"] = DAO(fichier="data/volleyball/player_women.csv")
 
-    def handle_unknown():
-        raise ValueError("Sport non pris en charge")
-
     def loader(self):
         action = {
             "basketball": self.__data_basketball,

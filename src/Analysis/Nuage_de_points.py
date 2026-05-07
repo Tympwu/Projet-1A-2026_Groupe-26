@@ -68,10 +68,7 @@ class Nuages_de_points(Graphique):
         if isinstance(couleur, str):
             self.couleur = couleur
 
-    def enregistrer_image(self, nom: str) -> None:
-        if not isinstance(nom, str):
-            raise TypeError("L'attribut nom doit être du type str")
-
+    def afficher_image(self) -> None:
         plt.figure(figsize=self.format_image)
 
         # Création du nuage de points
@@ -87,10 +84,6 @@ class Nuages_de_points(Graphique):
 
         plt.grid(True, linestyle='--', alpha=1)
         plt.tight_layout()
-
-        # CRITIQUE : On enregistre AVANT de montrer
-        plt.savefig(f"{nom}.png")
-        print(f"Image enregistrée sous : {nom}.png")
 
         # Affichage (pour Onyxia, utilise la fenêtre interactive si possible)
         plt.show()

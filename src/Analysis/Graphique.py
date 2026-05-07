@@ -1,3 +1,5 @@
+import matplolib.pyplot as plt
+
 from typing import Any
 from abc import ABC
 
@@ -31,3 +33,16 @@ class Graphique(ABC):
         self.titre = titre
         self.data1 = data1
         self.data2 = data2
+
+    def enregistrer_image(self):
+        """
+        Fonction permettant d'enregristrer un graphique
+        """
+        if self.menu_question(
+            "Voulez-vous enregistrer ce graphique ?",
+            ["oui", "non"],
+            {1: True, 2: False}
+        ):
+            nom = input("Quelle titre voulez-vous donner au fichier ?\nRéponse: ")
+            plt.savefig(f"{nom}.png")
+            print(f"Image enregistrée sous : {nom}.png")
