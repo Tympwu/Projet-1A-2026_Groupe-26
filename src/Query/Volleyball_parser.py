@@ -19,7 +19,7 @@ class Volleyball_Parser(Parser):
         for index, row in data.iterrows():
             equipe = Equipe(
                 id=index,
-                nom_equipe=self.fetch_safety_data(row["country_long"], str),
+                nom_equipe=self.fetch_safety_data(row["country_long"], str) + " " + other,
                 nom_abrev=self.fetch_safety_data(row["code"], str),
                 region_equipe=self.fetch_safety_data(row["country_long"], str),
                 pays_equipe=self.fetch_safety_data(row["country_long"], str),
@@ -34,6 +34,7 @@ class Volleyball_Parser(Parser):
         for index, row in data.iterrows():
             player = Player(
                 id=index,
+                sexe=other,
                 full_name=self.fetch_safety_data(row["name"], str),
                 dob=self.fetch_safety_data(row["birth_date"], str),
                 pseudo=self.fetch_safety_data(row["nickname"], str),
@@ -54,6 +55,7 @@ class Volleyball_Parser(Parser):
         """
         for index, row in data.iterrows():
             coach = Coach(
+                sexe=other,
                 id=index,
                 full_name=self.fetch_safety_data(row["name"], str),
                 dob=self.fetch_safety_data(row["birth_date"], str),
