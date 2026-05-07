@@ -74,11 +74,3 @@ class Football_European_leagues_Parser(Parser):
                 self.dict_equipe[self.fetch_safety_data(row["away_team_api_id"], int)].ajouter_joueur(
                     self.dict_player[joueur_away]
                     )
-
-
-    def parse_competition(self, data: pd.DataFrame, other=None):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Compétitions de Football européen
-        """
-        pass

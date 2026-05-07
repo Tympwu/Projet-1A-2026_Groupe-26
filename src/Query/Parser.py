@@ -36,10 +36,6 @@ class Parser(ABC):
         pass
 
     @abstractmethod
-    def parse_competition(self, data, other: Any):
-        pass
-
-    @abstractmethod
     def parse_equipes(self, data, other: Any):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
