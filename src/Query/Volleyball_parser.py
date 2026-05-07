@@ -21,7 +21,6 @@ class Volleyball_Parser(Parser):
                 id=index,
                 nom_equipe=self.fetch_safety_data(row["country_long"], str) + " " + other,
                 nom_abrev=self.fetch_safety_data(row["code"], str),
-                region_equipe=self.fetch_safety_data(row["country_long"], str),
                 pays_equipe=self.fetch_safety_data(row["country_long"], str),
                 )
             self.dict_equipe[equipe.nom_equipe] = equipe
