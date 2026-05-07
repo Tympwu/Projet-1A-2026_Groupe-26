@@ -16,6 +16,7 @@ class Menu(ABC):
         self.admin: bool = False
         if glob_sport is not None:
             self.sport = glob_sport
+            self.team_sport = glob_sport not in {"tennis"}
         else:
             self.sport = None
         self._sports: dict[int, str] = {
@@ -23,8 +24,8 @@ class Menu(ABC):
             2: "football_european_leagues",
             3: "tennis",
             4: "league_of_legends",
-            5: "volleyball",
-            6: "Badminton"}
+            5: "volleyball"
+            }
         if glob_parser is not None:
             self.parser = glob_parser
             self.parser_match_name = {
@@ -111,10 +112,17 @@ class Menu(ABC):
             result = int(result)
         return result
 
-    def list_attr(self, data: dict[str, classmethod], allowed_data: list[str]) -> list[str]:
+    def list_attr(self, data: dict[int | str, classmethod], allowed_data: list[str]) -> list[str]:
         """
         Fonction permettant d'extraire l'entièreté des arguments d'une classe du dictionnaire
         Ces arguments doivent aussi être dans allowed_data
+
+        Parameters
+        ----------
+        data : dict[Any | classmethod]
+            Dictionnaire contenant l'ensemble des objects spéificique à une classe
+        allowed_data : list[str]
+            Liste contenant l'ensemble des paramètres autorisés
         """
         sample_data = next(iter(data.values()))
         filtered_attr = [

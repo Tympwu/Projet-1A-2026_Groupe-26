@@ -6,9 +6,6 @@ from ..Query.Basketball_parser import Basketball_Parser
 from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
-from ..Analysis.Match_printer import Match_printer
-from ..Analysis.Joueur_printer import Joueur_printer
-from ..Analysis.Equipe_printer import Equipe_printer
 from ..Interface.Menu import Menu
 from ..Interface.Menu_Recherche import Recherche
 from ..DAO.export_data import Export_data
@@ -33,9 +30,6 @@ class Menu_Début(Menu):
         self.sport_choosen: int = None
         self.team_sport: bool = True
         self.__recherche_data: Recherche | None = None
-        self.__match_printer: Match_printer = None
-        self.__equipe_printer: Equipe_printer = None
-        self.__joueur_printer: Joueur_printer = None
 
     def connect(self):
         """
@@ -92,6 +86,7 @@ class Menu_Début(Menu):
         Football européen
         Tennis
         League-of-Legends
+        Volleyball
 
 
         A tout moment, si vous répondez 0 à une question cela permettra de revenir en arrière
@@ -189,17 +184,8 @@ class Menu_Début(Menu):
             self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme")
             print("Matchs chargés")
 
-        # Création des printer correspondants
-        self.__joueur_printer = Joueur_printer(self.parser.dict_player)
-        self.__equipe_printer = Equipe_printer(self.parser.dict_equipe)
-        self.__match_printer = Match_printer(self.parser.dict_matchs, team_sport=self.team_sport)
-
         # Création du module de rercherche des données
-        self.__recherche_data = Recherche(self._sports[self.sport_choosen], {
-            "matchs": self.__match_printer,
-            "joueurs": self.__joueur_printer,
-            "equipes": self.__equipe_printer}
-        )
+        self.__recherche_data = Recherche()
 
         # Création du module d'export des données correspondant et du modèle graphique
         self.__graph_menu = Menu_Graphique()
