@@ -48,6 +48,8 @@ class Menu_Graphique(Menu):
             question0,
             {i: unidecode(ele.lower()) for i, ele in enumerate(question0, 1)},
         )
+        if first_data == 0:
+            return 0, 0
 
         data1 = self.list_attr(
             self.parser_match_name[first_data],
@@ -61,6 +63,8 @@ class Menu_Graphique(Menu):
             question1,
             data_dict1
         )
+        if var1 == 0:
+            return 0, 0
 
         # Deuxième variable
         question2 = {"Joueurs", "Équipes", "Matchs", "Coachs"}
@@ -72,6 +76,8 @@ class Menu_Graphique(Menu):
             question2,
             {i: unidecode(ele.lower()) for i, ele in enumerate(question2, 1)}
         )
+        if second_data == 0:
+            return 0, 0
         data2 = self.list_attr(
             self.parser_match_name[second_data],
             self.parameters_allowed[second_data])
@@ -84,6 +90,8 @@ class Menu_Graphique(Menu):
             question3,
             data_dict2
         )
+        if var2 == 0:
+            return 0, 0
 
         value1 = []
         value2 = []
@@ -102,6 +110,8 @@ class Menu_Graphique(Menu):
             self.data_available[self.sport],
             None
         ])
+        if value1_temp == value2_temp == 0:
+            return 0
         value = [[element1, element2] for element1, element2 in zip(value1_temp, value2_temp)]
         value = pd.DataFrame(value, columns=["first_value", "second_value"])
         value = value.groupby(['second_value']).mean()

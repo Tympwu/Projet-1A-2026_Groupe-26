@@ -56,8 +56,8 @@ class Menu(ABC):
             ]
         }
         self.numeric_parameters = {
-            "id", "taille", "numero_maillot", "poids", "id_match",
-            "tourney_id", "match_num", "best_of", "temps_match"
+            "id", "taille", "numero_maillot", "poids", "id_match", "score1", "score2", "score"
+            "tourney_id", "match_num", "best_of"
         }
         self.data_available = {
             "basketball": {
