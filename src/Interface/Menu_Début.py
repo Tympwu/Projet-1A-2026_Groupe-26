@@ -3,7 +3,7 @@ from ..Query.Parser import Parser
 from ..Query.Tennis_parser import Tennis_Parser
 from ..Query.Basketball_parser import Basketball_Parser
 # from ..Query.Badminton_parser import Badminton_Parser
-# from ..Query.Volleyball_parser import Volleyball_Parser
+from ..Query.Volleyball_parser import Volleyball_Parser
 from ..Query.League_of_legend_parser import League_of_legend_Parser
 from ..Query.Football_E_parser import Football_European_leagues_Parser
 from ..Analysis.Match_printer import Match_printer
@@ -174,6 +174,19 @@ class Menu_Début(Menu):
             self.parser.parse_coach(self.search.dao["coach"].data)
             print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
+            print("Matchs chargés")
+
+        elif self.sport_choosen == 5:  # volleyball
+            self.initialize_parser(
+                Volleyball_Parser(), self._sports[self.sport_choosen], self.__search
+            )
+            self.parser.parse_equipes(self.search.dao["country"].data)
+            print("Equipes sans joueurs chargées")
+            self.parser.parse_players(self.search.dao["player_men"].data)
+            print("Joueurs chargées et ajoutés dans les équipes")
+            self.parser.parse_coach(self.search.dao["coach_men"].data)
+            print("Coachs chargées et ajouté dans les equipes")
+            self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["contry"].data)
             print("Matchs chargés")
 
         # Création des printer correspondants
