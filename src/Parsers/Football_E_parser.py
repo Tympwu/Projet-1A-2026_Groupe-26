@@ -78,3 +78,6 @@ class Football_European_leagues_Parser(Parser):
                 self.dict_equipe[
                     self.fetch_safety_data(row["away_team_api_id"], int)
                     ].ajouter_joueur(self.dict_player[joueur_away])
+
+    def parse_coachs(self, data, other=None):
+        pass

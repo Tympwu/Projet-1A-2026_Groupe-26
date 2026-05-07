@@ -28,7 +28,7 @@ class Menu(ABC):
             }
         if glob_parser is not None:
             self.parser = glob_parser
-            self.parser_match_name = {
+            self.parser_match_name: dict[str, dict[int | str, classmethod]] = {
                 "joueurs": self.parser.dict_player,
                 "matchs": self.parser.dict_matchs,
                 "equipes": self.parser.dict_equipe,
@@ -37,7 +37,7 @@ class Menu(ABC):
             self.__search = glob_dao
         else:
             self.parser = None
-        self.parameters_allowed = {
+        self.parameters_allowed: dict[str, list[str]] = {
             "joueurs": [
                 "id", "first_name", "last_name", "full_name", "sexe", "pseudo", "equipe", "taille",
                 "nationalite", "continent", "numero_maillot", "main_forte", "poids", "role"
@@ -55,11 +55,11 @@ class Menu(ABC):
                 "pseudo", "dob", "sexe", "role", "equipe"
             ]
         }
-        self.numeric_parameters = {
+        self.numeric_parameters: set[str] = {
             "id", "taille", "numero_maillot", "poids", "id_match", "score1", "score2", "score"
             "tourney_id", "match_num", "best_of"
         }
-        self.data_available = {
+        self.data_available: dict[str, set[str]] = {
             "basketball": {
                 "Equipes", "Joueurs", "Matchs"
             },
@@ -70,7 +70,7 @@ class Menu(ABC):
                 "Joueurs", "Matchs"
             },
             "volleyball": {
-
+                "Equipes", "Joueurs", "Coachs", "Matchs"
             },
             "league_of_legends": {
                 "Equipes", "Joueurs", "Coachs", "Matchs"

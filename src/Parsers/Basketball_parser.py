@@ -72,3 +72,6 @@ class Basketball_Parser(Parser):
                 date_match=self.fetch_safety_data(row["game_date"], str)
                 )
             self.dict_matchs[match.id_match] = match
+
+    def parse_coachs(self, data, other=None):
+        pass

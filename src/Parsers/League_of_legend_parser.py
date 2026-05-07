@@ -48,7 +48,7 @@ class League_of_legend_Parser(Parser):
                 if equipe.nom_equipe == player.equipe:
                     self.dict_equipe[equipe.nom_equipe].ajouter_joueur(player)
 
-    def parse_coach(self, data: pd.DataFrame, other=None):
+    def parse_coachs(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Coachs de leagues of legends

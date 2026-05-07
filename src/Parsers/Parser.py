@@ -42,8 +42,8 @@ class Parser(ABC):
 
     @abstractmethod
     def parse_equipes(self, data, other: Any):
-        """
-        Fonction permettant de récupérer les éléments des bases de données et de créer les classes
-        correspondantes. Cette dernière est spécifique aux Équipes de Tennis
-        """
+        pass
+
+    @abstractmethod
+    def parse_coachs(self, data, other: Any):
         pass

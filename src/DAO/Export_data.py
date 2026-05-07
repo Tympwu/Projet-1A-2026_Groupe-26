@@ -1,9 +1,14 @@
+import pandas as pd
+
 from ..Model.Coach import Coach
 from ..Model.Equipe import Equipe
 from ..Model.Match import Match
 from ..Model.Player import Player
 from ..Menus.Menu import Menu
 from .Interaction import DAO
+
+global glob_fuse_dao
+glob_fuse_dao = False
 
 
 class Export_data(Menu):
@@ -38,8 +43,67 @@ class Export_data(Menu):
                 "joueurs": ["player_men", "player_women"]
             }
         }
+        self.parser_function_match = {
+            "joueurs": self.parser.parse_players,
+            "equipes": self.parser.parse_equipes,
+            "matchs": self.parser.parse_matchs,
+            "coachs": self.parser.parse_coachs
+        }
 
     def add_data(self):
+        """
+        Fonction permettant d'ajouter des données dans la base de données
+        """
+        # Première question pour déterminer dans quelle catégorie ajouter des informations
+        possible_answer = [
+            "Ajouter des " + element.lower() for element in self.data_available[self.sport]
+        ]
+        dict_answer = {
+            i: element.lower() for i, element in enumerate(self.data_available[self.sport], 1)
+        }
+        result = self.menu_question(
+            "Quelle donnée voulez-vous ajouter ?",
+            possible_answer,
+            dict_answer
+        )
+        if result == 0:
+            return
+
+        # Disjonction de cas afin de prévoir les sports séparés en fonction du sexe
+        men_women = None
+        if isinstance(self.dao_match_name[self.sport][result], list):
+            men_women = self.menu_question(
+                f"Le {self.sport} est divisé en catégorie femme et homme\n" +
+                "Dans laquelle voulez-vous ajouter des données ?",
+                ["Homme", "Femme"],
+                {1: 1, 2: 2},
+                break_on_call=True
+            )
+            if men_women == 0:
+                return 0
+            else:
+                men_women -= 1
+                dao_wanted = self.dao[self.dao_match_name[self.sport][result][men_women]]
+                list_attr = list(
+                    self.dao[self.dao_match_name[self.sport][result][men_women]].data.columns)
+        else:
+            dao_wanted = self.dao[self.dao_match_name[self.sport][result]]
+            list_attr = list(self.dao[self.dao_match_name[self.sport][result]].data.columns)
+
+        # Éléments initiaux pour la création du nouvel élément
+        new_element: dict[str, str | None] = {"sport": self.sport}
+        new_element[list_attr[0]] = max(
+            self.parser_match_name[result].keys(), default=0) + 1
+        
+        # Liste de questions pour remplir les données
+        for attribut in list_attr[1:]:
+            parameter = input(f"Valeur pour {attribut} :")
+            new_element[attribut] = [parameter] if parameter is not None else None
+        dao_wanted.inserer(new_element)
+        # Là !!!!!!!!!!!!!!!!!!!!!!!!!!!
+        self.parser_function_match[result](pd.DataFrame(new_element), other=men_women)
+
+    def add_data_bis(self):
 
         sport_sans_equipe = {"tennis"}
 
@@ -176,6 +240,30 @@ class Export_data(Menu):
         """
         Fonction permettant d'exporter les données voulues de la catégorie demandée
         """
+        # Cas d'un sport séparé en fonction du sexe
+        if isinstance(self.dao_match_name[self.sport][categorie], list):
+            men_women = self.menu_question(
+                f"Le {self.sport} est divisé en catégorie femme et homme\n" +
+                "Dans laquelle voulez-vous ajouter des données ?",
+                ["Homme", "Femme"],
+                {1: 1, 2: 2},
+                break_on_call=True
+            )
+            if men_women == 0:
+                return 0
+            else:
+                men_women -= 1
+                # Exportation des données
+                self.dao[self.dao_match_name[self.sport][categorie][men_women]].sauvegarde()
+        else:
+            # Exportation des données
+            self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+        print("Exportation effectuée !\n\n")
+"""            
+    def __export_data(self, categorie):
+        
+        Fonction permettant d'exporter les données voulues de la catégorie demandée
+        
         result = []
         for element in self.data_added[categorie]:
             result.append(
@@ -183,7 +271,26 @@ class Export_data(Menu):
             )
         if result == []:
             print("Pas de nouvelles données, la base de donnée initiale a été renvoyée")
-            self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+            if self.sport not in {"tennis", "volleyball"}:
+                self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+            else:
+                for element in self.dao_match_name[self.sport][categorie]:
+                    self.dao[element].sauvegarde()
         else:
-            self.dao[self.dao_match_name[self.sport][categorie]].inserer(result)
-            self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+            if self.sport not in {"tennis", "volleyball"}:
+                self.dao[self.dao_match_name[self.sport][categorie]].inserer(result)
+                self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
+            else:
+                fuse_dao = glob_fuse_dao
+                if not fuse_dao:
+                    print(
+                        "Les données initiales étaient séparés en 2 fichiers distincts," +
+                        " le fichier sortant est la fusion des deux et des ajouts manuels")
+                    global glob_fuse_dao
+                    glob_fuse_dao = True
+                    self.dao[self.dao_match_name[self.sport][categorie][0]].inserer(
+                        self.dao[self.dao_match_name[self.sport][categorie][1]]
+                    )
+                self.dao[self.dao_match_name[self.sport][categorie][0]].inserer(result)
+                self.dao[self.dao_match_name[self.sport][categorie][0]].sauvegarde()
+"""

@@ -164,7 +164,7 @@ class Menu_Début(Menu):
             print("Equipes sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player"].data)
             print("Joueurs chargées et ajoutés dans les équipes")
-            self.parser.parse_coach(self.search.dao["coach"].data)
+            self.parser.parse_coachs(self.search.dao["coach"].data)
             print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(self.search.dao["match"].data, self.search.dao["team"].data)
             print("Matchs chargés")
@@ -177,7 +177,7 @@ class Menu_Début(Menu):
             print("Equipes sans joueurs chargées")
             self.parser.parse_players(self.search.dao["player_men"].data, other="Homme")
             print("Joueurs chargées et ajoutés dans les équipes")
-            self.parser.parse_coach(self.search.dao["coach_men"].data, other="Homme")
+            self.parser.parse_coachs(self.search.dao["coach_men"].data, other="Homme")
             print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(
                 self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme"

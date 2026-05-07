@@ -69,6 +69,7 @@ class Tennis_Parser(Parser):
             self.dict_matchs[match.id_match] = match
 
     def parse_equipes(self, data, other=None):
-        """
-        """
+        pass
+
+    def parse_coachs(self, data, other=None):
         pass
