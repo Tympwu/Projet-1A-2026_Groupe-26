@@ -2,7 +2,7 @@ from .Parser import Parser
 import pandas as pd
 
 from ..Model.Player import Player
-from ..Model.match import Match
+from ..Model.Match import Match
 from ..Model.Equipe import Equipe
 from ..Model.Coach import Coach
 
@@ -78,7 +78,6 @@ class League_of_legend_Parser(Parser):
             self.dict_nom_abbreg_nom_equipe[
                 self.fetch_safety_data(row["team_abbreviation"], str)
                 ] = self.fetch_safety_data(row["team"], str)
-        # print(self.dict_nom_abbreg_nom_equipe)
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
             date_match = date_match[:4] + "-" + date_match[5:7] + "-" + date_match[8:10]
@@ -97,7 +96,3 @@ class League_of_legend_Parser(Parser):
                 match.ajouter_scores(score1=0, score2=1)
 
             self.dict_matchs[match.id_match] = match
-
-
-
-

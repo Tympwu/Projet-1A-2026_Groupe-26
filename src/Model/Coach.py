@@ -74,19 +74,11 @@ class Coach(Personne):
         -------
         str
             Représentation textuelle du coach.
-
-        Examples
-        ---------
-        >>> c1 = Coach(id=7, pseudo='Pep')
-        >>> print(c1)
-        pseudo : Pep
-        id : 7
         """
-        result = ""
-        for nom_argument, valeur in self.__dict__.items():
-            if valeur is not None:
-                result += f"\n{nom_argument} : {valeur}"
-        return result
+        dict_result = {
+            element: [value] for element, value in self.__dict__.items() if value is not None
+        }
+        return tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
 
     def __hash__(self) -> int:
         """Calcule l'hash du coach.

@@ -46,17 +46,17 @@ class Personne:
     ) -> None:
         if (id is not None) and (not isinstance(id, int)):
             raise ValueError("l'attribut id doit être du type int ou None")
-        if  (first_name is not None) and (not isinstance(first_name, str)):
+        if (first_name is not None) and (not isinstance(first_name, str)):
             raise ValueError("l'attribut first_name doit être du type str ou None")
-        if  (last_name is not None) and (not isinstance(last_name, str)):
+        if (last_name is not None) and (not isinstance(last_name, str)):
             raise ValueError("l'attribut last_name doit être du type str ou None")
-        if  (full_name is not None) and (not isinstance(full_name, str)):
+        if (full_name is not None) and (not isinstance(full_name, str)):
             raise ValueError("l'attribut full_name doit être du type str ou None")
-        if  (dob is not None) and (not isinstance(dob, str)):
+        if (dob is not None) and (not isinstance(dob, str)):
             raise ValueError("l'attribut dob doit être du type str ou None")
-        if  (lieu_naissance is not None) and (not isinstance(lieu_naissance, str)):
+        if (lieu_naissance is not None) and (not isinstance(lieu_naissance, str)):
             raise ValueError("l'attribut lieu_naissance doit être du type str ou None")
-        if  (sexe is not None) and (not isinstance(sexe, str)):
+        if (sexe is not None) and (not isinstance(sexe, str)):
             raise ValueError("l'attribut sexe doit être du type str ou None")
         self.id = id
         self.first_name = first_name

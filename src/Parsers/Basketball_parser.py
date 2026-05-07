@@ -2,7 +2,7 @@ from .Parser import Parser
 import pandas as pd
 
 from ..Model.Player import Player
-from ..Model.match import Match
+from ..Model.Match import Match
 from ..Model.Equipe import Equipe
 
 
@@ -56,7 +56,6 @@ class Basketball_Parser(Parser):
                 sport="Basketball")
             self.dict_player[player.id] = player
             self.dict_equipe[self.fetch_safety_data(row["team_id"], int)].ajouter_joueur(player)
-
 
     def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame):
         """

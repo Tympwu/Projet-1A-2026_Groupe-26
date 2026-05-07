@@ -1,15 +1,19 @@
 from typing import Any
-from abc import abstractmethod, ABC
+from abc import ABC
 
 
 class Graphique(ABC):
     """
     Class qui regroupe les caractéristiques commune des graphiques
 
-    attribut:
-    titre: str = "" représente le titre du graphique
-    data1: list[Any] = [] représente la 1ère série de donnée
-    data2: list[Any] = [] représente la 2ème série de donnée
+    Parameters
+    ----------
+    titre : str = ""
+        Représente le titre du graphique
+    data1 : list[Any] = []
+        Représente la 1ère série de donnée
+    data2 : list[Any] = []
+        Représente la 2ème série de donnée
     """
 
     def __init__(

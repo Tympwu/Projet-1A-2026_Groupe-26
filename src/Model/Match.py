@@ -1,5 +1,4 @@
 from .Equipe import Equipe
-from typing import Any
 from tabulate import tabulate
 
 from .Player import Player
@@ -8,12 +7,6 @@ from .Player import Player
 class Match:
     """
     Classe représentant un match
-    
-    Returns
-    -------
-    _type_
-        _description_
-
     """
     def __init__(
         self,
@@ -90,7 +83,7 @@ class Match:
                 "nom": [self.equipe1.nom_equipe, self.equipe2.nom_equipe],
                 "score": [self.score1, self.score2]
             }
-        
+
         dict_result = {
             element: [value] for element, value in self.__dict__.items()
             if not ((value is None) or (element in {
@@ -103,7 +96,6 @@ class Match:
         tab_match = tabulate(dict_result, headers="keys", tablefmt="rounded_grid")
         tab_score = tabulate(participants, headers="keys", tablefmt="rounded_grid")
         return f"{tab_match}\n\nParticipants :\n{tab_score}"
-
 
     def ajouter_scores(self, score1: int, score2: int) -> None:
         """

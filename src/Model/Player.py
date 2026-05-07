@@ -61,8 +61,8 @@ class Player(Personne):
     """
 
     id: int
-    first_name: str 
-    last_name: str 
+    first_name: str
+    last_name: str
     full_name: str
     sexe: str
     dob: str

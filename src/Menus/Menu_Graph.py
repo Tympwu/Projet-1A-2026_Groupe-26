@@ -4,7 +4,7 @@ import pandas as pd
 
 from ..Analysis.Diagramme_en_Barre import Diagramme_en_Barre
 from ..Analysis.Nuage_de_points import Nuages_de_points
-from ..Interface.Menu import Menu
+from .Menu import Menu
 
 
 class Menu_Graphique(Menu):

@@ -2,7 +2,7 @@ from .Parser import Parser
 import pandas as pd
 
 from ..Model.Player import Player
-from ..Model.match import Match
+from ..Model.Match import Match
 from ..Model.Equipe import Equipe
 from ..Model.Coach import Coach
 
@@ -67,7 +67,6 @@ class Volleyball_Parser(Parser):
             for equipe in self.dict_equipe.values():
                 if equipe.nom_abrev == coach.equipe:
                     self.dict_equipe[equipe.nom_equipe].ajouter_coach(coach)
-        
 
     def parse_matchs(self, data: pd.DataFrame, other: pd.DataFrame, sexe=None):
         """
@@ -86,9 +85,11 @@ class Volleyball_Parser(Parser):
             match = Match(
                 id_match=index,
                 equipe1=self.dict_equipe[
-                    self.dict_nom_abbreg_nom_equipe[self.fetch_safety_data(row["country_code_1"], str)]],
+                    self.dict_nom_abbreg_nom_equipe[
+                        self.fetch_safety_data(row["country_code_1"], str)]],
                 equipe2=self.dict_equipe[
-                    self.dict_nom_abbreg_nom_equipe[self.fetch_safety_data(row["country_code_2"], str)]],
+                    self.dict_nom_abbreg_nom_equipe[
+                        self.fetch_safety_data(row["country_code_2"], str)]],
                 date_match=date_match,
                 score1=self.fetch_safety_data(row["set_country_1"], int),
                 score2=self.fetch_safety_data(row["set_country_2"], int),

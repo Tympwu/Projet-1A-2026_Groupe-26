@@ -2,10 +2,7 @@ from .Parser import Parser
 import pandas as pd
 
 from ..Model.Player import Player
-from ..Model.match import Match
-from ..Model.Competition import Competition
-# from ..Model.Equipe import Equipe
-# from ..Model.Coach import Coach
+from ..Model.Match import Match
 
 
 class Tennis_Parser(Parser):
@@ -56,7 +53,7 @@ class Tennis_Parser(Parser):
                 else:
                     res_score[1] += 1
             return (res_score[0], res_score[1])
-    
+
         for index, row in data.iterrows():
             match = Match(
                 id_match=index,

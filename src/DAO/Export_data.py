@@ -1,9 +1,8 @@
-# from ..Model.Coach import Coach
-# from ..Model.Competition import Competition
+from ..Model.Coach import Coach
 from ..Model.Equipe import Equipe
-from ..Model.match import Match
+from ..Model.Match import Match
 from ..Model.Player import Player
-from ..Interface.Menu import Menu
+from ..Menus.Menu import Menu
 
 
 class Export_data(Menu):

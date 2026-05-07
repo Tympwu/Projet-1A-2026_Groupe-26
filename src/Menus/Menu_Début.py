@@ -1,15 +1,13 @@
-from ..Query.data_load import Data_loader
-from ..Query.Parser import Parser
-from ..Query.Tennis_parser import Tennis_Parser
-from ..Query.Basketball_parser import Basketball_Parser
-# from ..Query.Badminton_parser import Badminton_Parser
-from ..Query.Volleyball_parser import Volleyball_Parser
-from ..Query.League_of_legend_parser import League_of_legend_Parser
-from ..Query.Football_E_parser import Football_European_leagues_Parser
-from ..Interface.Menu import Menu
-from ..Interface.Menu_Recherche import Recherche
-from ..DAO.export_data import Export_data
-from ..Interface.Menu_Graph import Menu_Graphique
+from ..DAO.Data_load import Data_loader
+from ..Parsers.Tennis_parser import Tennis_Parser
+from ..Parsers.Basketball_parser import Basketball_Parser
+from ..Parsers.Volleyball_parser import Volleyball_Parser
+from ..Parsers.League_of_legend_parser import League_of_legend_Parser
+from ..Parsers.Football_E_parser import Football_European_leagues_Parser
+from ..Menus.Menu import Menu
+from ..Menus.Menu_Recherche import Recherche
+from ..DAO.Export_data import Export_data
+from ..Menus.Menu_Graph import Menu_Graphique
 
 
 class Menu_Début(Menu):
@@ -25,7 +23,7 @@ class Menu_Début(Menu):
             4: "league_of_legends",
             5: "volleyball",
             6: "badminton"}
-        self.parser: Parser = None
+        self.parser = None
         self.__graph_menu: Menu_Graphique = None
         self.sport_choosen: int = None
         self.team_sport: bool = True
@@ -181,7 +179,9 @@ class Menu_Début(Menu):
             print("Joueurs chargées et ajoutés dans les équipes")
             self.parser.parse_coach(self.search.dao["coach_men"].data, other="Homme")
             print("Coachs chargées et ajouté dans les equipes")
-            self.parser.parse_matchs(self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme")
+            self.parser.parse_matchs(
+                self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme"
+            )
             print("Matchs chargés")
 
         # Création du module de rercherche des données
