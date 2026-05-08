@@ -61,7 +61,7 @@ class Player(Personne):
     """
     def __init__(
         self,
-        id: int,
+        id: int = None,
         first_name: str = None,
         last_name: str = None,
         full_name: str = None,
