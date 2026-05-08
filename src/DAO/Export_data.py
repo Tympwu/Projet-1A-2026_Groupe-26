@@ -1,9 +1,5 @@
 import pandas as pd
 
-from ..Model.Coach import Coach
-from ..Model.Equipe import Equipe
-from ..Model.Match import Match
-from ..Model.Player import Player
 from ..Menus.Menu import Menu
 from .Interaction import DAO
 
@@ -91,125 +87,26 @@ class Export_data(Menu):
             list_attr = list(self.dao[self.dao_match_name[self.sport][result]].data.columns)
 
         # Éléments initiaux pour la création du nouvel élément
-        new_element: dict[str, str | None] = {"sport": self.sport}
+        new_element: dict[str, str | None] = {}
         new_element[list_attr[0]] = max(
             self.parser_match_name[result].keys(), default=0) + 1
-        
+
         # Liste de questions pour remplir les données
         for attribut in list_attr[1:]:
-            parameter = input(f"Valeur pour {attribut} :")
+            parameter = input(f"Valeur pour {attribut} (Exemple : {dao_wanted.data[attribut][0]}):")
             new_element[attribut] = [parameter] if parameter is not None else None
-        dao_wanted.inserer(new_element)
-        # Là !!!!!!!!!!!!!!!!!!!!!!!!!!!
-        self.parser_function_match[result](pd.DataFrame(new_element), other=men_women)
-
-    def add_data_bis(self):
-
-        sport_sans_equipe = {"tennis"}
-
-        options = {
-            1: self.parser.dict_player,
-            2: self.parser.dict_equipe,
-            3: self.parser.dict_matchs
-        }
-
-        classes = {
-            1: Player,
-            2: Equipe,
-            3: Match
-        }
-
-        classes_print = {
-            1: "Joueur",
-            2: "Equipe",
-            3: "Match"
-        }
-
-        while True:
-
-            print("-------------------------------------------")
-            print("Que voulez-vous faire désormais ?")
-
-            print("1. Ajouter des joueurs")
-
-            if self.sport.lower() not in sport_sans_equipe:
-                print("2. Ajouter des équipes")
-
-            print("3. Ajouter des matchs")
-            print("0. Revenir au menu principal\n")
-
-            result = self.answer_question({0, 1, 2, 3})
-
-            if result == 0:
-                return
-
-            data_dict = options[result]
-            cls = classes[result]
-
-            new_data = self.collect_input_data(data_dict, cls)
-            instance = cls(**new_data)
-
-            # stockage dynamique
-            key = getattr(instance, "id", None) or getattr(instance, "id_match", None)
-
-            data_dict[key] = instance
-            self.data_added[classes_print[result].lower() + "s"].append(instance)
-
-            print("\n" + str(classes_print[result]) + " créé :")
-            print(instance)
-
-    def collect_input_data(self, data_dict, cls):
-
-        def convert_value(value, expected_type):
-            if value == "":
-                return None
-            try:
-                if expected_type is int:
-                    return int(value)
-                if expected_type is float:
-                    return round(float(value), 2)
-                if expected_type is str:
-                    return value
-                return value
-            except ValueError:
-                print(f"Valeur invalide pour type {expected_type.__name__}")
-                return None
-
-        sample = next(iter(data_dict.values()))
-        annotations = cls.__annotations__
-        used_attr = {
-            attr: attr_type
-            for attr, attr_type in annotations.items()
-            if any(getattr(obj, attr, None) is not None for obj in data_dict.values())
-        }
-        attributes = list(sample.__dict__.keys())
-        new_data = {}
-        max_id = max(data_dict.keys(), default=0)
-        if "id" in attributes:
-            new_data["id"] = max_id + 1
-        elif "id_match" in attributes:
-            new_data["id_match"] = max_id + 1
-        if "sport" in attributes:
-            new_data["sport"] = self.sport
-
-        print("\n--- Saisie des données ---")
-        for attr, attr_type in used_attr.items():
-            if attr in {"id", "id_match", "sport"}:
-                continue
-            while True:
-                value = input(f"{attr} ({attr_type.__name__}) : ")
-                converted = convert_value(value, attr_type)
-                if converted is not None or value == "":
-                    new_data[attr] = converted
-                    break
-                print("Type invalide, recommencez")
-        return new_data
-
-    def supprimer_data(self):
-        pass
-
-    def modifier_data(self):
-        pass
+        try:
+            self.parser_function_match[result](pd.DataFrame(new_element), other=men_women)
+            dao_wanted.inserer(new_element)
+            print("Élément crée avec succès")
+        except (ValueError, IndexError):
+            print(
+                "Certains valeurs renseignées n'étaient pas du bon type ou format," +
+                " l'ajout n'as pas pu se faire")
+        except KeyError:
+            print(
+                "L'une des id renseigné n'est pas valide, merci de renseigner une id déjà" +
+                " existante ou de créer l'élement voulu d'abord")
 
     def menu_export_data(self):
         """
@@ -259,38 +156,3 @@ class Export_data(Menu):
             # Exportation des données
             self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
         print("Exportation effectuée !\n\n")
-"""            
-    def __export_data(self, categorie):
-        
-        Fonction permettant d'exporter les données voulues de la catégorie demandée
-        
-        result = []
-        for element in self.data_added[categorie]:
-            result.append(
-                {key: value for key, value in element.__dict__.items() if value is not None}
-            )
-        if result == []:
-            print("Pas de nouvelles données, la base de donnée initiale a été renvoyée")
-            if self.sport not in {"tennis", "volleyball"}:
-                self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
-            else:
-                for element in self.dao_match_name[self.sport][categorie]:
-                    self.dao[element].sauvegarde()
-        else:
-            if self.sport not in {"tennis", "volleyball"}:
-                self.dao[self.dao_match_name[self.sport][categorie]].inserer(result)
-                self.dao[self.dao_match_name[self.sport][categorie]].sauvegarde()
-            else:
-                fuse_dao = glob_fuse_dao
-                if not fuse_dao:
-                    print(
-                        "Les données initiales étaient séparés en 2 fichiers distincts," +
-                        " le fichier sortant est la fusion des deux et des ajouts manuels")
-                    global glob_fuse_dao
-                    glob_fuse_dao = True
-                    self.dao[self.dao_match_name[self.sport][categorie][0]].inserer(
-                        self.dao[self.dao_match_name[self.sport][categorie][1]]
-                    )
-                self.dao[self.dao_match_name[self.sport][categorie][0]].inserer(result)
-                self.dao[self.dao_match_name[self.sport][categorie][0]].sauvegarde()
-"""

@@ -43,20 +43,6 @@ class Equipe:
     nom_equipe : Olympique Lyonnais
     ville_equipe : Lyon
     """
-
-    id: int
-    joueurs_equipe: set[Player]
-    coach_equipe: set[Coach]
-    nom_equipe: str
-    nom_abrev: str
-    nickname: str
-    ville_equipe: str
-    region_equipe: str
-    pays_equipe: str
-    continent_equipe: str
-    ligue: str
-    annee_fondation: int
-    
     def __init__(
         self,
         id: int,

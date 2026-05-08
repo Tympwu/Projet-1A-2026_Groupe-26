@@ -83,10 +83,10 @@ class Diagramme_en_Barre(Graphique):
         largeur, hauteur = self.format_image[0], self.format_image[1]
         plt.figure(figsize=(largeur, hauteur))
 
-        plt.bar(self.data2, self.data1, color=self.couleur)
+        plt.bar(self.data1, self.data2, color=self.couleur)
         plt.title(self.titre)
-        plt.xlabel(self.nom_axe2)
-        plt.ylabel(self.nom_axe1)
+        plt.xlabel(self.nom_axe1)
+        plt.ylabel(self.nom_axe2)
 
         # inclinaison des labels s'ils sont trop longs
         plt.xticks(rotation=45, ha='right')

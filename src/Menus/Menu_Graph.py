@@ -120,14 +120,14 @@ class Menu_Graphique(Menu):
             data1=list(value["first_value"]), data2=list(value.index), titre=titre,
             nom_axe1=self.var1, nom_axe2=self.var2
         )
-        self.hist.afficher_image()
+        self.diag.afficher_image()
         if self.menu_question(
             "Voulez-vous enregistrer ce graphique ?",
             ["oui", "non"],
             {1: True, 2: False}
         ):
             titre = input("Quelle titre voulez-vous donner au fichier ?\nRéponse: ")
-            self.hist.enregistrer_image(titre)
+            self.diag.enregistrer_image(titre)
 
     def menu_nuage(self):
         value1, value2 = self._menu_choix_var([

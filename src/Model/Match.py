@@ -60,7 +60,7 @@ class Match:
         self.joueur1 = joueur1
         self.joueur2 = joueur2
         self.score1 = score1
-        self.score2 = score
+        self.score2 = score2
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match
