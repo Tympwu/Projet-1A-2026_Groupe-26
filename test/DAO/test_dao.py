@@ -2,16 +2,10 @@ import pandas as pd
 import pytest
 import numpy as np
 from unittest.mock import patch
-import sys
-from pathlib import Path
 from src.DAO.Interaction import DAO
 
-sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-
-# ---------------------------------------------------------------------------
 # Fixtures
-# ---------------------------------------------------------------------------
 
 SAMPLE_DATA = pd.DataFrame({
     "id":    [1, 2, 3, 4],
@@ -61,9 +55,7 @@ def dao_doublons():
         return DAO(SAMPLE_CSV)
 
 
-# ---------------------------------------------------------------------------
-# __init__
-# ---------------------------------------------------------------------------
+# test __init__
 
 def test_init_fichier_valide(dao):
     assert dao is not None
@@ -94,9 +86,7 @@ def test_init_data_chargee(dao):
     assert len(dao.data) == 4
 
 
-# ---------------------------------------------------------------------------
-# __repr__ / __str__
-# ---------------------------------------------------------------------------
+# test __repr__ / __str__
 
 def test_repr_contient_fichier(dao_prive):
     assert SAMPLE_CSV in repr(dao_prive)
@@ -107,9 +97,7 @@ def test_str_retourne_fichier(dao):
     assert str(dao) == SAMPLE_CSV
 
 
-# ---------------------------------------------------------------------------
-# data (property)
-# ---------------------------------------------------------------------------
+# test data (property)
 
 def test_data_retourne_dataframe(dao):
     assert isinstance(dao.data, pd.DataFrame)
@@ -119,9 +107,7 @@ def test_data_integrite(dao):
     pd.testing.assert_frame_equal(dao.data, SAMPLE_DATA)
 
 
-# ---------------------------------------------------------------------------
-# choix_col
-# ---------------------------------------------------------------------------
+# test choix_col
 
 def test_choix_col_une_colonne(dao):
     result = dao.choix_col(["nom"])
@@ -139,9 +125,7 @@ def test_choix_col_inexistante_leve_keyerror(dao):
         dao.choix_col(["inexistante"])
 
 
-# ---------------------------------------------------------------------------
-# filtrer
-# ---------------------------------------------------------------------------
+# test filtrer
 
 def test_filtrer_valeur_existante(dao):
     result = dao.filtrer("nom", ["Alice"])
@@ -163,9 +147,7 @@ def test_filtrer_colonne_numerique(dao):
     assert len(result) == 2
 
 
-# ---------------------------------------------------------------------------
-# inserer
-# ---------------------------------------------------------------------------
+# test inserer
 
 def test_inserer_ajout_ligne(dao):
     dao.inserer({"id": [5], "nom": ["Dave"], "age": [40], "email": ["d@x.com"]})
@@ -180,9 +162,7 @@ def test_inserer_ajout_multiple(dao):
     assert len(dao.data) == 6
 
 
-# ---------------------------------------------------------------------------
-# modifier
-# ---------------------------------------------------------------------------
+# test modifier
 
 def test_modifier_valeur(dao):
     dao.modifier(0, {"nom": "Alicia"})
@@ -200,9 +180,7 @@ def test_modifier_id_inexistant_leve_keyerror(dao):
         dao.modifier(999, {"nom": "X"})
 
 
-# ---------------------------------------------------------------------------
-# supprimer
-# ---------------------------------------------------------------------------
+# test supprimer
 
 def test_supprimer_reduit_taille(dao):
     dao.supprimer(0)
@@ -225,9 +203,7 @@ def test_supprimer_id_inexistant_leve_keyerror(dao):
         dao.supprimer(999)
 
 
-# ---------------------------------------------------------------------------
-# enlever_valeur_duplique
-# ---------------------------------------------------------------------------
+# test enlever_valeur_duplique
 
 def test_enlever_duplique_supprime_doublons(dao_doublons):
     dao_doublons.enlever_valeur_duplique()
@@ -245,9 +221,7 @@ def test_enlever_duplique_sans_doublons_aucun_changement(dao):
     assert len(dao.data) == taille_avant
 
 
-# ---------------------------------------------------------------------------
-# enlever_valeur_manquante
-# ---------------------------------------------------------------------------
+# test enlever_valeur_manquante
 
 def test_enlever_nan_sans_colonne(dao_nan):
     dao_nan.enlever_valeur_manquante()
@@ -271,9 +245,7 @@ def test_enlever_nan_sans_nan_aucun_changement(dao):
     assert len(dao.data) == taille_avant
 
 
-# ---------------------------------------------------------------------------
-# description
-# ---------------------------------------------------------------------------
+# test description
 
 def test_description_retourne_dataframe(dao):
     assert isinstance(dao.description(), pd.DataFrame)
@@ -283,9 +255,7 @@ def test_description_contient_count(dao):
     assert "count" in dao.description().index
 
 
-# ---------------------------------------------------------------------------
-# sauvegarde
-# ---------------------------------------------------------------------------
+# test sauvegarde
 
 def test_sauvegarde_sans_col_privees(dao_prive, tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
