@@ -23,6 +23,7 @@ class Match:
         date_match: str | None = None,
         temps_match: str | None = None,
     ) -> None:
+    
         if not (isinstance(id_match, int) or id_match is None):
             raise TypeError("l'attribut id_match doit être du type int ou None")
         if not (isinstance(region, str) or region is None):
