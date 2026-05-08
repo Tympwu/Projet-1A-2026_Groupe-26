@@ -42,10 +42,20 @@ class Recherche(Menu):
         """
         Fonction permettant de gérer l'affichage d'un ou plusieurs joueurs / matchs / equipes...
         """
+        # Permet de gérer le cas des matchs avec la possibilité de tri avec les équipes ou joueurs
+        if self.categorie == "matchs":
+            parameter_allow = self.parameters_allowed[self.categorie].copy()
+            parameter_allow.extend(["equipe1", "equipe2", "joueur1", "joueur2"])
+        else:
+            parameter_allow = self.parameters_allowed[self.categorie]
+
+        # Création de la liste des paramètres autorisés
         self.filtered_attr = self.list_attr(
             self.parser_match_name[self.categorie],
-            self.parameters_allowed[self.categorie]
-            )
+            parameter_allow
+        )
+
+        # Proposition des différents choix
         self.menu_question(
             f"\n===== MENU {self.categorie.upper()} =====\n",
             [f"Afficher tous les {self.categorie}", "Recherche avancée"],
@@ -54,6 +64,9 @@ class Recherche(Menu):
         )
 
     def recherche_par_attribut(self):
+        """
+        Fonction permettant de rechercher un élément précis en fonction d'un paramètre
+        """
         attr = self.menu_question(
             f"\n===== RECHERCHE {self.categorie.upper()} =====\n\nRecherche par:",
             self.filtered_attr,
@@ -63,9 +76,13 @@ class Recherche(Menu):
             return
         elif attr is not None:
             valeur = input(f"Valeur pour {attr} : ")
+            if attr in {"equipe1", "equipe2"}:
+                attr = attr + ".nom_equipe"
+            elif attr in {"joueur1", "joueur2"}:
+                attr = attr + ".full_name"
             self.search_element(attr, valeur)
 
-    def search_element(self, attr, val):
+    def search_element(self, attr: str, val: str):
         """
         Fonction permettant de rechercher un ou plusieurs éléments correspondant
 
@@ -78,8 +95,13 @@ class Recherche(Menu):
         """
         found = False
         count = 0
+        if ("." in attr):
+            attr = attr.split(sep=".")
         for element in self.parser_match_name[self.categorie].values():
-            value = getattr(element, attr, None)
+            if isinstance(attr, list):
+                value = getattr(getattr(element, attr[0], None), attr[1], None)
+            else:
+                value = getattr(element, attr, None)
             if value is not None and str(value).lower() == str(val).lower():
                 count += 1
                 print(element)
@@ -114,8 +136,8 @@ class Recherche(Menu):
             else:
                 for match in self.parser_match_name[self.categorie].values():
                     tab.append([
-                        match.id_match, match.best_of, match.date_match,
-                        match.joueur1, match.joueur2, match.score1, match.score2
+                        match.id_match, match.best_of, match.date_match, match.joueur1.full_name,
+                        match.joueur2.full_name, match.score1, match.score2
                     ])
                 print(tabulate(
                     tab, headers=[
