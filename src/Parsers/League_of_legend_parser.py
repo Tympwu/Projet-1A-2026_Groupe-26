@@ -90,7 +90,7 @@ class League_of_legend_Parser(Parser):
                 temps_match=self.fetch_safety_data(row["time"], str),
                 date_match=date_match
                 )
-            if self.fetch_safety_data(row["winner"], str) == match.equipe1.nom_equipe:
+            if self.fetch_safety_data(row["winner"], str) == match.equipe1.nom_abrev:
                 match.ajouter_scores(score1=1, score2=0)
             else:
                 match.ajouter_scores(score1=0, score2=1)
