@@ -137,7 +137,7 @@ class Match:
         if self.score1 is None or self.score2 is None:
             raise ValueError("les scores n'ont pas été mis")
         else:
-            if self.score_equipe_1 > self.score_equipe_2:
+            if self.score1 > self.score2:
                 return self.equipe_1
             else:
                 return self.equipe_2
@@ -152,7 +152,7 @@ class Match:
         Equipe
 
         """
-        if self.score_equipe_1 is None or self.score_equipe_2 is None:
+        if self.score1 is None or self.score2 is None:
             raise ValueError("les scores n'ont pas été mis")
         else:
             if self.score2 > self.score1:
