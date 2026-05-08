@@ -2,7 +2,7 @@
 
 ## Goal
 
-This student project aims to visualize differents sports statistics and allow its user to easily find data on differents sports related to athletes, teams, etc. 
+This student project aims to provide an interactive way to visualize sports statistics and enable users to easily access and explore data related to athletes, teams, matches, and other sports entities.
 
 ## Usage
 
@@ -10,6 +10,12 @@ Install the necessary dependencies listed in `requirements.txt`
 
 Run the CLI app with `python __main__.py`
 
+## Usage
+
+Install the required dependencies listed in `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
 
 ## Test
 
@@ -18,6 +24,12 @@ Depending on your installation, run one of these commands:
 `conda run pytest --cov`
 `pytest --cov`
 
+##Features
+  - Importing and processing databases
+  - Data parsing and normalization
+  - Statistical analysis and data exploration
+  - Interactive menu-based navigation
+  - Object-oriented data management
 
 # Project's Architecture
 Projet-1A-2026_Groupe-26/             
