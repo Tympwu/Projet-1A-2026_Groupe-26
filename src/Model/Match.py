@@ -115,15 +115,14 @@ class Match:
             raise ValueError("l'attribut equipe2 du match vaut None")
         if (self.score1 is not None) or (self.score2 is not None):
             raise ValueError("les scores ont déjà été enregistrés")
-        if score1 + score2 == self.best_of:
-            self.score1 = score1
-            self.score2 = score2
-        else:
-            if max(score1, score2) == (self.best_of + 1) / 2:
+        if score1 + score2 <= self.best_of:
+            if max(score1, score2) > (self.best_of + 1) / 2:
+                raise ValueError("score non compatible avec le format (attribut best_of)")
+            else:
                 self.score1 = score1
                 self.score2 = score2
-            else:
-                raise ValueError("score non compatible avec le format (attribut best_of)")
+        else:
+            raise ValueError("score non compatible avec le format (attribut best_of)")
 
     def renvoyer_equipe_gagnante(self) -> Equipe | None:
         """
