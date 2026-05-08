@@ -35,22 +35,34 @@ def test_Coach_init():
 
 
 @pytest.mark.parametrize(
-    "id, first_name, last_name, sexe, dob, lieu_naissance, role, nationalite, equipe, pseudo, message_erreur",
+    "id, first_name, last_name, sexe, dob, lieu_naissance, " +
+    "role, nationalite, equipe, pseudo, message_erreur",
     [
-        ("", None, None, None, None, None, None, None, None, None, "l'attribut id doit être du type int ou None"),
-        (1, 1, None, None, None, None, None, None, None, None, "l'attribut first_name doit être du type str ou None"),
-        (1, None, 1, None, None, None, None, None, None, None, "l'attribut last_name doit être du type str ou None"),
-        (1, None, None, 1, None, None, None, None, None, None, "l'attribut sexe doit être du type str ou None"),
-        (1, None, None, None, 1, None, None, None, None, None, "l'attribut dob doit être du type str ou None"),
-        (1, None, None, None, None, 1, None, None, None, None, "l'attribut lieu_naissance doit être du type str ou None"),
-        (1, None, None, None, None, None, True, None, None, None, "l'attribut role doit être du type str ou None"),
-        (1, None, None, None, None, None, None, True, None, None, "l'attribut nationalite doit être du type str ou None"),
-        (1, None, None, None, None, None, None, None, True, None, "l'attribut equipe doit être du type str ou None"),
-        (1, None, None, None, None, None, None, None, None, True, "l'attribut pseudo doit être du type str ou None"),
+        ("", None, None, None, None, None, None, None, None, None,
+         "l'attribut id doit être du type int ou None"),
+        (1, 1, None, None, None, None, None, None, None, None,
+         "l'attribut first_name doit être du type str ou None"),
+        (1, None, 1, None, None, None, None, None, None, None,
+         "l'attribut last_name doit être du type str ou None"),
+        (1, None, None, 1, None, None, None, None, None, None,
+         "l'attribut sexe doit être du type str ou None"),
+        (1, None, None, None, 1, None, None, None, None, None,
+         "l'attribut dob doit être du type str ou None"),
+        (1, None, None, None, None, 1, None, None, None, None,
+         "l'attribut lieu_naissance doit être du type str ou None"),
+        (1, None, None, None, None, None, True, None, None, None,
+         "l'attribut role doit être du type str ou None"),
+        (1, None, None, None, None, None, None, True, None, None,
+         "l'attribut nationalite doit être du type str ou None"),
+        (1, None, None, None, None, None, None, None, True, None,
+         "l'attribut equipe doit être du type str ou None"),
+        (1, None, None, None, None, None, None, None, None, True,
+         "l'attribut pseudo doit être du type str ou None"),
     ],
 )
 def test_Coach_init_erreur(
-    id, first_name, last_name, sexe, dob, lieu_naissance, role, nationalite, equipe, pseudo, message_erreur
+    id, first_name, last_name, sexe, dob, lieu_naissance, role,
+    nationalite, equipe, pseudo, message_erreur
         ) -> None:
     with pytest.raises(ValueError, match=re.escape(message_erreur)):
         Coach(
@@ -63,8 +75,8 @@ def test_Coach_init_erreur(
 def test_Coach_str() -> None:
     P1 = Coach(first_name="Luis", last_name="Enrique", equipe="PSG")
     assert str(P1) == (
-        "╭──────────────┬─────────────┬─────────────┬────────╮\n" +
-        "│ first_name   │ last_name   │ full_name   │ equipe │\n" +
-        "├──────────────┼─────────────┼─────────────┼────────┤\n" +
-        "│ Luis         │ Enrique     │ Luis Enrique│ PSG    │\n" +
-        "╰──────────────┴─────────────┴─────────────┴────────╯")
+        "╭──────────────┬─────────────┬──────────────┬──────────╮\n" +
+        "│ first_name   │ last_name   │ full_name    │ equipe   │\n" +
+        "├──────────────┼─────────────┼──────────────┼──────────┤\n" +
+        "│ Luis         │ Enrique     │ Luis Enrique │ PSG      │\n" +
+        "╰──────────────┴─────────────┴──────────────┴──────────╯")

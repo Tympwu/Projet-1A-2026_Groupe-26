@@ -35,7 +35,8 @@ def test_Player_init():
 
 
 @pytest.mark.parametrize(
-    "pseudo, id_equipe, nationalite, continent, numero_maillot, main_forte, taille, role, poids, message_erreur",
+    "pseudo, id_equipe, nationalite, continent, numero_maillot, " +
+    "main_forte, taille, role, poids, message_erreur",
     [
         (1, None, None, None, None, None, None, None, None,
          "l'attribut pseudo doit être du type str ou None"),
