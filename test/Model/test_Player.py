@@ -4,20 +4,6 @@ import pytest
 
 from src.Model.Player import Player
 
-"""
-def test_Player_constructor_is_ok_with_valid_data():
-    platoche = Player(1980, "Michel Platini", "false")
-    assert platoche.id == 1980
-    assert not platoche.is_the_goat
-
-
-def test_player_repr_method_displays_goat_tag_for_the_goat():
-    kiki = Player(2018, "Kylian Mbappé", "false")
-    assert str(kiki) == "Kylian Mbappé"
-
-    the_goat = Player(1928, "Arthur Friedenreich", True)
-    assert str(the_goat) == "Arthur Friedenreich (GOAT)"
-"""
 
 def test_Player_init():
     P1 = Player(
@@ -46,3 +32,48 @@ def test_Player_init():
     assert P2.sexe is None
     assert P2.sexe is None
     assert P2.sexe is None
+
+
+@pytest.mark.parametrize(
+    "pseudo, id_equipe, nationalite, continent, numero_maillot, main_forte, taille, role, poids, message_erreur",
+    [
+        (1, None, None, None, None, None, None, None, None,
+         "l'attribut pseudo doit être du type str ou None"),
+        (None, [], None, None, None, None, None, None, None,
+         "l'attribut id_equipe doit être du type int ou None"),
+        (None, None, {}, None, None, None, None, None, None,
+         "l'attribut nationalite doit être du type str ou None"),
+        (None, None, None, 1, None, None, None, None, None,
+         "l'attribut continent doit être du type str ou None"),
+        (None, None, None, None, "", None, None, None, None,
+         "l'attribut numero_maillot doit être du type int ou None"),
+        (None, None, None, None, None, 15, None, None, None,
+         "l'attribut main_forte doit être du type str ou None"),
+        (None, None, None, None, None, None, "", None, None,
+         "l'attribut taille doit être du type float, int ou None"),
+        (None, None, None, None, None, None, None, 12, None,
+         "l'attribut role doit être du type str ou None"),
+        (None, None, None, None, None, None, None, None, "",
+         "l'attribut poids doit être du type str ou None"),
+    ],
+)
+def test_Personne_init_erreur(
+    pseudo, id_equipe, nationalite, continent, numero_maillot,
+    main_forte, taille, role, poids, message_erreur
+        ) -> None:
+    with pytest.raises(ValueError, match=re.escape(message_erreur)):
+        Player(
+            pseudo=pseudo, id_equipe=id_equipe, nationalite=nationalite,
+            continent=continent, numero_maillot=numero_maillot,
+            main_forte=main_forte, taille=taille, role=role, poids=poids
+            )
+
+
+def test_Player_str() -> None:
+    P1 = Player(first_name="Marc", last_name="Evans", sexe="M")
+    assert str(P1) == (
+        "╭──────────────┬─────────────┬─────────────┬────────╮\n" +
+        "│ first_name   │ last_name   │ full_name   │ sexe   │\n" +
+        "├──────────────┼─────────────┼─────────────┼────────┤\n" +
+        "│ Marc         │ Evans       │ Marc Evans  │ M      │\n" +
+        "╰──────────────┴─────────────┴─────────────┴────────╯")
