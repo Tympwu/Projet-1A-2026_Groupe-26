@@ -87,28 +87,3 @@ class Nuages_de_points(Graphique):
 
         # Affichage (pour Onyxia, utilise la fenêtre interactive si possible)
         plt.show()
-
-
-"""
-# Bloc test
-if __name__ == "__main__":
-
-    mon_graph = Nuages_de_points(
-        titre="Test nuage de point",
-        data1=[1, 2, 3, 4, 5],
-        data2=[10, -20, 30.5, -40, 50],
-        couleur="red",
-        nom_axe1= "toto"
-    )
-
-    print("Données après init (axe 1 puis axe 2):\n", mon_graph.data1, mon_graph.data2)
-
-    # 2. Test des méthodes d'ajout manuel
-    mon_graph.ajouter_point([-10, -20])
-
-    print("Données après ajouts manuels (axe 1 puis axe 2) :\n", mon_graph.data2, mon_graph.data2)
-
-
-    # 3. Lancement de l'affichage
-    mon_graph.enregistrer_image("test nuage de point")
-"""

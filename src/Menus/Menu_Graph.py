@@ -117,8 +117,8 @@ class Menu_Graphique(Menu):
         value = value.groupby(['second_value']).mean()
         titre = input("Quelle titre voulez-vous donner à votre histogramme ?\nRéponse: ")
         self.diag = Diagramme_en_Barre(
-            data1=list(value["first_value"]), data2=list(value.index), titre=titre,
-            nom_axe1=self.var1, nom_axe2=self.var2
+            data1=list(value.index), data2=list(value["first_value"]), titre=titre,
+            nom_axe1=self.var2, nom_axe2=self.var1
         )
         self.diag.afficher_image()
         if self.menu_question(

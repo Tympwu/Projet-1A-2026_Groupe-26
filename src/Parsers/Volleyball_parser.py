@@ -10,16 +10,21 @@ from ..Model.Coach import Coach
 class Volleyball_Parser(Parser):
     def __init__(self):
         super().__init__("volleyball")
+        self.dict_nom_abbreg_nom_equipe = dict()
 
     def parse_equipes(self, data: pd.DataFrame, other=None):
         """
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Equipes de volleyball masculin
         """
+        if other == "H":
+            id_add = 0
+        elif other == "F":
+            id_add = len(self.dict_equipe)
         for index, row in data.iterrows():
             equipe = Equipe(
-                id=index,
-                nom_equipe=self.fetch_safety_data(row["country_long"], str) + " " + other,
+                id=index + id_add,
+                nom_equipe=self.fetch_safety_data(row["country"], str) + " " + other,
                 nom_abrev=self.fetch_safety_data(row["code"], str),
                 pays_equipe=self.fetch_safety_data(row["country_long"], str),
                 )
@@ -30,9 +35,13 @@ class Volleyball_Parser(Parser):
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Joueurs de volleyball masculin
         """
+        if other == "H":
+            id_add = 0
+        elif other == "F":
+            id_add = len(self.dict_player)
         for index, row in data.iterrows():
             player = Player(
-                id=index,
+                id=index + id_add,
                 sexe=other,
                 full_name=self.fetch_safety_data(row["name"], str),
                 dob=self.fetch_safety_data(row["birth_date"], str),
@@ -52,10 +61,14 @@ class Volleyball_Parser(Parser):
         Fonction permettant de récupérer les éléments des bases de données et de créer les classes
         correspondantes. Cette dernière est spécifique aux Coachs de leagues of legends
         """
+        if other == "H":
+            id_add = 0
+        elif other == "F":
+            id_add = len(self.dict_coach)
         for index, row in data.iterrows():
             coach = Coach(
                 sexe=other,
-                id=index,
+                id=index + id_add,
                 full_name=self.fetch_safety_data(row["name"], str),
                 dob=self.fetch_safety_data(row["birth_date"], str),
                 nationalite=self.fetch_safety_data(row["country_code"], str),
@@ -74,22 +87,31 @@ class Volleyball_Parser(Parser):
         correspondantes. Cette dernière est spécifique aux Matchs de volleyball masculin
         """
 
-        self.dict_nom_abbreg_nom_equipe = dict()
         for index, row in other.iterrows():
             self.dict_nom_abbreg_nom_equipe[
-                self.fetch_safety_data(row["code"], str)
-                ] = self.fetch_safety_data(row["country_long"], str) + " " + sexe
+                self.fetch_safety_data(row["code"], str) + sexe
+                ] = self.fetch_safety_data(row["country"], str) + " " + sexe
+
+        # Système pour s'occuper des équipes en fonction du sexe
+        if sexe == "H":
+            def equipe_data(row, entry):
+                return self.dict_equipe[self.dict_nom_abbreg_nom_equipe[
+                    self.fetch_safety_data(row[entry], str) + sexe
+                    ]]
+            rows = ["country_code_1", "country_code_2"]
+            id_add = 0
+        elif sexe == "F":
+            def equipe_data(row, entry):
+                return self.dict_equipe[self.fetch_safety_data(row[entry], str) + " " + sexe]
+            rows = ["country_1", "country_2"]
+            id_add = len(self.dict_matchs)
 
         for index, row in data.iterrows():
             date_match = self.fetch_safety_data(row["date"], str)
             match = Match(
-                id_match=index,
-                equipe1=self.dict_equipe[
-                    self.dict_nom_abbreg_nom_equipe[
-                        self.fetch_safety_data(row["country_code_1"], str)]],
-                equipe2=self.dict_equipe[
-                    self.dict_nom_abbreg_nom_equipe[
-                        self.fetch_safety_data(row["country_code_2"], str)]],
+                id_match=index + id_add,
+                equipe1=equipe_data(row, rows[0]),
+                equipe2=equipe_data(row, rows[1]),
                 date_match=date_match,
                 score1=self.fetch_safety_data(row["set_country_1"], int),
                 score2=self.fetch_safety_data(row["set_country_2"], int),

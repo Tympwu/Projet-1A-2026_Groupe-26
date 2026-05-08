@@ -82,17 +82,21 @@ class Export_data(Menu):
                 dao_wanted = self.dao[self.dao_match_name[self.sport][result][men_women]]
                 list_attr = list(
                     self.dao[self.dao_match_name[self.sport][result][men_women]].data.columns)
+                # Changement pour correspondre dans la suite
+                men_women = "H" if men_women == 0 else "F"
         else:
             dao_wanted = self.dao[self.dao_match_name[self.sport][result]]
             list_attr = list(self.dao[self.dao_match_name[self.sport][result]].data.columns)
 
         # Éléments initiaux pour la création du nouvel élément
         new_element: dict[str, str | None] = {}
-        new_element[list_attr[0]] = max(
-            self.parser_match_name[result].keys(), default=0) + 1
+        if "id" in list_attr[0]:
+            new_element[list_attr[0]] = max(
+                self.parser_match_name[result].keys(), default=0) + 1
+            list_attr = list_attr[1:]
 
         # Liste de questions pour remplir les données
-        for attribut in list_attr[1:]:
+        for attribut in list_attr:
             parameter = input(f"Valeur pour {attribut} (Exemple : {dao_wanted.data[attribut][0]}):")
             new_element[attribut] = [parameter] if parameter is not None else None
         try:

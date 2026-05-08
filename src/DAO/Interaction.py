@@ -6,7 +6,9 @@ from pathlib import Path
 class DAO:
     def __init__(self, fichier: str, col_prive: list[str] | None = None):
         assert isinstance(fichier, str), "Le type de fichier ne correspond pas"
-        assert isinstance(col_prive, list) or col_prive is None, "Le type de col_prive ne correspond pas"
+        assert (
+            isinstance(col_prive, list) or
+            col_prive is None), "Le type de col_prive ne correspond pas"
 
         base = Path(__file__).parent.parent.parent
         full_path = base / fichier
@@ -78,7 +80,8 @@ class DAO:
 
     def modifier(self, id: int, data: dict[str, Any]) -> None:
         """
-        Modifie les données du tableau selon l'id de la ligne souhaité selon le dictionnaire de données en entrée
+        Modifie les données du tableau selon l'id de la ligne souhaité selon
+        le dictionnaire de données en entrée
 
         Parameters
         ----------

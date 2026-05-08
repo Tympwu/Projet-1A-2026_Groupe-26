@@ -20,10 +20,10 @@ class Diagramme_en_Barre(Graphique):
 
         super().__init__(titre, data1, data2)
 
-        if not all(isinstance(x, (int, float)) for x in self.data1):
-            raise TypeError("Les valeurs de data1 doivent être numériques.")
+        if not all(isinstance(x, (int, float)) for x in self.data2):
+            raise TypeError("Les valeurs de data2 doivent être numériques.")
 
-        self.data2 = [str(label) for label in data2]
+        self.data1 = [str(label) for label in data1]
         self.format_image = format_image
         self.couleur = couleur
         self.valeur_par_defaut = valeur_par_defaut

@@ -4,10 +4,9 @@ import numpy as np
 from unittest.mock import patch
 import sys
 from pathlib import Path
+from src.DAO.Interaction import DAO
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
-
-from src.DAO.Interaction import DAO
 
 
 # ---------------------------------------------------------------------------
@@ -175,7 +174,9 @@ def test_inserer_ajout_ligne(dao):
 
 
 def test_inserer_ajout_multiple(dao):
-    dao.inserer({"id": [5,6], "nom": ["Dave","Eve"], "age": [40,28], "email": ["d@x.com","e@x.com"]})
+    dao.inserer(
+        {"id": [5, 6], "nom": ["Dave", "Eve"], "age": [40, 28], "email": ["d@x.com", "e@x.com"]}
+    )
     assert len(dao.data) == 6
 
 
@@ -268,7 +269,7 @@ def test_enlever_nan_sans_nan_aucun_changement(dao):
     taille_avant = len(dao.data)
     dao.enlever_valeur_manquante()
     assert len(dao.data) == taille_avant
-    
+
 
 # ---------------------------------------------------------------------------
 # description

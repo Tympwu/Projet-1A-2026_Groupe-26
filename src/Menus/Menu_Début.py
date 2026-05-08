@@ -173,14 +173,20 @@ class Menu_Début(Menu):
             self.initialize_parser(
                 Volleyball_Parser(), self._sports[self.sport_choosen], self.__search
             )
-            self.parser.parse_equipes(self.search.dao["country"].data, other="Homme")
+            self.parser.parse_equipes(self.search.dao["country"].data, other="H")
+            self.parser.parse_equipes(self.search.dao["country"].data, other="F")
             print("Equipes sans joueurs chargées")
-            self.parser.parse_players(self.search.dao["player_men"].data, other="Homme")
+            self.parser.parse_players(self.search.dao["player_men"].data, other="H")
+            self.parser.parse_players(self.search.dao["player_women"].data, other="F")
             print("Joueurs chargées et ajoutés dans les équipes")
-            self.parser.parse_coachs(self.search.dao["coach_men"].data, other="Homme")
+            self.parser.parse_coachs(self.search.dao["coach_men"].data, other="H")
+            self.parser.parse_coachs(self.search.dao["coach_women"].data, other="F")
             print("Coachs chargées et ajouté dans les equipes")
             self.parser.parse_matchs(
-                self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="Homme"
+                self.search.dao["match_men"].data, self.search.dao["country"].data, sexe="H"
+            )
+            self.parser.parse_matchs(
+                self.search.dao["match_women"].data, self.search.dao["country"].data, sexe="F"
             )
             print("Matchs chargés")
 
