@@ -24,8 +24,8 @@ def test_Player_init():
         id=1, first_name="Edouard", last_name="Elric", sexe="M",
         dob="04-10-2003", lieu_naissance="Resembool", pseudo="ED",
         id_equipe=1, nationalite="Amestris", continent="Fictif",
-        numero_maillot="66", main_forte="droite", taille=149.5,
-        poid=50, role="Alchemist"
+        numero_maillot=66, main_forte="droite", taille=149.5,
+        poids=50, role="Alchemist"
         )
     P2 = Player()
     assert P1.id == 1
