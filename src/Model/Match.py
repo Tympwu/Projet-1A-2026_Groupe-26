@@ -18,7 +18,6 @@ class Match:
         joueur2: Player | None = None,
         score1: int | None = None,
         score2: int | None = None,
-        score: int | None = None,
         best_of: int = 1,
         date_match: str | None = None,
         temps_match: str | None = None,
@@ -61,8 +60,7 @@ class Match:
         self.joueur1 = joueur1
         self.joueur2 = joueur2
         self.score1 = score1
-        self.score2 = score2
-        self.score = score
+        self.score2 = score
         self.best_of = best_of
         self.date_match = date_match
         self.temps_match = temps_match
