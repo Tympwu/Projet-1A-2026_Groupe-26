@@ -56,6 +56,15 @@ class Coach(Personne):
         sexe: str = None,
         role: str = None
     ) -> None:
+
+        if not (isinstance(role, str) or role is None):
+            raise ValueError("l'attribut role doit être du type str ou None")
+        if not (isinstance(nationalite, str) or nationalite is None):
+            raise ValueError("L'attribut region doit être du type")
+        if not (isinstance(equipe, str) or equipe is None):
+            raise ValueError("l'attribut equipe1 doit être du type str ou None")
+        if not (isinstance(pseudo, str) or pseudo is None):
+            raise ValueError("l'attribut equipe1 doit être du type str ou None")
         self.id = id
         super().__init__(
             id=id,
@@ -65,6 +74,8 @@ class Coach(Personne):
             lieu_naissance=lieu_naissance,
             dob=dob,
             sexe=sexe)
+
+
         self.equipe = equipe
         self.nationalite = nationalite
         self.pseudo = pseudo
