@@ -59,27 +59,6 @@ class Player(Personne):
     >>> p1.id
     10
     """
-
-    id: int
-    first_name: str
-    last_name: str
-    full_name: str
-    sexe: str
-    dob: str
-    lieu_naissance: str
-    pseudo: str
-    id_equipe: int
-    equipe: str
-    nationalite: str
-    continent: str
-    sport: str
-    numero_maillot: int
-    main_forte: str
-    taille: int
-    poids: int
-    stat: dict[str, int]
-    role: str
-
     def __init__(
         self,
         id: int,
@@ -99,7 +78,6 @@ class Player(Personne):
         main_forte: str = None,
         taille: float = None,
         poids: float = None,
-        stat: dict[str, int] = None,
         role: str = None
     ) -> None:
         super().__init__(
@@ -136,7 +114,6 @@ class Player(Personne):
         self.main_forte = main_forte
         self.taille = round(taille, 2) if taille is not None else None
         self.poids = round(poids, 2) if poids is not None else None
-        self.stat = stat
         self.role = role
 
     def __repr__(self) -> str:
