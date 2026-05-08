@@ -1,15 +1,15 @@
-# Projet 1A 2025
+# Projet 1A 2025-2026
 
 ## Goal
 
-This student project aims to determine who is the greatest football player of all time via a thorough statistical analysis
+This student project aims to visualize differents sports statistics and allow its user to easily find data on differents sports related to athletes, teams, etc. 
 
 ## Usage
 
 Install the necessary dependencies listed in `requirements.txt`
 
 Run the CLI app with `python __main__.py`
-Or run the notebook `Projet1A.ipynb`
+
 
 ## Test
 
@@ -17,6 +17,31 @@ Depending on your installation, run one of these commands:
 `python -m pytest --cov`
 `conda run pytest --cov`
 `pytest --cov`
+
+
+# Project's Architecture
+Projet-1A-2026_Groupe-26/             
+├── data/
+├── src/
+│   ├── __init__.py
+│   ├── Analysis/
+│   ├── DAO/
+│   ├── Menus/
+│   ├── Model/
+│   └── Parsers/
+├── tests/
+│   ├── __init__.py
+│   ├── Analysis/
+│   ├── Common/
+│   ├── DAO/
+│   ├── Model/
+│   └── Parser/
+├── __main__.py
+├── .gitignore
+├── AUTHOR.md
+├── README.md
+└── requirements.txt
+
 
 # Notes for students
 
