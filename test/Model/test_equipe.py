@@ -66,5 +66,4 @@ def test_equipe_str():
         "Coach :\n"
         "Aucun"
     )
-    
     assert str(e).strip() == attendu.strip()
