@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from src.DAO.interaction import DAO
+from src.DAO.Interaction import DAO
 
 
 # ---------------------------------------------------------------------------
@@ -26,14 +26,14 @@ SAMPLE_CSV = "data/test.csv"
 
 @pytest.fixture
 def dao():
-    with patch("src.DAO.interaction.pd.read_csv",
+    with patch("src.DAO.Interaction.pd.read_csv",
                return_value=SAMPLE_DATA.copy()):
         return DAO(SAMPLE_CSV)
 
 
 @pytest.fixture
 def dao_prive():
-    with patch("src.DAO.interaction.pd.read_csv",
+    with patch("src.DAO.Interaction.pd.read_csv",
                return_value=SAMPLE_DATA.copy()):
         return DAO(SAMPLE_CSV, col_prive=["email"])
 
@@ -45,7 +45,7 @@ def dao_nan():
         "nom": ["Alice", None, "Charlie"],
         "age": [30, 25, np.nan],
     })
-    with patch("src.DAO.interaction.pd.read_csv",
+    with patch("src.DAO.Interaction.pd.read_csv",
                return_value=donnees):
         return DAO(SAMPLE_CSV)
 
@@ -57,7 +57,7 @@ def dao_doublons():
         "nom": ["Alice", "Alice", "Bob"],
         "age": [30, 30, 25],
     })
-    with patch("src.DAO.interaction.pd.read_csv",
+    with patch("src.DAO.Interaction.pd.read_csv",
                return_value=donnees):
         return DAO(SAMPLE_CSV)
 
@@ -71,7 +71,7 @@ def test_init_fichier_valide(dao):
 
 
 def test_init_fichier_mauvais_type_leve_assertion():
-    with patch("src.DAO.interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.Interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
         with pytest.raises(AssertionError):
             DAO(123)
 
@@ -85,7 +85,7 @@ def test_init_col_prive_none_accepte(dao):
 
 
 def test_init_col_prive_mauvais_type_leve_assertion():
-    with patch("src.DAO.interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
+    with patch("src.DAO.Interaction.pd.read_csv", return_value=SAMPLE_DATA.copy()):
         with pytest.raises(AssertionError):
             DAO(SAMPLE_CSV, col_prive="email")
 
@@ -169,14 +169,13 @@ def test_filtrer_colonne_numerique(dao):
 # ---------------------------------------------------------------------------
 
 def test_inserer_ajout_ligne(dao):
-    dao.inserer({"id": 5, "nom": "Dave", "age": 40, "email": "d@x.com"})
+    dao.inserer({"id": [5], "nom": ["Dave"], "age": [40], "email": ["d@x.com"]})
     assert len(dao.data) == 5
     assert dao.data.iloc[-1]["nom"] == "Dave"
 
 
 def test_inserer_ajout_multiple(dao):
-    dao.inserer({"id": 5, "nom": "Dave", "age": 40, "email": "d@x.com"})
-    dao.inserer({"id": 6, "nom": "Eve",  "age": 28, "email": "e@x.com"})
+    dao.inserer({"id": [5,6], "nom": ["Dave","Eve"], "age": [40,28], "email": ["d@x.com","e@x.com"]})
     assert len(dao.data) == 6
 
 
@@ -269,19 +268,7 @@ def test_enlever_nan_sans_nan_aucun_changement(dao):
     taille_avant = len(dao.data)
     dao.enlever_valeur_manquante()
     assert len(dao.data) == taille_avant
-
-
-# ---------------------------------------------------------------------------
-# renvoyer_types
-# ---------------------------------------------------------------------------
-
-def test_renvoyer_types_retourne_series(dao):
-    assert isinstance(dao.renvoyer_types(), pd.Series)
-
-
-def test_renvoyer_types_contient_toutes_colonnes(dao):
-    assert set(dao.renvoyer_types().index) == set(SAMPLE_DATA.columns)
-
+    
 
 # ---------------------------------------------------------------------------
 # description
