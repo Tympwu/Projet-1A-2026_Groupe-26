@@ -51,66 +51,69 @@ class Export_data(Menu):
         Fonction permettant d'ajouter des données dans la base de données
         """
         # Première question pour déterminer dans quelle catégorie ajouter des informations
-        possible_answer = [
-            "Ajouter des " + element.lower() for element in self.data_available[self.sport]
-        ]
-        dict_answer = {
-            i: element.lower() for i, element in enumerate(self.data_available[self.sport], 1)
-        }
-        result = self.menu_question(
-            "Quelle donnée voulez-vous ajouter ?",
-            possible_answer,
-            dict_answer
-        )
-        if result == 0:
-            return
-
-        # Disjonction de cas afin de prévoir les sports séparés en fonction du sexe
-        men_women = None
-        if isinstance(self.dao_match_name[self.sport][result], list):
-            men_women = self.menu_question(
-                f"Le {self.sport} est divisé en catégorie femme et homme\n" +
-                "Dans laquelle voulez-vous ajouter des données ?",
-                ["Homme", "Femme"],
-                {1: 1, 2: 2},
-                break_on_call=True
+        while True:
+            possible_answer = [
+                "Ajouter des " + element.lower() for element in self.data_available[self.sport]
+            ]
+            dict_answer = {
+                i: element.lower() for i, element in enumerate(self.data_available[self.sport], 1)
+            }
+            result = self.menu_question(
+                "Quelle donnée voulez-vous ajouter ?",
+                possible_answer,
+                dict_answer
             )
-            if men_women == 0:
-                return 0
+            if result == 0:
+                return
+
+            # Disjonction de cas afin de prévoir les sports séparés en fonction du sexe
+            men_women = None
+            if isinstance(self.dao_match_name[self.sport][result], list):
+                men_women = self.menu_question(
+                    f"Le {self.sport} est divisé en catégorie femme et homme\n" +
+                    "Dans laquelle voulez-vous ajouter des données ?",
+                    ["Homme", "Femme"],
+                    {1: 1, 2: 2},
+                    break_on_call=True
+                )
+                if men_women == 0:
+                    return 0
+                else:
+                    men_women -= 1
+                    dao_wanted = self.dao[self.dao_match_name[self.sport][result][men_women]]
+                    list_attr = list(
+                        self.dao[self.dao_match_name[self.sport][result][men_women]].data.columns)
+                    # Changement pour correspondre dans la suite
+                    men_women = "H" if men_women == 0 else "F"
             else:
-                men_women -= 1
-                dao_wanted = self.dao[self.dao_match_name[self.sport][result][men_women]]
-                list_attr = list(
-                    self.dao[self.dao_match_name[self.sport][result][men_women]].data.columns)
-                # Changement pour correspondre dans la suite
-                men_women = "H" if men_women == 0 else "F"
-        else:
-            dao_wanted = self.dao[self.dao_match_name[self.sport][result]]
-            list_attr = list(self.dao[self.dao_match_name[self.sport][result]].data.columns)
+                dao_wanted = self.dao[self.dao_match_name[self.sport][result]]
+                list_attr = list(self.dao[self.dao_match_name[self.sport][result]].data.columns)
 
-        # Éléments initiaux pour la création du nouvel élément
-        new_element: dict[str, str | None] = {}
-        if "id" in list_attr[0]:
-            new_element[list_attr[0]] = max(
-                self.parser_match_name[result].keys(), default=0) + 1
-            list_attr = list_attr[1:]
+            # Éléments initiaux pour la création du nouvel élément
+            new_element: dict[str, str | None] = {}
+            if "id" in list_attr[0]:
+                new_element[list_attr[0]] = max(
+                    self.parser_match_name[result].keys(), default=0) + 1
+                list_attr = list_attr[1:]
 
-        # Liste de questions pour remplir les données
-        for attribut in list_attr:
-            parameter = input(f"Valeur pour {attribut} (Exemple : {dao_wanted.data[attribut][0]}):")
-            new_element[attribut] = [parameter] if parameter is not None else None
-        try:
-            self.parser_function_match[result](pd.DataFrame(new_element), other=men_women)
-            dao_wanted.inserer(new_element)
-            print("Élément crée avec succès")
-        except (ValueError, IndexError):
-            print(
-                "Certains valeurs renseignées n'étaient pas du bon type ou format," +
-                " l'ajout n'as pas pu se faire")
-        except KeyError:
-            print(
-                "L'une des id renseigné n'est pas valide, merci de renseigner une id déjà" +
-                " existante ou de créer l'élement voulu d'abord")
+            # Liste de questions pour remplir les données
+            for attribut in list_attr:
+                parameter = input(f"Valeur pour {attribut} (Exemple : {
+                    dao_wanted.data[attribut][0]
+                    }):")
+                new_element[attribut] = [parameter] if parameter is not None else None
+            try:
+                self.parser_function_match[result](pd.DataFrame(new_element), other=men_women)
+                dao_wanted.inserer(new_element)
+                print("Élément crée avec succès")
+            except (ValueError, IndexError, AttributeError):
+                print(
+                    "Certains valeurs renseignées n'étaient pas du bon type ou format," +
+                    " l'ajout n'as pas pu se faire")
+            except KeyError:
+                print(
+                    "L'une des id renseigné n'est pas valide, merci de renseigner une id déjà" +
+                    " existante ou de créer l'élement voulu d'abord")
 
     def menu_export_data(self):
         """

@@ -39,7 +39,7 @@ class Menu_Graphique(Menu):
             paramètres pour le choix de l'utilisateur
         """
         # Première variable
-        question0 = {"Joueurs", "Équipes", "Matchs", "Coachs"}
+        question0 = {"Joueurs", "Equipes", "Matchs", "Coachs"}
         if constraint[0] is None:
             constraint[0] = question0
         question0 = list(question0 & constraint[0])
@@ -67,7 +67,7 @@ class Menu_Graphique(Menu):
             return 0, 0
 
         # Deuxième variable
-        question2 = {"Joueurs", "Équipes", "Matchs", "Coachs"}
+        question2 = {"Joueurs", "Equipes", "Matchs", "Coachs"}
         if constraint[2] is None:
             constraint[2] = question2
         question2 = list(question2 & constraint[2])
