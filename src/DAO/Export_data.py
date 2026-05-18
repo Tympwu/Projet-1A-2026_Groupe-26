@@ -108,7 +108,7 @@ class Export_data(Menu):
                 print("Élément crée avec succès")
             except (ValueError, IndexError, AttributeError):
                 print(
-                    "Certains valeurs renseignées n'étaient pas du bon type ou format," +
+                    "Certaines valeurs renseignées n'étaient pas du bon type ou format," +
                     " l'ajout n'as pas pu se faire")
             except KeyError:
                 print(
